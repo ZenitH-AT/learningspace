@@ -8,16 +8,17 @@
     <meta name="author" content="">
     <link rel="icon" href="img/favicon.ico">
 
-    <title>My Room | LearningSpace</title>
+    <title>Home | LearningSpace</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Sign up and sign in style -->
-    <link rel="stylesheet" href="css/modal.css">
-
     <!-- Custom styles for this template -->
     <link href="css/carousel.css" rel="stylesheet">
+
+    <!-- notifications styles -->
+    <link rel="stylesheet" href="css/notifications.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -32,8 +33,8 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.htlm">Home</a>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.html">Home<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="gallery.html">Gallery</a>
@@ -46,13 +47,130 @@
                     </li>
                 </ul>
 
-                <form class="form-inline mt-2 mt-md-0 js-signin-modal-trigger">
-                    <button class="btn btn-outline-success my-2 my-sm-0" data-toggle="collapse" data-target=".navbar-collapse.show" href="#0" style="margin-right: 15px;" data-signin="login">Sign in
-                    </button>
-                    <button class="btn btn-outline-success my-2 my-sm-0" data-toggle="collapse" data-target=".navbar-collapse.show" href="#0" data-signin="signup">Sign up
-                    </button>
+                <form class="form-inline mt-2 mt-md-0 ">
+
+                    <!-- notifications dropdown start -->
+                    <li class="nav-item dropdown" style="list-style-type:none;">
+                        <a class="nav-link text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-bell"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="head text-light bg-dark">
+                                <div class="row">
+                                    <div class="col-lg-12 col-sm-12 col-12">
+                                        <span>Notifications (3)</span>
+                                        <a href="" class="float-right text-light">Mark all as read</a>
+                                    </div>
+                            </li>
+                            <li class="notification-box">
+                                <div class="row">
+                                    <div class="col-lg-3 col-sm-3 col-3 text-center">
+                                        <img src="img/notification.jpg" class="w-50 rounded-circle">
+                                    </div>
+                                    <div class="col-lg-8 col-sm-8 col-8">
+                                        <strong class="text-info">David John</strong>
+                                        <div>
+                                            Lorem ipsum dolor sit amet, consectetur
+                                        </div>
+                                        <small class="text-warning">27.11.2015, 15:00</small>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="notification-box bg-gray">
+                                <div class="row">
+                                    <div class="col-lg-3 col-sm-3 col-3 text-center">
+                                        <img src="img/notification.jpg" class="w-50 rounded-circle">
+                                    </div>
+                                    <div class="col-lg-8 col-sm-8 col-8">
+                                        <strong class="text-info">David John</strong>
+                                        <div>
+                                            Lorem ipsum dolor sit amet, consectetur
+                                        </div>
+                                        <small class="text-warning">27.11.2015, 15:00</small>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="notification-box">
+                                <div class="row">
+                                    <div class="col-lg-3 col-sm-3 col-3 text-center">
+                                        <img src="img/notification.jpg" class="w-50 rounded-circle">
+                                    </div>
+                                    <div class="col-lg-8 col-sm-8 col-8">
+                                        <strong class="text-info">David John</strong>
+                                        <div>
+                                            Lorem ipsum dolor sit amet, consectetur
+                                        </div>
+                                        <small class="text-warning">27.11.2015, 15:00</small>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="footer bg-dark text-center">
+                                <a href="notifications.html" class="text-light">View All</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- notifications dropdown end -->
+
+                    <li class="nav-item text-light" style="list-style-type:none; margin-left: 30px">
+                        <span>Hello, Username</span>
+                    </li>
+
+                    <!-- account dropdown start -->
+                    <li class="nav-item dropdown" style="list-style-type:none;">
+                        <a class="nav-link text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-user"></i>
+                        </a>
+                        <ul class="dropdown-menu" style="width: auto;">
+                            <li class="head text-light bg-dark">
+                                <div class="row">
+                                    <div class="col-lg-12 col-sm-12 col-12">
+                                        <span>Username</span>
+                                    </div>
+                            </li>
+                            <li class="head text-dark">
+                                <div class="row">
+                                    <div class="col-lg-8 col-sm-8 col-8">
+                                        <a href="profile.html" class="text-dark">Profile</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="head text-dark bg-gray">
+                                <div class="row">
+                                    <div class="col-lg-8 col-sm-8 col-8">
+                                        <a href="room.html" class="text-dark">Room</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="head text-dark">
+                                <div class="row">
+                                    <div class="col-lg-8 col-sm-8 col-8">
+                                        <a href="payments.html" class="text-dark">Payments</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="head text-dark bg-gray">
+                                <div class="row">
+                                    <div class="col-lg-8 col-sm-8 col-8">
+                                        <a href="tickets.html" class="text-dark">Tickets (2)</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="head text-dark">
+                                <div class="row">
+                                    <div class="col-lg-8 col-sm-8 col-8">
+                                        <a href="" class="text-dark">Review</a>
+                                        <!-- modal href here -->
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="footer bg-dark text-light bg-dark">
+                                <a href="index.html" class="text-light">Sign out</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- account dropdown end -->
                 </form>
-            </div>
+                </div>
         </nav>
     </header>
 
@@ -66,22 +184,12 @@
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="first-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="First slide">
-                    <div class="container">
-                        <div class="carousel-caption text-left">
-                            <h1>Example headline.</h1>
-                            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                            <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
                     <img class="second-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Second slide">
                     <div class="container">
                         <div class="carousel-caption">
                             <h1>Another example headline.</h1>
                             <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                            <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
+                            <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
                         </div>
                     </div>
                 </div>
@@ -91,7 +199,7 @@
                         <div class="carousel-caption text-right">
                             <h1>One more for good measure.</h1>
                             <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                            <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
+                            <p><a class="btn btn-lg btn-primary" href="#" role="button">Book now</a></p>
                         </div>
                     </div>
                 </div>
@@ -183,104 +291,6 @@
         </div>
         <!-- /.container -->
 
-        <div class="cd-signin-modal js-signin-modal">
-            <!-- this is the entire modal form, including the background -->
-            <div class="cd-signin-modal__container">
-                <!-- this is the container wrapper -->
-                <ul class="cd-signin-modal__switcher js-signin-modal-switcher js-signin-modal-trigger" style="list-style-type:none;">
-                    <li><a href="#0" data-signin="login" data-type="login">Sign in</a></li>
-                    <li><a href="#0" data-signin="signup" data-type="signup">New account</a></li>
-                </ul>
-
-                <div class="cd-signin-modal__block js-signin-modal-block" data-type="login">
-                    <!-- log in form -->
-                    <form class="cd-signin-modal__form">
-                        <p class="cd-signin-modal__fieldset">
-                            <label class="cd-signin-modal__label cd-signin-modal__label--email cd-signin-modal__label--image-replace" for="signin-email">E-mail</label>
-                            <input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="signin-email" type="email" placeholder="E-mail">
-                            <span class="cd-signin-modal__error">Error message here!</span>
-                        </p>
-
-                        <p class="cd-signin-modal__fieldset">
-                            <label class="cd-signin-modal__label cd-signin-modal__label--password cd-signin-modal__label--image-replace" for="signin-password">Password</label>
-                            <input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="signin-password" type="text" placeholder="Password">
-                            <a href="#0" class="cd-signin-modal__hide-password js-hide-password" style="font-size: 1.0rem;">Hide</a>
-                            <span class="cd-signin-modal__error">Error message here!</span>
-                        </p>
-
-                        <p class="cd-signin-modal__fieldset">
-                            <input type="checkbox" id="remember-me" checked class="cd-signin-modal__input ">
-                            <label for="remember-me">Remember me</label>
-                        </p>
-
-                        <p class="cd-signin-modal__fieldset">
-                            <input class="cd-signin-modal__input cd-signin-modal__input--full-width" type="submit" value="Login">
-                        </p>
-                    </form>
-
-                    <p class="cd-signin-modal__bottom-message js-signin-modal-trigger"><a href="#0" style="font-size: 1.0rem;" data-signin="reset">Forgot your password?</a></p>
-                </div>
-                <!-- cd-signin-modal__block -->
-
-                <div class="cd-signin-modal__block js-signin-modal-block" data-type="signup">
-                    <!-- sign up form -->
-                    <form class="cd-signin-modal__form">
-                        <p class="cd-signin-modal__fieldset">
-                            <label class="cd-signin-modal__label cd-signin-modal__label--username cd-signin-modal__label--image-replace" for="signup-username">Username</label>
-                            <input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="signup-username" type="text" placeholder="Username">
-                            <span class="cd-signin-modal__error">Error message here!</span>
-                        </p>
-
-                        <p class="cd-signin-modal__fieldset">
-                            <label class="cd-signin-modal__label cd-signin-modal__label--email cd-signin-modal__label--image-replace" for="signup-email">E-mail</label>
-                            <input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="signup-email" type="email" placeholder="E-mail">
-                            <span class="cd-signin-modal__error">Error message here!</span>
-                        </p>
-
-                        <p class="cd-signin-modal__fieldset">
-                            <label class="cd-signin-modal__label cd-signin-modal__label--password cd-signin-modal__label--image-replace" for="signup-password">Password</label>
-                            <input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="signup-password" type="text" placeholder="Password">
-                            <a href="#0" class="cd-signin-modal__hide-password js-hide-password" style="font-size: 1.0rem;">Hide</a>
-                            <span class="cd-signin-modal__error">Error message here!</span>
-                        </p>
-
-                        <p class="cd-signin-modal__fieldset">
-                            <input type="checkbox" id="accept-terms" class="cd-signin-modal__input ">
-                            <label for="accept-terms">I agree to the <a href="#0">Terms</a></label>
-                        </p>
-
-                        <p class="cd-signin-modal__fieldset">
-                            <input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding" type="submit" value="Create account">
-                        </p>
-                    </form>
-                </div>
-                <!-- cd-signin-modal__block -->
-
-                <div class="cd-signin-modal__block js-signin-modal-block" data-type="reset">
-                    <!-- reset password form -->
-                    <p class="cd-signin-modal__message">Lost your password? Please enter your email address. You will receive a link to create a new password.</p>
-
-                    <form class="cd-signin-modal__form">
-                        <p class="cd-signin-modal__fieldset">
-                            <label class="cd-signin-modal__label cd-signin-modal__label--email cd-signin-modal__label--image-replace" for="reset-email">E-mail</label>
-                            <input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="reset-email" type="email" placeholder="E-mail">
-                            <span class="cd-signin-modal__error">Error message here!</span>
-                        </p>
-
-                        <p class="cd-signin-modal__fieldset">
-                            <input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding" type="submit" value="Reset password">
-                        </p>
-                    </form>
-
-                    <p class="cd-signin-modal__bottom-message js-signin-modal-trigger"><a href="#0" data-signin="login">Back to log-in</a></p>
-                </div>
-                <!-- cd-signin-modal__block -->
-                <a href="#0" class="cd-signin-modal__close js-close">Close</a>
-            </div>
-            <!-- cd-signin-modal__container -->
-        </div>
-        <!-- cd-signin-modal -->
-
         <style>
             #backtop {
                 position: fixed;
@@ -318,9 +328,9 @@
 
         <!-- FOOTER -->
         <footer class="py-5 bg-dark">
-                <p class="m-0 text-center text-white">&copy; 2018 LearningSpace &middot;
-                    <a href="#">Privacy</a> &middot; <a href="#">Terms</a>
-                </p>
+            <p class="m-0 text-center text-white">&copy; 2018 LearningSpace &middot;
+                <a href="#">Privacy</a> &middot; <a href="#">Terms</a>
+            </p>
             <!-- /.container -->
         </footer>
     </main>
@@ -334,8 +344,6 @@
     </script>
     <script src="js/vendor/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <!-- for sign up and sign in modal -->
-    <script src="js/main.js"></script>
     <!-- for back to top arrow -->
     <script src="js/float-panel.js"></script>
 </body>
