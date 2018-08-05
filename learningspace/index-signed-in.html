@@ -21,7 +21,10 @@
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- for review modal star rating -->
-    <link href="css/star-rating.css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="css/star-rating.css" media="all" rel="stylesheet" type="text/css" />
+
+    <!-- for live chat -->
+    <link rel="stylesheet" href="css/live-chat.css">
 </head>
 
 <body>
@@ -354,6 +357,30 @@
 
         <div id="backtop" class="" style="display: block;">▲</div>
 
+        <!-- live chat float start -->
+        <div class="floating-chat">
+            <i class="fa fa-comments" aria-hidden="true"></i>
+            <div class="chat">
+                <div class="header">
+                    <span class="title">
+                Live chat
+            </span>
+                    <button>
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </button>
+
+                </div>
+                <ul class="messages">
+                    <li class="other">Hello, how can we help?</li>
+                </ul>
+                <div class="footer">
+                    <div class="text-box" contenteditable="true" disabled="true"></div>
+                    <button id="sendMessage">send</button>
+                </div>
+            </div>
+        </div>
+        <!-- live chat float end -->
+
         <!-- FOOTER -->
         <footer class="py-5 bg-dark">
             <p class="m-0 text-center text-white">&copy; 2018 LearningSpace &middot;
@@ -376,6 +403,8 @@
     <script src="js/float-panel.js"></script>
     <!-- for review modal star rating -->
     <script src="js/star-rating.js" type="text/javascript"></script>
+    <!-- for live chat -->
+    <script src="js/live-chat.js"></script>
 </body>
 
 </html>
