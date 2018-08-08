@@ -4,6 +4,7 @@
 /* Carousel base class */
 .carousel {
   margin-bottom: 4rem;
+  text-shadow: 2px 2px 10px black;
 }
 /* Since positioning the image, we need to help out the caption */
 .carousel-caption {

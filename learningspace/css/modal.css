@@ -188,7 +188,6 @@ x sigin/signup popup
 .cd-signin-modal__switcher li {
   width: 50%;
   float: left;
-  text-align: center;
 }
 
 .cd-signin-modal__switcher li:first-child a {
