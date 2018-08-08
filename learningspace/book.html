@@ -29,24 +29,24 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.html">Home<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="gallery.html">Gallery</a>
                     </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="book.html">Book<span class="sr-only">(current)</span></a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="book.html">Book</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="contact.html">Contact</a>
                     </li>
                 </ul>
 
+                <a href="register.html" class="btn btn-outline-success my-2 my-sm-0" role="button" style="margin-right: 15px;">Sign up</a>
+
                 <form class="form-inline mt-2 mt-md-0 js-signin-modal-trigger">
-                    <button class="btn btn-outline-success my-2 my-sm-0" data-toggle="collapse" data-target=".navbar-collapse.show" href="#0" style="margin-right: 15px;" data-signin="login">Sign in
-                    </button>
-                    <button class="btn btn-outline-success my-2 my-sm-0" data-toggle="collapse" data-target=".navbar-collapse.show" href="#0" data-signin="signup">Sign up
+                    <button class="btn btn-outline-success my-2 my-sm-0" data-toggle="collapse" data-target=".navbar-collapse.show" href="#0" data-signin="login">Sign in
                     </button>
                 </form>
             </div>
@@ -202,10 +202,9 @@
             <div class="cd-signin-modal__container">
                 <!-- this is the container wrapper -->
                 <ul class="cd-signin-modal__switcher js-signin-modal-switcher js-signin-modal-trigger" style="list-style-type:none;">
-                    <li><a href="#0" data-signin="login" data-type="login">Sign in</a></li>
-                    <li><a href="#0" data-signin="signup" data-type="signup">New account</a></li>
+                    <li><a  data-signin="login" style="font-size:110%;" data-type="login">Sign in</a></li>
                 </ul>
-                
+
                 <div class="cd-signin-modal__block js-signin-modal-block" data-type="login">
                     <!-- log in form -->
                     <form class="cd-signin-modal__form">
@@ -224,49 +223,17 @@
 
                         <p class="cd-signin-modal__fieldset">
                             <input type="checkbox" id="remember-me" checked class="cd-signin-modal__input ">
-                            <label for="remember-me">Remember me</label>
+                            <label style="margin-right:45%" for="remember-me">Remember me</label>
+                            <a href="#0" class="text-info" style="font-size: 1.0rem;" data-signin="reset">Forgot your password?</a>
                         </p>
 
                         <p class="cd-signin-modal__fieldset">
                             <input class="cd-signin-modal__input cd-signin-modal__input--full-width" type="submit" value="Login">
                         </p>
+                        
                     </form>
 
-                    <p class="cd-signin-modal__bottom-message js-signin-modal-trigger"><a href="#0" style="font-size: 1.0rem;" data-signin="reset">Forgot your password?</a></p>
-                </div>
-                <!-- cd-signin-modal__block -->
-
-                <div class="cd-signin-modal__block js-signin-modal-block" data-type="signup">
-                    <!-- sign up form -->
-                    <form class="cd-signin-modal__form">
-                        <p class="cd-signin-modal__fieldset">
-                            <label class="cd-signin-modal__label cd-signin-modal__label--username cd-signin-modal__label--image-replace" for="signup-username">Username</label>
-                            <input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="signup-username" type="text" placeholder="Username">
-                            <span class="cd-signin-modal__error">Error message here!</span>
-                        </p>
-
-                        <p class="cd-signin-modal__fieldset">
-                            <label class="cd-signin-modal__label cd-signin-modal__label--email cd-signin-modal__label--image-replace" for="signup-email">E-mail</label>
-                            <input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="signup-email" type="email" placeholder="E-mail">
-                            <span class="cd-signin-modal__error">Error message here!</span>
-                        </p>
-
-                        <p class="cd-signin-modal__fieldset">
-                            <label class="cd-signin-modal__label cd-signin-modal__label--password cd-signin-modal__label--image-replace" for="signup-password">Password</label>
-                            <input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="signup-password" type="text" placeholder="Password">
-                            <a href="#0" class="cd-signin-modal__hide-password js-hide-password" style="font-size: 1.0rem;">Hide</a>
-                            <span class="cd-signin-modal__error">Error message here!</span>
-                        </p>
-
-                        <p class="cd-signin-modal__fieldset">
-                            <input type="checkbox" id="accept-terms" class="cd-signin-modal__input ">
-                            <label for="accept-terms">I agree to the <a href="#0">Terms</a></label>
-                        </p>
-
-                        <p class="cd-signin-modal__fieldset">
-                            <input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding" type="submit" value="Create account">
-                        </p>
-                    </form>
+                    
                 </div>
                 <!-- cd-signin-modal__block -->
 

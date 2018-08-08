@@ -18,7 +18,7 @@
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- for review modal star rating -->
-    <link href="css/star-rating.css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="css/star-rating.css" media="all" rel="stylesheet" type="text/css" />
 
     <!-- for live chat -->
     <link rel="stylesheet" href="css/live-chat.css">
@@ -178,6 +178,68 @@
     </header>
 
     <main role="main">
+
+        <div class="container">
+
+            <style>
+                body {
+                    /*Fixes content being covered by navbar*/
+                    padding-top: 6%;
+                }
+            </style>
+
+            <legend class="header col-md-10">Update account</legend>
+
+            <div class="row">
+                <div class="column col-md-10">
+                    <p class="col-md-10">Email address
+                        <input class="form-control col-md-5" style="margin-top: .5%" placeholder="example@gmail.com" required type="text">
+                    </p>
+                    <p class="col-md-10">First name
+                        <input class="form-control col-md-5" style="margin-top: .5%" placeholder="Robert" type="text">
+                    </p>
+                    <p class="col-md-10">Middle name
+                        <input class="form-control col-md-5" style="margin-top: .5%" placeholder="Fritz" required type="text">
+                    </p>
+                    <p class="col-md-10">Last name
+                        <input class="form-control col-md-5" style="margin-top: .5%" placeholder="Berge" required type="text">
+                    </p>
+                    <p class="col-md-10">Update password
+                        <input class="form-control col-md-5" style="margin-top: .5%" required type="password">
+                    </p>
+                    <p class="col-md-10">Repeat password
+                        <input class="form-control col-md-5" style="margin-top: .5%" required type="password">
+                    </p>
+                    <p class="col-md-10" style="margin-left: 1%">
+                        <text class="text-muted">Gender</text>
+                        <div class="radio col-md-10" style="margin-top: -1%">
+                            <label style="margin-left: 1%">
+                                <input type="radio" name="optradio" checked> Male</label>
+                            <label style="margin-left: 1%">
+                                <input type="radio" name="optradio"> Female</label>
+                        </div>
+                    </p>
+                    <p class="col-md-10">Update date of birth
+                        <input class="form-control col-md-5" style="margin-top: .5%" value="1998-06-01" required type="date">
+                    </p>
+                    <p class="col-md-10">School
+                        <input class="form-control col-md-5" style="margin-top: .5%" placeholder="Bergvliet High School" required type="text">
+                    </p>
+                    <p class="col-md-10">Phone number
+                        <input class="form-control col-md-5" style="margin-top: .5%" placeholder="072 437 5326" required type="text">
+                    </p>
+                </div>
+                <div class="column col-xs-8">
+                    <img class="rounded-circle" src="img/livechat/self.jpg" alt="Generic placeholder image" width="140" height="140">
+                    <p><a class="text-info" href="#">edit account picture</a></p>
+                </div>
+            </div>
+
+            <p class="col-md-10">
+                <a type="submit" href="index-signed-in.html" class="btn btn-outline-success formbutton">Update account</a>
+            </p>
+
+        </div>
 
         <!-- Review modal -->
         <div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
