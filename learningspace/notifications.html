@@ -1,4 +1,4 @@
-<!doctype html>
+	<!doctype html>
 <html lang="en">
 
 <head>
@@ -16,6 +16,9 @@
     <!-- notifications styles -->
     <link rel="stylesheet" href="css/notifications.css">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- for full notification messages -->
+    <link rel="stylesheet" href="css/messages.css">
 
     <!-- for review modal star rating -->
     <link href="css/star-rating.css" media="all" rel="stylesheet" type="text/css"/>
@@ -55,56 +58,38 @@
                     <!-- notifications dropdown start -->
                     <li class="nav-item dropdown" style="list-style-type:none;">
                         <a class="nav-link text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-bell " style="text-shadow: 0px 0px 15px #ffff00;">(3)</i>
+                            <i class="fa fa-bell " style="text-shadow: 0px 0px 15px #ffff00;">(2)</i>
                         </a>
                         <ul class="dropdown-menu">
                             <li class="head text-light bg-dark">
                                 <div class="row">
                                     <div class="col-lg-12 col-sm-12 col-12">
-                                        <span>Notifications (3)</span>
+                                        <span>Notifications (2)</span>
                                         <a href="" class="float-right text-light">Mark all as read</a>
                                     </div>
                                 </div>
                             </li>
                             <li class="notification-box">
                                 <div class="row">
-                                    <div class="col-lg-3 col-sm-3 col-3 text-center">
-                                        <img src="img/notification.jpg" class="w-50 rounded-circle">
-                                    </div>
-                                    <div class="col-lg-8 col-sm-8 col-8">
-                                        <strong class="text-info">David John</strong>
+                                    <div class="col-lg-1 col-sm-1 col-1 text-center"></div>
+                                    <div class="col-lg-10 col-sm-10 col-10">
+                                        <strong class="text-success">Success: Your payment has been recieved</strong>
                                         <div>
-                                            Lorem ipsum dolor sit amet, consectetur
+                                            Your overdue payment for 26 August 2018 has b...
                                         </div>
-                                        <small class="text-warning">27.11.2015, 15:00</small>
+                                        <small class="text-muted">01/09/2018, 15:00</small>
                                     </div>
                                 </div>
                             </li>
                             <li class="notification-box bg-gray">
                                 <div class="row">
-                                    <div class="col-lg-3 col-sm-3 col-3 text-center">
-                                        <img src="img/notification.jpg" class="w-50 rounded-circle">
-                                    </div>
-                                    <div class="col-lg-8 col-sm-8 col-8">
-                                        <strong class="text-info">David John</strong>
+                                	<div class="col-lg-1 col-sm-1 col-1 text-center"></div>
+                                    <div class="col-lg-10 col-sm-10 col-10">
+                                        <strong class="text-danger">Danger: Payment overdue</strong>
                                         <div>
-                                            Lorem ipsum dolor sit amet, consectetur
+                                            Your payment due on <strong>26 August 2018</strong> is overdu...
                                         </div>
-                                        <small class="text-warning">27.11.2015, 15:00</small>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="notification-box">
-                                <div class="row">
-                                    <div class="col-lg-3 col-sm-3 col-3 text-center">
-                                        <img src="img/notification.jpg" class="w-50 rounded-circle">
-                                    </div>
-                                    <div class="col-lg-8 col-sm-8 col-8">
-                                        <strong class="text-info">David John</strong>
-                                        <div>
-                                            Lorem ipsum dolor sit amet, consectetur
-                                        </div>
-                                        <small class="text-warning">27.11.2015, 15:00</small>
+                                        <small class="text-muted">30/08/2018, 14:00</small>
                                     </div>
                                 </div>
                             </li>
@@ -178,6 +163,76 @@
     </header>
 
     <main role="main">
+
+    	<style>
+                body {
+                    /*Fixes content being covered by navbar*/
+                    padding-top: 6%;
+                }
+            </style>
+
+    	<div class="container">
+
+    		<legend class="header col-md-10" style="margin-bottom: -1%">New notifications</legend>
+
+    <div class="row">
+        <div class="col-sm-6 col-md-6">
+            <div class="alert-message alert-message-success">
+            	<text class="text-muted">01/09/2018, 15:00</text>
+                <h4>Success: Your payment has been recieved</h4> 
+                <p>
+                    Your overdue payment for <strong>26 August 2018</strong> has been recieved.</p>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-6">
+            <div class="alert-message alert-message-danger">
+            	<text class="text-muted">30/08/2018, 14:00</text>
+                <h4>Danger: Payment overdue</h4>  
+                <p>
+                    Your payment due on <strong>26 August 2018</strong> is overdue by 3 days. Should you fail to pay the amount by <strong>05 September 2018</strong>, you will be evicted.</p>
+            </div>
+        </div>
+    </div>
+
+	<legend class="header col-md-10" style="margin-bottom: -1%">Read notifications</legend>
+
+    <div class="row">
+        <div class="col-sm-6 col-md-6">
+            <div class="alert-message alert-message-warning">
+            	<text class="text-muted">14/08/2018, 11:45</text>
+                <h4>Warning: Incoming noise complaint</h4>
+                <p>
+                    A noise complaint has been directed to your room. Please refrain from disturbing other students.</p>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-6">
+            <div class="alert-message alert-message-info">
+            	<text class="text-muted">14/08/2018, 12:00</text>
+                <h4>Info: Review LearningSpace?</h4>      
+                <p>
+                    Hello, we trust you are enjoying your stay so far. If so, feel free to leave us a review!</p>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: -1%">
+        <div class="col-sm-6 col-md-6">
+            <div class="alert-message alert-message-default">
+            	<text class="text-muted">02/08/2018, 17:19</text>
+                <h4>Ticket (Reference: DFGH553)</h4>
+                <p>
+                    Your ticket <strong>"New room key doesn't work"</strong> has been closed and marked as solved.</p>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-6">
+            <div class="alert-message alert-message-notice">
+            	<text class="text-muted">21/07/2018, 12:11</text>
+                <h4>Notice: Booking created</h4>
+                <p>
+                    Your room number <strong>017</strong> will be ready on <strong> 1 August 2018</strong>.</p>
+            </div>
+        </div>
+    </div>
+</div>
 
         <!-- Review modal -->
         <div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
