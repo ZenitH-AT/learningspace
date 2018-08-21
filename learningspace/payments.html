@@ -160,8 +160,7 @@
                 <a href="room.html" class="text-info">view room</a></p>
 
             <p class="col-md-10">
-                <button type="submit" class="btn btn-outline-primary formbutton" style="margin-right: 15px;">Download payments history</button>
-                <button type="submit" class="btn btn-outline-dark formbutton">Request refund</button>
+                <button type="submit" class="btn btn-outline-primary formbutton" data-toggle="modal" data-target="#paymentHistory">View payments history</button>
             </p>
 
             <legend class="header col-md-10" style="font-size:110%;">Complete your next payment</legend>
@@ -217,6 +216,58 @@
             <p class="col-md-10">
                 <button type="submit" style="margin-top: 1%" class="btn btn-outline-success formbutton">Confirm payment</button>
             </p>
+        </div>
+
+        <!-- Payment history modal -->
+        <div class="modal" id="paymentHistory">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Username's payment history</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Payment ID</th>
+                                    <th scope="col">Amount</th>
+                                    <th scope="col">Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1234</td>
+                                    <td>R 900</td>
+                                    <td>23/06/2018</td>
+                                </tr>
+                                <tr>
+                                    <td>3234</td>
+                                    <td>R 900</td>
+                                    <td>23/07/2018</td>
+                                </tr>
+                                <tr>
+                                    <td>1112</td>
+                                    <td>R 900</td>
+                                    <td>23/08/2018</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="form-group">
+                            <legend style="font-size:110%;">Request refund</legend>
+                            <input class="form-control" style="margin-bottom:4%" placeholder="Payment ID" required="" autofocus="" type="text">
+                            <textarea class="form-control" name="message" placeholder="Reason" rows="3" required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-outline-dark formbutton">Request refund</button>
+                    </div>
+
+                </div>
+            </div>
         </div>
 
         <style>
