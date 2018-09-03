@@ -1,26 +1,29 @@
 <!-- live chat float start -->
-<div class="floating-chat">
-    <i class="fa fa-comments" aria-hidden="true"></i>
-    <div class="chat">
-        <div class="header">
-            <span class="title">
-                Live chat
-            </span>
-            <button>
-                <i class="fa fa-times" aria-hidden="true"></i>
-            </button>
-
+<?php
+    if (isset($_SESSION["iduser"])) {
+        ?><div class="floating-chat">
+        <i class="fa fa-comments" aria-hidden="true"></i>
+        <div class="chat">
+            <div class="header">
+                <span class="title">
+                    Live chat
+                </span>
+                <button>
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+            <ul class="messages">
+                <li class="other">Hello, how can we help?</li>
+            </ul>
+            <div class="footer">
+                <div class="text-box" contenteditable="true" disabled="true"></div>
+                <button id="sendMessage">send</button>
+            </div>
         </div>
-        <ul class="messages">
-            <li class="other">Hello, how can we help?</li>
-        </ul>
-        <div class="footer">
-            <div class="text-box" contenteditable="true" disabled="true"></div>
-            <button id="sendMessage">send</button>
-        </div>
-    </div>
-</div>
-<!-- live chat float end *******************************************8-->
+    </div><?php
+    } 
+?>
+<!-- live chat float end ********************************************-->
 
 
 
@@ -77,7 +80,7 @@ if (isset($_GET['error'])) {
 
 <footer class="container text-center">
     <!--<p class="float-right"><a href="#">Put Something in Here!</a></p>-->
-    <p>&copy; 2017-2018 DreamTeam, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+    <p>&copy; 2017-2018 DreamTeam, Inc. &middot; <a href="/PrivacyPopup.php">Privacy</a> &middot; <a href="#">Terms</a></p>
 </footer>
 
 
