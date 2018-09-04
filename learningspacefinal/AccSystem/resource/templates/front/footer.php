@@ -76,13 +76,12 @@ if (isset($_GET['error'])) {
 }
 ?>
 
-
-
 <footer class="container text-center">
     <!--<p class="float-right"><a href="#">Put Something in Here!</a></p>-->
-    <p>&copy; 2017-2018 DreamTeam, Inc. &middot; <a href="/PrivacyPopup.php">Privacy</a> &middot; <a href="#">Terms</a></p>
+    <p>&copy; 2017-2018 DreamTeam, Inc. &middot; <a href="PrivacyTerms.php" data-toggle="modal" data-target="#PrivacyPopup">Privacy</a> &middot; <a href="PrivacyTerms.php" data-toggle="modal" data-target="#TermsPopup">Terms</a></p>
 </footer>
 
+<?php include "PrivacyTerms.php"; ?>
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
