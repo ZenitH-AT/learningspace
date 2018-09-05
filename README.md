@@ -5,6 +5,6 @@ A student accomodaition website with full user and admin features.
 
 The **learningspace** and **learningspaceadmin** folders contain templates for the final system (use these for an idea of what your solution should look like).
 
-The **learningspacefinal** folder contains the database that you need to import to your MySQL server and the **AccSystem** folder, which must be put in your NetBeans project folder located in "C:\xammp\htdocs\".
+The **learningspacefinal** folder contains the database that you need to import to your MySQL server and the **AccSystem** folder, which must be put in your NetBeans project folder located at "C:\xammp\htdocs\project".
 
 The live chat system (port 8088) is external, so you need to add **allow_url_include = 1** to your php.ini file on your Apache server. In order for it to work correctly, you may need to change your Apache server's port to 8080 in httpd.conf.
