@@ -123,7 +123,7 @@
                     <h2>Contact Us</h2>
                     <p>If you have any questions about this Privacy Policy, please contact us:</p>
                     <ul>
-                            <li>By email: projectcrudacc@gmail.com</li>
+                            <li>By email: <a href="mailto:learningspace@gmail.com">projectcrudacc@gmail.com</a></li>
                             
                             </ul>
                 </div>
@@ -201,7 +201,7 @@
                     <h2>Contact Us</h2>
                     <p>If you have any questions about this Privacy Policy, please contact us:</p>
                     <ul>
-                            <li>By email: projectcrudacc@gmail.com</li>
+                            <li>By email: <a href="mailto:learningspace@gmail.com">projectcrudacc@gmail.com</a></li>
                             
                             </ul>
                 </div>
