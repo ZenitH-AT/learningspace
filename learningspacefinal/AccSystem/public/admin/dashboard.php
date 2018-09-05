@@ -15,12 +15,15 @@
         <link href="./css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/fontawesome/css/all.min.css" rel="stylesheet">
         <link href="./css/bootstrap.min.css" rel="stylesheet">
+        <link href="./css/sb-admin.css" rel="stylesheet">
+        
 
         <!-- Custom styles for this template -->
         <link href="./css/dashboard.css" rel="stylesheet">
     </head>
 
     <body>
+
         <?php include 'dash_navbar.php'; ?>
 
         <div class="container-fluid">
@@ -30,45 +33,71 @@
                 <!--Sidebar menu-->
                 <?php include 'dash_sidemenu.php'; ?>
 
+
                 <!--main content-->
                 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-                    <?php if (!isset($_SESSION['admin'])){
+                    <?php
+                    if (!isset($_SESSION['admin'])) {
                         redirect("../HomePage.php");
-                    }?>
-                    
-                    <?php if ($_SERVER['REQUEST_URI'] == "/project/AccSystem/public/admin/dashboard.php"){
+                    }
+                    ?>
+
+                    <?php
+                    if ($_SERVER['REQUEST_URI'] == "/project/AccSystem/public/admin/dashboard.php") {
                         include 'dash_main.php';
-                    }?>
-                    <?php if (isset($_GET['student'])) {
-                        include TEMPLATE_BACK.'student.php';
-                    }?>
-                    <?php if (isset($_GET['booking'])) {
-                        include TEMPLATE_BACK.'booking.php';
-                    }?>
-                    <?php if (isset($_GET['viewing'])) {
-                        include TEMPLATE_BACK.'viewing.php';
-                    }?>
-                    <?php if (isset($_GET['room'])) {
-                        include TEMPLATE_BACK.'room.php';
-                    }?>
-                    <?php if (isset($_GET['notification'])) {
-                        include TEMPLATE_BACK.'notification.php';
-                    }?>
-                    <?php if (isset($_GET['ticket'])) {
-                        include TEMPLATE_BACK.'ticket.php';
-                    }?>
-                    <?php if (isset($_GET['livechat'])) {
-                        include TEMPLATE_BACK.'livechat.php';
-                    }?>
-                    <?php if (isset($_GET['payment'])) {
-                        include TEMPLATE_BACK.'payment.php';
-                    }?>
-                    <?php if (isset($_GET['refund'])) {
-                        include TEMPLATE_BACK.'refund.php';
-                    }?>
-                    <?php if (isset($_GET['admins'])) {
-                        include TEMPLATE_BACK.'admins.php';
-                    }?>
+                    }
+                    ?>
+                    <?php
+                    if (isset($_GET['student'])) {
+                        include TEMPLATE_BACK . 'student.php';
+                    }
+                    ?>
+                    <?php
+                    if (isset($_GET['booking'])) {
+                        include TEMPLATE_BACK . 'booking.php';
+                    }
+                    ?>
+                    <?php
+                    if (isset($_GET['viewing'])) {
+                        include TEMPLATE_BACK . 'viewing.php';
+                    }
+                    ?>
+                    <?php
+                    if (isset($_GET['room'])) {
+                        include TEMPLATE_BACK . 'room.php';
+                    }
+                    ?>
+                    <?php
+                    if (isset($_GET['notification'])) {
+//                        include TEMPLATE_BACK . 'notification.php';
+                        
+                    }
+                    ?>
+                    <?php
+                    if (isset($_GET['ticket'])) {
+                        include TEMPLATE_BACK . 'ticket.php';
+                    }
+                    ?>
+                    <?php
+                    if (isset($_GET['livechat'])) {
+                        include TEMPLATE_BACK . 'livechat.php';
+                    }
+                    ?>
+                    <?php
+                    if (isset($_GET['payment'])) {
+                        include TEMPLATE_BACK . 'payment.php';
+                    }
+                    ?>
+                    <?php
+                    if (isset($_GET['refund'])) {
+                        include TEMPLATE_BACK . 'refund.php';
+                    }
+                    ?>
+                    <?php
+                    if (isset($_GET['admins'])) {
+                        include TEMPLATE_BACK . 'admins.php';
+                    }
+                    ?>
 
                 </main>
 
@@ -83,43 +112,25 @@
         <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
         <script src="./js/popper.min.js"></script>
         <script src="./js/bootstrap.min.js"></script>
+        <script src="./js/myScript.js"></script>
 
         <!-- Icons -->
         <script src="./js/feather.min.js"></script>
         <script>
             feather.replace();
         </script>
+        <script>
+//            $(document).ready(function() {
+//                $("a").click(function(e) {
+//                    //e.preventDefault();
+//                    $("a.active").removeClass("active");
+//                    $(this).addClass("active");
+//                });
+//            });
+        </script>
 
         <!-- Graphs -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
-        <script>
-            var ctx = document.getElementById("myChart");
-            var myChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-                    datasets: [{
-                            data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
-                            lineTension: 0,
-                            backgroundColor: 'transparent',
-                            borderColor: '#007bff',
-                            borderWidth: 4,
-                            pointBackgroundColor: '#007bff'
-                        }]
-                },
-                options: {
-                    scales: {
-                        yAxes: [{
-                                ticks: {
-                                    beginAtZero: false
-                                }
-                            }]
-                    },
-                    legend: {
-                        display: false
-                    }
-                }
-            });
-        </script>
+        <script src="js/chart.js"></script>
     </body>
 </html>

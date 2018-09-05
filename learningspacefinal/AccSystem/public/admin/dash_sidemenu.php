@@ -1,5 +1,5 @@
 <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-    <div class="sidebar-sticky">
+    <div class="sidebar-sticky" id="side">
         <ul class="nav flex-column">
             <li class="nav-item">
                 <a class="nav-link" href="dashboard.php">
@@ -62,7 +62,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="?admins">
+                <a class="nav-link sie" href="dashboard.php?admins">
                     <span data-feather="users"></span>
                     Administrators
                 </a>

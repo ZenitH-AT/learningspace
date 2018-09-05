@@ -30,7 +30,7 @@
      
 
         </ul>
-        <div style="padding-right: 6px;">
+        <div style="padding-right: 15px;">
             <a href="../HomePage.php"><button type="button" class = "btn btn-outline-success my-2 my-sm-0" style="padding-right: 6px;"><i class="fa fa-fw fa-home"></i> Home Page</button></a>
             <a href="../../resource/logout.php"><button type="button" class = "btn btn-outline-success my-2 my-sm-0"><i class="fa fa-fw fa-power-off"></i> Sign out</button></a>
         </div>
