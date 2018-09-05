@@ -1,31 +1,11 @@
-<!-- live chat float start -->
+<!-- live chat float include -->
+<!-- is run on a node.js server -->
+<!-- note: 'allow_url_include = 1' must be added to php.ini for this to work-->
 <?php
     if (isset($_SESSION["iduser"])) {
-        ?><div class="floating-chat">
-        <i class="fa fa-comments" aria-hidden="true"></i>
-        <div class="chat">
-            <div class="header">
-                <span class="title">
-                    Live chat
-                </span>
-                <button>
-                    <i class="fa fa-times" aria-hidden="true"></i>
-                </button>
-            </div>
-            <ul class="messages">
-                <li class="other">Hello, how can we help?</li>
-            </ul>
-            <div class="footer">
-                <div class="text-box" contenteditable="true" disabled="true"></div>
-                <button id="sendMessage">send</button>
-            </div>
-        </div>
-    </div><?php
+        include 'http://localhost:8088/client.php';
     } 
 ?>
-<!-- live chat float end ********************************************-->
-
-
 
 <!--Alert Message For Login *****************************************-->
 <!--error=1 is used to display alert msg of wrong pass or email-->
