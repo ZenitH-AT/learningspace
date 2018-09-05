@@ -19,8 +19,8 @@
 
                 <p class="cd-signin-modal__fieldset">
                     <label class="cd-signin-modal__label cd-signin-modal__label--password cd-signin-modal__label--image-replace" for="signin-password">Password</label>
-                    <input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="signin-password" name="signin-password" type="text" placeholder="Password">
-                    <a href="#" class="cd-signin-modal__hide-password js-hide-password" style="font-size: 1.0rem;">Hide</a>
+                    <input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="signin-password" name="signin-password" type="password" placeholder="Password">
+                    <a href="#" class="cd-signin-modal__hide-password js-hide-password" style="font-size: 1.0rem;">Show</a>
                     <span class="cd-signin-modal__error">Error message here!</span>
                 </p>
                 
