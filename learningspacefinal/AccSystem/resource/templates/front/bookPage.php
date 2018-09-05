@@ -106,7 +106,7 @@
 
                         <div class="form-group" ng-app="CheckBox" ng-controller="CheckIt">
                             <div class="col-md-12">
-                                <p class="text-info">Accept Terms of Services <input type="checkbox" ng-model="chkValue"></p>
+                                <p class="text-info">Accept <a class="text-info" href="PrivacyTerms.php" data-toggle="modal" data-target="#TermsPopup">Terms of Service</a> <input type="checkbox" ng-model="chkValue"></p>
                                 <input type="button" value="submit" ng-disabled="!chkValue" >
                                 <button type="submit" name="bookroom" ng-disabled="!chkValue" class=" btn btn-outline-success formbutton">Book room</button>
     <!--                                <a class="btn btn-warning"><span class="fa fa-minus"></span></a>-->
