@@ -19,7 +19,6 @@
         <link href="./css/carousel.css" rel="stylesheet">
         <link href="./css/notifications.css" rel="stylesheet">
         <link href="./css/modal.css" rel="stylesheet">
-        <link href="./css/live-chat.css" rel="stylesheet">
         <link href="./css/thumbnail-gallery.css" rel="stylesheet">
         <link href="./css/jquery.datetimepicker.css" rel="stylesheet">
 

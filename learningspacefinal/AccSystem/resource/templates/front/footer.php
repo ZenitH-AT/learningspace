@@ -78,7 +78,6 @@ if (isset($_GET['error'])) {
 <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
 <script src="./js/holder.min.js"></script>
 <script src="./js/float-panel.js"></script>
-<script src="./js/live-chat.js"></script>
 <script src="./js/jquery.datetimepicker.full.js"></script>
 <!-- for gallery images -->
 
