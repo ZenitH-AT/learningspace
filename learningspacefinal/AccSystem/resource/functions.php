@@ -562,8 +562,8 @@ function signup() {
 
                     $mail = new MailClass();
                     $subject = "Your Accommodation Account - Verify Your Email Address";
-                    $body = "Dear {$fname} {$lname}<br>"
-                            . "Please verify your email address to complete your LearnigSpace Account<br><br>"
+                    $body = "Dear {$fname} {$lname}<br><br>"
+                            . "Please click the link below to verify your LearningSpace account.<br><br>"
                             . "<a href='http://localhost/project/AccSystem/public/userActivation.php?key={$userActicationKey}' class='btn btn-outline-success formbutton'>Verify email address</a>";
 
                     $getresult = $mail->sendMail($email, $subject, $body);
