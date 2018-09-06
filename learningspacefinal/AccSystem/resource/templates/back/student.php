@@ -2,7 +2,13 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="page-header">Student</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
-        Some
+        <?php if(isset($_GET['student'])=="deleted"){ ?>
+        <div class='alert alert-danger alert-dismissible fade show text-center' role='alert'>
+                <strong>Info!</strong> Admin, You Cannot Book a Room.
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                    <span aria-hidden='true'>&times;</span>
+                </button></div>
+        <?php }?>
     </div>
 </div>
 
