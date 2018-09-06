@@ -574,7 +574,7 @@ function signup() {
                                       <span aria-hidden='true'>&times;</span>
                                     </button></div>";
                         $sql = "INSERT INTO student(studFirstName,studMiddleName,studLastName,studEmail,studPassword,studGender,studDOB,studSchool,studSchoolAddress,studCountry,studCity,studStreet,id_passport,studPhone,activationKey,isActive,data)"
-                                . "VALUES('{$fname}','{$midname}','{$lname}','{$email}','{$passEncrip}','{$gender}','{$date}','{$schoolName}','{$schoolAdd}','{$country}','{$city}','{$street}',{$idPassport}','{$phone}','{$userActicationKey}','0',now())";
+                                . "VALUES('{$fname}','{$midname}','{$lname}','{$email}','{$passEncrip}','{$gender}','{$date}','{$schoolName}','{$schoolAdd}','{$country}','{$city}','{$street}','{$idPassport}','{$phone}','{$userActicationKey}','0',now())";
 
                         $insert = query($sql);
                         confirm($insert);
