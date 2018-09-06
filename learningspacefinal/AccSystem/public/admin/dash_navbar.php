@@ -19,7 +19,7 @@
                 </form>-->
         <ul class="navbar-nav ">
             <li class="nav-item text-nowrap" style="padding-right: 11px;">
-                <a class="nav-link text-light"></i><?php echo "Admin, " . ucfirst($_SESSION["adminFN"]); ?></a>
+                <a class="nav-link text-light"></i><?php echo "Welcome Admin, " . ucfirst($_SESSION["adminFN"]); ?></a>
             </li>
             <li class="nav-item text-nowrap">
 
