@@ -33,6 +33,56 @@ function fetch_array($result) {
     return mysqli_fetch_array($result);
 }
 
+function toRemove($tableName,$colomnName, $idItem){
+    $tN=  escape_String($tableName); $clN = escape_String($colomnName); $id = escape_String($idItem);
+    $query = "DELETE FROM {$tN} WHERE {$clN}='{$id}' ";
+    $remove = query($query);
+    confirm($remove);
+    if ($remove) {
+        return 1;
+    }  else {
+        return 0;
+    }
+}
+
+
+//Show all Students
+function get_Students() {
+    $query = query("SELECT * FROM student ORDER BY studID DESC ");
+    confirm($query);
+
+    while ($row = fetch_array($query)) {
+        $student = <<<DELIMETER
+        <tr>
+            <td>{$row['studID']}</td>
+            <td>{$row['studFirstName']}</td>
+            <td>{$row['studMiddleName']}</td>
+            <td>{$row['studLastName']}</td>
+            <td>{$row['studEmail']}</td>
+            <td>{$row['studPassword']}</td>
+            <td>{$row['studGender']}</td>
+            <td>{$row['studDOB']}</td>
+            <td>{$row['studSchool']}</td>
+            <td>{$row['studSchoolAddress']}</td>
+            <td>{$row['studCountry']}</td>
+            <td>{$row['studCity']}</td>
+            <td>{$row['studStreet']}</td>
+            <td>{$row['id_passport']}</td>
+            <td>{$row['studPhone']}</td>
+            <td>{$row['activationKey']}</td>
+            <td>{$row['isActive']}</td>
+            <td>{$row['data']}</td>
+            
+            <td><a class="btn btn-success" href="../../resource/templates/back/add.php?student={$row['studID']}"><span class="fa fa-user-plus" style="color:white"></span></a></td>
+            <td><a class="btn btn-info" href="../../resource/templates/back/edit.php?student={$row['studID']}"><span class="fa fa-user-edit" style="color:white"></span></a></td>
+            <td><a class="btn btn-danger" href="../../resource/templates/back/remove.php?student={$row['studID']}"><span class="fa fa-user-minus" style="color:white"></span></a></td>
+            
+        </tr>
+DELIMETER;
+        echo $student;
+    }
+}
+
 //Get Rooms
 function get_Rooms_BelowBelow() {
 //    WHERE roomType IN ('palacio','gold')
@@ -226,6 +276,7 @@ function lognew() {
         if (!empty($user) && !empty($pass)) {
 
             $encrypPass = md5($pass);
+            $countAdmin = 0;
             $query = "SELECT * FROM student "
                     . "WHERE studEmail='{$user}' AND studPassword='{$encrypPass}'";
 
@@ -233,7 +284,15 @@ function lognew() {
             confirm($result);
             $count = countItem($result);
 
-            echo $count;
+            if ($count == 0) {
+                $query = "SELECT * FROM admin "
+                        . "WHERE adminEmail='{$user}' AND adminPassword='{$pass}'";
+
+                $resultad = query($query);
+                confirm($resultad);
+                $countAdmin = countItem($resultad);
+            }
+
 
             if ($count > 0) {
                 while ($row = fetch_array($result)) {
@@ -254,6 +313,33 @@ function lognew() {
                         $_SESSION["password"] = $userPass;
 
                         redirect("HomePage.php");
+                    }
+                } else {
+                    redirect("HomePage.php?error=5");
+                }
+            } elseif ($countAdmin > 0) {
+                while ($rowad = fetch_array($resultad)) {
+                    $adminID = $rowad['adminID'];
+                    $adminFirstN = $rowad['adminFirstN'];
+                    $adminLastN = $rowad['adminLastN'];
+                    $adminCategory = $rowad['adminCategory'];
+                    $adminEmail = $rowad['adminEmail'];
+                    $adminActive = $rowad['adminActive'];
+                    $adminPassword = $rowad['adminPassword'];
+                }
+                if ($adminActive == 1) {
+                    if (($pass == $adminPassword) && ($adminEmail == $user)) {
+                        $_SESSION["admin"] = "Admin";
+                        $_SESSION["idadmin"] = $adminID;
+                        $_SESSION["adminFN"] = $adminFirstN;
+                        $_SESSION["adminLN"] = $adminLastN;
+                        $_SESSION["adminCategory"] = $adminCategory;
+                        $_SESSION["adminEmail"] = $adminEmail;
+                        $_SESSION["adminIsActive"] = $adminActive;
+                        $_SESSION["adminPass"] = $adminPassword;
+
+                        //redirect("HomePage.php");
+                        redirect("admin/dashboard.php");
                     }
                 } else {
                     redirect("HomePage.php?error=5");
