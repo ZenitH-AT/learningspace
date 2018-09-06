@@ -14,6 +14,11 @@
             <!-- Wrap the rest of the page in another container to center all the content. -->
             <?php include TEMPLATE_FRONT.DS.'LGPopup.php'; ?>
             
+            <?php
+               if ($_SERVER['REQUEST_URI'] == "/project/") {
+                        redirect("HomePage.php");
+                    }
+            ?>
 
             
             <div class="container marketing">
