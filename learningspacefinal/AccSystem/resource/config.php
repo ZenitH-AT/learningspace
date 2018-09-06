@@ -25,6 +25,6 @@ defined("DB_USER") ? NULL : define("DB_USER", "root");
 defined("DB_PASS") ? NULL : define("DB_PASS", "");
 defined("DB_NAME") ? NULL : define("DB_NAME", "accommodation");
 
-$connection = mysqli_connect(DB_HOST,DB_USER,DB_PASS,DB_NAME)or die("TGERE IS NO DATABASE CONNECTION");
+$connection = mysqli_connect(DB_HOST,DB_USER,DB_PASS,DB_NAME)or die("THERE IS NO DATABASE CONNECTION");
 
 require_once( __DIR__."/functions.php");
