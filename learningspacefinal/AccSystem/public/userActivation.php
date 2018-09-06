@@ -2,7 +2,7 @@
 
 
 <?php //include '../resource/templates/front/header.php'; ?><!-- Page Hearder-->
-<?php include TEMPLATE_FRONT . DS . "header.php"; ?>
+<?php include TEMPLATE_FRONT.DS."header.php"; ?>
 
 <main role="main">
     <link rel="icon" href="">
@@ -11,14 +11,14 @@
     <div class="container marketing">
 
 
-    <?php include TEMPLATE_FRONT . DS . "emailActivation.php"; ?>
+    <?php include TEMPLATE_FRONT.DS."emailActivation.php"; ?>
 
     <hr class="featurette-divider">
 
     </div><!-- /.container -->
 
     <!-- FOOTER -->
-    <?php include TEMPLATE_FRONT . DS . "footer.php"; ?>
+    <?php include TEMPLATE_FRONT.DS."footer.php"; ?>
 </main>
 
 </body>
