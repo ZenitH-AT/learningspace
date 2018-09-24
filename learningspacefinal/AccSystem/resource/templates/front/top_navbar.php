@@ -52,7 +52,7 @@
                         <li class="head text-dark myMenuUser">
                             <!--<a href="userProfile.php?iduser=<?php echo $_SESSION['iduser']; ?>" class="text-dark">-->
                             <div class="row">
-                                <div class="col-lg-8 col-sm-8 col-8">
+                                <div class="col-lg-8 col-sm-10 col-8">
                                     <a href="userProfile.php?iduser=<?php echo $_SESSION['iduser']; ?>" class="text-dark"><i class="fa fa-fw fa-user"></i> Profile</a>
                                 </div>
                             </div>
@@ -60,21 +60,21 @@
                         </li>
                         <li class="head text-dark myMenuUser">
                             <div class="row">
-                                <div class="col-lg-8 col-sm-8 col-8">
+                                <div class="col-lg-8 col-sm-10 col-8">
                                     <a href="userRoomDetails.php?iduser=<?php echo $_SESSION['iduser']; ?>" class="text-dark"><i class="fa fa-fw fa-home"></i> Room</a>
                                 </div>
                             </div>
                         </li>
                         <li class="head text-dark myMenuUser">
                             <div class="row">
-                                <div class="col-lg-10 col-sm-8 col-8">
+                                <div class="col-lg-10 col-sm-10 col-8">
                                     <a href="paymentPage.php?iduser=<?php echo $_SESSION['iduser']; ?>" class="text-dark"><i class="fa fa-fw fa-credit-card"></i> Payments</a>
                                 </div>
                             </div>
                         </li>
                         <li class="head text-dark myMenuUser">
                             <div class="row">
-                                <div class="col-lg-8 col-sm-8 col-8">
+                                <div class="col-lg-8 col-sm-10 col-8">
                                     <a href="userTicket.php?iduser=<?php echo $_SESSION['iduser']; ?>" class="text-dark"><i class="fa fa-fw fa-life-ring"></i> Tickets</a>
                                 </div>
                             </div>
