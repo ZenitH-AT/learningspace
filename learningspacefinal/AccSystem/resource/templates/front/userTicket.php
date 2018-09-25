@@ -8,7 +8,7 @@
                         <legend class="header col-md-10">Create new ticket</legend>
                         <div class="form-group">
                             <div class="col-md-10 col-md-offset-1">
-                                <input id="phone" name="phone" type="text" placeholder="Subject" class="form-control" required>
+                                <input id="subject" name="subject" type="text" placeholder="Subject" class="form-control" required>
                             </div>
                         </div>
 
@@ -20,10 +20,10 @@
 
                         <div class="form-group">
                             <div class="col-md-10 col-md-offset-1">
-                                <select class="combobox form-control">
+                                <select class="combobox form-control" id="category" name="category">
                                     <option value="" selected="selected">Select category</option>
-                                    <option value="EFT">Complaint</option>
-                                    <option value="CC">Sales</option>
+                                    <option value="EFT">Booking</option>
+                                    <option value="CC">Complaint</option>
                                     <option value="XX">Other</option>
                                 </select>
                             </div>
@@ -31,7 +31,7 @@
 
                         <div class="form-group">
                             <div class="col-md-12">
-                                <button type="submit" class=" btn btn-outline-success formbutton">Create ticket</button>
+                                <button type="submit" id="create" name="create" class=" btn btn-outline-success formbutton">Create ticket</button>
                             </div>
                         </div>
                     </fieldset>
