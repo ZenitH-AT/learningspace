@@ -1,5 +1,5 @@
 <a href="#" class="navbar-left"><img style="max-width:100%; margin-left: 20%; height: 40px;" src="IMAGE/web/logo.png">
-    <a class="navbar-brand" href="#" style="margin-left: 10px;">LearningSpace</a>
+    <a class="navbar-brand" href="HomePage.php" style="margin-left: 10px;">LearningSpace</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
