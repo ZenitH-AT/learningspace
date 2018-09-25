@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 25, 2018 at 03:57 AM
+-- Generation Time: Sep 25, 2018 at 04:45 AM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -76,6 +76,14 @@ CREATE TABLE `helpticket` (
   `ticketTime` datetime NOT NULL,
   `isActive` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `helpticket`
+--
+
+INSERT INTO `helpticket` (`ticketID`, `studID`, `ticketSubject`, `ticketCategory`, `ticketTime`, `isActive`) VALUES
+(5, 22, 'tEST', 'Booking', '2018-09-25 04:44:39', 1),
+(6, 22, 'sdfsd', 'Booking', '2018-09-25 04:44:47', 1);
 
 -- --------------------------------------------------------
 
@@ -360,7 +368,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `helpticket`
 --
 ALTER TABLE `helpticket`
-  MODIFY `ticketID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ticketID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `helpticketmessage`
