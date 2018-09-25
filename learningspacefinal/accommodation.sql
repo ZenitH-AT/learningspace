@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.2
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Aug 30, 2018 at 09:02 AM
--- Server version: 10.1.34-MariaDB
--- PHP Version: 7.2.8
+-- Host: 127.0.0.1
+-- Generation Time: Sep 25, 2018 at 03:57 AM
+-- Server version: 10.1.35-MariaDB
+-- PHP Version: 7.2.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -21,16 +21,14 @@ SET time_zone = "+00:00";
 --
 -- Database: `accommodation`
 --
-CREATE DATABASE IF NOT EXISTS `accommodation` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
-USE `accommodation`;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Accommodation`
+-- Table structure for table `accommodation`
 --
 
-CREATE TABLE `Accommodation` (
+CREATE TABLE `accommodation` (
   `accID` int(11) NOT NULL,
   `accResgistratioonNo` varchar(255) COLLATE utf8_bin NOT NULL,
   `accLocation` varchar(255) COLLATE utf8_bin NOT NULL,
@@ -71,10 +69,27 @@ INSERT INTO `admin` (`adminID`, `adminFirstN`, `adminLastN`, `adminCategory`, `a
 --
 
 CREATE TABLE `helpticket` (
-  `helpID` int(11) NOT NULL,
-  `helpName` varchar(255) COLLATE utf8_bin NOT NULL,
-  `helpEmail` varchar(255) COLLATE utf8_bin NOT NULL,
-  `helpText` text COLLATE utf8_bin NOT NULL
+  `ticketID` int(11) NOT NULL,
+  `studID` int(11) NOT NULL,
+  `ticketSubject` varchar(255) COLLATE utf8_bin NOT NULL,
+  `ticketCategory` varchar(255) COLLATE utf8_bin NOT NULL,
+  `ticketTime` datetime NOT NULL,
+  `isActive` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `helpticketmessage`
+--
+
+CREATE TABLE `helpticketmessage` (
+  `messageID` int(11) NOT NULL,
+  `ticketID` int(11) NOT NULL,
+  `studID` int(11) DEFAULT NULL,
+  `adminID` int(11) DEFAULT NULL,
+  `messageText` longtext COLLATE utf8_bin NOT NULL,
+  `messageTime` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -144,10 +159,10 @@ INSERT INTO `room` (`room_id`, `roomName`, `roomPrice`, `roomType`, `roomCapacit
 -- --------------------------------------------------------
 
 --
--- Table structure for table `roomMarket`
+-- Table structure for table `roommarket`
 --
 
-CREATE TABLE `roomMarket` (
+CREATE TABLE `roommarket` (
   `roomMarketID` int(11) NOT NULL,
   `firstText` varchar(255) COLLATE utf8_bin NOT NULL,
   `secondText` varchar(255) COLLATE utf8_bin NOT NULL,
@@ -155,10 +170,10 @@ CREATE TABLE `roomMarket` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Dumping data for table `roomMarket`
+-- Dumping data for table `roommarket`
 --
 
-INSERT INTO `roomMarket` (`roomMarketID`, `firstText`, `secondText`, `roomID`) VALUES
+INSERT INTO `roommarket` (`roomMarketID`, `firstText`, `secondText`, `roomID`) VALUES
 (1, 'First featurette heading.', 'It\'ll blow your mind.', 5),
 (2, 'Oh yeah, it\'s that good.', 'See for yourself.', 1),
 (3, 'What are you waiting for?', 'Book today.', 7),
@@ -205,9 +220,8 @@ INSERT INTO `student` (`studID`, `studFirstName`, `studMiddleName`, `studLastNam
 (7, 'Ee', 'Mooo', 'Suquila', 'moisddd@dd.com', 'f5213dacaee168fffb80807b1cc0e269', 'Male', '2018-08-10', 'Hb', 'Trdf', '', '', '', 'hjghfgdf', '0834866680', '92ae56d3c81e8dd53aae2bf77c267ce5', '1', '2018-08-10 21:19:15'),
 (8, 'Kdfhbvh', 'KJSDFJN', 'DKJFNF', 'mois@fdj.cisjd', 'efdd30ebc81423fe7e5f016a10c67570', 'Male', '0000-00-00', 'Kjdnjnc', 'Jnxckjn', '', '', '', 'jdnfjncjn', '9387444363', 'bef2e86c5dbc9587fee929d4c84fb08a', '0', '2018-08-14 21:17:02'),
 (9, 'OKKKKK', 'Kjxncjn', 'Kdjfnjvnjk', 'moise@gma.com', '6e37469971a8bb23117f0085370dda2d', 'Male', '0000-00-00', 'Cjndjc', 'Kdjncjn', '', '', '', 'kjfnvjfnj', '2345456662211', '27ef5cf82630dd9d694f6843ef5a518c', '1', '2018-08-14 21:21:12'),
-(17, 'Moises', 'Wenikeni', 'Borracha', 'moisesnt2@gmail.com', '8ee2197f8c482f9cdb157f126e255bc3', 'Male', '1993-08-20', 'CTI', '21 Claremont', 'Angola', 'Talatona', 'Rua 12', 'N1353299Â§', '23763783772', '8c9c87290a8bb9de1d3e123fe13602a2', '1', '2018-08-22 16:33:34'),
 (18, 'Ze', 'Assunca', 'Luia', 'zenaideluis22@gmail.com', '2b0eb3f6a700f8cb1f3148b6b08aab2e', 'Male', '0000-00-00', 'Cti', 'Iamb Road', '', '', '', 'n27382nw34', '9987739279293', '2f444438b0b2cc7a64fe8107107157f8', '1', '2018-08-16 11:11:40'),
-(19, 'Robert', 'Fritz', 'Berge', 'zenith3za@gmail.com', 'd106b29303767527fc11214f1b325fb6', 'Male', '0000-00-00', 'Bergvliet High', '1 Firgrove Avenue', '', '', '', '9861525587', '7124375326', '8308afecf642e8f9cb2ccb7c302fcedc', '1', '2018-08-16 14:32:15');
+(22, 'Robert', 'Fritz', 'Berge', 'zenith3za@gmail.com', 'd106b29303767527fc11214f1b325fb6', 'Male', '1998-01-06', 'Bergvliet High', 'Dunno', 'South Africa', 'Cape Town', 'Hertzog Road', '9806015255087', '0724375326', '91fccd488a9f0015a74dbbf8448e0975', '1', '2018-09-07 00:03:03');
 
 -- --------------------------------------------------------
 
@@ -223,14 +237,6 @@ CREATE TABLE `studentprofile` (
   `profileRestriction` int(11) NOT NULL,
   `date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
---
--- Dumping data for table `studentprofile`
---
-
-INSERT INTO `studentprofile` (`profileID`, `studID`, `studDescription`, `studPicture`, `profileRestriction`, `date`) VALUES
-(5, 18, 'iam here', 'Deluxe', 0, '2018-08-22 11:01:25'),
-(7, 17, 'Im There', '17Deluxe.jpg', 0, '2018-08-22 16:33:34');
 
 -- --------------------------------------------------------
 
@@ -261,9 +267,9 @@ INSERT INTO `viewing` (`viewBookingID`, `viewerName`, `viewerEmail`, `viewerPhon
 --
 
 --
--- Indexes for table `Accommodation`
+-- Indexes for table `accommodation`
 --
-ALTER TABLE `Accommodation`
+ALTER TABLE `accommodation`
   ADD PRIMARY KEY (`accID`),
   ADD UNIQUE KEY `Unique` (`accResgistratioonNo`);
 
@@ -279,7 +285,13 @@ ALTER TABLE `admin`
 -- Indexes for table `helpticket`
 --
 ALTER TABLE `helpticket`
-  ADD PRIMARY KEY (`helpID`);
+  ADD PRIMARY KEY (`ticketID`);
+
+--
+-- Indexes for table `helpticketmessage`
+--
+ALTER TABLE `helpticketmessage`
+  ADD PRIMARY KEY (`messageID`);
 
 --
 -- Indexes for table `login_test`
@@ -302,9 +314,9 @@ ALTER TABLE `room`
   ADD UNIQUE KEY `roomName` (`roomName`);
 
 --
--- Indexes for table `roomMarket`
+-- Indexes for table `roommarket`
 --
-ALTER TABLE `roomMarket`
+ALTER TABLE `roommarket`
   ADD PRIMARY KEY (`roomMarketID`),
   ADD KEY `Foreign` (`roomID`);
 
@@ -333,9 +345,9 @@ ALTER TABLE `viewing`
 --
 
 --
--- AUTO_INCREMENT for table `Accommodation`
+-- AUTO_INCREMENT for table `accommodation`
 --
-ALTER TABLE `Accommodation`
+ALTER TABLE `accommodation`
   MODIFY `accID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -348,7 +360,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `helpticket`
 --
 ALTER TABLE `helpticket`
-  MODIFY `helpID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ticketID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `helpticketmessage`
+--
+ALTER TABLE `helpticketmessage`
+  MODIFY `messageID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `login_test`
@@ -369,22 +387,22 @@ ALTER TABLE `room`
   MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `roomMarket`
+-- AUTO_INCREMENT for table `roommarket`
 --
-ALTER TABLE `roomMarket`
+ALTER TABLE `roommarket`
   MODIFY `roomMarketID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `studID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `studID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `studentprofile`
 --
 ALTER TABLE `studentprofile`
-  MODIFY `profileID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `profileID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `viewing`
