@@ -22,9 +22,9 @@
                             <div class="col-md-10 col-md-offset-1">
                                 <select class="combobox form-control" id="category" name="category">
                                     <option value="" selected="selected">Select category</option>
-                                    <option value="EFT">Booking</option>
-                                    <option value="CC">Complaint</option>
-                                    <option value="XX">Other</option>
+                                    <option value="Booking">Booking</option>
+                                    <option value="Complaint">Complaint</option>
+                                    <option value="Other">Other</option>
                                 </select>
                             </div>
                         </div>
@@ -38,6 +38,28 @@
                 </form>
             </div>
         </div>
+
+        <?php
+            if (isset($_POST['create'])) {
+                $conn = mysqli_connect("localhost", "root", "", "accommodation"); //required to get the last inserted ID
+
+                $subject = escape_String($_POST['subject']);
+                $message = escape_String($_POST['message']);
+                $category = escape_String($_POST['category']);
+                
+                $sqlcreateticket = "INSERT INTO helpticket(studID, ticketSubject, ticketCategory, ticketTime, isActive) VALUES('{$_SESSION["iduser"]}', '{$subject}', '{$category}', now(), '1')";
+                mysqli_query($conn, $sqlcreateticket);
+                
+                $lastid = mysqli_insert_id($conn);
+
+                $sqlticketmessage = "INSERT INTO helpticketmessage(ticketID, studID, messageText, messageTime) VALUES('{$lastid}', '{$_SESSION["iduser"]}', '{$message}', now())";
+                $insertticketmessage = query($sqlticketmessage);
+                confirm($insertticketmessage);
+
+                mysqli_close($conn);
+            }
+        ?>
+
         <div class="col-md-6">
             <div class="well well-sm">
                 <form class="form-horizontal" method="post">
