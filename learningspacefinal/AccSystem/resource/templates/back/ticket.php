@@ -30,7 +30,7 @@
                     <td><?php echo $row['ticketTime'] ?></td>
 
                     <td><button type="button" class="btn btn-success formbutton" data-toggle="modal" data-target="#openTicketModal<?php echo $row['ticketID']; ?>"><span class="fa fa-comments" style="color:white"></button></form></td>
-                    <td><form method="POST"><button class="btn btn-danger formbutton" name="closereopen<?php echo $row['ticketID']; ?>"><span class="fa fa-times" style="color:white"></button></form></td>
+                    <td><form method="POST"><button class="btn btn-danger formbutton" name="closereopen<?php echo $row['ticketID']; ?>" onclick="return confirm('Are you sure you want to close <?php echo $row['ticketSubject'] ?>?')"><span class="fa fa-times" style="color:white"></button></form></td>
                 </tr> 
                 <?php
                 //Close/reopen button handling
@@ -68,7 +68,7 @@
                     <td><?php echo $row['ticketTime'] ?></td>
 
                     <td><button type="button" class="btn btn-success formbutton" data-toggle="modal" data-target="#closedTicketModal<?php echo $row['ticketID']; ?>"><span class="fa fa-comments" style="color:white"></button></form></td>
-                    <td><form method="POST"><button class="btn btn-info formbutton" name="closereopen<?php echo $row['ticketID']; ?>"><span class="fa fa-arrow-up" style="color:white"></button></form></td>
+                    <td><form method="POST"><button class="btn btn-info formbutton" name="closereopen<?php echo $row['ticketID']; ?>" onclick="return confirm('Are you sure you want to reopen <?php echo $row['ticketSubject'] ?>?')"><span class="fa fa-arrow-up" style="color:white"></button></form></td>
                 </tr> 
                 <?php 
                 //Close/reopen button handling
