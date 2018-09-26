@@ -96,7 +96,7 @@
                                             <p><span class="text-secondary">Last reply: </span><span><?php echo $resultlastreply['lastReply']; ?></span></p>
                                         </p>
                                         <a href="#" class="btn btn-outline-info btn-secondary" data-toggle="modal" data-target="#ticketPopup<?php echo $row['ticketID']; ?>" name="viewid<?php echo $row['ticketID']; ?>">View ticket</a>
-                                        <form><button class="btn btn-outline-secondary btn-secondary" style="float:right" name="closereopen<?php echo $row['ticketID']; ?>">Close ticket (issue resolved)</button></form>
+                                        <form><button class="btn btn-outline-secondary btn-secondary" style="float:right" name="closereopen<?php echo $row['ticketID']; ?>" onclick="return confirm('Are you sure you want to close <?php echo $row['ticketSubject'] ?>?')">Close ticket (issue resolved)</button></form>
 
                                         <?php close_open_ticket($row['ticketID']); //Close/reopen button handling ?>
                                     </div> 
