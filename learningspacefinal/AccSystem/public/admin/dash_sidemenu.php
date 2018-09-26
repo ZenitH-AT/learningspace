@@ -21,44 +21,44 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="?viewing">
-                    <span data-feather="file"></span>
+                    <span data-feather="eye"></span>
                     Viewings
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="?room">
-                    <span data-feather="bar-chart-2"></span>
+                    <span data-feather="home"></span>
                     Rooms
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="?notification">
-                    <span data-feather="layers"></span>
-                    Notification
+                    <span data-feather="bell"></span>
+                    Notifications
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="?ticket">
-                    <span data-feather="layers"></span>
+                    <span data-feather="life-buoy"></span>
                     Tickets
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="?livechat">
-                    <span data-feather="layers"></span>
+                    <span data-feather="message-circle"></span>
                     Live Chat
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="?payment">
-                    <span data-feather="layers"></span>
+                    <span data-feather="credit-card"></span>
                     Payments
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="?refund">
-                    <span data-feather="layers"></span>
-                    Refund Request
+                    <span data-feather="alert-circle"></span>
+                    Refund Requests
                 </a>
             </li>
             <li class="nav-item">
