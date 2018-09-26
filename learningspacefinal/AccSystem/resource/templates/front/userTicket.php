@@ -74,7 +74,7 @@
                         $row_count = $result->num_rows;
 
                         if($row_count == 0){ ?>
-                            <div class='alert alert-info alert-dismissible fade show text-center' role='alert'>
+                            <div class='alert alert-info fade show text-center' role='alert'>
                                 You currently have no active tickets.
                             </div> <?php
                         } else {
@@ -97,9 +97,10 @@
 
                                         <!-- Card buttons -->
                                         <span style="float:left"><a href="#" class="btn btn-outline-info btn-secondary" data-toggle="modal" data-target="#ticketPopup<?php echo $row['ticketID']; ?>" name="viewid<?php echo $row['ticketID']; ?>">View ticket</a></span>
-                                        <span style="float:right"><form><button class="btn btn-outline-secondary btn-secondary" name="closereopen<?php echo $row['ticketID']; ?>" onclick="return confirm('Are you sure you want to close <?php echo $row['ticketSubject'] ?>? You should only close a ticket when the issue has been resolved.')">Close ticket (issue resolved)</button></form></span>
-  
-                                        <?php close_open_ticket($row['ticketID'], $row['isActive']); //Close ticket button handling ?>
+                                        <span style="float:right"><form method="post"><button class="btn btn-outline-secondary btn-secondary" name="closereopen<?php echo $row['ticketID']; ?>" onclick="return confirm('Are you sure you want to close <?php echo $row['ticketSubject'] ?>? You should only close a ticket when the issue has been resolved.')">Close ticket (issue resolved)</button></form></span><?php
+                                        
+                                        //Close ticket button handling 
+                                        close_open_ticket($row['ticketID'], $row['isActive']) ?>
                                     </div> 
                                 </div>
                                 
@@ -139,11 +140,11 @@
                                                     $messageauthorname;
 
                                                     if ($messageauthortype == "student") {
-                                                        $sqlstudentauthor = mysqli_query($connview, "SELECT studFirstName, studLastName FROM student WHERE studID = " . $message['studID']);
+                                                        $sqlstudentauthor = query("SELECT studFirstName, studLastName FROM student WHERE studID = " . $message['studID']);
                                                         $studentname = mysqli_fetch_assoc($sqlstudentauthor);
                                                         $messageauthorname = $studentname['studFirstName'] . ' ' . $studentname['studLastName'];
                                                     } else {
-                                                        $sqladminauthor = mysqli_query($connview, "SELECT adminFirstN, adminLastN FROM admin WHERE adminID = " . $message['adminID']);
+                                                        $sqladminauthor = query("SELECT adminFirstN, adminLastN FROM admin WHERE adminID = " . $message['adminID']);
                                                         $adminname = mysqli_fetch_assoc($sqladminauthor);
                                                         $messageauthorname = $adminname['adminFirstN'] . ' ' . $adminname['adminLastN'];                                          
                                                     } ?>
@@ -177,11 +178,11 @@
     </div>
 <?php 
 } else if (isset($_SESSION["admin"])) { ?>
-    <div class='alert alert-warning alert-dismissible fade show text-center' role='alert'>
+    <div class='alert alert-warning fade show text-center' role='alert'>
         <strong>Alert!</strong> Admin, You cannot create create user support tickets.
     </div><?php 
 } else { ?>
-    <div class='alert alert-warning alert-dismissible fade show text-center' role='alert'>
+    <div class='alert alert-warning fade show text-center' role='alert'>
         <strong>Alert!</strong> You must register/login to create and view your support tickets.
     </div><?php 
 } ?>
