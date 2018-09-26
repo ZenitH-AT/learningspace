@@ -39,8 +39,14 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="?ticket">
+                    <?php
+                        //To display open ticket count 
+                        $query = query("SELECT COUNT(*) AS ticketCount FROM helpticket WHERE isActive = 1");
+                        confirm($query); 
+                    ?>
+
                     <span data-feather="life-buoy"></span>
-                    Tickets
+                    Tickets - <span class="text-danger"><?php echo countItem($query); ?></span>
                 </a>
             </li>
             <li class="nav-item">
