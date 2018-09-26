@@ -901,10 +901,9 @@ function profile() {
     }
 }
 
-function close_open_ticket($ticketID) {
+//Toggles between closed and open ticket status
+function close_open_ticket($ticketID, $isActive) {
     if (isset($_POST['closereopen' . $ticketID])) {
-        $isActive = query("SELECT isActive FROM helpticket WHERE ticketID = " . $ticketID)->fetch_object()->isActive;
-
         $closereopen = ($isActive == 1) ? 0 : 1;
         
         query("UPDATE helpticket SET isActive = " . $closereopen . " WHERE ticketID = " . $ticketID);
