@@ -41,25 +41,24 @@
             </div>
 
             <?php
-                //Creating new ticket
-                if (isset($_POST['create'])) {
-                    $conn = mysqli_connect("localhost", "root", "", "accommodation"); //required to get the last inserted ID
+            //Creating new ticket
+            if (isset($_POST['create'])) {
+                $conn = mysqli_connect("localhost", "root", "", "accommodation"); //required to get the last inserted ID
 
-                    $subject = escape_String($_POST['subject']);
-                    $message = escape_String($_POST['message']);
-                    $category = escape_String($_POST['category']);
-                    
-                    $sqlcreateticket = "INSERT INTO helpticket(studID, ticketSubject, ticketCategory, ticketTime, isActive) VALUES('{$_SESSION["iduser"]}', '{$subject}', '{$category}', now(), '1')";
-                    mysqli_query($conn, $sqlcreateticket);
-                    
-                    $lastid = mysqli_insert_id($conn);
+                $subject = escape_String($_POST['subject']);
+                $message = escape_String($_POST['message']);
+                $category = escape_String($_POST['category']);
+                
+                $sqlcreateticket = "INSERT INTO helpticket(studID, ticketSubject, ticketCategory, ticketTime, isActive) VALUES('{$_SESSION["iduser"]}', '{$subject}', '{$category}', now(), '1')";
+                mysqli_query($conn, $sqlcreateticket);
+                
+                $lastid = mysqli_insert_id($conn);
 
-                    $sqlticketmessage = "INSERT INTO helpticketmessage(ticketID, studID, messageText, messageTime) VALUES('{$lastid}', '{$_SESSION["iduser"]}', '{$message}', now())";
-                    $insertticketmessage = query($sqlticketmessage);
-                    confirm($insertticketmessage);
+                $insertticketmessage = query("INSERT INTO helpticketmessage(ticketID, studID, messageText, messageTime) VALUES('{$lastid}', '{$_SESSION["iduser"]}', '{$message}', now())");
+                confirm($insertticketmessage);
 
-                    mysqli_close($conn);
-                } ?>
+                mysqli_close($conn);
+            } ?>
 
             <div class="col-md-6">
                 <div class="well well-sm">
@@ -69,7 +68,7 @@
                         //Displaying active tickets
                         $connview = mysqli_connect("localhost", "root", "", "accommodation");
                         
-                        $sqlviewtickets = "SELECT ticketID, ticketSubject, ticketCategory, ticketTime FROM helpticket WHERE studID = " . $_SESSION["iduser"] . " AND isActive = 1 ORDER BY ticketTime DESC";
+                        $sqlviewtickets = "SELECT * FROM helpticket WHERE studID = " . $_SESSION["iduser"] . " AND isActive = 1 ORDER BY ticketTime DESC";
                         $result = $connview->query($sqlviewtickets);
 
                         $row_count = $result->num_rows;
@@ -95,10 +94,12 @@
                                             <p><span class="text-secondary">Category: </span><span><?php echo $row['ticketCategory']; ?></span></p>
                                             <p><span class="text-secondary">Last reply: </span><span><?php echo $resultlastreply['lastReply']; ?></span></p>
                                         </p>
-                                        <a href="#" class="btn btn-outline-info btn-secondary" data-toggle="modal" data-target="#ticketPopup<?php echo $row['ticketID']; ?>" name="viewid<?php echo $row['ticketID']; ?>">View ticket</a>
-                                        <form><button class="btn btn-outline-secondary btn-secondary" style="float:right" name="closereopen<?php echo $row['ticketID']; ?>" onclick="return confirm('Are you sure you want to close <?php echo $row['ticketSubject'] ?>?')">Close ticket (issue resolved)</button></form>
 
-                                        <?php close_open_ticket($row['ticketID']); //Close ticket button handling ?>
+                                        <!-- Card buttons -->
+                                        <span style="float:left"><a href="#" class="btn btn-outline-info btn-secondary" data-toggle="modal" data-target="#ticketPopup<?php echo $row['ticketID']; ?>" name="viewid<?php echo $row['ticketID']; ?>">View ticket</a></span>
+                                        <span style="float:right"><form><button class="btn btn-outline-secondary btn-secondary" name="closereopen<?php echo $row['ticketID']; ?>" onclick="return confirm('Are you sure you want to close <?php echo $row['ticketSubject'] ?>? You should only close a ticket when the issue has been resolved.')">Close ticket (issue resolved)</button></form></span>
+  
+                                        <?php close_open_ticket($row['ticketID'], $row['isActive']); //Close ticket button handling ?>
                                     </div> 
                                 </div>
                                 
@@ -111,27 +112,25 @@
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
                                             </div> 
                                             <div class="modal-body">
-                                                <form>
-                                                    <div class="form-group">
-                                                        <textarea class="form-control" id="replyMessage" name="replyMessage<?php echo $row['ticketID']; ?>" placeholder="Type your message here" rows="4" required></textarea>
-                                                    </div>
-                                                    <button href="userTicket.php" type="submit" id="replyButton" name="replyButton<?php echo $row['ticketID']; ?>" style="float:right" class="btn btn-outline-success">Reply to ticket</button>
-                                                </form>
+                                                <!-- Reply to ticket form -->
+                                                <form action="" method="post">
+                                                    <textarea type="text" class="form-control" name="messageText<?php echo $row['ticketID']; ?>" placeholder="Type your message here" rows="4" required></textarea><br />
+                                                    <button type="submit" class="btn btn-outline-success formbutton" style="float:right" name="messageSend<?php echo $row['ticketID']; ?>">Reply to ticket</button>
+                                                </form> <?php
+
+                                                //Reply to ticket button code
+                                                if(isset($_POST['messageSend' . $row['ticketID']])){
+                                                    query("INSERT INTO helpticketmessage (ticketID, studID, messageText, messageTime) VALUES('{$row['ticketID']}', '{$_SESSION["iduser"]}', '{$_POST['messageText' . $row['ticketID']]}', now())");
+                                                    ?><script>alert("Your reply has been sent.");</script><?php
+                                                } ?>
+
                                                 <br /><br /><h6>Conversation</h6><?php
                                                 
-                                                //Reply to ticket button code
-                                                if (isset($_POST['replyButton' . $row['ticketID']])) {
-                                                    $replymessage = escape_String($_POST['replyMessage'. $row['ticketID']]);
-                                                    
-                                                    $sqlreplymessage = "INSERT INTO helpticketmessage (ticketID, studID, messageText, messageTime) VALUES('{$row['ticketID']}', '{$_SESSION["iduser"]}', '{$replymessage}', now())";
-                                                    $connview->query($sqlreplymessage);
-                                                }
-    
-                                                //while loop to create cards for each message
-                                                $sqlgetmessages = "SELECT studID, adminID, messageText, messageTime FROM helpticketmessage WHERE ticketID = " . $row['ticketID'] . " ORDER BY messageTime DESC";
-                                                $resultmessages = $connview->query($sqlgetmessages);
-
+                                                //Data for while loop
+                                                $resultmessages = query("SELECT studID, adminID, messageText, messageTime FROM helpticketmessage WHERE ticketID = " . $row['ticketID'] . " ORDER BY messageTime DESC");
                                                 $message_count = $resultmessages->num_rows;
+
+                                                //while loop to create cards for each message
                                                 while ($message = $resultmessages->fetch_assoc()) { 
                                                     //Getting message author type; either student or admin (the message author is based on which field in the message record is null)
                                                     $messageauthortype = empty($message['adminID']) ? 'student' : 'admin'; 
