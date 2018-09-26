@@ -900,3 +900,16 @@ function profile() {
         }
     }
 }
+
+function close_open_ticket($ticketID) {
+    if (isset($_POST['closereopen' . $ticketID])) {
+        $isActive = query("SELECT isActive FROM helpticket WHERE ticketID = " . $ticketID)->fetch_object()->isActive;
+
+        $closereopen = ($isActive == 1) ? 0 : 1;
+        
+        query("UPDATE helpticket SET isActive = " . $closereopen . " WHERE ticketID = " . $ticketID);
+
+        header("Refresh:0");
+        exit(); //Prevents ticket closing from immediately reopening the ticket
+    } 
+}
