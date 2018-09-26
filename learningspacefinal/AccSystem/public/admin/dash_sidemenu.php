@@ -41,7 +41,7 @@
                 <a class="nav-link" href="?ticket">
                     <?php
                         //To display open ticket count 
-                        $query = query("SELECT COUNT(*) AS ticketCount FROM helpticket WHERE isActive = 1");
+                        $query = query("SELECT * FROM helpticket WHERE isActive = 1");
                         confirm($query); 
                     ?>
 
