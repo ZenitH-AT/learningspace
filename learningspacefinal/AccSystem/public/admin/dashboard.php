@@ -69,8 +69,7 @@
                     ?>
                     <?php
                     if (isset($_GET['notification'])) {
-//                        include TEMPLATE_BACK . 'notification.php';
-                        
+                        include TEMPLATE_BACK . 'notification.php';
                     }
                     ?>
                     <?php
