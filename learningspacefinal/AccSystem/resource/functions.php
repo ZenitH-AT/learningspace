@@ -913,7 +913,7 @@ function close_open_ticket($ticketID, $isActive) {
     } 
 }
 
-//Creates a notification. 
+//Creates a notification
 //This can be tied to many buttons around the user interface.
 //$inputids must be a single studID or comma separated list of student IDs that the notification is sent to.
 //if $inputids is a star (*), it the notification is sent to all students.
