@@ -66,7 +66,7 @@
             </tr>
         </thead>
         <tbody> <?php
-            $query = query("SELECT * FROM notification ORDER BY notificationID DESC");
+            $query = query("SELECT * FROM notification ORDER BY time DESC");
             confirm($query);
 
             while ($row = fetch_array($query)) { 
@@ -90,7 +90,7 @@
                     <td><?php echo $row['studID'] ?></td>
                     <td><?php echo $row['title'] ?></td>
                     <td><?php echo $row['body'] ?></td> 
-                    <td><?php echo '<textt ' . $typeclass . '>' . $row['type'] . '</text>' ?></td>
+                    <td><?php echo '<text ' . $typeclass . '>' . $row['type'] . '</text>' ?></td>
                     <td><?php echo $row['time'] ?></td>
                     <td><?php echo $row['status'] == 1 ? '<text class="text-info">read</text>' : 'unread' ?></td>
 
