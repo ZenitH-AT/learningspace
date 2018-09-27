@@ -1,64 +1,109 @@
+<?php if (isset($_SESSION["iduser"])) { ?>
+    <div class="container">
+        <!-- Fix content appearing under navbar -->
+        <div class=" col-sm-4 col-lg-4 col-md-4"></div>
 
-<div class="container">
-    <div class=" col-sm-4 col-lg-4 col-md-4"></div>
+        <legend class="header col-md-10" style="margin-bottom: -2%">Unread notifications</legend><br /><?php
+
+        //Determining number of notifications
+        $query = query("SELECT * FROM notification WHERE studID = " . $_SESSION["iduser"] . " AND status = 0 ORDER BY time DESC");
+        confirm($query);
+
+        $row_count = $query->num_rows;
+        
+        if ($row_count == 0) { ?>
+            <a class="col-sm-6 col-md-6" style="text-muted">No new notifications</a><?php
+        } else { ?>
+            <legend class="header col-md-10" style="margin-bottom: -0.5%"><form method="post"><button class="btn btn-outline-secondary formbutton" name="markread" onclick="return confirm('Are you sure you want to mark all notifications as read?')">Mark all as read</button></form></legend><?php
+            
+            //Mark all as read button handling
+            if(isset($_POST['markread'])) {
+                query("UPDATE notification SET status = 1 WHERE studID = " . $_SESSION["iduser"]);
     
-    <legend class="header col-md-10" style="margin-bottom: -1%">New notifications</legend>
+                header("Refresh:0");
+                exit();
+            }
+        } ?>
 
-    <div class="row">
-        <div class="col-sm-6 col-md-6">
-            <div class="alert-message alert-message-success">
-                <text class="text-muted">01/09/2018, 15:00</text>
-                <h4>Success: Your payment has been recieved</h4> 
-                <p>
-                    Your overdue payment for <strong>26 August 2018</strong> has been recieved.</p>
-            </div>
+        <div class="row"><?php
+            //Generating notification cards
+            while ($row = fetch_array($query)) { 
+                //Determining which icon to use based on notification type
+                $iconclass;  
+
+                if ($row['type'] == 'default') {
+                    $iconclass = 'fas fa-comment-dots';
+                } else if ($row['type'] == 'info') {
+                    $iconclass = 'fas fa-info-circle';
+                } else if ($row['type'] == 'success') {
+                    $iconclass = 'fas fa-check-circle';
+                } else if ($row['type'] == 'warning') {
+                    $iconclass = 'fas fa-exclamation-triangle';
+                } else if ($row['type'] == 'danger') {
+                    $iconclass = 'fas fa-times-circle';
+                } else if ($row['type'] == 'notice') {
+                    $iconclass = 'fas fa-flag';
+                } ?>
+
+                <!-- notification card -->
+                <div class="col-sm-6 col-md-6">
+                    <div class="alert-message alert-message-<?php echo $row['type'] ?>">
+                        <i class="<?php echo $iconclass ?> text-muted"></i>
+                        <a class="text-muted"><?php echo $row['time'] ?></a>
+                        <h4><?php echo $row['title'] ?></h4> 
+                        <p><?php echo $row['body'] ?></p>
+                    </div>
+                </div><?php
+            } ?>
         </div>
-        <div class="col-sm-6 col-md-6">
-            <div class="alert-message alert-message-danger">
-                <text class="text-muted">30/08/2018, 14:00</text>
-                <h4>Danger: Payment overdue</h4>  
-                <p>
-                    Your payment due on <strong>26 August 2018</strong> is overdue by 3 days. Should you fail to pay the amount by <strong>05 September 2018</strong>, you will be evicted.</p>
-            </div>
+
+        <br /><legend class="header col-md-10" style="margin-bottom: -1%">Read notifications (last 30 days)</legend>
+
+        <div class="row"><?php
+            //Only returns notifications from the last 30 days in order to not flood the user with too much information
+            $query = query("SELECT * FROM notification WHERE studID = " . $_SESSION["iduser"] . " AND status = 1 AND time BETWEEN now() - INTERVAL 30 DAY AND now() ORDER BY time DESC");
+            confirm($query);
+    
+            $row_count = $query->num_rows;
+
+            //Generating notification cards
+            while ($row = fetch_array($query)) { 
+                //Determining which icon to use based on notification type
+                $iconclass;  
+
+                if ($row['type'] == 'default') {
+                    $iconclass = 'fas fa-comment-dots';
+                } else if ($row['type'] == 'info') {
+                    $iconclass = 'fas fa-info-circle';
+                } else if ($row['type'] == 'success') {
+                    $iconclass = 'fas fa-check-circle';
+                } else if ($row['type'] == 'warning') {
+                    $iconclass = 'fas fa-exclamation-triangle';
+                } else if ($row['type'] == 'danger') {
+                    $iconclass = 'fas fa-times-circle';
+                } else if ($row['type'] == 'notice') {
+                    $iconclass = 'fas fa-flag';
+                } ?>
+
+                <!-- notification card -->
+                <div class="col-sm-6 col-md-6">
+                    <div class="alert-message alert-message-<?php echo $row['type'] ?>">
+                        <i class="<?php echo $iconclass ?> text-muted"></i>
+                        <a class="text-muted"><?php echo $row['time'] ?></a>
+                        <h4><?php echo $row['title'] ?></h4> 
+                        <p><?php echo $row['body'] ?></p>
+                    </div>
+                </div><?php
+            } ?>    
         </div>
     </div>
-
-    <legend class="header col-md-10" style="margin-bottom: -1%">Read notifications</legend>
-
-    <div class="row">
-        <div class="col-sm-6 col-md-6">
-            <div class="alert-message alert-message-warning">
-                <text class="text-muted">14/08/2018, 11:45</text>
-                <h4>Warning: Incoming noise complaint</h4>
-                <p>
-                    A noise complaint has been directed to your room. Please refrain from disturbing other students.</p>
-            </div>
-        </div>
-        <div class="col-sm-6 col-md-6">
-            <div class="alert-message alert-message-info">
-                <text class="text-muted">14/08/2018, 12:00</text>
-                <h4>Info: Review LearningSpace?</h4>      
-                <p>
-                    Hello, we trust you are enjoying your stay so far. If so, feel free to leave us a review!</p>
-            </div>
-        </div>
-    </div>
-    <div class="row" style="margin-top: -1%">
-        <div class="col-sm-6 col-md-6">
-            <div class="alert-message alert-message-default">
-                <text class="text-muted">02/08/2018, 17:19</text>
-                <h4>Ticket (Reference: DFGH553)</h4>
-                <p>
-                    Your ticket <strong>"New room key doesn't work"</strong> has been closed and marked as solved.</p>
-            </div>
-        </div>
-        <div class="col-sm-6 col-md-6">
-            <div class="alert-message alert-message-notice">
-                <text class="text-muted">21/07/2018, 12:11</text>
-                <h4>Notice: Booking created</h4>
-                <p>
-                    Your room number <strong>017</strong> will be ready on <strong> 1 August 2018</strong>.</p>
-            </div>
-        </div>
-    </div>
-</div>
+<?php 
+} else if (isset($_SESSION["admin"])) { ?>
+    <div class='alert alert-warning fade show text-center' role='alert'>
+        <strong>Alert!</strong> Admin, You cannot view user notifications here.
+    </div><?php 
+} else { ?>
+    <div class='alert alert-warning fade show text-center' role='alert'>
+        <strong>Alert!</strong> You must register/login to create and view your notifications.
+    </div><?php 
+} ?>
