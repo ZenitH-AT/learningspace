@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 27, 2018 at 05:44 AM
+-- Generation Time: Sep 27, 2018 at 05:50 AM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -148,7 +148,7 @@ CREATE TABLE `notification` (
   `title` longtext COLLATE utf8_bin NOT NULL,
   `body` longtext COLLATE utf8_bin NOT NULL,
   `type` varchar(255) COLLATE utf8_bin NOT NULL,
-  `time` datetime(1) NOT NULL,
+  `time` datetime NOT NULL,
   `status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
