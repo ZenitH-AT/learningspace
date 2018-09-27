@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 25, 2018 at 04:45 AM
+-- Generation Time: Sep 27, 2018 at 05:44 AM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -82,8 +82,9 @@ CREATE TABLE `helpticket` (
 --
 
 INSERT INTO `helpticket` (`ticketID`, `studID`, `ticketSubject`, `ticketCategory`, `ticketTime`, `isActive`) VALUES
-(5, 22, 'tEST', 'Booking', '2018-09-25 04:44:39', 1),
-(6, 22, 'sdfsd', 'Booking', '2018-09-25 04:44:47', 1);
+(5, 22, 'Testing', 'Complaint', '2018-09-25 21:53:33', 0),
+(6, 22, 'Room key missing', 'Booking', '2018-09-26 04:02:59', 0),
+(7, 22, 'Another test', 'Other', '2018-09-26 20:44:46', 1);
 
 -- --------------------------------------------------------
 
@@ -99,6 +100,21 @@ CREATE TABLE `helpticketmessage` (
   `messageText` longtext COLLATE utf8_bin NOT NULL,
   `messageTime` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `helpticketmessage`
+--
+
+INSERT INTO `helpticketmessage` (`messageID`, `ticketID`, `studID`, `adminID`, `messageText`, `messageTime`) VALUES
+(12, 5, 22, NULL, 'Just a simple test', '2018-09-25 21:53:33'),
+(13, 6, 22, NULL, 'Where is my room key?! For room 22...', '2018-09-26 04:02:59'),
+(14, 7, 22, NULL, 'Yet another to check something', '2018-09-26 20:44:46'),
+(19, 7, 22, NULL, 'Reply test', '2018-09-26 22:23:47'),
+(22, 7, 22, NULL, 'test', '2018-09-26 22:32:37'),
+(23, 7, 22, NULL, 'One last test', '2018-09-26 22:36:41'),
+(24, 7, NULL, 1, 'Hello, how can I help?', '2018-09-26 22:49:51'),
+(25, 6, 22, NULL, 'test', '2018-09-26 22:58:29'),
+(26, 5, 22, NULL, 'test', '2018-09-26 23:12:07');
 
 -- --------------------------------------------------------
 
@@ -119,6 +135,22 @@ CREATE TABLE `login_test` (
 INSERT INTO `login_test` (`id`, `username`, `password`) VALUES
 (1, 'moises', 'moises'),
 (2, 'suquila', 'borracha');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notification`
+--
+
+CREATE TABLE `notification` (
+  `notificationID` int(11) NOT NULL,
+  `studID` int(11) NOT NULL,
+  `title` longtext COLLATE utf8_bin NOT NULL,
+  `body` longtext COLLATE utf8_bin NOT NULL,
+  `type` varchar(255) COLLATE utf8_bin NOT NULL,
+  `time` datetime(1) NOT NULL,
+  `status` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -308,6 +340,12 @@ ALTER TABLE `login_test`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `notification`
+--
+ALTER TABLE `notification`
+  ADD PRIMARY KEY (`notificationID`);
+
+--
 -- Indexes for table `payment`
 --
 ALTER TABLE `payment`
@@ -368,19 +406,25 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `helpticket`
 --
 ALTER TABLE `helpticket`
-  MODIFY `ticketID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ticketID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `helpticketmessage`
 --
 ALTER TABLE `helpticketmessage`
-  MODIFY `messageID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `messageID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `login_test`
 --
 ALTER TABLE `login_test`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `notification`
+--
+ALTER TABLE `notification`
+  MODIFY `notificationID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `payment`
