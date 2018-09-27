@@ -912,3 +912,36 @@ function close_open_ticket($ticketID, $isActive) {
         exit(); //Prevents ticket closing from immediately reopening the ticket
     } 
 }
+
+//Creates a notification. 
+//This can be tied to many buttons around the user interface.
+//$inputids must be a single studID or comma separated list of student IDs that the notification is sent to.
+//if $inputids is a star (*), it the notification is sent to all students.
+function send_notification($title, $body, $type, $inputids) {
+    if($inputids != '*') {
+        //Sending a notification to the specific student(s)
+        $recipients = preg_replace('/\s+/', '', $inputids); //removing whitespace just incase
+        $recipients = explode(',', $recipients); //converting each recipient into an array
+        
+        //Sending notification to each student
+        foreach($recipients as $studID) {
+            $sqlcreate = query("INSERT INTO notification (studID, title, body, type, time, status) VALUES({$studID}, '{$title}', '{$body}', '{$type}', now(), 0)");
+            confirm($sqlcreate);
+        }
+    } else if ($inputids == '*') {
+        //Sending a notification to all students
+        $numstudents = countItem(query("SELECT * FROM student"));
+        $studids = query("SELECT studID FROM student ORDER BY studID");
+
+        while ($row = mysqli_fetch_assoc($studids)) {
+            //Sending notification to each student
+            foreach($row as $studID) {
+                $sqlcreate = query("INSERT INTO notification (studID, title, body, type, time, status) VALUES({$studID}, '{$title}', '{$body}', '{$type}', now(), 0)");
+                confirm($sqlcreate);
+            }
+        }
+
+        header("Refresh:0");
+        exit();
+    } 
+}
