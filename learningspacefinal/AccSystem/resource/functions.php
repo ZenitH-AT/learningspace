@@ -945,3 +945,20 @@ function send_notification($title, $body, $type, $inputids) {
         exit();
     } 
 }
+
+//Determines which icon to use based on notification type
+function notification_icon($type) {
+    if ($type == 'default') {
+        echo 'fas fa-comment-dots';
+    } else if ($type == 'info') {
+        echo 'fas fa-info-circle';
+    } else if ($type == 'success') {
+        echo 'fas fa-check-circle';
+    } else if ($type == 'warning') {
+        echo 'fas fa-exclamation-triangle';
+    } else if ($type == 'danger') {
+        echo 'fas fa-times-circle';
+    } else if ($type == 'notice') {
+        echo 'fas fa-flag';
+    }
+}
