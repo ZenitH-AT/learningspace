@@ -1,4 +1,4 @@
-<img style="max-width:3%; max-height:3%; margin-right:1.5%" src="IMAGE/web/logo.png">
+<img style="min-width:40px; min-height:40px; max-width:3%; max-height:3%; margin-right:1.5%" src="IMAGE/web/logo.png">
 <a class="navbar-brand" href="HomePage.php">LearningSpace</a>
 
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
