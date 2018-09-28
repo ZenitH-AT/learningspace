@@ -18,10 +18,7 @@
             
             //Mark all as read button handling
             if(isset($_POST['markread'])) {
-                query("UPDATE notification SET status = 1 WHERE studID = " . $_SESSION["iduser"]);
-    
-                header("Refresh:0");
-                exit();
+                mark_read($_SESSION["iduser"]);
             }
         } ?>
 
