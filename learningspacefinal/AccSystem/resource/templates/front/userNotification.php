@@ -1,19 +1,19 @@
 <?php if (isset($_SESSION["iduser"])) { ?>
     <div class="container">
         <!-- Fix content appearing under navbar -->
-        <div class=" col-sm-4 col-lg-4 col-md-4"></div>
-
-        <legend class="header col-md-10" style="margin-bottom: -2%">Unread notifications</legend><br /><?php
+        <div class=" col-sm-4 col-lg-4 col-md-4"></div><?php
 
         //Determining number of notifications
         $sqlunread = query("SELECT * FROM notification WHERE studID = " . $_SESSION["iduser"] . " AND status = 0 ORDER BY time DESC");
         confirm($sqlunread);
 
-        $unreadcount = $sqlunread->num_rows;
-        
+        $unreadcount = $sqlunread->num_rows; 
+
         if ($unreadcount == 0) { ?>
+            <legend class="header col-md-10" style="margin-bottom: -2%">Unread notifications</legend><br />
             <a class="col-sm-6 col-md-6" style="text-muted">No new notifications</a><?php
         } else { ?>
+            <legend class="header col-md-10" style="margin-bottom: -2%">Unread notifications (<?php echo $unreadcount ?>)</legend><br />
             <legend class="header col-md-10" style="margin-bottom: -0.5%"><form method="post"><button class="btn btn-outline-secondary formbutton" name="markread" onclick="return confirm('Are you sure you want to mark all notifications as read?')">Mark all as read</button></form></legend><?php
             
             //Mark all as read button handling
