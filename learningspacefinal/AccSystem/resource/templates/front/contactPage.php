@@ -11,47 +11,36 @@
                         <?php send_message()?>
                         <div class="form-group">
                             <div class="col-md-10 col-md-offset-1">
-                                <input name="contactFirstName" type="text" placeholder="First Name" class="form-control" required>
+                                <input id="fname" name="fname" type="text" placeholder="First Name" class="form-control" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-md-10 col-md-offset-1">
-                                <input name="contactLastName" type="text" placeholder="Last Name" class="form-control" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-10 col-md-offset-1">
-                                <input name="contactEmail" type="email" placeholder="Email Address" class="form-control" required>
+                                <input id="lname" name="lname" type="text" placeholder="Last Name" class="form-control" required>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="col-md-10 col-md-offset-1">
-                                <input name="contactPhone" type="text" placeholder="Phone" class="form-control" required>
+                                <input id="email" name="email" type="email" placeholder="Email Address" class="form-control" required>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="col-md-10 col-md-offset-1">
-                                <textarea class="form-control" name="contactMessage" placeholder="Message" rows="7" required></textarea>
+                                <input id="phone" name="phone" type="text" placeholder="Phone" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-10 col-md-offset-1">
+                                <textarea class="form-control" id="message" name="message" placeholder="Message" rows="7" required></textarea>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="col-md-12">
-                                <button type="submit" name="sendMessage" class=" btn btn-outline-success formbutton">Send message</button><?php
-                                
-                                //Send message button handling
-                                if (isset($_POST['sendMessage'])) {
-                                    $firstname = escape_String($_POST['contactFirstName']);
-                                    $lastname = escape_String($_POST['contactLastName']);
-                                    $email = escape_String($_POST['contactEmail']);
-                                    $phone = escape_String($_POST['contactPhone']);
-                                    $message = escape_String($_POST['contactMessage']);
-
-                                    send_contact_message($firstname, $lastname, $email, $phone, $message);
-                                } ?>
+                                <button type="submit" id="send_msg" name="send_msg" class=" btn btn-outline-success formbutton">Send message</button>
                             </div>
                         </div>
                     </fieldset>
@@ -62,14 +51,14 @@
             <div>
                 <div class="panel panel-default">
                     <div class="panel-body col-md-10">
-                    <legend class="header">Contact information</legend>
+                        <h4>Contact information</h4>
                         <div> Address line 1
                             <br /> Address 2
                             <br /> Tel: 061 410 5892
                             <br /> Email: <a href="mailto:learningspace@gmail.com">projectcrudacc@gmail.com</a>
                         </div>
                         <hr />
-                        <div id="map1" class="map" style="min-width:300px; min-height:300px; width:100%; height100%;">
+                        <div id="map1" class="map">
                         </div>
                     </div>
                 </div>
@@ -83,19 +72,19 @@
 <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
 
 <script type="text/javascript">
-    jQuery(function($) {
+    jQuery(function ($) {
         function init_map1() {
-            var myLocation = new google.maps.LatLng(-33.987419, 18.472080, 17);
+            var myLocation = new google.maps.LatLng(-33.9833874,18.4697127);
             var mapOptions = {
                 center: myLocation,
                 zoom: 16
             };
             var marker = new google.maps.Marker({
                 position: myLocation,
-                title: "LearningSpace"
+                title: "Property Location"
             });
             var map = new google.maps.Map(document.getElementById("map1"),
-                mapOptions);
+                    mapOptions);
             marker.setMap(map);
         }
         init_map1();
