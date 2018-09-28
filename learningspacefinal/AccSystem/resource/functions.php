@@ -662,9 +662,9 @@ function signup() {
 
                     $mail = new MailClass();
                     $subject = "Your Accommodation Account - Verify Your Email Address";
-                    $body = "Dear {$fname} {$lname}<br>"
-                            . "Please verify your email address to complete your LearnigSpace Account<br><br>"
-                            . "<a href='http://localhost/project/AccSystem/public/userActivation.php?key={$userActicationKey}' class='btn btn-outline-success formbutton'>Verify email address</a>";
+                    $body = "Dear {$fname} {$lname}<br><br>"
+                            . "Please click the link below to verify your LearningSpace account.<br><br>"
+                            . "<a href='http://localhost:8080/project/AccSystem/public/userActivation.php?key={$userActicationKey}' class='btn btn-outline-success formbutton'>Verify email address</a>";
 
                     $getresult = $mail->sendMail($email, $subject, $body);
 
@@ -1306,5 +1306,95 @@ function makePayment() {
             }
         }
     }
+}
+
+//Toggles between closed and open ticket status
+function close_open_ticket($ticketID, $isActive) {
+    if (isset($_POST['closereopen' . $ticketID])) {
+        $closereopen = ($isActive == 1) ? 0 : 1;
+        
+        query("UPDATE helpticket SET isActive = " . $closereopen . " WHERE ticketID = " . $ticketID);
+
+        header("Refresh:0");
+        exit(); //Prevents ticket closing from immediately reopening the ticket
+    } 
+}
+
+//Creates a notification
+//This can be tied to many buttons around the user interface.
+//$inputids must be a single studID or comma separated list of student IDs that the notification is sent to.
+//if $inputids is a star (*), it the notification is sent to all students.
+function send_notification($title, $body, $type, $inputids) {
+    if($inputids != '*') {
+        //Sending a notification to the specific student(s)
+        $recipients = preg_replace('/\s+/', '', $inputids); //removing whitespace just incase
+        $recipients = explode(',', $recipients); //converting each recipient into an array
+        
+        //Sending notification to each student
+        foreach($recipients as $studID) {
+            $sqlcreate = query("INSERT INTO notification (studID, title, body, type, time, status) VALUES({$studID}, '{$title}', '{$body}', '{$type}', now(), 0)");
+            confirm($sqlcreate);
+        }
+    } else if ($inputids == '*') {
+        //Sending a notification to all students
+        $numstudents = countItem(query("SELECT * FROM student"));
+        $studids = query("SELECT studID FROM student ORDER BY studID");
+
+        while ($row = mysqli_fetch_assoc($studids)) {
+            //Sending notification to each student
+            foreach($row as $studID) {
+                $sqlcreate = query("INSERT INTO notification (studID, title, body, type, time, status) VALUES({$studID}, '{$title}', '{$body}', '{$type}', now(), 0)");
+                confirm($sqlcreate);
+            }
+        }
+
+        header("Refresh:0");
+        exit();
+    } 
+}
+
+//Marks all unread notifications for a given student ID as read
+function mark_read($studID) {
+    query("UPDATE notification SET status = 1 WHERE studID = " . $studID);
+
+    header("Refresh:0");
+    exit();
+}
+
+//Determines which icon to use based on notification type
+function notification_icon($type) {
+    if ($type == 'default') {
+        echo 'fas fa-comment-dots';
+    } else if ($type == 'info') {
+        echo 'fas fa-info-circle';
+    } else if ($type == 'success') {
+        echo 'fas fa-check-circle';
+    } else if ($type == 'warning') {
+        echo 'fas fa-exclamation-triangle';
+    } else if ($type == 'danger') {
+        echo 'fas fa-times-circle';
+    } else if ($type == 'notice') {
+        echo 'fas fa-flag';
+    }
+}
+
+//Sends an email to the admin and back to the sender (for contact page)
+function send_contact_message($firstname, $lastname, $email, $phone, $message) {
+    $mail = new MailClass();
+
+    //Message sent to admin
+    $adminEmail = "zenith3za@gmail.com";
+    $subject = "New message from contact page";
+    $body = "<strong>Contact information:</strong><br/>
+            First name: {$firstname}<br/>
+            Last name: {$lastname}<br/>
+            Email: {$email}<br/>
+            Phone: {$phone}<br/><br/>
+            <strong>Message:</strong><br/>{$message}";
+
+    $mail->sendMail($adminEmail, $subject, $body);
+
+    //Message sent back to sender
+    $mail->sendMail($email, "Your message has been sent", "We will get back to you soon.<br/><br/><strong>Your message:</strong></br>{$message}");
 }
 
