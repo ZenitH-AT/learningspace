@@ -946,6 +946,14 @@ function send_notification($title, $body, $type, $inputids) {
     } 
 }
 
+//Marks all unread notifications for a given student ID as read
+function mark_read($studID) {
+    query("UPDATE notification SET status = 1 WHERE studID = " . $studID);
+    
+    header("Refresh:0");
+    exit();
+}
+
 //Determines which icon to use based on notification type
 function notification_icon($type) {
     if ($type == 'default') {
