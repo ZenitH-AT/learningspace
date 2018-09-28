@@ -7,9 +7,9 @@
     </ol>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img class="first-slide" src="IMAGE/web/Surreal.jpg" alt="First slide">
+            <img class="first-slide" src="IMAGE/gallery/3.jpg" alt="First slide">
             <div class="container">
-                <div class="carousel-caption text-left">
+                <div class="carousel-caption text-left" style="text-shadow: 0px 0px 3px #000">
                     <h1>Example headline.</h1>
                     <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
                     <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
@@ -17,9 +17,9 @@
             </div>
         </div>
         <div class="carousel-item">
-            <img class="second-slide" src="IMAGE/web/1031947.jpg" alt="Second slide">
+            <img class="second-slide" src="IMAGE/gallery/2.jpg" alt="Second slide">
             <div class="container">
-                <div class="carousel-caption">
+                <div class="carousel-caption" style="text-shadow: 0px 0px 3px #000">
                     <h1>Another example headline.</h1>
                     <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
                     <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
@@ -27,9 +27,9 @@
             </div>
         </div>
         <div class="carousel-item">
-            <img class="third-slide" src="IMAGE/web/GhcRJrf.jpg" alt="Third slide">
+            <img class="third-slide" src="IMAGE/gallery/benches1.jpg" alt="Third slide">
             <div class="container">
-                <div class="carousel-caption text-right">
+                <div class="carousel-caption text-right" style="text-shadow: 0px 0px 3px #000">
                     <h1>One more for good measure.</h1>
                     <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
                     <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
