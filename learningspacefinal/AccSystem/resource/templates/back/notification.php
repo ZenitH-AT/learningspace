@@ -31,7 +31,7 @@
                         <input type="text" class="form-control" id="recipients" name="recipients" placeholder="Recipient ID(s)" required><br />
                         <label class="form-text text-muted">Separate multiple student IDs with a comma.<br/>Type * to send to all students.</label>
                         
-                        <button type="submit" class="btn btn-outline-success formbutton" style="right:0; position:absolute; bottom:0;" name="send">Send notification</button><?php
+                        <button type="submit" class="btn btn-outline-success formbutton" style="right:0; position:absolute; bottom:0;" name="send" onclick="return confirm('Are you sure you want to send this notification?')">Send notification</button><?php
 
                         //Send button handling
                         if (isset($_POST['send'])) {
