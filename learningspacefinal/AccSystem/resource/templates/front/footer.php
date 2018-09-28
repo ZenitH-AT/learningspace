@@ -87,46 +87,45 @@ if (isset($_GET['error'])) {
 <script>baguetteBox.run('.tz-gallery');</script>
 
 <script>
-    $(document).ready(function() {
-        //var minDate = new Date();
-        //var tomorrow = new Date(getDate()+1);
-        //tomorrow.setDate(today.getDate()+1);
+    //Function for ToolTip used in BookingPage
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
 
+<script>
+    $(document).ready(function() {
         $("#bookviewings").datetimepicker({
             minDate: '+2',
             allowTimes: ['12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00'],
             beforeShowDay:
                     function(date) {
-                        return [date.getDay() == 6 || date.getDay() == 0 ? false : true];
+                        return [date.getDay() == 0 ? false : true];
+                        //return [date.getDay() == 5 || date.getDay() == 0 ? false : true];// Restric Saturdays and Sundays
                     }
         });
-
-        $("#checkout").datetimepicker({
-            format: 'd/m/Y',
-            formatTime: 'H:i',
-            //formatDate: 'Y/m/d',
+        
+        $("#checkin").datetimepicker({
             minDate: '+2',
+            formatTime:	false,
+            format:	'Y/m/d',
+            //allowTimes: ['12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00'],
             beforeShowDay:
                     function(date) {
-                        return [date.getDay() == 6 || date.getDay() == 0 ? false : true];
+                        return [date.getDay() == 0 ? false : true];
+                        //return [date.getDay() == 5 || date.getDay() == 0 ? false : true];// Restric Saturdays and Sundays
                     }
-
-//                    showAnim: 'drop',
-//                    minDate: '+1',
-//                    numberOfMonth: 1,
-//                    dataFormat: 'dd/mm/yyyy'
-//                    onClose: function (selectedDate) {
-//                        $('#checkout').datepicker("option", "minDate", selectedDate);
-//                    }
         });
-
-        /* causes error in browser console
-        $("#checkout").datepicker({
-            showAnim: 'drop',
-            minDate: '+1',
-            numberOfMonth: 1,
-            dataFormat: 'dd/mm/yyyy'
-        });*/
-
+        
+        $("#checkout").datetimepicker({
+            minDate: '+2',
+            formatTime:	false,
+            format:	'Y/m/d',
+            beforeShowDay:
+                    function(date) {
+                        return [date.getDay() == 0 ? false : true];
+                    }
+        });
+        
     });
 </script>
