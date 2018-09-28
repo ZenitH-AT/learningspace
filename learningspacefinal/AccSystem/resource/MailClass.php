@@ -16,7 +16,7 @@ class MailClass {
             $message->setTo($sendto);
             $message->setSubject($subject);
             $message->setBody($body,'text/html');
-            $message->setFrom("projectcrudacc@gmail.com", "Admin");
+            $message->setFrom("projectcrudacc@gmail.com", "LearningSpace");
             
             if (!empty($targetpath)) {
                 $message->attach(Swift_Attachment::fromPath($targetpath));
