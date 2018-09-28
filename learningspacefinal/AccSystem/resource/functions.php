@@ -949,7 +949,7 @@ function send_notification($title, $body, $type, $inputids) {
 //Marks all unread notifications for a given student ID as read
 function mark_read($studID) {
     query("UPDATE notification SET status = 1 WHERE studID = " . $studID);
-    
+
     header("Refresh:0");
     exit();
 }
@@ -969,4 +969,24 @@ function notification_icon($type) {
     } else if ($type == 'notice') {
         echo 'fas fa-flag';
     }
+}
+
+//Sends an email to the admin and back to the sender (for contact page)
+function send_contact_message($firstname, $lastname, $email, $phone, $message) {
+    $mail = new MailClass();
+
+    //Message sent to admin
+    $adminEmail = "zenith3za@gmail.com";
+    $subject = "New message from contact page";
+    $body = "<strong>Contact information:</strong><br/>
+            First name: {$firstname}<br/>
+            Last name: {$lastname}<br/>
+            Email: {$email}<br/>
+            Phone: {$phone}<br/><br/>
+            <strong>Message:</strong><br/>{$message}";
+
+    $mail->sendMail($adminEmail, $subject, $body);
+
+    //Message sent back to sender
+    $mail->sendMail($email, "Your message has been sent", "We will get back to you soon.<br/><br/><strong>Your message:</strong></br>{$message}");
 }
