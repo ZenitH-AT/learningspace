@@ -11,36 +11,47 @@
                         <?php send_message()?>
                         <div class="form-group">
                             <div class="col-md-10 col-md-offset-1">
-                                <input id="fname" name="fname" type="text" placeholder="First Name" class="form-control" required>
+                                <input name="contactFirstName" type="text" placeholder="First Name" class="form-control" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-md-10 col-md-offset-1">
-                                <input id="lname" name="lname" type="text" placeholder="Last Name" class="form-control" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-10 col-md-offset-1">
-                                <input id="email" name="email" type="email" placeholder="Email Address" class="form-control" required>
+                                <input name="contactLastName" type="text" placeholder="Last Name" class="form-control" required>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="col-md-10 col-md-offset-1">
-                                <input id="phone" name="phone" type="text" placeholder="Phone" class="form-control" required>
+                                <input name="contactEmail" type="email" placeholder="Email Address" class="form-control" required>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="col-md-10 col-md-offset-1">
-                                <textarea class="form-control" id="message" name="message" placeholder="Message" rows="7" required></textarea>
+                                <input name="contactPhone" type="text" placeholder="Phone" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-10 col-md-offset-1">
+                                <textarea class="form-control" name="contactMessage" placeholder="Message" rows="7" required></textarea>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="col-md-12">
-                                <button type="submit" id="send_msg" name="send_msg" class=" btn btn-outline-success formbutton">Send message</button>
+                                <button type="submit" name="sendMessage" class=" btn btn-outline-success formbutton">Send message</button><?php
+                                
+                                //Send message button handling
+                                if (isset($_POST['sendMessage'])) {
+                                    $firstname = escape_String($_POST['contactFirstName']);
+                                    $lastname = escape_String($_POST['contactLastName']);
+                                    $email = escape_String($_POST['contactEmail']);
+                                    $phone = escape_String($_POST['contactPhone']);
+                                    $message = escape_String($_POST['contactMessage']);
+
+                                    send_contact_message($firstname, $lastname, $email, $phone, $message);
+                                } ?>
                             </div>
                         </div>
                     </fieldset>
@@ -81,7 +92,7 @@
             };
             var marker = new google.maps.Marker({
                 position: myLocation,
-                title: "Property Location"
+                title: "LearningSpace"
             });
             var map = new google.maps.Map(document.getElementById("map1"),
                 mapOptions);
