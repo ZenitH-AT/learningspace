@@ -60,7 +60,6 @@ if (isset($_GET['error'])) {
 ?>
 
 <footer class="container text-center">
-    <!--<p class="float-right"><a href="#">Put Something in Here!</a></p>-->
     <p>&copy; 2017-2018 DreamTeam, Inc. &middot; <a href="PrivacyTerms.php" data-toggle="modal" data-target="#PrivacyPopup">Privacy</a> &middot; <a href="PrivacyTerms.php" data-toggle="modal" data-target="#TermsPopup">Terms</a></p>
 </footer>
 
@@ -75,22 +74,17 @@ if (isset($_GET['error'])) {
 <script src="./js/popper.min.js"></script>
 <script src="./js/bootstrap.min.js"></script>
 <script src="js/main.js"></script>
+
 <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
 <script src="./js/holder.min.js"></script>
 <script src="./js/float-panel.js"></script>
 <script src="./js/jquery.datetimepicker.full.js"></script>
-<!-- for gallery images -->
 
+<!-- for gallery images -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
 
-<script>
-            baguetteBox.run('.tz-gallery');
-</script>
-
-<script>
-
-</script>
+<script>baguetteBox.run('.tz-gallery');</script>
 
 <script>
     $(document).ready(function() {
@@ -126,12 +120,13 @@ if (isset($_GET['error'])) {
 //                    }
         });
 
+        /* causes error in browser console
         $("#checkout").datepicker({
             showAnim: 'drop',
             minDate: '+1',
             numberOfMonth: 1,
             dataFormat: 'dd/mm/yyyy'
-        });
+        });*/
 
     });
 </script>
