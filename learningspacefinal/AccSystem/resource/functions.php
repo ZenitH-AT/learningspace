@@ -33,18 +33,25 @@ function fetch_array($result) {
     return mysqli_fetch_array($result);
 }
 
-function toRemove($tableName,$colomnName, $idItem){
-    $tN=  escape_String($tableName); $clN = escape_String($colomnName); $id = escape_String($idItem);
+function backHOme() {
+    if (!isset($_SESSION['iduser'])) {
+        redirect("Homepage.php");
+    }
+}
+
+function toRemove($tableName, $colomnName, $idItem) {
+    $tN = escape_String($tableName);
+    $clN = escape_String($colomnName);
+    $id = escape_String($idItem);
     $query = "DELETE FROM {$tN} WHERE {$clN}='{$id}' ";
     $remove = query($query);
     confirm($remove);
     if ($remove) {
         return 1;
-    }  else {
+    } else {
         return 0;
     }
 }
-
 
 //Show all Students
 function get_Students() {
@@ -72,8 +79,8 @@ function get_Students() {
             <td>{$row['activationKey']}</td>
             <td>{$row['isActive']}</td>
             <td>{$row['data']}</td>
-            
-            <td><a class="btn btn-success" href="../../resource/templates/back/add.php?student={$row['studID']}"><span class="fa fa-user-plus" style="color:white"></span></a></td>
+     
+            <td><a class="btn btn-success" href="../../resource/templates/back/add.php?student={$row['studID']}"><span class="fa fa-clock" style="color:white"></span></a></td>
             <td><a class="btn btn-info" href="../../resource/templates/back/edit.php?student={$row['studID']}"><span class="fa fa-user-edit" style="color:white"></span></a></td>
             <td><a class="btn btn-danger" href="../../resource/templates/back/remove.php?student={$row['studID']}"><span class="fa fa-user-minus" style="color:white"></span></a></td>
             
@@ -225,13 +232,28 @@ DELIMETER;
     }
 }
 
-//        echo '<script language="javascript">';
-//        echo 'alert("message successfully sent")';
-//        echo '</script>';     
-//        Send alert message
-
 function bookingPage() {
-    global $viewsuccess;
+    global $viewsuccess, $checkPayment, $bookDateIn, $bookDateOut, $DatesError, $bookRoomName, $bookRoomPrice, $bookRoomCapacity, $paymentConfirm;
+    $checkPayment = "NotReady";
+    //$bookRoomPrice = $bookDateIn = $bookDateOut = "";
+
+    if (isset($_GET['id'])) {
+        $idRoom = escape_String($_GET['id']);
+
+        //Get Room Details
+        $query = "SELECT * FROM room WHERE room_id='{$idRoom}'";
+        $result = query($query);
+        confirm($result);
+        $count = countItem($result);
+        if ($count > 0) {
+            while ($row = fetch_array($result)) {
+                $bookRoomName = $row['roomName'];
+                $bookRoomPrice = $row['roomPrice'];
+                $bookRoomCapacity = $row['roomCapacity'];
+            }
+        }
+    }
+
     if (isset($_POST['bookview'])) {
         $viewname = escape_String($_POST['name']);
         $viewemail = escape_String($_POST['email']);
@@ -262,7 +284,74 @@ function bookingPage() {
     }
 
     if (isset($_POST['bookroom'])) {
-        echo 'Ok';
+        $bookDateIn = escape_String($_POST['checkInDate']);
+        $bookDateOut = escape_String($_POST['checkOutDate']);
+
+        if (($bookDateIn <= $bookDateOut)) {
+            $checkPayment = "ready";
+            $_SESSION['bookDateIn'] = $bookDateIn;
+            $_SESSION['bookDateOut'] = $bookDateOut;
+
+
+            if ($count > 0) {
+//                while ($row = fetch_array($result)) {
+//                    $bookRoomName = $row['roomName'];
+//                    $bookRoomPrice = $row['roomPrice'];
+//                    $bookRoomCapacity = $row['roomCapacity'];
+//                }
+                $_SESSION['bookRoomPrice'] = $bookRoomPrice;
+            }
+        } else {
+            $DatesError = "<div class='alert alert-danger alert-dismissible fade show text-center' role='alert'>
+                                    <strong>Dates Error!</strong> ChechIn Date Must Be Greater Than CheckOut Date.
+                                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                      <span aria-hidden='true'>&times;</span>
+                                    </button></div>";
+        }
+    }
+
+    if (isset($_POST['confirmPay'])) {
+        $cardNumber = escape_String($_POST['cardNumber']);
+        $cardMonth = escape_String($_POST['cardMonth']);
+        $cardYear = escape_String($_POST['cardYear']);
+        $payMonth = 1;
+
+        //Taking days between the two given dates
+        $earlier = new DateTime($_SESSION['bookDateIn']);
+        $later = new DateTime($_SESSION['bookDateOut']);
+        $stayingPeriod = $later->diff($earlier)->format("%a");
+
+
+        $sql = "INSERT INTO booking(studID,roomID,bookStatDate,bookEndDate,stayingPeriod,bookingDate) "
+                . "VALUES('{$_SESSION['iduser']}','{$idRoom}','{$_SESSION['bookDateIn']}','{$_SESSION['bookDateOut']}','{$stayingPeriod}',now())";
+        $insertRoom = query($sql);
+        confirm($insertRoom);
+
+        $sql = "INSERT INTO payment(cardNumber,cardMonth,cardYear,payAmount,payMonth,studID,roomID,paymentStatus,paymentDate) "
+                . "VALUES('{$cardNumber}','{$cardMonth}','{$cardYear}','{$_SESSION['bookRoomPrice']}','{$payMonth}','{$_SESSION['iduser']}','{$idRoom}',paymentStatus=1,now())";
+        $insertPayment = query($sql);
+        confirm($insertPayment);
+
+        $sql2 = "UPDATE room SET roomReserved='1' WHERE room_id='{$idRoom}'";
+        $updateRoom = query($sql2);
+        confirm($updateRoom);
+
+        if ($insertPayment && $insertRoom && $updateRoom) {
+            $paymentConfirm = "<div class='alert alert-success alert-dismissible fade show text-center' role='alert'>
+                                    <strong>Confirmation!</strong> Your Booking and Payment Was Made Successfully.
+                                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                      <span aria-hidden='true'>&times;</span>
+                                    </button></div>";
+            $_SESSION["checkPayment"] = "done";
+            unset($_SESSION["bookRoomPrice"]);
+            unset($_SESSION["bookDateIn"]);
+            unset($_SESSION["bookDateOut"]);
+            redirect("booking.php");
+        }
+    }
+
+    if (isset($_POST['back'])) {
+        redirect("booking.php?id=" . $idRoom);
     }
 }
 
@@ -284,6 +373,7 @@ function lognew() {
             confirm($result);
             $count = countItem($result);
 
+
             if ($count == 0) {
                 $query = "SELECT * FROM admin "
                         . "WHERE adminEmail='{$user}' AND adminPassword='{$pass}'";
@@ -303,7 +393,17 @@ function lognew() {
                     $UserActive = $row['isActive'];
                     $userPass = $row['studPassword'];
                 }
+
                 if ($UserActive == 1) {
+                    $query = "SELECT * FROM booking WHERE studID='{$id}' AND bookingStatus='1'";
+
+                    $result = query($query);
+                    confirm($result);
+                    $count = countItem($result);
+                    if ($count > 0) {
+                        $_SESSION["userRoomBooked"] = $id;
+                    }
+
                     if (($encrypPass == $userPass) && ($UserEmail == $user)) {
                         $_SESSION["iduser"] = $id;
                         $_SESSION["firstname"] = $UserFirstName;
@@ -562,11 +662,12 @@ function signup() {
 
                     $mail = new MailClass();
                     $subject = "Your Accommodation Account - Verify Your Email Address";
-                    $body = "Dear {$fname} {$lname}<br><br>"
-                            . "Please click the link below to verify your LearningSpace account.<br><br>"
-                            . "<a href='http://localhost:8080/project/AccSystem/public/userActivation.php?key={$userActicationKey}' class='btn btn-outline-success formbutton'>Verify email address</a>";
+                    $body = "Dear {$fname} {$lname}<br>"
+                            . "Please verify your email address to complete your LearnigSpace Account<br><br>"
+                            . "<a href='http://localhost/project/AccSystem/public/userActivation.php?key={$userActicationKey}' class='btn btn-outline-success formbutton'>Verify email address</a>";
 
                     $getresult = $mail->sendMail($email, $subject, $body);
+
                     if ($getresult) {
                         $confirmemail = "<div class='alert alert-success alert-dismissible fade show text-center' role='alert'>
                                     <strong>Success!</strong> A Activation Link Has Been Sent to this -> <strong>{$email}</strong>.
@@ -901,92 +1002,309 @@ function profile() {
     }
 }
 
-//Toggles between closed and open ticket status
-function close_open_ticket($ticketID, $isActive) {
-    if (isset($_POST['closereopen' . $ticketID])) {
-        $closereopen = ($isActive == 1) ? 0 : 1;
-        
-        query("UPDATE helpticket SET isActive = " . $closereopen . " WHERE ticketID = " . $ticketID);
+function getClientRoom() {
+    global $roomID, $bookStatDate, $bookEndDate, $stayingPeriod,
+    $roomName, $roomPrice, $roomType, $roomCapacity,
+    $roomReserved, $roomImage, $roomDescription, $roomShortDescription,
+    $numMonth, $numDaysLeft, $monthNumberFr, $count2;
 
-        header("Refresh:0");
-        exit(); //Prevents ticket closing from immediately reopening the ticket
-    } 
-}
+    $numMonth = 0;
 
-//Creates a notification
-//This can be tied to many buttons around the user interface.
-//$inputids must be a single studID or comma separated list of student IDs that the notification is sent to.
-//if $inputids is a star (*), it the notification is sent to all students.
-function send_notification($title, $body, $type, $inputids) {
-    if($inputids != '*') {
-        //Sending a notification to the specific student(s)
-        $recipients = preg_replace('/\s+/', '', $inputids); //removing whitespace just incase
-        $recipients = explode(',', $recipients); //converting each recipient into an array
-        
-        //Sending notification to each student
-        foreach($recipients as $studID) {
-            $sqlcreate = query("INSERT INTO notification (studID, title, body, type, time, status) VALUES({$studID}, '{$title}', '{$body}', '{$type}', now(), 0)");
-            confirm($sqlcreate);
+    //Get Booking Details
+    $query = "SELECT * FROM booking WHERE studID='{$_SESSION["iduser"]}'";
+    $result = query($query);
+    confirm($result);
+    $count = countItem($result);
+    //$row = fetch_array($result);
+    //$getStatus = $row['bookingStatus'];
+    //echo $getStatus;
+
+
+    if ($count > 0) {
+        while ($row = fetch_array($result)) {
+            $ID = $row['roomID'];
+            $StatDate = $row['bookStatDate'];
+            $EndDate = $row['bookEndDate'];
+            $Period = $row['stayingPeriod'];
+            $bookingStatus = $row['bookingStatus'];
         }
-    } else if ($inputids == '*') {
-        //Sending a notification to all students
-        $numstudents = countItem(query("SELECT * FROM student"));
-        $studids = query("SELECT studID FROM student ORDER BY studID");
 
-        while ($row = mysqli_fetch_assoc($studids)) {
-            //Sending notification to each student
-            foreach($row as $studID) {
-                $sqlcreate = query("INSERT INTO notification (studID, title, body, type, time, status) VALUES({$studID}, '{$title}', '{$body}', '{$type}', now(), 0)");
-                confirm($sqlcreate);
+        //$getPeriod = 184;
+        $numMonth = 0;
+        $numDaysLeft = 0;
+        $_SESSION["bookStatus"] = $bookingStatus;
+
+        if ($bookingStatus == 1) {
+            $roomID = $ID;
+            $bookStatDate = $StatDate;
+            $bookEndDate = $EndDate;
+            $stayingPeriod = $Period;
+            $getPeriod = $Period;
+            //$bookingStatus = $row['bookingStatus'];
+
+            while ($getPeriod >= 0) {
+                $monthNumberFr = strtotime("+" . $numMonth . " months", strtotime($bookStatDate));
+                $datte = date('n', $monthNumberFr);
+
+                $currentYear = date('Y-m-d', $monthNumberFr);
+
+                switch ($datte) {
+                    case 4:
+                    case 6:
+                    case 9:
+                    case 11:
+                        $getPeriod -= 30; //30
+                        break;
+                    case 2:
+                        $strdata2 = strtotime(date($currentYear));
+                        $daysF = cal_days_in_month(CAL_GREGORIAN, 2, date('y', $strdata2));
+                        if ($daysF == 29) {
+                            $getPeriod = $getPeriod - 29; //29
+                        } else {
+                            $getPeriod = $getPeriod - 28; //28
+                        }
+                        break;
+                    default :
+                        $getPeriod = $getPeriod - 31; //31
+                        break;
+                }
+
+                if ($getPeriod >= 0) {
+                    $numMonth++;
+                    $numDaysLeft = $getPeriod;
+                }
             }
+            $monthNumberFr = date('n', $monthNumberFr);
+            $_SESSION["numMonth"] = $numMonth;
+            $_SESSION["numDaysLeft"] = $numDaysLeft;
+            $_SESSION["idRoom"]=$roomID;
         }
+    }
 
-        header("Refresh:0");
-        exit();
-    } 
-}
+    //Get Room Details
+    $queryR = "SELECT * FROM room WHERE room_id='{$roomID}'";
+    $resultR = query($queryR);
+    confirm($resultR);
+    $count2 = 0;
+    $count2 = countItem($resultR);
 
-//Marks all unread notifications for a given student ID as read
-function mark_read($studID) {
-    query("UPDATE notification SET status = 1 WHERE studID = " . $studID);
-
-    header("Refresh:0");
-    exit();
-}
-
-//Determines which icon to use based on notification type
-function notification_icon($type) {
-    if ($type == 'default') {
-        echo 'fas fa-comment-dots';
-    } else if ($type == 'info') {
-        echo 'fas fa-info-circle';
-    } else if ($type == 'success') {
-        echo 'fas fa-check-circle';
-    } else if ($type == 'warning') {
-        echo 'fas fa-exclamation-triangle';
-    } else if ($type == 'danger') {
-        echo 'fas fa-times-circle';
-    } else if ($type == 'notice') {
-        echo 'fas fa-flag';
+    if ($count2 > 0) {
+        while ($row2 = fetch_array($resultR)) {
+            $roomName = $row2['roomName'];
+            $roomPrice = $row2['roomPrice'];
+            $roomType = $row2['roomType'];
+            $roomCapacity = $row2['roomCapacity'];
+            $roomReserved = $row2['roomReserved'];
+            $roomImage = $row2['roomImage'];
+            $roomDescription = $row2['roomDescription'];
+            $roomShortDescription = $row2['roomShortDescription'];
+        }
+        $_SESSION['roomPrice'] = $roomPrice;
     }
 }
 
-//Sends an email to the admin and back to the sender (for contact page)
-function send_contact_message($firstname, $lastname, $email, $phone, $message) {
-    $mail = new MailClass();
+function payment() {
+    global $monthsNum;
 
-    //Message sent to admin
-    $adminEmail = "zenith3za@gmail.com";
-    $subject = "New message from contact page";
-    $body = "<strong>Contact information:</strong><br/>
-            First name: {$firstname}<br/>
-            Last name: {$lastname}<br/>
-            Email: {$email}<br/>
-            Phone: {$phone}<br/><br/>
-            <strong>Message:</strong><br/>{$message}";
+    //Get Booking Details
+    $query = "SELECT bookStatDate FROM booking WHERE studID='{$_SESSION["iduser"]}' AND bookingStatus='1'";
+    $result2 = query($query);
+    confirm($result2);
+    $count2 = countItem($result2);
+    if ($count2 > 0) {
+        $row = fetch_array($result2);
+        $bookStatDate = $row['bookStatDate'];
+        $_SESSION["bookStatDate"] = $bookStatDate;
+        //echo $bookStatDate;
+    }
 
-    $mail->sendMail($adminEmail, $subject, $body);
+    //Get PAYMENT Details
+    $query = "SELECT * FROM payment WHERE studID='{$_SESSION["iduser"]}' AND roomID='{$_SESSION["idRoom"]}' AND paymentStatus=1";
+    $result = query($query);
+    confirm($result);
+    $count = countItem($result);
+    $NUM = 1;
+    $monthsNum = array();
 
-    //Message sent back to sender
-    $mail->sendMail($email, "Your message has been sent", "We will get back to you soon.<br/><br/><strong>Your message:</strong></br>{$message}");
+    if ($count > 0) {
+        while ($row = fetch_array($result)) {
+            $student = <<<DELIMETER
+        <tr>
+            <td>{$row['payMonth']}</td>
+            <td>{$row['cardNumber']}</td>
+            <td>{$row['roomID']}</td>
+            <td>{$row['paymentDate']}</td>
+            <td><a class="btn btn-success" href="#"><span class="fa fa-check-circle" style="color:white"></span></a></td>
+        </tr>
+DELIMETER;
+
+            $monthsNum[] = $row['payMonth'];
+            $_SESSION["monthsNum"] = $monthsNum;
+            echo $student;
+            $NUM++;
+        }
+        $_SESSION["count"] = $count;
+    }
 }
+
+function paymentMonths() {
+    $arrayMonths = array("January", "February", "March", "April", "May", "June", "July", "August", "September", "Octuber", "November", "December");
+    $countMonth = 0;
+    if (isset($_SESSION["numMonth"])) {
+        $countMonth = $_SESSION["numMonth"];
+    }
+    $NUM2 = 0;
+    //$monthArrayNum = array();
+    while ($NUM2 < $countMonth) {
+        $monthNumberFr = strtotime("+" . $NUM2 . " months", strtotime($_SESSION["bookStatDate"]));
+        $ok = date('n', $monthNumberFr);
+
+        switch ($ok) {
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+            case 6:
+            case 7:
+            case 8:
+            case 9:
+            case 10:
+            case 11:
+            case 12:
+                if ($NUM2 < sizeof($_SESSION["monthsNum"])) {
+                    echo "<div style='padding-right: 5px; padding-bottom: 3px;' data-toggle='tooltip' data-placement='top' title='It was already paid'><strong class='btn btn-success' >{$arrayMonths[$ok - 1]} </strong></div>";
+                } else {
+                    echo "<div style='padding-right: 5px; padding-bottom: 2px;' data-toggle='tooltip' data-placement='top' title='This was not paid yet'><strong class='btn btn-danger'>{$arrayMonths[$ok - 1]} </strong></div>";
+                }
+                break;
+        }
+
+        $NUM2++;
+    }
+}
+
+function leaveOption() {
+    if (isset($_SESSION["bookStatus"])) {
+        global $leaveRoom, $confirm;
+        
+        $count=0;
+        
+        if (isset($_SESSION["idRoom"])) {
+        //Get Booking Details
+        $query = "SELECT * FROM booking WHERE studID='{$_SESSION["iduser"]}' AND roomID='{$_SESSION["idRoom"]}' AND bookingStatus='1'";
+        $result = query($query);
+        confirm($result);
+        $count = countItem($result);
+        }
+
+        if ($count > 0) {
+            $row = fetch_array($result);
+            $bookStatDate = $row['bookStatDate'];
+            $roomID = $row['roomID'];
+            $studID = $row['studID'];
+
+            $today = date('Y/m/d');  //('Y/m/d')  "2019/4/2"
+            //
+            $count2=0;
+            if (isset($_SESSION["idRoom"])) {
+                //Get PAYMENT Details
+                $query2 = "SELECT * FROM payment WHERE studID='{$_SESSION["iduser"]}' AND roomID='{$_SESSION["idRoom"]}' AND paymentStatus=1";
+                $result2 = query($query2);
+                confirm($result2);
+                $count2 = countItem($result2);
+            }
+            $date1 = strtotime($bookStatDate);
+            $date2 = strtotime($today);
+            $months = 0;
+
+            while (($date1 = strtotime('+1 MONTH', $date1)) <= $date2) {
+                $months++;
+            }
+//            echo '<br>';
+            //echo $months;
+            //echo '<br>';
+            //echo date('Y/m/d',$date2);
+            //echo '<br>';
+            //echo date('Y/m/d',$date1);
+            //echo '<br>';
+            //echo $count2;
+
+            if ($months < $count2) {
+
+                $leaveRoom = "yes";
+                if (isset($_POST['confirmLeaving'])) {
+                    $leavePassword = escape_String($_POST['leavePassword']);
+                    $encrypPass = md5($leavePassword);
+
+                    $query = "SELECT * FROM student WHERE studEmail='{$_SESSION["email"]}' AND studPassword='{$encrypPass}'";
+                    $result = query($query);
+                    confirm($result);
+                    $count = countItem($result);
+
+                    if (!empty($leavePassword)) {
+                        if ($count > 0) {
+                            $sql = "UPDATE booking SET bookingStatus=0,	bookingDate=now() WHERE studID='{$studID}'";
+                            $update1 = query($sql);
+                            confirm($update1);
+
+                            $sql2 = "UPDATE room SET roomReserved='0' WHERE room_id='{$roomID}'";
+                            $update2 = query($sql2);
+                            confirm($update2);
+                            
+                            $sql3 = "UPDATE payment SET paymentStatus=0 WHERE roomID='{$roomID}' AND studID='{$studID}' AND paymentStatus=1";
+                            $update3 = query($sql3);
+                            confirm($update3);
+
+                            if ($update1 && $update2 && $update3) {
+                                unset($_SESSION["checkPayment"]);
+                                unset($_SESSION["userRoomBooked"]);
+                                redirect("?confirm=yes");
+                            }
+                        } else {
+                            $confirm = "<div class='alert alert-danger alert-dismissible fade show text-center' role='alert'>
+                                        <strong>Canceled!</strong> You Have Provided a Wrong Password.
+                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                          <span aria-hidden='true'>&times;</span>
+                                        </button></div>";
+                        }
+                    } else {
+                        $confirm = "<div class='alert alert-info alert-dismissible fade show text-center' role='alert'>
+                                    <strong>Info!</strong> Password Field Cannot Be Empty.
+                                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                      <span aria-hidden='true'>&times;</span>
+                                    </button></div>";
+                    }
+                }
+            } else {
+                $leaveRoom = "no";
+                if (isset($_POST['redirectPayment'])) {
+                    redirect("paymentPage.php");
+                }
+            }
+        }
+    }
+}
+
+function makePayment() {
+    //echo $_SESSION["count"];
+    if (isset($_SESSION["count"]) && isset($_SESSION["totalCost"]) && isset($_SESSION["iduser"]) && isset($_SESSION["idRoom"])) {
+        if (isset($_POST['confirmPay'])) {
+
+            $cardNum = escape_String($_POST['cardNumber']);
+            $cardM = escape_String($_POST['cardMonth']);
+            $cardY = escape_String($_POST['cardYear']);
+            $payM = $_SESSION["count"] + 1;
+
+            $sqlup = "INSERT INTO payment(cardNumber,cardMonth,cardYear,payAmount,payMonth,studID,roomID,paymentDate) "
+                    . "VALUES('{$cardNum}','{$cardM}','{$cardY}','{$_SESSION["totalCost"]}','{$payM}','{$_SESSION['iduser']}','{$_SESSION['idRoom']}',now())";
+            $insertPayment = query($sqlup);
+            confirm($insertPayment);
+
+            if ($insertPayment) {
+                redirect("?paid");
+            }
+        }
+    }
+}
+
