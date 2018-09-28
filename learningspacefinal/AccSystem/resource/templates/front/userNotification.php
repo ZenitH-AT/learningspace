@@ -3,7 +3,7 @@
         <!-- Fix content appearing under navbar -->
         <div class=" col-sm-4 col-lg-4 col-md-4"></div><?php
 
-        //Determining number of notifications
+        //Determining number of unread notifications
         $sqlunread = query("SELECT * FROM notification WHERE studID = " . $_SESSION["iduser"] . " AND status = 0 ORDER BY time DESC");
         confirm($sqlunread);
 
