@@ -53,43 +53,6 @@ function toRemove($tableName, $colomnName, $idItem) {
     }
 }
 
-//Show all Students
-function get_Students() {
-    $query = query("SELECT * FROM student ORDER BY studID DESC ");
-    confirm($query);
-
-    while ($row = fetch_array($query)) {
-        $student = <<<DELIMETER
-        <tr>
-            <td>{$row['studID']}</td>
-            <td>{$row['studFirstName']}</td>
-            <td>{$row['studMiddleName']}</td>
-            <td>{$row['studLastName']}</td>
-            <td>{$row['studEmail']}</td>
-            <td>{$row['studPassword']}</td>
-            <td>{$row['studGender']}</td>
-            <td>{$row['studDOB']}</td>
-            <td>{$row['studSchool']}</td>
-            <td>{$row['studSchoolAddress']}</td>
-            <td>{$row['studCountry']}</td>
-            <td>{$row['studCity']}</td>
-            <td>{$row['studStreet']}</td>
-            <td>{$row['id_passport']}</td>
-            <td>{$row['studPhone']}</td>
-            <td>{$row['activationKey']}</td>
-            <td>{$row['isActive']}</td>
-            <td>{$row['data']}</td>
-     
-            <td><a class="btn btn-success" href="../../resource/templates/back/add.php?student={$row['studID']}"><span class="fa fa-clock" style="color:white"></span></a></td>
-            <td><a class="btn btn-info" href="../../resource/templates/back/edit.php?student={$row['studID']}"><span class="fa fa-user-edit" style="color:white"></span></a></td>
-            <td><a class="btn btn-danger" onclick="confirm('Are you sure you want to remove {$row['studFirstName']} {$row['studLastName']}?')" href="../../resource/templates/back/remove.php?student={$row['studID']}"><span class="fa fa-user-minus" style="color:white" onclick="confirm("Are you sure you want to delete {$row['studFirstName']} {$row['studLastName']}?)"></span></a></td>
-            
-        </tr>
-DELIMETER;
-        echo $student;
-    }
-}
-
 //Get Rooms
 function get_Rooms_BelowBelow() {
 //    WHERE roomType IN ('palacio','gold')
