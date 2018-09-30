@@ -41,9 +41,9 @@
                 <a class="nav-link" href="?ticket">
                     <?php
                         //To display open ticket count 
-                        $query = query("SELECT * FROM helpticket WHERE isActive = 1");
-                        confirm($query);
-                        $numTickets = countItem($query);
+                        $queryTicket = query("SELECT * FROM helpticket WHERE isActive = 1");
+                        confirm($queryTicket);
+                        $numTickets = countItem($queryTicket);
                     ?>
 
                     <span data-feather="life-buoy"></span>
@@ -64,8 +64,16 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="?refund">
+
+                    <?php
+                        //To display refund request count 
+                        $queryRefund = query("SELECT * FROM refund");
+                        confirm($queryRefund);
+                        $numRequests = countItem($queryRefund);
+                    ?>
+
                     <span data-feather="alert-circle"></span>
-                    Refund Requests
+                    Refund Requests <?php if($numRequests > 0) echo '- <span class="text-danger">' . $numRequests; ?></span>
                 </a>
             </li>
             <li class="nav-item">
