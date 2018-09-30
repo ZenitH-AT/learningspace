@@ -52,6 +52,10 @@
                                 if(isset($_POST['messageSend' . $row['ticketID']])){
                                     query("INSERT INTO helpticketmessage (ticketID, adminID, messageText, messageTime) VALUES('{$row['ticketID']}', '{$_SESSION["idadmin"]}', '{$_POST['messageText' . $row['ticketID']]}', now())");
                                     ?><script>alert("Your reply has been sent.");</script><?php
+
+                                    //Sending the user a notification
+                                    $adminName = mysqli_fetch_assoc(query("SELECT adminFirstN, adminLastN FROM admin WHERE adminID = " . $_SESSION["idadmin"]));
+                                    send_notification("Your ticket has recieved a reply", "Your ticket has recieved a reply from <strong>{$adminName['adminFirstN']} {$adminName['adminLastN']}</strong>. Ticket ID: <strong>{$row['ticketID']}</strong>. Subject: <strong>{$row['ticketSubject']}</strong>.", "info", $row['studID']);
                                 } ?>
 
                                 <br /><br /><h6>Conversation</h6><?php
