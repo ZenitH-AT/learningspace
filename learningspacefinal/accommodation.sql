@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 30, 2018 at 04:54 AM
+-- Generation Time: Sep 30, 2018 at 05:00 AM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -196,8 +196,8 @@ INSERT INTO `notification` (`notificationID`, `studID`, `title`, `body`, `type`,
 (8, 9, 'Hello', 'Testing again', 'default', '2018-09-27 21:39:08', 0),
 (9, 18, 'Hello', 'Testing again', 'default', '2018-09-27 21:39:08', 0),
 (10, 22, 'Final test', 'For now...', 'warning', '2018-09-28 02:52:52', 0),
-(11, 22, 'Your booking was successful', 'You have booked room <strong>1</strong> starting at <strong>2018/09/30</strong>', 'success', '2018-09-30 03:28:42', 0),
-(12, 22, 'Your booking was successful', 'Your payment refund request has been <strong>declined</strong>.', 'danger', '2018-09-30 04:53:09', 0);
+(13, 22, 'Your booking was successful', 'You have booked room <strong>1</strong> starting at <strong>2018/09/30</strong>', 'success', '2018-09-30 03:28:42', 0),
+(14, 22, 'Your refund request was declined', 'Your payment refund request has been <strong>declined</strong>.', 'danger', '2018-09-30 04:53:09', 0);
 
 -- --------------------------------------------------------
 
@@ -530,7 +530,7 @@ ALTER TABLE `login_test`
 -- AUTO_INCREMENT for table `notification`
 --
 ALTER TABLE `notification`
-  MODIFY `notificationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `notificationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `payment`
