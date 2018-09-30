@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 30, 2018 at 05:00 AM
+-- Generation Time: Sep 30, 2018 at 05:57 AM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -146,7 +146,8 @@ INSERT INTO `helpticketmessage` (`messageID`, `ticketID`, `studID`, `adminID`, `
 (24, 7, NULL, 1, 'Hello, how can I help?', '2018-09-26 22:49:51'),
 (25, 6, 22, NULL, 'test', '2018-09-26 22:58:29'),
 (26, 5, 22, NULL, 'test', '2018-09-26 23:12:07'),
-(27, 7, NULL, 1, 'Test', '2018-09-30 04:35:34');
+(27, 7, NULL, 1, 'Test', '2018-09-30 04:35:34'),
+(32, 7, NULL, 1, 'Test2', '2018-09-30 05:37:10');
 
 -- --------------------------------------------------------
 
@@ -196,8 +197,9 @@ INSERT INTO `notification` (`notificationID`, `studID`, `title`, `body`, `type`,
 (8, 9, 'Hello', 'Testing again', 'default', '2018-09-27 21:39:08', 0),
 (9, 18, 'Hello', 'Testing again', 'default', '2018-09-27 21:39:08', 0),
 (10, 22, 'Final test', 'For now...', 'warning', '2018-09-28 02:52:52', 0),
-(13, 22, 'Your booking was successful', 'You have booked room <strong>1</strong> starting at <strong>2018/09/30</strong>', 'success', '2018-09-30 03:28:42', 0),
-(14, 22, 'Your refund request was declined', 'Your payment refund request has been <strong>declined</strong>.', 'danger', '2018-09-30 04:53:09', 0);
+(13, 22, 'Your booking was successful', 'Your booking for room <strong>1</strong> starts at <strong>2018/09/30</strong>.', 'success', '2018-09-30 03:28:42', 0),
+(14, 22, 'Your refund request was declined', 'Your payment refund request has been <strong>declined</strong>.', 'danger', '2018-09-30 04:53:09', 0),
+(18, 22, 'Your ticket has recieved a reply', 'Your ticket has recieved a reply from <strong>Moises Borracha</strong>. Ticket ID: <strong>7</strong>. Subject: <strong>Another test</strong>.', 'info', '2018-09-30 05:37:10', 0);
 
 -- --------------------------------------------------------
 
@@ -518,7 +520,7 @@ ALTER TABLE `helpticket`
 -- AUTO_INCREMENT for table `helpticketmessage`
 --
 ALTER TABLE `helpticketmessage`
-  MODIFY `messageID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `messageID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `login_test`
@@ -530,7 +532,7 @@ ALTER TABLE `login_test`
 -- AUTO_INCREMENT for table `notification`
 --
 ALTER TABLE `notification`
-  MODIFY `notificationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `notificationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `payment`
