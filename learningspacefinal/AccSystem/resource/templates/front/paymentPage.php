@@ -102,8 +102,10 @@ $confirm1 = "<div class='alert alert-success alert-dismissible fade show text-ce
                                         <th scope="col">Month</th>
                                         <th scope="col">Card No</th>
                                         <th scope="col">Room No</th>
+                                        <th scope="col">Amount</th>
                                         <th scope="col">Date</th>
                                         <th scope="col">Paid</th>
+                                        <th scope="col">Request refund</th>
                                     </tr>
                                 </thead >
 
