@@ -337,6 +337,9 @@ function bookingPage() {
         confirm($updateRoom);
 
         if ($insertPayment && $insertRoom && $updateRoom) {
+            //Send the student a notification
+            send_notification("Your booking was successful", "Your booking for room <strong>{$idRoom}</strong> starts at <strong>{$_SESSION['bookDateIn']}</strong>.", "success", $_SESSION['iduser']);
+
             $paymentConfirm = "<div class='alert alert-success alert-dismissible fade show text-center' role='alert'>
                                     <strong>Confirmation!</strong> Your Booking and Payment Was Made Successfully.
                                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
