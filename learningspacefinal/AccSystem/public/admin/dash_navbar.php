@@ -7,7 +7,7 @@
         <ul class="navbar-nav mr-auto"></ul>
         <ul class="navbar-nav ">
             <li class="nav-item text-nowrap" style="padding-right: 11px;">
-                <a class="nav-link text-light"></i><?php echo "Welcome Admin, " . ucfirst($_SESSION["adminFN"]); ?></a>
+                <a class="nav-link text-light"></i><?php echo "Welcome, " . ucfirst($_SESSION["adminFN"]) . " (" . ($_SESSION['adminCategory'] == 1 ? "owner" : "regular admin") . ")"; ?></a>
             </li>
         </ul>
         <div style="padding-right: 15px;">
