@@ -1,5 +1,4 @@
-     
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="page-header">Viewings</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
         <?php if(isset($_GET['student'])){ 
@@ -17,7 +16,7 @@
 <div class="row">
     <div class="col-lg-12">
         <ol class="breadcrumb text-secondary ">
-            <li class="breadcrumb-item text-secondary"><i class="fa fa-book-open"></i> Viewings</li>  
+            <li class="breadcrumb-item text-secondary"><i class="fa fa-eye"></i> Viewings</li>  
         </ol>
     </div>
 </div>
