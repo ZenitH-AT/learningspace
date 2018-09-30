@@ -15,7 +15,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="?booking">
-                    <span data-feather="shopping-cart"></span>
+                    <span data-feather="book-open"></span>
                     Bookings
                 </a>
             </li>
@@ -38,16 +38,14 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="?ticket">
+<a class="nav-link" href="?ticket">
                     <?php
                         //To display open ticket count 
-                        $queryTicket = query("SELECT * FROM helpticket WHERE isActive = 1");
-                        confirm($queryTicket);
-                        $numTickets = countItem($queryTicket);
+                        $query = query("SELECT * FROM helpticket WHERE isActive = 1");
+                        confirm($query); 
                     ?>
-
-                    <span data-feather="life-buoy"></span>
-                    Tickets <?php if($numTickets > 0) echo '- <span class="text-danger">' . $numTickets; ?></span>
+<span data-feather="life-buoy"></span>
+Tickets - <span class="text-danger"><?php echo countItem($query); ?></span>
                 </a>
             </li>
             <li class="nav-item">
@@ -64,16 +62,8 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="?refund">
-
-                    <?php
-                        //To display refund request count 
-                        $queryRefund = query("SELECT * FROM refund");
-                        confirm($queryRefund);
-                        $numRequests = countItem($queryRefund);
-                    ?>
-
                     <span data-feather="alert-circle"></span>
-                    Refund Requests <?php if($numRequests > 0) echo '- <span class="text-danger">' . $numRequests; ?></span>
+                    Refund Requests
                 </a>
             </li>
             <li class="nav-item">
@@ -84,7 +74,7 @@
             </li>
         </ul>
 
-        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+<!--        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
             <span>Saved reports</span>
             <a class="d-flex align-items-center text-muted" href="#">
             </a>
@@ -116,7 +106,7 @@
                 </a>
             </li>
         </ul>
-        
+        -->
     </div>
 </nav>
 
