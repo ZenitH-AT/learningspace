@@ -39,57 +39,6 @@ function backHOme() {
     }
 }
 
-function toRemove($tableName, $colomnName, $idItem) {
-    $tN = escape_String($tableName);
-    $clN = escape_String($colomnName);
-    $id = escape_String($idItem);
-    $query = "DELETE FROM {$tN} WHERE {$clN}='{$id}' ";
-    $remove = query($query);
-    confirm($remove);
-    if ($remove) {
-        return 1;
-    } else {
-        return 0;
-    }
-}
-
-//Show all Students
-function get_Students() {
-    $query = query("SELECT * FROM student ORDER BY studID DESC ");
-    confirm($query);
-
-    while ($row = fetch_array($query)) {
-        $student = <<<DELIMETER
-        <tr>
-            <td>{$row['studID']}</td>
-            <td>{$row['studFirstName']}</td>
-            <td>{$row['studMiddleName']}</td>
-            <td>{$row['studLastName']}</td>
-            <td>{$row['studEmail']}</td>
-            <td>{$row['studPassword']}</td>
-            <td>{$row['studGender']}</td>
-            <td>{$row['studDOB']}</td>
-            <td>{$row['studSchool']}</td>
-            <td>{$row['studSchoolAddress']}</td>
-            <td>{$row['studCountry']}</td>
-            <td>{$row['studCity']}</td>
-            <td>{$row['studStreet']}</td>
-            <td>{$row['id_passport']}</td>
-            <td>{$row['studPhone']}</td>
-            <td>{$row['activationKey']}</td>
-            <td>{$row['isActive']}</td>
-            <td>{$row['data']}</td>
-     
-            <td><a class="btn btn-success" href="../../resource/templates/back/add.php?student={$row['studID']}"><span class="fa fa-clock" style="color:white"></span></a></td>
-            <td><a class="btn btn-info" href="../../resource/templates/back/edit.php?student={$row['studID']}"><span class="fa fa-user-edit" style="color:white"></span></a></td>
-            <td><a class="btn btn-danger" onclick="confirm('Are you sure you want to remove {$row['studFirstName']} {$row['studLastName']}?')" href="../../resource/templates/back/remove.php?student={$row['studID']}"><span class="fa fa-user-minus" style="color:white" onclick="confirm("Are you sure you want to delete {$row['studFirstName']} {$row['studLastName']}?)"></span></a></td>
-            
-        </tr>
-DELIMETER;
-        echo $student;
-    }
-}
-
 //Get Rooms
 function get_Rooms_BelowBelow() {
 //    WHERE roomType IN ('palacio','gold')
@@ -97,7 +46,7 @@ function get_Rooms_BelowBelow() {
     confirm($query);
 
     $num = 1;
-    $target = 'one';
+    $target = 'two';
     while ($row = fetch_array($query)) {
         $room1 = <<<DELIMETER
     <div class="col-sm-4 col-lg-4 col-md-4" >
@@ -159,10 +108,10 @@ function get_Rooms_BelowCarousel() {
     $query = query("SELECT * FROM room");
     confirm($query);
 
-    $num = 1;
+    $num3 = 1;
     $target = 'one';
     while ($row = fetch_array($query)) {
-        $room1 = <<<DELIMETER
+        $room3 = <<<DELIMETER
     <div class="col-lg-4">
         <a class=""  href="viewRoom.php?id={$row['room_id']}">
         <img class=" rounded-circle" width="200" height="200" src="IMAGE/gallery/{$row['roomImage']}" alt="">
@@ -180,22 +129,22 @@ function get_Rooms_BelowCarousel() {
         </div>
     </div>
 DELIMETER;
-        echo $room1;
-        $target = $target . ($num++);
+        echo $room3;
+        $target = $target . ($num3++);
     }
 }
 
 function get_Rooms_Marketing() {
     $query = query("SELECT R.room_id,R.roomDescription, R.roomImage,R.roomPrice,R.roomName, RM.firstText,RM.secondText "
             . "FROM room AS R INNER JOIN roomMarket AS RM "
-            . "WHERE R.room_id = RM.roomID AND R.roomType IN ('Marketing ','New') ");
+            . "WHERE R.room_id = RM.roomID AND R.roomType IN ('Marketing ','New') LIMIT 2");
     confirm($query);
 
-    $num = 1;
+    $num2 = 1;
     $target = 'one';
     while ($row = fetch_array($query)) {
-        if ($num % 2 == 0) {
-            $room1 = <<<DELIMETER
+        if ($num2 % 2 == 0) {
+            $room2 = <<<DELIMETER
     <div class="row featurette">
         <div class="col-md-7 order-md-2">
             <h2 class="featurette-heading">{$row['firstText']}<br>
@@ -211,7 +160,7 @@ function get_Rooms_Marketing() {
     <hr class="featurette-divider">
 DELIMETER;
         } else {
-            $room1 = <<<DELIMETER
+            $room2 = <<<DELIMETER
     <div class="row featurette">
         <div class="col-md-7">
             <h2 class="featurette-heading">{$row['firstText']}<br> 
@@ -227,8 +176,8 @@ DELIMETER;
     <hr class="featurette-divider">
 DELIMETER;
         }
-        echo $room1;
-        $target = $target . ($num++);
+        echo $room2;
+        $target = $target . ($num2++);
     }
 }
 
@@ -337,9 +286,6 @@ function bookingPage() {
         confirm($updateRoom);
 
         if ($insertPayment && $insertRoom && $updateRoom) {
-            //Send the student a notification
-            send_notification("Your booking was successful", "Your booking for room <strong>{$idRoom}</strong> starts at <strong>{$_SESSION['bookDateIn']}</strong>.", "success", $_SESSION['iduser']);
-
             $paymentConfirm = "<div class='alert alert-success alert-dismissible fade show text-center' role='alert'>
                                     <strong>Confirmation!</strong> Your Booking and Payment Was Made Successfully.
                                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
@@ -379,7 +325,7 @@ function lognew() {
 
             if ($count == 0) {
                 $query = "SELECT * FROM admin "
-                        . "WHERE adminEmail='{$user}' AND adminPassword='{$pass}'";
+                        . "WHERE adminEmail='{$user}' AND adminPassword='{$encrypPass}'";
 
                 $resultad = query($query);
                 confirm($resultad);
@@ -431,7 +377,8 @@ function lognew() {
                     $adminPassword = $rowad['adminPassword'];
                 }
                 if ($adminActive == 1) {
-                    if (($pass == $adminPassword) && ($adminEmail == $user)) {
+                    //$passEnc = md5($adminPassword);
+                    if (($adminPassword == $encrypPass) && ($adminEmail == $user)) {
                         $_SESSION["admin"] = "Admin";
                         $_SESSION["idadmin"] = $adminID;
                         $_SESSION["adminFN"] = $adminFirstN;
@@ -665,9 +612,9 @@ function signup() {
 
                     $mail = new MailClass();
                     $subject = "Your Accommodation Account - Verify Your Email Address";
-                    $body = "Dear {$fname} {$lname}<br><br>"
+                    $body = "Dear {$fname} {$lname}<br>"
                             . "Please click the link below to verify your LearningSpace account.<br><br>"
-                            . "<a href='http://localhost:8080/project/AccSystem/public/userActivation.php?key={$userActicationKey}' class='btn btn-outline-success formbutton'>Verify email address</a>";
+                            . "<a href='http://localhost/project/AccSystem/public/userActivation.php?key={$userActicationKey}' class='btn btn-outline-success formbutton'>Verify email address</a>";
 
                     $getresult = $mail->sendMail($email, $subject, $body);
 
@@ -1131,45 +1078,19 @@ function payment() {
 
     if ($count > 0) {
         while ($row = fetch_array($result)) {
+            $student = <<<DELIMETER
+        <tr>
+            <td>{$row['payMonth']}</td>
+            <td>{$row['cardNumber']}</td>
+            <td>{$row['roomID']}</td>
+            <td>{$row['paymentDate']}</td>
+            <td><a class="btn btn-success" href="#"><span class="fa fa-check-circle" style="color:white"></span></a></td>
+        </tr>
+DELIMETER;
+
             $monthsNum[] = $row['payMonth'];
-            $_SESSION["monthsNum"] = $monthsNum; ?>
-
-            <tr>
-                <td><?php echo $row['payMonth'] ?></td>
-                <td><?php echo $row['cardNumber'] ?></td>
-                <td><?php echo $row['roomID'] ?></td>
-                <td><?php echo 'R' . $row['payAmount'] ?></td>
-                <td><?php echo $row['paymentDate'] ?></td>
-                <td><a class="btn btn-success" href="#"><span class="fa fa-check-circle" style="color:white"></span></a></td>
-                <td><a class="btn btn-secondary" href="#" data-toggle="modal" data-target="#refundPopup<?php echo $row['payID']; ?>"><span class="fa fa-undo-alt" style="color:white"></span></a></td>
-
-                <div class="modal fade" id="refundPopup<?php echo $row['payID']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
-                        <div class="modal-content">  
-                            <div class="modal-header">
-                                <h5>Payment refund request</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
-                            </div> 
-                            <div class="modal-body">
-                                <form action="" method="get">
-                                    <textarea type="text" class="form-control" name="reason<?php echo $row['payID']; ?>" placeholder="Reason" rows="4" required></textarea><br />
-                                    <button type="submit" class="btn btn-primary formbutton" style="float:right" name="refund<?php echo $row['payID']; ?>" onclick="confirm('Are you sure?')">Reqest refund</button>
-                                </form> <?php
-
-                                //Request refund button handling
-                                if(isset($_GET['refund' . $row['payID']])){
-                                    query("INSERT INTO refund (payID, studID, reason, date) VALUES('{$row['payID']}', '{$_SESSION["iduser"]}', '{$_GET['reason' . $row['payID']]}', now())");
-                                    ?><script>alert("Your request has been sent.");</script><?php
-                                } ?> 
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </tr> <?php
-
+            $_SESSION["monthsNum"] = $monthsNum;
+            echo $student;
             $NUM++;
         }
         $_SESSION["count"] = $count;
@@ -1337,6 +1258,142 @@ function makePayment() {
     }
 }
 
+
+
+//********************** Admin Functions ***************************************
+function toRemove($tableName, $colomnName, $idItem) {
+    $tN = escape_String($tableName);
+    $clN = escape_String($colomnName);
+    $id = escape_String($idItem);
+    $query = "DELETE FROM {$tN} WHERE {$clN}='{$id}' ";
+    $remove = query($query);
+    confirm($remove);
+    if ($remove) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+//Show all Students
+function get_Students() {
+    $query = query("SELECT * FROM student ORDER BY studID DESC ");
+    confirm($query);
+
+    while ($row = fetch_array($query)) {
+        $student = <<<DELIMETER
+        <tr>
+            <td>{$row['studID']}</td>
+            <td>{$row['studFirstName']}</td>
+            <td>{$row['studMiddleName']}</td>
+            <td>{$row['studLastName']}</td>
+            <td>{$row['studEmail']}</td>
+            <td>{$row['studPassword']}</td>
+            <td>{$row['studGender']}</td>
+            <td>{$row['studDOB']}</td>
+            <td>{$row['studSchool']}</td>
+            <td>{$row['studSchoolAddress']}</td>
+            <td>{$row['studCountry']}</td>
+            <td>{$row['studCity']}</td>
+            <td>{$row['studStreet']}</td>
+            <td>{$row['id_passport']}</td>
+            <td>{$row['studPhone']}</td>
+            <td>{$row['activationKey']}</td>
+            <td>{$row['isActive']}</td>
+            <td>{$row['data']}</td>
+     
+            <td><a class="btn btn-success" href="../../resource/templates/back/add.php?student={$row['studID']}"><span class="fa fa-clock" style="color:white"></span></a></td>
+            <td><a class="btn btn-info" href="../../resource/templates/back/edit.php?student={$row['studID']}"><span class="fa fa-user-edit" style="color:white"></span></a></td>
+            <td><a class="btn btn-danger" href="../../resource/templates/back/remove.php?student={$row['studID']}"><span class="fa fa-user-minus" style="color:white"></span></a></td>
+            
+        </tr>
+DELIMETER;
+        echo $student;
+    }
+}
+
+//Show all Bookings
+function get_Bookings() {
+    $query = query("SELECT * FROM booking ORDER BY bookID DESC ");
+    confirm($query);
+
+    while ($row = fetch_array($query)) {
+        $booking = <<<DELIMETER
+        <tr>
+            <td>{$row['bookID']}</td>
+            <td>{$row['studID']}</td>
+            <td>{$row['roomID']}</td>
+            <td>{$row['bookStatDate']}</td>
+            <td>{$row['bookEndDate']}</td>
+            <td>{$row['stayingPeriod']}</td>
+            <td>{$row['bookingDate']}</td>
+            <td>{$row['bookingStatus']}</td>
+     
+            <td><a class="btn btn-success" href="#"><span class="fa fa-clock" style="color:white"></span></a></td>
+            <td><a class="btn btn-info" href="#"><span class="fa fa-user-edit" style="color:white"></span></a></td>
+            <td><a class="btn btn-danger" href="#"><span class="fa fa-user-minus" style="color:white"></span></a></td>
+            
+        </tr>
+DELIMETER;
+        echo $booking;
+    }
+}
+
+//Show all Viewings
+function get_Viewings() {
+    $query = query("SELECT * FROM viewing ORDER BY viewBookingID DESC ");
+    confirm($query);
+
+    while ($row = fetch_array($query)) {
+        $booking = <<<DELIMETER
+        <tr>
+            <td>{$row['viewBookingID']}</td>
+            <td>{$row['viewerName']}</td>
+            <td>{$row['viewerEmail']}</td>
+            <td>{$row['viewerPhone']}</td>
+            <td>{$row['viewDate']}</td>
+            <td>{$row['viewStatus']}</td>
+            <td>{$row['roomName']}</td>
+            <td>{$row['scheduledDate']}</td>
+     
+            <td><a class="btn btn-success" href="#"><span class="fa fa-clock" style="color:white"></span></a></td>
+            <td><a class="btn btn-info" href="#"><span class="fa fa-user-edit" style="color:white"></span></a></td>
+            <td><a class="btn btn-danger" href="#"><span class="fa fa-user-minus" style="color:white"></span></a></td>
+            
+        </tr>
+DELIMETER;
+        echo $booking;
+    }
+}
+
+//Show all Rooms
+function get_Rooms() {
+    $query = query("SELECT * FROM room ORDER BY room_id DESC ");
+    confirm($query);
+
+    while ($row = fetch_array($query)) {
+        $booking = <<<DELIMETER
+        <tr>
+            <td>{$row['room_id']}</td>
+            <td><a class="btn btn-outline-success"  href="#"><img style="" class="" src="../IMAGE/gallery/{$row['roomImage']}"  width="125"></a></td>
+            <td>{$row['roomName']}</td>
+            <td>{$row['roomPrice']}</td>
+            <td>{$row['roomType']}</td>
+            <td>{$row['roomCapacity']}</td>
+            <td>{$row['roomReserved']}</td>
+            <td>{$row['roomShortDescription']}</td>
+            <td><a class="btn btn-outline-dark" href="#"><span class="fa fa-eye" style="color:black"></span></a></td>
+
+            <td><a class="btn btn-success" href="#"><span class="fa fa-clock" style="color:white"></span></a></td>
+            <td><a class="btn btn-info" href="#"><span class="fa fa-user-edit" style="color:white"></span></a></td>
+            <td><a class="btn btn-danger" href="#"><span class="fa fa-user-minus" style="color:white"></span></a></td>
+        </tr>
+
+DELIMETER;
+        echo $booking;
+    }
+}
+
 //Toggles between closed and open ticket status
 function close_open_ticket($ticketID, $isActive) {
     if (isset($_POST['closereopen' . $ticketID])) {
@@ -1349,7 +1406,7 @@ function close_open_ticket($ticketID, $isActive) {
     } 
 }
 
-//Creates a notification
+//Creates a notification. 
 //This can be tied to many buttons around the user interface.
 //$inputids must be a single studID or comma separated list of student IDs that the notification is sent to.
 //if $inputids is a star (*), it the notification is sent to all students.
@@ -1381,49 +1438,3 @@ function send_notification($title, $body, $type, $inputids) {
         exit();
     } 
 }
-
-//Marks all unread notifications for a given student ID as read
-function mark_read($studID) {
-    query("UPDATE notification SET status = 1 WHERE studID = " . $studID);
-
-    header("Refresh:0");
-    exit();
-}
-
-//Determines which icon to use based on notification type
-function notification_icon($type) {
-    if ($type == 'default') {
-        echo 'fas fa-comment-dots';
-    } else if ($type == 'info') {
-        echo 'fas fa-info-circle';
-    } else if ($type == 'success') {
-        echo 'fas fa-check-circle';
-    } else if ($type == 'warning') {
-        echo 'fas fa-exclamation-triangle';
-    } else if ($type == 'danger') {
-        echo 'fas fa-times-circle';
-    } else if ($type == 'notice') {
-        echo 'fas fa-flag';
-    }
-}
-
-//Sends an email to the admin and back to the sender (for contact page)
-function send_contact_message($firstname, $lastname, $email, $phone, $message) {
-    $mail = new MailClass();
-
-    //Message sent to admin
-    $adminEmail = "zenith3za@gmail.com";
-    $subject = "New message from contact page";
-    $body = "<strong>Contact information:</strong><br/>
-            First name: {$firstname}<br/>
-            Last name: {$lastname}<br/>
-            Email: {$email}<br/>
-            Phone: {$phone}<br/><br/>
-            <strong>Message:</strong><br/>{$message}";
-
-    $mail->sendMail($adminEmail, $subject, $body);
-
-    //Message sent back to sender
-    $mail->sendMail($email, "Your message has been sent", "We will get back to you soon.<br/><br/><strong>Your message:</strong></br>{$message}");
-}
-
