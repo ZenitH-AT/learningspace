@@ -1131,19 +1131,45 @@ function payment() {
 
     if ($count > 0) {
         while ($row = fetch_array($result)) {
-            $student = <<<DELIMETER
-        <tr>
-            <td>{$row['payMonth']}</td>
-            <td>{$row['cardNumber']}</td>
-            <td>{$row['roomID']}</td>
-            <td>{$row['paymentDate']}</td>
-            <td><a class="btn btn-success" href="#"><span class="fa fa-check-circle" style="color:white"></span></a></td>
-        </tr>
-DELIMETER;
-
             $monthsNum[] = $row['payMonth'];
-            $_SESSION["monthsNum"] = $monthsNum;
-            echo $student;
+            $_SESSION["monthsNum"] = $monthsNum; ?>
+
+            <tr>
+                <td><?php echo $row['payMonth'] ?></td>
+                <td><?php echo $row['cardNumber'] ?></td>
+                <td><?php echo $row['roomID'] ?></td>
+                <td><?php echo 'R' . $row['payAmount'] ?></td>
+                <td><?php echo $row['paymentDate'] ?></td>
+                <td><a class="btn btn-success" href="#"><span class="fa fa-check-circle" style="color:white"></span></a></td>
+                <td><a class="btn btn-secondary" href="#" data-toggle="modal" data-target="#refundPopup<?php echo $row['payID']; ?>"><span class="fa fa-undo-alt" style="color:white"></span></a></td>
+
+                <div class="modal fade" id="refundPopup<?php echo $row['payID']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+                        <div class="modal-content">  
+                            <div class="modal-header">
+                                <h5>Payment refund request</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                            </div> 
+                            <div class="modal-body">
+                                <form action="" method="get">
+                                    <textarea type="text" class="form-control" name="reason<?php echo $row['payID']; ?>" placeholder="Reason" rows="4" required></textarea><br />
+                                    <button type="submit" class="btn btn-primary formbutton" style="float:right" name="refund<?php echo $row['payID']; ?>" onclick="confirm('Are you sure?')">Reqest refund</button>
+                                </form> <?php
+
+                                //Request refund button handling
+                                if(isset($_GET['refund' . $row['payID']])){
+                                    query("INSERT INTO refund (payID, studID, reason, date) VALUES('{$row['payID']}', '{$_SESSION["iduser"]}', '{$_GET['reason' . $row['payID']]}', now())");
+                                    ?><script>alert("Your request has been sent.");</script><?php
+                                } ?> 
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </tr> <?php
+
             $NUM++;
         }
         $_SESSION["count"] = $count;
