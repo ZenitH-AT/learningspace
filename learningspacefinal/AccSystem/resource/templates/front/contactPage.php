@@ -63,8 +63,8 @@
                 <div class="panel panel-default">
                     <div class="panel-body col-md-10">
                     <legend class="header">Contact information</legend>
-                        <div> Address line 1
-                            <br /> Address 2
+                        <div> 567 Memory Lane, Claremont
+                            <br /> Cape Town, 6562
                             <br /> Tel: 061 410 5892
                             <br /> Email: <a href="mailto:learningspace@gmail.com">projectcrudacc@gmail.com</a>
                         </div>
