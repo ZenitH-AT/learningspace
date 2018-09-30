@@ -42,11 +42,12 @@
                     <?php
                         //To display open ticket count 
                         $query = query("SELECT * FROM helpticket WHERE isActive = 1");
-                        confirm($query); 
+                        confirm($query);
+                        $numTickets = countItem($query);
                     ?>
 
                     <span data-feather="life-buoy"></span>
-                    Tickets - <span class="text-danger"><?php echo countItem($query); ?></span>
+                    Tickets <?php if($numTickets > 0) echo '- <span class="text-danger">' . $numTickets; ?></span>
                 </a>
             </li>
             <li class="nav-item">
