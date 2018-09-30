@@ -36,6 +36,7 @@
                         //Accept button handling
                         if(isset($_POST['accept' . $row['requestID']])){
                             query("DELETE FROM payment WHERE payID = " . $row['payID']);
+                            query("DELETE FROM refund WHERE requestID = " . $row['requestID']);
                             ?><script>alert("The request has been accepted.");</script><?php
 
                             send_notification("Your refund request was accepted", "Your payment refund request has been <strong>accepted</strong>.", "success", $row['studID']);
