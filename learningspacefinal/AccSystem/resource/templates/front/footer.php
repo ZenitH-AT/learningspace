@@ -1,28 +1,14 @@
-<!-- live chat float start -->
-<div class="floating-chat">
-    <i class="fa fa-comments" aria-hidden="true"></i>
-    <div class="chat">
-        <div class="header">
-            <span class="title">
-                Live chat
-            </span>
-            <button>
-                <i class="fa fa-times" aria-hidden="true"></i>
-            </button>
-
-        </div>
-        <ul class="messages">
-            <li class="other">Hello, how can we help?</li>
-        </ul>
-        <div class="footer">
-            <div class="text-box" contenteditable="true" disabled="true"></div>
-            <button id="sendMessage">send</button>
-        </div>
-    </div>
-</div>
-<!-- live chat float end *******************************************8-->
-
-
+<!-- live chat float include -->
+<!-- is run on a node.js server -->
+<!-- note: 'allow_url_include = 1' must be added to php.ini for this to work-->
+<?php
+    if (isset($_SESSION["iduser"])) {
+        include 'http://localhost:8088/client.php';
+        ?>
+            <script>socket.connect('http://localhost:8088');</script>
+        <?php
+    } 
+?>
 
 <!--Alert Message For Login *****************************************-->
 <!--error=1 is used to display alert msg of wrong pass or email-->
@@ -73,13 +59,11 @@ if (isset($_GET['error'])) {
 }
 ?>
 
-
-
 <footer class="container text-center">
-    <!--<p class="float-right"><a href="#">Put Something in Here!</a></p>-->
-    <p>&copy; 2017-2018 DreamTeam, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+    <p>&copy; 2017-2018 DreamTeam, Inc. &middot; <a href="PrivacyTerms.php" data-toggle="modal" data-target="#PrivacyPopup">Privacy</a> &middot; <a href="PrivacyTerms.php" data-toggle="modal" data-target="#TermsPopup">Terms</a></p>
 </footer>
 
+<?php include "PrivacyTerms.php"; ?>
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
@@ -90,27 +74,24 @@ if (isset($_GET['error'])) {
 <script src="./js/popper.min.js"></script>
 <script src="./js/bootstrap.min.js"></script>
 <script src="js/main.js"></script>
+
 <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
 <script src="./js/holder.min.js"></script>
 <script src="./js/float-panel.js"></script>
-<script src="./js/live-chat.js"></script>
 <script src="./js/jquery.datetimepicker.full.js"></script>
+
 <!-- for gallery images -->
-        
 <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
 
-<script>
-            baguetteBox.run('.tz-gallery');
-</script>
+<script>baguetteBox.run('.tz-gallery');</script>
 
 <script>
-//Function for ToolTip used in BookingPage
-$(function () {
-  $('[data-toggle="tooltip"]').tooltip();
-});
+    //Function for ToolTip used in BookingPage
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
 </script>
-
 
 <script>
     $(document).ready(function() {
