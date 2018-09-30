@@ -82,7 +82,7 @@ function get_Students() {
      
             <td><a class="btn btn-success" href="../../resource/templates/back/add.php?student={$row['studID']}"><span class="fa fa-clock" style="color:white"></span></a></td>
             <td><a class="btn btn-info" href="../../resource/templates/back/edit.php?student={$row['studID']}"><span class="fa fa-user-edit" style="color:white"></span></a></td>
-            <td><a class="btn btn-danger" href="../../resource/templates/back/remove.php?student={$row['studID']}"><span class="fa fa-user-minus" style="color:white"></span></a></td>
+            <td><a class="btn btn-danger" onclick="confirm('Are you sure you want to remove {$row['studFirstName']} {$row['studLastName']}?')" href="../../resource/templates/back/remove.php?student={$row['studID']}"><span class="fa fa-user-minus" style="color:white" onclick="confirm("Are you sure you want to delete {$row['studFirstName']} {$row['studLastName']}?)"></span></a></td>
             
         </tr>
 DELIMETER;
