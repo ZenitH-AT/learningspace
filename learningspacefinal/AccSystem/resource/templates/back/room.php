@@ -17,7 +17,7 @@
 <div class="row">
     <div class="col-lg-12">
         <ol class="breadcrumb text-secondary ">
-            <li class="breadcrumb-item text-secondary"><i class="fa fa-book-open"></i> Rooms</li> 
+            <li class="breadcrumb-item text-secondary"><i class="fa fa-home"></i> Rooms</li> 
         </ol>
     </div>
 </div>
