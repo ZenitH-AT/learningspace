@@ -5,6 +5,17 @@ if (!isset($_SESSION)) {
 }
 
 if (isset($_SESSION)) {
+    //Admin session
+    unset($_SESSION["admin"]);
+    unset($_SESSION["idadmin"]);
+    unset($_SESSION["adminFN"]);
+    unset($_SESSION["adminLN"]);
+    unset($_SESSION["adminCategory"]);
+    unset($_SESSION["adminEmail"]);
+    unset($_SESSION["adminIsActive"]);
+    unset($_SESSION["adminPass"]);
+
+    //User session
     unset($_SESSION["iduser"]);
     unset($_SESSION["firstname"]);
     unset($_SESSION["lastname"]);
@@ -31,6 +42,5 @@ if (isset($_SESSION)) {
     } else {
         header("Refresh:0;");
         header("Location: ../public/HomePage.php");
-        //header("Refresh:0; url=../public/HomePage.php");
     }
 }
