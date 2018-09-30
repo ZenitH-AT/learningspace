@@ -5,6 +5,15 @@ if (!isset($_SESSION)) {
 }
 
 if (isset($_SESSION)) {
+    unset($_SESSION["admin"]);
+    unset($_SESSION["idadmin"]);
+    unset($_SESSION["adminFN"]);
+    unset($_SESSION["adminLN"]);
+    unset($_SESSION["adminCategory"]);
+    unset($_SESSION["adminEmail"]);
+    unset($_SESSION["adminIsActive"]);
+    unset($_SESSION["adminPass"]);
+    
     unset($_SESSION["iduser"]);
     unset($_SESSION["firstname"]);
     unset($_SESSION["lastname"]);
