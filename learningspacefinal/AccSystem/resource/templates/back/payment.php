@@ -30,7 +30,7 @@
                         <td><?php echo $row['cardNumber'] ?></td>
                         <td><?php echo $row['cardMonth'] ?></td>
                         <td><?php echo $row['cardYear'] ?></td> 
-                        <td><?php echo $row['payAmount'] ?></td>
+                        <td><?php echo 'R' . $row['payAmount'] ?></td>
                         <td><?php echo $row['payMonth'] ?></td>
                         <td><?php echo $row['studID'] ?></td>
                         <td><?php echo $row['roomID'] ?></td>
