@@ -55,12 +55,10 @@ function toRemove($tableName, $colomnName, $idItem) {
 
 //Get Rooms
 function get_Rooms_BelowBelow() {
-//    WHERE roomType IN ('palacio','gold')
     $query = query("SELECT * FROM room ");
     confirm($query);
-
     $num = 1;
-    $target = 'one';
+    $target = 'two';
     while ($row = fetch_array($query)) {
         $room1 = <<<DELIMETER
     <div class="col-sm-4 col-lg-4 col-md-4" >
@@ -121,11 +119,10 @@ DELIMETER;
 function get_Rooms_BelowCarousel() {
     $query = query("SELECT * FROM room");
     confirm($query);
-
-    $num = 1;
+    $num3 = 1;
     $target = 'one';
     while ($row = fetch_array($query)) {
-        $room1 = <<<DELIMETER
+        $room3 = <<<DELIMETER
     <div class="col-lg-4">
         <a class=""  href="viewRoom.php?id={$row['room_id']}">
         <img class=" rounded-circle" width="200" height="200" src="IMAGE/gallery/{$row['roomImage']}" alt="">
@@ -143,22 +140,21 @@ function get_Rooms_BelowCarousel() {
         </div>
     </div>
 DELIMETER;
-        echo $room1;
-        $target = $target . ($num++);
+        echo $room3;
+        $target = $target . ($num3++);
     }
 }
 
 function get_Rooms_Marketing() {
     $query = query("SELECT R.room_id,R.roomDescription, R.roomImage,R.roomPrice,R.roomName, RM.firstText,RM.secondText "
             . "FROM room AS R INNER JOIN roomMarket AS RM "
-            . "WHERE R.room_id = RM.roomID AND R.roomType IN ('Marketing ','New') ");
+            . "WHERE R.room_id = RM.roomID AND R.roomType IN ('Marketing ','New') LIMIT 2");
     confirm($query);
-
-    $num = 1;
+    $num2 = 1;
     $target = 'one';
     while ($row = fetch_array($query)) {
-        if ($num % 2 == 0) {
-            $room1 = <<<DELIMETER
+        if ($num2 % 2 == 0) {
+            $room2 = <<<DELIMETER
     <div class="row featurette">
         <div class="col-md-7 order-md-2">
             <h2 class="featurette-heading">{$row['firstText']}<br>
@@ -174,7 +170,7 @@ function get_Rooms_Marketing() {
     <hr class="featurette-divider">
 DELIMETER;
         } else {
-            $room1 = <<<DELIMETER
+            $room2 = <<<DELIMETER
     <div class="row featurette">
         <div class="col-md-7">
             <h2 class="featurette-heading">{$row['firstText']}<br> 
@@ -190,8 +186,8 @@ DELIMETER;
     <hr class="featurette-divider">
 DELIMETER;
         }
-        echo $room1;
-        $target = $target . ($num++);
+        echo $room2;
+        $target = $target . ($num2++);
     }
 }
 
@@ -342,7 +338,7 @@ function lognew() {
 
             if ($count == 0) {
                 $query = "SELECT * FROM admin "
-                        . "WHERE adminEmail='{$user}' AND adminPassword='{$pass}'";
+                        . "WHERE adminEmail='{$user}' AND adminPassword='{$encrypPass}'";
 
                 $resultad = query($query);
                 confirm($resultad);
@@ -394,7 +390,8 @@ function lognew() {
                     $adminPassword = $rowad['adminPassword'];
                 }
                 if ($adminActive == 1) {
-                    if (($pass == $adminPassword) && ($adminEmail == $user)) {
+                    //$passEnc = md5($adminPassword);
+                    if (($adminPassword == $encrypPass) && ($adminEmail == $user)) {
                         $_SESSION["admin"] = "Admin";
                         $_SESSION["idadmin"] = $adminID;
                         $_SESSION["adminFN"] = $adminFirstN;
@@ -403,7 +400,7 @@ function lognew() {
                         $_SESSION["adminEmail"] = $adminEmail;
                         $_SESSION["adminIsActive"] = $adminActive;
                         $_SESSION["adminPass"] = $adminPassword;
-
+                        
                         //redirect("HomePage.php");
                         redirect("admin/dashboard.php");
                     }
@@ -1297,6 +1294,85 @@ function makePayment() {
                 redirect("?paid");
             }
         }
+    }
+}
+
+//**************************** Admin Functions ****************************
+
+//Show all Bookings
+function get_Bookings() {
+    $query = query("SELECT * FROM booking ORDER BY bookID DESC ");
+    confirm($query);
+    while ($row = fetch_array($query)) {
+        $booking = <<<DELIMETER
+        <tr>
+            <td>{$row['bookID']}</td>
+            <td>{$row['studID']}</td>
+            <td>{$row['roomID']}</td>
+            <td>{$row['bookStatDate']}</td>
+            <td>{$row['bookEndDate']}</td>
+            <td>{$row['stayingPeriod']}</td>
+            <td>{$row['bookingDate']}</td>
+            <td>{$row['bookingStatus']}</td>
+     
+            <td><a class="btn btn-success" href="#"><span class="fa fa-clock" style="color:white"></span></a></td>
+            <td><a class="btn btn-info" href="#"><span class="fa fa-user-edit" style="color:white"></span></a></td>
+            <td><a class="btn btn-danger" href="#"><span class="fa fa-user-minus" style="color:white"></span></a></td>
+            
+        </tr>
+DELIMETER;
+        echo $booking;
+    }
+}
+
+//Show all Viewings
+function get_Viewings() {
+    $query = query("SELECT * FROM viewing ORDER BY viewBookingID DESC ");
+    confirm($query);
+    while ($row = fetch_array($query)) {
+        $booking = <<<DELIMETER
+        <tr>
+            <td>{$row['viewBookingID']}</td>
+            <td>{$row['viewerName']}</td>
+            <td>{$row['viewerEmail']}</td>
+            <td>{$row['viewerPhone']}</td>
+            <td>{$row['viewDate']}</td>
+            <td>{$row['viewStatus']}</td>
+            <td>{$row['roomName']}</td>
+            <td>{$row['scheduledDate']}</td>
+     
+            <td><a class="btn btn-success" href="#"><span class="fa fa-clock" style="color:white"></span></a></td>
+            <td><a class="btn btn-info" href="#"><span class="fa fa-user-edit" style="color:white"></span></a></td>
+            <td><a class="btn btn-danger" href="#"><span class="fa fa-user-minus" style="color:white"></span></a></td>
+            
+        </tr>
+DELIMETER;
+        echo $booking;
+    }
+}
+
+//Show all Rooms
+function get_Rooms() {
+    $query = query("SELECT * FROM room ORDER BY room_id DESC ");
+    confirm($query);
+    while ($row = fetch_array($query)) {
+        $booking = <<<DELIMETER
+        <tr>
+            <td>{$row['room_id']}</td>
+            <td><a class="btn btn-outline-success"  href="#"><img style="" class="" src="../IMAGE/gallery/{$row['roomImage']}"  width="125"></a></td>
+            <td>{$row['roomName']}</td>
+            <td>{$row['roomPrice']}</td>
+            <td>{$row['roomType']}</td>
+            <td>{$row['roomCapacity']}</td>
+            <td>{$row['roomReserved']}</td>
+            <td>{$row['roomShortDescription']}</td>
+            <td><a class="btn btn-outline-dark" href="#"><span class="fa fa-eye" style="color:black"></span></a></td>
+            <td><a class="btn btn-success" href="#"><span class="fa fa-clock" style="color:white"></span></a></td>
+            <td><a class="btn btn-info" href="#"><span class="fa fa-user-edit" style="color:white"></span></a></td>
+            <td><a class="btn btn-danger" href="#"><span class="fa fa-user-minus" style="color:white"></span></a></td>
+        </tr>
+DELIMETER;
+        echo $booking;
     }
 }
 
