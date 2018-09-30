@@ -8,14 +8,14 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="dashboard.php?student">
+                <a class="nav-link" href="?student">
                     <span data-feather="users"></span>
                     Students
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="?booking">
-                    <span data-feather="shopping-cart"></span>
+                    <span data-feather="book-open"></span>
                     Bookings
                 </a>
             </li>
