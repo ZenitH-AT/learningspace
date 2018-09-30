@@ -3,8 +3,8 @@
     <h1 class="page-header">Student</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
         <?php if(isset($_GET['student'])=="deleted"){ ?>
-        <div class='alert alert-danger alert-dismissible fade show text-center' role='alert'>
-                <strong>Info!</strong> Admin, You Cannot Book a Room.
+        <div class='alert alert-info alert-dismissible fade show text-center' role='alert'>
+                <strong>Info!</strong> Student deleted.
                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                     <span aria-hidden='true'>&times;</span>
                 </button></div>
@@ -48,7 +48,6 @@
                 <th>Status</th>
                 <th width="80%">Registration_Date</th>
 
-                <th>Add</th>
                 <th>Edit</th>
                 <th>Remove</th>
             </tr>
