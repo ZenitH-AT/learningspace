@@ -209,7 +209,7 @@
                                 <div class="col-md-12">
                                     <?php if (isset($_GET['id'])) { ?>
                                         <div data-toggle="tooltip" data-placement="top" title="Click to Read and Agree the Terms and Conditions">
-                                            <a style="text-info" name="TermsConditions" href="PrivacyTerms.php" data-toggle="modal" data-target="#TermsPopup">Accept Terms of Services</a><input type="checkbox"  onchange="document.getElementById('sendN').disabled = !this.checked;"/>
+                                            <a style="text-info" name="TermsConditions" href="PrivacyTerms.php" data-toggle="modal" data-target="#TermsPopup">Accept Terms of Service</a><input type="checkbox"  onchange="document.getElementById('sendN').disabled = !this.checked;"/>
                                         </div>
                                         <br>
                                         <button type="submit" name="bookroom" disabled id="sendN" class=" btn btn-outline-success formbutton">Confirm Details</button>
