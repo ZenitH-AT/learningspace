@@ -74,7 +74,7 @@
                 <form class="form-horizontal" method="post">
                     <fieldset>
                         <div class="text-center">
-                        <legend class="header col-md-12">Book a Room <hr></legend>
+                        <legend class="header col-md-12">Book a Room<hr></legend>
                         </div>
                         <?php echo $DatesError; ?>
 
@@ -209,7 +209,7 @@
                                 <div class="col-md-12">
                                     <?php if (isset($_GET['id'])) { ?>
                                         <div data-toggle="tooltip" data-placement="top" title="Click to Read and Agree the Terms and Conditions">
-                                            <button type="button" class="btn btn-sm" name="TermsConditions" href="PrivacyTerms.php" data-toggle="modal" data-target="#TermsPopup">Accept Terms of Services <input type="checkbox"  onchange="document.getElementById('sendN').disabled = !this.checked;" /></button>
+                                            <a style="text-info" name="TermsConditions" href="PrivacyTerms.php" data-toggle="modal" data-target="#TermsPopup">Accept Terms of Services</a><input type="checkbox"  onchange="document.getElementById('sendN').disabled = !this.checked;"/>
                                         </div>
                                         <br>
                                         <button type="submit" name="bookroom" disabled id="sendN" class=" btn btn-outline-success formbutton">Confirm Details</button>
