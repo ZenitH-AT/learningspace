@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 30, 2018 at 11:19 PM
+-- Generation Time: Oct 01, 2018 at 12:10 AM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -379,6 +379,7 @@ CREATE TABLE `viewing` (
   `viewerPhone` varchar(255) COLLATE utf8_bin NOT NULL,
   `viewDate` datetime NOT NULL,
   `viewStatus` int(11) NOT NULL,
+  `roomName` varchar(55) COLLATE utf8_bin NOT NULL,
   `scheduledDate` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -386,9 +387,10 @@ CREATE TABLE `viewing` (
 -- Dumping data for table `viewing`
 --
 
-INSERT INTO `viewing` (`viewBookingID`, `viewerName`, `viewerEmail`, `viewerPhone`, `viewDate`, `viewStatus`, `scheduledDate`) VALUES
-(1, 'Moises', 'moisesnt2@gmail.com', '8348666889', '2018-08-31 00:00:00', 1, '2018-08-30 01:35:11'),
-(2, 'Moises', 'moisesnt2@gmail.com', '8348666889', '2018-08-31 12:00:00', 1, '2018-08-30 01:37:00');
+INSERT INTO `viewing` (`viewBookingID`, `viewerName`, `viewerEmail`, `viewerPhone`, `viewDate`, `viewStatus`, `roomName`, `scheduledDate`) VALUES
+(1, 'Moises', 'moisesnt2@gmail.com', '8348666889', '2018-08-31 00:00:00', 1, '0', '2018-08-30 01:35:11'),
+(2, 'Moises', 'moisesnt2@gmail.com', '8348666889', '2018-08-31 12:00:00', 1, '0', '2018-08-30 01:37:00'),
+(3, 'teressa', 'moisesnt2@gmail.com', '65555465766', '2018-09-22 12:30:00', 1, '0', '2018-09-21 21:48:01');
 
 --
 -- Indexes for dumped tables
@@ -572,7 +574,7 @@ ALTER TABLE `studentprofile`
 -- AUTO_INCREMENT for table `viewing`
 --
 ALTER TABLE `viewing`
-  MODIFY `viewBookingID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `viewBookingID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
