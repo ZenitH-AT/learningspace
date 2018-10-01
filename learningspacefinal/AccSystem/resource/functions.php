@@ -218,10 +218,10 @@ function bookingPage() {
         $viewemail = escape_String($_POST['email']);
         $viewphone = escape_String($_POST['phone']);
         $viewdate = escape_String($_POST['date']);
+        $idRoom = escape_String($_GET['id']);
 
-
-        $query = "INSERT INTO viewing(viewerName,viewerEmail,viewerPhone,viewDate,viewStatus,scheduledDate)"
-                . "VALUES('{$viewname}','{$viewemail}','{$viewphone}','{$viewdate}','1',now())";
+        $query = "INSERT INTO viewing(viewerName,viewerEmail,viewerPhone,viewDate,viewStatus,roomName,scheduledDate)"
+                . "VALUES('{$viewname}','{$viewemail}','{$viewphone}','{$viewdate}','1','{$idRoom}',now())";
         $insert = query($query);
         confirm($query);
 
@@ -318,34 +318,25 @@ function bookingPage() {
 }
 
 function lognew() {
-
     //If Login Button is Pressed
     if (isset($_POST['doLogin'])) {
         $user = filter_var($_POST['signin-email'], FILTER_SANITIZE_EMAIL);
         $pass = escape_String($_POST['signin-password']);
-
         if (!empty($user) && !empty($pass)) {
-
             $encrypPass = md5($pass);
             $countAdmin = 0;
             $query = "SELECT * FROM student "
                     . "WHERE studEmail='{$user}' AND studPassword='{$encrypPass}'";
-
             $result = query($query);
             confirm($result);
             $count = countItem($result);
-
-
             if ($count == 0) {
                 $query = "SELECT * FROM admin "
                         . "WHERE adminEmail='{$user}' AND adminPassword='{$encrypPass}'";
-
                 $resultad = query($query);
                 confirm($resultad);
                 $countAdmin = countItem($resultad);
             }
-
-
             if ($count > 0) {
                 while ($row = fetch_array($result)) {
                     $id = $row['studID'];
@@ -355,17 +346,14 @@ function lognew() {
                     $UserActive = $row['isActive'];
                     $userPass = $row['studPassword'];
                 }
-
                 if ($UserActive == 1) {
                     $query = "SELECT * FROM booking WHERE studID='{$id}' AND bookingStatus='1'";
-
                     $result = query($query);
                     confirm($result);
                     $count = countItem($result);
                     if ($count > 0) {
                         $_SESSION["userRoomBooked"] = $id;
                     }
-
                     if (($encrypPass == $userPass) && ($UserEmail == $user)) {
                         $_SESSION["iduser"] = $id;
                         $_SESSION["firstname"] = $UserFirstName;
@@ -373,7 +361,6 @@ function lognew() {
                         $_SESSION["email"] = $UserEmail;
                         $_SESSION["isactive"] = $UserActive;
                         $_SESSION["password"] = $userPass;
-
                         redirect("HomePage.php");
                     }
                 } else {
@@ -401,7 +388,6 @@ function lognew() {
                         $_SESSION["adminIsActive"] = $adminActive;
                         $_SESSION["adminPass"] = $adminPassword;
                         
-                        //redirect("HomePage.php");
                         redirect("admin/dashboard.php");
                     }
                 } else {
