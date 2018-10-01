@@ -1123,7 +1123,7 @@ function payment() {
 }
 
 function paymentMonths() {
-    $arrayMonths = array("January", "February", "March", "April", "May", "June", "July", "August", "September", "Octuber", "November", "December");
+    $arrayMonths = array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
     $countMonth = 0;
     if (isset($_SESSION["numMonth"])) {
         $countMonth = $_SESSION["numMonth"];
