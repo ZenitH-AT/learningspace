@@ -1106,6 +1106,7 @@ function payment() {
                                 if(isset($_GET['refund' . $row['payID']])){
                                     query("INSERT INTO refund (payID, studID, reason, date) VALUES('{$row['payID']}', '{$_SESSION["iduser"]}', '{$_GET['reason' . $row['payID']]}', now())");
                                     ?><script>alert("Your request has been sent.");</script><?php
+                                    $_SESSION["monthsNum"]--;
                                 } ?> 
                             </div>
                             <div class="modal-footer">
