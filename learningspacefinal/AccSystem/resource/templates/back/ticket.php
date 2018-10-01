@@ -50,7 +50,7 @@
 
                                 //Reply to ticket button code
                                 if(isset($_POST['messageSend' . $row['ticketID']])){
-                                    query("INSERT INTO helpticketmessage (ticketID, adminID, messageText, messageTime) VALUES('{$row['ticketID']}', '{$_SESSION["idadmin"]}', '{$_POST['messageText' . $row['ticketID']]}', now())");
+                                    query("INSERT INTO helpticketmessage (ticketID, adminID, messageText, messageTime) VALUES('{$row['ticketID']}', '{$_SESSION["idadmin"]}', '" . $_POST['messageText' . $row['ticketID']] . "', now())");
                                     ?><script>alert("Your reply has been sent.");</script><?php
 
                                     //Sending the user a notification
