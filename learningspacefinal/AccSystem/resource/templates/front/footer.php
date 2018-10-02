@@ -3,7 +3,7 @@
 <!-- note: 'allow_url_include = 1' must be added to php.ini for this to work-->
 <?php
     if (isset($_SESSION["iduser"])) {
-        include 'http://localhost:8088/client.php';
+        @include 'http://localhost:8088/client.php';
         ?>
             <script>socket.connect('http://localhost:8088');</script>
         <?php
