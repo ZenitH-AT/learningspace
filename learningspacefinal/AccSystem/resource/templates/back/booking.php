@@ -27,14 +27,14 @@
     <table class="table table-striped table-sm">
         <thead>
             <tr>  
-                <th>ID</th>
-                <th>Student_ID</th>
-                <th>Room_ID</th>
-                <th>Started_Date</th>
-                <th>Final_Date</th>
-                <th>Staying_Period</th>
-                <th>booking_Date</th>
-                <th>booking_Status</th>
+                <th>Booking ID</th>
+                <th>Room ID</th>
+                <th>Student ID</th>
+                <th>Start date</th>
+                <th>End date</th>
+                <th>Staying period<br />(days)</th>
+                <th>Date scheduled</th>
+                <th>Booking status</th>
 
                 <th>Pending</th>
                 <th>Edit</th>
