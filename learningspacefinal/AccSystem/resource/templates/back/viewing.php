@@ -27,13 +27,13 @@
         <thead>
             <tr>  
                 <th>View ID</th>
+                <th>Room ID</th>
                 <th>Viewer name</th>
                 <th>Viewer email</th>
                 <th>Viewer phone</th>
                 <th>View date</th>
-                <th>View status</th>
-                <th>Room ID</th>
                 <th>Date Scheduled</th>
+                <th>View status</th>
 
                 <th>Pending</th>
                 <th>Edit</th>
