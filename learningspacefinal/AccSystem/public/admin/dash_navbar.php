@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#"><img style="max-width:100%; margin-left: 3%; height: 30px;" src="../image/web/logo.png"> LearningSpace</a>
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#"><img style="min-width:30px; min-height:30px; max-width:3%; max-height:3%; margin-right:1.5%" src="../image/web/logo.png">LearningSpace</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
