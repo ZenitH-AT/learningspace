@@ -214,9 +214,20 @@ function bookingPage() {
     }
 
     if (isset($_POST['bookview'])) {
-        $viewname = escape_String($_POST['name']);
-        $viewemail = escape_String($_POST['email']);
-        $viewphone = escape_String($_POST['phone']);
+        $viewname;
+        $viewemail;
+        $viewphone;
+
+        if (!isset($_SESSION["iduser"])) { 
+            $viewname = escape_String($_POST['name']);
+            $viewemail = escape_String($_POST['email']);
+            $viewphone = escape_String($_POST['phone']);
+        } else {
+            $viewname = $_SESSION["firstname"] . $_SESSION["lastname"];
+            $viewemail = $_SESSION["email"];
+            $viewphone = $_SESSION["phone"];
+        }
+        
         $viewdate = escape_String($_POST['date']);
         $idRoom = escape_String($_GET['id']);
 
