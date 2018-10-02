@@ -107,7 +107,7 @@ function get_Rooms_Gallery() {
                 <div class="caption">
                     <h3>{$row['roomName']}</h3>
                     <p>{$row['roomShortDescription']}
-                    <a class="text-success"  href="viewRoom.php?id={$row['room_id']}">More&raquo;</a></p>
+                    <br/><br/><a class="text-success" style="float:right; font-size:150%" href="viewRoom.php?id={$row['room_id']}">More&raquo;</a></p>
                 </div>
             </div>
         </div>
