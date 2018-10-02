@@ -7,30 +7,32 @@
             <div class="well well-sm">
                 <form class="form-horizontal" method="post">
                     <fieldset>
-                        <legend class="header col-md-10">Leave a message</legend>
-                        <?php send_message()?>
-                        <div class="form-group">
-                            <div class="col-md-10 col-md-offset-1">
-                                <input name="contactFirstName" type="text" placeholder="First Name" class="form-control" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-10 col-md-offset-1">
-                                <input name="contactLastName" type="text" placeholder="Last Name" class="form-control" required>
-                            </div>
-                        </div>
+                        <legend class="header col-md-10">Leave a message</legend><?php
 
-                        <div class="form-group">
-                            <div class="col-md-10 col-md-offset-1">
-                                <input name="contactEmail" type="email" placeholder="Email Address" class="form-control" required>
+                        if (!isset($_SESSION["iduser"])) { ?>
+                            <div class="form-group">
+                                <div class="col-md-10 col-md-offset-1">
+                                    <input name="contactFirstName" type="text" placeholder="First Name" class="form-control" required>
+                                </div>
                             </div>
-                        </div>
+                            <div class="form-group">
+                                <div class="col-md-10 col-md-offset-1">
+                                    <input name="contactLastName" type="text" placeholder="Last Name" class="form-control" required>
+                                </div>
+                            </div>
 
-                        <div class="form-group">
-                            <div class="col-md-10 col-md-offset-1">
-                                <input name="contactPhone" type="text" placeholder="Phone" class="form-control" required>
+                            <div class="form-group">
+                                <div class="col-md-10 col-md-offset-1">
+                                    <input name="contactEmail" type="email" placeholder="Email Address" class="form-control" required>
+                                </div>
                             </div>
-                        </div>
+
+                            <div class="form-group">
+                                <div class="col-md-10 col-md-offset-1">
+                                    <input name="contactPhone" type="text" placeholder="Phone" class="form-control" required>
+                                </div>
+                            </div><?php 
+                        } ?>
 
                         <div class="form-group">
                             <div class="col-md-10 col-md-offset-1">
@@ -44,10 +46,23 @@
                                 
                                 //Send message button handling
                                 if (isset($_POST['sendMessage'])) {
-                                    $firstname = escape_String($_POST['contactFirstName']);
-                                    $lastname = escape_String($_POST['contactLastName']);
-                                    $email = escape_String($_POST['contactEmail']);
-                                    $phone = escape_String($_POST['contactPhone']);
+                                    $firstname;
+                                    $lastname;
+                                    $email;
+                                    $phone;
+
+                                    if (!isset($_SESSION["iduser"])) {
+                                        $firstname = escape_String($_POST['contactFirstName']);
+                                        $lastname = escape_String($_POST['contactLastName']);
+                                        $email = escape_String($_POST['contactEmail']);
+                                        $phone = escape_String($_POST['contactPhone']);
+                                    } else {
+                                        $firstname = $_SESSION["firstname"];
+                                        $lastname = $_SESSION["lastname"];
+                                        $email = $_SESSION["email"];
+                                        $phone = $_SESSION["phone"];
+                                    }
+
                                     $message = escape_String($_POST['contactMessage']);
 
                                     send_contact_message($firstname, $lastname, $email, $phone, $message);
