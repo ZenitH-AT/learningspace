@@ -223,7 +223,7 @@ function bookingPage() {
             $viewemail = escape_String($_POST['email']);
             $viewphone = escape_String($_POST['phone']);
         } else {
-            $viewname = $_SESSION["firstname"] . $_SESSION["lastname"];
+            $viewname = $_SESSION["firstname"] . " " . $_SESSION["lastname"];
             $viewemail = $_SESSION["email"];
             $viewphone = $_SESSION["phone"];
         }
@@ -1284,25 +1284,123 @@ DELIMETER;
 function get_Viewings() {
     $query = query("SELECT * FROM viewing ORDER BY viewBookingID DESC ");
     confirm($query);
-    while ($row = fetch_array($query)) {
-        $booking = <<<DELIMETER
+    while ($row = fetch_array($query)) { ?>
         <tr>
-            <td>{$row['viewBookingID']}</td>
-            <td>{$row['viewerName']}</td>
-            <td>{$row['viewerEmail']}</td>
-            <td>{$row['viewerPhone']}</td>
-            <td>{$row['viewDate']}</td>
-            <td>{$row['viewStatus']}</td>
-            <td>{$row['roomName']}</td>
-            <td>{$row['scheduledDate']}</td>
-     
-            <td><a class="btn btn-success" href="#"><span class="fa fa-clock" style="color:white"></span></a></td>
-            <td><a class="btn btn-info" href="#"><span class="fa fa-user-edit" style="color:white"></span></a></td>
-            <td><a class="btn btn-danger" href="#"><span class="fa fa-user-minus" style="color:white"></span></a></td>
-            
-        </tr>
-DELIMETER;
-        echo $booking;
+            <td><?php echo $row['viewBookingID'] ?></td>
+            <td><?php echo $row['viewerName'] ?></td>
+            <td><?php echo $row['viewerEmail'] ?></td>
+            <td><?php echo $row['viewerPhone'] ?></td>
+            <td><?php echo $row['viewDate'] ?></td>
+            <td><?php echo $row['viewStatus'] ?></td>
+            <td><?php echo $row['roomName'] ?></td>
+            <td><?php echo $row['scheduledDate'] ?></td><?php
+
+            //Determining pending colour
+            $pendingColour;
+
+            if(new DateTime('today') < new DateTime($row['viewDate'])) {
+                $pendingColour = "btn btn-success";
+            } else {
+                $pendingColour = "btn btn-secondary";
+            } ?>
+    
+            <td><a class="<?php echo $pendingColour ?>" href="#"><span class="fa fa-clock" style="color:white"></span></a></td>
+            <td><button type="button" class="btn btn-info formbutton" data-toggle="modal" data-target="#viewingPopup<?php echo $row['viewBookingID']; ?>"><span class="fa fa-edit" style="color:white"></button></form></td>
+            <td><form method="post"><button class="btn btn-danger formbutton" name="removeViewing<?php echo $row['viewBookingID'] ?>" onclick="return confirm('Are you sure you want to remove viewing ID: <?php echo $row['viewBookingID'] ?>?')"><span class="fa fa-times" style="color:white"></button></form></td>
+        </tr><?php
+
+        //Remove button handling
+        if(isset($_POST['removeViewing' . $row['viewBookingID']])) {
+            query("DELETE FROM viewing WHERE viewBookingID = " . $row['viewBookingID']);
+            ?><script>alert("Viewing deleted.");</script><?php
+
+            header("Refresh:0");
+            exit();
+        } ?>
+
+        <!-- Edit viewing modal -->
+        <div class="modal fade" id="viewingPopup<?php echo $row['viewBookingID']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+                <div class="modal-content">  
+                    <div class="modal-header">
+                        <h5>Edit viewing ID: <?php echo $row['viewBookingID']?></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                    </div> 
+                    <div class="modal-body">
+                        <!-- Edit viewing form -->
+                        <form action="" method="post">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <form method="post">
+                                            <div class="form-group row">
+                                                <div class="col-sm-6">
+                                                    Viewer name
+                                                    <input type="text" class="form-control" value="<?php echo $row['viewerName'] ?>" id="name<?php echo $row['viewBookingID']; ?>" name="name<?php echo $row['viewBookingID']; ?>" required>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    Viewer email
+                                                    <input type="text" class="form-control" value="<?php echo $row['viewerEmail'] ?>" id="email<?php echo $row['viewBookingID']; ?>" name="email<?php echo $row['viewBookingID']; ?>" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-sm-6">
+                                                    Viewer phone
+                                                    <input type="text" class="form-control" value="<?php echo $row['viewerPhone'] ?>" id="phone<?php echo $row['viewBookingID']; ?>" name="phone<?php echo $row['viewBookingID']; ?>" required>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    View date
+                                                    <input type="text" class="form-control" value="<?php echo $row['viewDate'] ?>" id="viewDate<?php echo $row['viewBookingID']; ?>" name="viewDate<?php echo $row['viewBookingID']; ?>" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-sm-6">
+                                                    Viewer status
+                                                    <input type="text" class="form-control" value="<?php echo $row['viewStatus'] ?>" id="status<?php echo $row['viewBookingID']; ?>" name="status<?php echo $row['viewBookingID']; ?>" required>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    Room ID
+                                                    <input type="text" class="form-control" value="<?php echo $row['roomName'] ?>" id="room<?php echo $row['viewBookingID']; ?>" name="room<?php echo $row['viewBookingID']; ?>" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-sm-6">
+                                                    Date scheduled
+                                                    <input type="text" class="form-control" value="<?php echo $row['scheduledDate'] ?>" id="scheduledDate<?php echo $row['viewBookingID']; ?>" name="scheduledDate<?php echo $row['viewBookingID']; ?>" required>
+                                                </div>
+                                            </div>
+
+                                            <button type="submit" class="btn btn-outline-info formbutton" style="float:right" name="editViewing<?php echo $row['viewBookingID']; ?>">Edit viewing</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div><?php
+
+                            //Edit student button handling
+                            if(isset($_POST['editViewing' . $row['viewBookingID']])) {
+                                query("UPDATE viewing SET 
+                                       viewerName = '{$_POST['name' . $row['viewBookingID']]}',
+                                       viewerEmail = '{$_POST['email' . $row['viewBookingID']]}', 
+                                       viewerPhone = '{$_POST['phone' . $row['viewBookingID']]}', 
+                                       viewDate = '{$_POST['viewDate' . $row['viewBookingID']]}', 
+                                       viewStatus = '{$_POST['status' . $row['viewBookingID']]}', 
+                                       roomName = '{$_POST['room' . $row['viewBookingID']]}', 
+                                       scheduledDate = '{$_POST['scheduledDate' . $row['viewBookingID']]}'
+                                       WHERE viewBookingID = " . $row['viewBookingID']);
+                                
+                                ?><script>alert("Viewing edited.");</script><?php
+
+                                header("Refresh:0");
+                                exit();
+                            } ?>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div><?php
     }
 }
 
