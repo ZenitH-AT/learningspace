@@ -26,14 +26,14 @@
     <table class="table table-striped table-sm">
         <thead>
             <tr>  
-                <th>ID</th>
+                <th>View ID</th>
                 <th>Viewer name</th>
                 <th>Viewer email</th>
                 <th>Viewer phone</th>
                 <th>View date</th>
                 <th>View status</th>
-                <th>Room</th>
-                <th>Date</th>
+                <th>Room ID</th>
+                <th>Date Scheduled</th>
 
                 <th>Pending</th>
                 <th>Edit</th>
