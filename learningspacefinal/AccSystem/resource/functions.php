@@ -1258,25 +1258,122 @@ function makePayment() {
 function get_Bookings() {
     $query = query("SELECT * FROM booking ORDER BY bookID DESC ");
     confirm($query);
-    while ($row = fetch_array($query)) {
-        $booking = <<<DELIMETER
+    while ($row = fetch_array($query)) { ?>
         <tr>
-            <td>{$row['bookID']}</td>
-            <td>{$row['studID']}</td>
-            <td>{$row['roomID']}</td>
-            <td>{$row['bookStatDate']}</td>
-            <td>{$row['bookEndDate']}</td>
-            <td>{$row['stayingPeriod']}</td>
-            <td>{$row['bookingDate']}</td>
-            <td>{$row['bookingStatus']}</td>
+            <td><?php echo $row['bookID']; ?></td>
+            <td><?php echo $row['roomID']; ?></td>
+            <td><?php echo $row['studID']; ?></td>
+            <td><?php echo $row['bookStatDate']; ?></td>
+            <td><?php echo $row['bookEndDate']; ?></td>
+            <td><?php echo $row['stayingPeriod']; ?></td>
+            <td><?php echo $row['bookingDate']; ?></td>
+            <td><?php echo ($row['bookingStatus'] == 1 ? '<a class="text-success">active</a>' : '<a class="text-secondary">ended</a>'); ?></td><?php
      
-            <td><a class="btn btn-success" href="#"><span class="fa fa-clock" style="color:white"></span></a></td>
-            <td><a class="btn btn-info" href="#"><span class="fa fa-user-edit" style="color:white"></span></a></td>
-            <td><a class="btn btn-danger" href="#"><span class="fa fa-user-minus" style="color:white"></span></a></td>
-            
-        </tr>
-DELIMETER;
-        echo $booking;
+            //Determining pending colour
+            $bookPendingColour;
+
+            if(new DateTime('today') < new DateTime($row['bookStatDate'])) {
+                $bookPendingColour = "btn btn-success";
+            } else {
+                $bookPendingColour = "btn btn-secondary";
+            } ?>
+    
+            <td><a class="<?php echo $bookPendingColour ?>" href="#"><span class="fa fa-clock" style="color:white"></span></a></td>
+            <td><button type="button" class="btn btn-info formbutton" data-toggle="modal" data-target="#bookingPopup<?php echo $row['bookID']; ?>"><span class="fa fa-edit" style="color:white"></button></form></td>
+            <td><form method="post"><button class="btn btn-danger formbutton" name="removeBooking<?php echo $row['bookID'] ?>" onclick="return confirm('Are you sure you want to remove booking ID: <?php echo $row['bookID'] ?>?')"><span class="fa fa-times" style="color:white"></button></form></td>
+        </tr><?php
+
+        //Remove button handling
+        if(isset($_POST['removeBooking' . $row['bookID']])) {
+            query("DELETE FROM booking WHERE bookID = " . $row['bookID']);
+            ?><script>alert("Booking deleted.");</script><?php
+
+            header("Refresh:0");
+            exit();
+        } ?>
+
+        <!-- Edit booking modal -->
+        <div class="modal fade" id="bookingPopup<?php echo $row['bookID']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+                <div class="modal-content">  
+                    <div class="modal-header">
+                        <h5>Edit booking ID: <?php echo $row['bookID']?></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                    </div> 
+                    <div class="modal-body">
+                        <!-- Edit booking form -->
+                        <form action="" method="post">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <form method="post">
+                                            <div class="form-group row">
+                                                <div class="col-sm-6">
+                                                    Room ID
+                                                    <input type="text" class="form-control" value="<?php echo $row['roomID'] ?>" id="room<?php echo $row['bookID']; ?>" name="room<?php echo $row['bookID']; ?>" required>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    Student ID
+                                                    <input type="text" class="form-control" value="<?php echo $row['studID'] ?>" id="student<?php echo $row['bookID']; ?>" name="student<?php echo $row['bookID']; ?>" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-sm-6">
+                                                    Start date
+                                                    <input type="text" class="form-control" value="<?php echo $row['bookStatDate'] ?>" id="startDate<?php echo $row['bookID']; ?>" name="startDate<?php echo $row['bookID']; ?>" required>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    End date
+                                                    <input type="text" class="form-control" value="<?php echo $row['bookEndDate'] ?>" id="endDate<?php echo $row['bookID']; ?>" name="endDate<?php echo $row['bookID']; ?>" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-sm-6">
+                                                    Date scheduled
+                                                    <input type="text" class="form-control" value="<?php echo $row['bookingDate'] ?>" id="bookDate<?php echo $row['bookID']; ?>" name="bookDate<?php echo $row['bookID']; ?>" required>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    Booking status
+                                                    <input type="text" class="form-control" value="<?php echo $row['bookingStatus'] ?>" id="status<?php echo $row['bookID']; ?>" name="status<?php echo $row['bookID']; ?>" required>
+                                                </div>
+                                            </div>
+
+                                            <button type="submit" class="btn btn-outline-info formbutton" style="float:right" name="editBooking<?php echo $row['bookID']; ?>">Edit booking</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div><?php
+
+                            //Edit booking button handling
+                            if(isset($_POST['editBooking' . $row['bookID']])) {
+                                //Determining days between start and end date
+                                $startDate = new DateTime($_POST['startDate' . $row['bookID']]);
+                                $endDate = new DateTime($_POST['endDate' . $row['bookID']]);
+                                $period = $endDate->diff($startDate)->format("%a");
+                            
+                                query("UPDATE booking SET 
+                                    studID = '{$_POST['student' . $row['bookID']]}',
+                                    roomID = '{$_POST['room' . $row['bookID']]}', 
+                                    bookStatDate = '{$_POST['startDate' . $row['bookID']]}', 
+                                    bookEndDate = '{$_POST['endDate' . $row['bookID']]}', 
+                                    stayingPeriod = '{$period}', 
+                                    bookingDate = '{$_POST['bookDate' . $row['bookID']]}', 
+                                    bookingStatus = '{$_POST['status' . $row['bookID']]}'
+                                    WHERE bookID = " . $row['bookID']);
+                                
+                                ?><script>alert("Booking edited.");</script><?php
+
+                                header("Refresh:0");
+                                exit();
+                            } ?>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div><?php
     }
 }
 
@@ -1296,15 +1393,15 @@ function get_Viewings() {
             <td><?php echo $row['viewStatus'] ?></td><?php
 
             //Determining pending colour
-            $pendingColour;
+            $viewPendingColour;
 
             if(new DateTime('today') < new DateTime($row['viewDate'])) {
-                $pendingColour = "btn btn-success";
+                $viewPendingColour = "btn btn-success";
             } else {
-                $pendingColour = "btn btn-secondary";
+                $viewPendingColour = "btn btn-secondary";
             } ?>
     
-            <td><a class="<?php echo $pendingColour ?>" href="#"><span class="fa fa-clock" style="color:white"></span></a></td>
+            <td><a class="<?php echo $viewPendingColour ?>" href="#"><span class="fa fa-clock" style="color:white"></span></a></td>
             <td><button type="button" class="btn btn-info formbutton" data-toggle="modal" data-target="#viewingPopup<?php echo $row['viewBookingID']; ?>"><span class="fa fa-edit" style="color:white"></button></form></td>
             <td><form method="post"><button class="btn btn-danger formbutton" name="removeViewing<?php echo $row['viewBookingID'] ?>" onclick="return confirm('Are you sure you want to remove viewing ID: <?php echo $row['viewBookingID'] ?>?')"><span class="fa fa-times" style="color:white"></button></form></td>
         </tr><?php
@@ -1376,7 +1473,7 @@ function get_Viewings() {
                                 </div>
                             </div><?php
 
-                            //Edit student button handling
+                            //Edit view button handling
                             if(isset($_POST['editViewing' . $row['viewBookingID']])) {
                                 query("UPDATE viewing SET 
                                        viewerName = '{$_POST['name' . $row['viewBookingID']]}',
