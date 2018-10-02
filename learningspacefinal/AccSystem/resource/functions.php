@@ -708,51 +708,6 @@ function userActivation() {
     }
 }
 
-//Send Message
-function send_message() {
-
-    if (isset($_POST['send_msg'])) {
-
-        $to = "projectcrudacc@gmail.com";
-        $fname = escape_String($_POST['fname']);
-        $lname = escape_String($_POST['lname']);
-        $from = $fname . " " . $lname;
-        $subject = "Complaints";
-        $email = escape_String($_POST['email']);
-        $phone = escape_String($_POST['phone']);
-        $msg = escape_String($_POST['message']);
-
-        $headers = "From: {$from} {$email}";
-
-        $result = mail($to, $subject, $msg, $headers);
-        //$to = 'moisesnt2@gmail.com';
-        //$fname = $_POST['fname'];
-        //$lname = $_POST['lname'];
-        //$email = $_POST['email'];
-        //$phone = $_POST['phone'];
-        //$subject = 'Contact Me';
-        //$msg = $_POST['message'] . "<br>" . "My Phone Number: ";
-        //$full = $fname . " " . $lname;
-//          $headers = "From: projectcrudacc@gmail.com". phpversion();
-//        ini_set("SMTP", "smtp.gmail.com");
-//        ini_set("smtp_port", "587");
-//        ini_set('sendmail_from', 'moisesnt2@gmail.com');
-//        ini_set('auth_username', 'projectcrudacc@gmail.com');
-//        ini_set('auth_password', 'Projectcrudacc2');
-//        $result = mail($to, $subject, $msg, $headers);
-//        echo $result;
-//        if (!$result) {
-//            echo '<script language="javascript">';
-//            echo 'alert("Message Was Not Successfully Sent")';
-//            echo '</script>';
-//        } else {
-//            echo '<script language="javascript">';
-//            echo 'alert("Message Was Successfully Sent")';
-//            echo '</script>';
-//        }
-    }
-}
-
 //Get data For user profile Page
 function profile() {
     $getDescription = $getPicture = $getRestriction = "";
