@@ -1407,6 +1407,7 @@ function send_contact_message($firstname, $lastname, $email, $phone, $message) {
     $mail->sendMail($adminEmail, $subject, $body);
 
     //Message sent back to sender
-    $mail->sendMail($email, "Your message has been sent", "We will get back to you soon.<br/><br/><strong>Your message:</strong></br>{$message}");
+    $mail->sendMail($email, 'Your message has been sent', 
+                    'An administrator will get back to you soon!<br/><br/><strong>Your message:</strong><br/>' . $message . '<br/><br/><text class="text-muted">Do not reply to this email.</text>');
 }
 
