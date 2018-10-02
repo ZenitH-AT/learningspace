@@ -48,13 +48,11 @@
                 </a>
                 <ul class="dropdown-menu dropBox" style="">
                     <li class="head text-dark myMenuUser">
-                        <!--<a href="userProfile.php?iduser=<?php echo $_SESSION['iduser']; ?>" class="text-dark">-->
                         <div class="row">
                             <div class="col-lg-8 col-sm-10 col-8">
-                                <a href="userProfile.php?iduser=<?php echo $_SESSION['iduser']; ?>" class="text-dark"><i class="fa fa-fw fa-user"></i> Profile</a>
+                                <a class="text-dark" href="userProfile.php?iduser=<?php echo $_SESSION['iduser']; ?>"><i class="fa fa-fw fa-user"></i> Profile</a>
                             </div>
                         </div>
-                        <!--</a>-->
                     </li>
                     <li class="head text-dark myMenuUser">
                         <div class="row">
@@ -86,7 +84,7 @@
         } else if (isset($_SESSION["admin"])) { ?>
             <ul class="navbar-nav">
                 <li>
-                    <a class="nav-link text-light" ><?php echo "Welcome Admin, " .ucfirst($_SESSION["adminFN"]); ?></a>
+                    <a class="nav-link text-light"><?php echo "Welcome, " . ucfirst($_SESSION["adminFN"]) . " (" . ($_SESSION['adminCategory'] == 1 ? "owner" : "regular admin") . ")"; ?></a>
                 </li>
             </ul>
 
