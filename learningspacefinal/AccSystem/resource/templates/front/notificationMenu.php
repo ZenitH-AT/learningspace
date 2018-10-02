@@ -21,7 +21,7 @@
                 </div>
             </div>
         </li>
-        <div style="height:300px; overflow-y:scroll; overflow-x:hidden;"><?php
+        <div style="max-height:300px; overflow-y:scroll; overflow-x:hidden;"><?php
             //Generating notification cards
             if($unreadcount > 0) {
                 while ($row = fetch_array($sqlunreaddropdown)) { ?>
