@@ -1283,7 +1283,7 @@ function get_Bookings() {
             <td><form method="post"><button class="btn btn-danger formbutton" name="removeBooking<?php echo $row['bookID'] ?>" onclick="return confirm('Are you sure you want to remove booking ID: <?php echo $row['bookID'] ?>?')"><span class="fa fa-times" style="color:white"></button></form></td>
         </tr><?php
 
-        //Remove button handling
+        //Remove booking button handling
         if(isset($_POST['removeBooking' . $row['bookID']])) {
             query("DELETE FROM booking WHERE bookID = " . $row['bookID']);
             ?><script>alert("Booking deleted.");</script><?php
@@ -1406,7 +1406,7 @@ function get_Viewings() {
             <td><form method="post"><button class="btn btn-danger formbutton" name="removeViewing<?php echo $row['viewBookingID'] ?>" onclick="return confirm('Are you sure you want to remove viewing ID: <?php echo $row['viewBookingID'] ?>?')"><span class="fa fa-times" style="color:white"></button></form></td>
         </tr><?php
 
-        //Remove button handling
+        //Remove viewing button handling
         if(isset($_POST['removeViewing' . $row['viewBookingID']])) {
             query("DELETE FROM viewing WHERE viewBookingID = " . $row['viewBookingID']);
             ?><script>alert("Viewing deleted.");</script><?php
@@ -1505,24 +1505,81 @@ function get_Viewings() {
 function get_Rooms() {
     $query = query("SELECT * FROM room ORDER BY room_id DESC ");
     confirm($query);
-    while ($row = fetch_array($query)) {
-        $booking = <<<DELIMETER
+    while ($row = fetch_array($query)) { ?>
         <tr>
-            <td>{$row['room_id']}</td>
-            <td><a class="btn btn-outline-success"  href="#"><img style="" class="" src="../IMAGE/gallery/{$row['roomImage']}"  width="125"></a></td>
-            <td>{$row['roomName']}</td>
-            <td>{$row['roomPrice']}</td>
-            <td>{$row['roomType']}</td>
-            <td>{$row['roomCapacity']}</td>
-            <td>{$row['roomReserved']}</td>
-            <td>{$row['roomShortDescription']}</td>
-            <td><a class="btn btn-outline-dark" href="#"><span class="fa fa-eye" style="color:black"></span></a></td>
-            <td><a class="btn btn-success" href="#"><span class="fa fa-clock" style="color:white"></span></a></td>
-            <td><a class="btn btn-info" href="#"><span class="fa fa-user-edit" style="color:white"></span></a></td>
-            <td><a class="btn btn-danger" href="#"><span class="fa fa-user-minus" style="color:white"></span></a></td>
-        </tr>
-DELIMETER;
-        echo $booking;
+            <td><?php echo $row['room_id'] ?></td>
+            <td><img width="125" src="../IMAGE/gallery/<?php echo $row['roomImage'] ?>"></td>
+            <td><?php echo $row['roomName'] ?></td>
+            <td><?php echo $row['roomPrice'] ?></td>
+            <td><?php echo $row['roomType'] ?></td>
+            <td><?php echo $row['roomCapacity'] ?></td>
+            <td><?php echo ($row['roomReserved'] == 1 ? '<a class="text-info">reserved</a>' : '<a class="text-secondary">not reserved</a>')?></td>
+            <td><?php echo $row['roomShortDescription'] ?></td>
+
+            <td><a class="btn btn-outline-dark" data-toggle="modal" data-target="#descriptionPopup<?php echo $row['room_id']; ?>"><span class="far fa-file-alt" style="color:black"></span></a></td>
+            <td><button type="button" class="btn btn-info formbutton" data-toggle="modal" data-target="#roomPopup<?php echo $row['room_id']; ?>"><span class="fa fa-edit" style="color:white"></button></form></td>
+            <td><form method="post"><button class="btn btn-danger formbutton" name="removeRoom<?php echo $row['room_id'] ?>" onclick="return confirm('Are you sure you want to remove room ID: <?php echo $row['room_id'] ?>?')"><span class="fa fa-times" style="color:white"></button></form></td>
+        </tr><?php
+
+        //Remove room button handling
+        if(isset($_POST['removeViewing' . $row['room_id']])) {
+            query("DELETE FROM room WHERE room_id = " . $row['room_id']);
+            ?><script>alert("Room deleted.");</script><?php
+
+            header("Refresh:0");
+            exit();
+        } ?>
+        
+        <!-- Room long description modal -->
+        <div class="modal fade" id="descriptionPopup<?php echo $row['room_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+                <div class="modal-content">  
+                    <div class="modal-header">
+                        <h5><?php echo $row['roomName']?> description</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                    </div> 
+                    <div class="modal-body">
+                        <form action="" method="post">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <form method="post">
+                                            <div class="form-group row">
+                                                <div class="col-sm-12">
+                                                    <textarea class="form-control" name="description<?php echo $row['room_id']; ?>" rows="7" required><?php echo $row['roomDescription']; ?></textarea>
+                                                </div>
+                                            </div>
+
+                                            <button type="submit" class="btn btn-outline-info formbutton" style="float:right" name="editDescription<?php echo $row['room_id']; ?>">Save</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div><?php
+
+                            //Edit view button handling
+                            if(isset($_POST['editDescription' . $row['room_id']])) {
+                                query("UPDATE room SET 
+                                      roomDescription = '{$_POST['description' . $row['room_id']]}'
+                                      WHERE room_id = " . $row['room_id']);
+                                
+                                ?><script>alert("Description edited.");</script><?php
+
+                                header("Refresh:0");
+                                exit();
+                            } ?>
+                        </form>  
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Edit room modal -->
+        
+
+        <?php
     }
 }
 
