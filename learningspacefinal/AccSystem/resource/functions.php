@@ -343,6 +343,7 @@ function lognew() {
                     $UserFirstName = $row['studFirstName'];
                     $UserLastName = $row['studLastName'];
                     $UserEmail = $row['studEmail'];
+                    $UserPhone = $row['studPhone'];
                     $UserActive = $row['isActive'];
                     $userPass = $row['studPassword'];
                 }
@@ -359,6 +360,7 @@ function lognew() {
                         $_SESSION["firstname"] = $UserFirstName;
                         $_SESSION["lastname"] = $UserLastName;
                         $_SESSION["email"] = $UserEmail;
+                        $_SESSION["phone"] = $UserPhone;
                         $_SESSION["isactive"] = $UserActive;
                         $_SESSION["password"] = $userPass;
                         redirect("HomePage.php");

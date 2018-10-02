@@ -20,6 +20,7 @@ if (isset($_SESSION)) {
     unset($_SESSION["firstname"]);
     unset($_SESSION["lastname"]);
     unset($_SESSION["email"]);
+    unset($_SESSION["phone"]);
     unset($_SESSION["isactive"]);
     unset($_SESSION["password"]);
     unset($_SESSION["userRoomBooked"]);
