@@ -73,7 +73,7 @@
                                 <form action="" method="post">
                                     <div class="container">
                                         <div class="row">
-                                            <div class="col-md-14">
+                                            <div class="col-md-12">
                                                 <form method="post">
                                                     <div class="form-group row">
                                                         <div class="col-sm-6">
