@@ -1287,13 +1287,13 @@ function get_Viewings() {
     while ($row = fetch_array($query)) { ?>
         <tr>
             <td><?php echo $row['viewBookingID'] ?></td>
+            <td><?php echo $row['roomName'] ?></td>
             <td><?php echo $row['viewerName'] ?></td>
             <td><?php echo $row['viewerEmail'] ?></td>
             <td><?php echo $row['viewerPhone'] ?></td>
             <td><?php echo $row['viewDate'] ?></td>
-            <td><?php echo $row['viewStatus'] ?></td>
-            <td><?php echo $row['roomName'] ?></td>
-            <td><?php echo $row['scheduledDate'] ?></td><?php
+            <td><?php echo $row['scheduledDate'] ?></td>
+            <td><?php echo $row['viewStatus'] ?></td><?php
 
             //Determining pending colour
             $pendingColour;
@@ -1335,38 +1335,38 @@ function get_Viewings() {
                                         <form method="post">
                                             <div class="form-group row">
                                                 <div class="col-sm-6">
-                                                    Viewer name
-                                                    <input type="text" class="form-control" value="<?php echo $row['viewerName'] ?>" id="name<?php echo $row['viewBookingID']; ?>" name="name<?php echo $row['viewBookingID']; ?>" required>
+                                                    Room ID
+                                                    <input type="text" class="form-control" value="<?php echo $row['roomName'] ?>" id="room<?php echo $row['viewBookingID']; ?>" name="room<?php echo $row['viewBookingID']; ?>" required>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    Viewer email
-                                                    <input type="text" class="form-control" value="<?php echo $row['viewerEmail'] ?>" id="email<?php echo $row['viewBookingID']; ?>" name="email<?php echo $row['viewBookingID']; ?>" required>
+                                                    Viewer name
+                                                    <input type="text" class="form-control" value="<?php echo $row['viewerName'] ?>" id="name<?php echo $row['viewBookingID']; ?>" name="name<?php echo $row['viewBookingID']; ?>" required>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-sm-6">
+                                                    Viewer email
+                                                    <input type="text" class="form-control" value="<?php echo $row['viewerEmail'] ?>" id="email<?php echo $row['viewBookingID']; ?>" name="email<?php echo $row['viewBookingID']; ?>" required>
+                                                </div>
+                                                <div class="col-sm-6">
                                                     Viewer phone
                                                     <input type="text" class="form-control" value="<?php echo $row['viewerPhone'] ?>" id="phone<?php echo $row['viewBookingID']; ?>" name="phone<?php echo $row['viewBookingID']; ?>" required>
                                                 </div>
+                                            </div>
+                                            <div class="form-group row">
                                                 <div class="col-sm-6">
                                                     View date
                                                     <input type="text" class="form-control" value="<?php echo $row['viewDate'] ?>" id="viewDate<?php echo $row['viewBookingID']; ?>" name="viewDate<?php echo $row['viewBookingID']; ?>" required>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    Date scheduled
+                                                    <input type="text" class="form-control" value="<?php echo $row['scheduledDate'] ?>" id="scheduledDate<?php echo $row['viewBookingID']; ?>" name="scheduledDate<?php echo $row['viewBookingID']; ?>" required>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-sm-6">
                                                     Viewer status
                                                     <input type="text" class="form-control" value="<?php echo $row['viewStatus'] ?>" id="status<?php echo $row['viewBookingID']; ?>" name="status<?php echo $row['viewBookingID']; ?>" required>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    Room ID
-                                                    <input type="text" class="form-control" value="<?php echo $row['roomName'] ?>" id="room<?php echo $row['viewBookingID']; ?>" name="room<?php echo $row['viewBookingID']; ?>" required>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col-sm-6">
-                                                    Date scheduled
-                                                    <input type="text" class="form-control" value="<?php echo $row['scheduledDate'] ?>" id="scheduledDate<?php echo $row['viewBookingID']; ?>" name="scheduledDate<?php echo $row['viewBookingID']; ?>" required>
                                                 </div>
                                             </div>
 
