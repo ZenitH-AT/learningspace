@@ -44,7 +44,7 @@
                         <div class="form-group">
                         <?php
                         if ($row['roomReserved'] == 0) { ?>
-                            <a class="btn btn-outline-success"  href="booking.php?id=<?php echo $row['room_id'] ?>">Book Now</a>
+                            <a class="btn btn-outline-success"  href="booking.php?id=<?php echo $row['room_id'] ?>">Select this room for booking</a>
                         <?php } ?>
 
                         </div>
