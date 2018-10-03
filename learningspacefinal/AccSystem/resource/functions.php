@@ -1585,7 +1585,7 @@ function get_Rooms() {
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
                     </div> 
                     <div class="modal-body">
-                        <form action="" method="post">
+                        <form action="" method="post" enctype="multipart/form-data">
                             <div class="container">
                                 <div class="row">
                                     <div class="col-md-12">
@@ -1642,17 +1642,17 @@ function get_Rooms() {
 
                             //Edit room button handling
                             if(isset($_POST['editRoom' . $row['room_id']])) {
-                                $roomPictureName = $row['roomImage'];
+                                $editRoomImageName = $row['roomImage'];
 
-                                //Not working
                                 if (!(empty($_FILES['roomImage' . $row['room_id']]['name']))) {
-                                    //Set the image name to be updated in the database and upload the file to the server
-                                    $roomPictureName = $_FILES['roomImage' . $row['room_id']]['tmp_name'];
-                                    move_uploaded_file($roomPictureName, "../IMAGE/gallery/$roomPictureName");
+                                    //Set image name and upload file
+                                    $editRoomImageName = $_FILES['roomImage' . $row['room_id']]['name'];
+                                    $editRoomTempName = $_FILES['roomImage' . $row['room_id']]['tmp_name'];
+                                    move_uploaded_file($editRoomTempName, "../IMAGE/gallery/$editRoomImageName");
                                 }
 
                                 query("UPDATE room SET 
-                                      roomImage = '{$roomPictureName}',
+                                      roomImage = '{$editRoomImageName}',
                                       roomName = '{$_POST['roomName' . $row['room_id']]}',
                                       roomPrice = '{$_POST['roomPrice' . $row['room_id']]}',
                                       roomType = '{$_POST['roomType' . $row['room_id']]}',
