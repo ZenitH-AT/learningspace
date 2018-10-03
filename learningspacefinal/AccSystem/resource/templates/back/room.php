@@ -6,7 +6,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <form method="post">
+            <form method="post" enctype="multipart/form-data">
                 <div class="form-group row">
                     <div class="col-sm-3">
                         <input type="text" class="form-control" id="roomName" name="roomName" placeholder="Name" required>
@@ -35,12 +35,14 @@
 
                         //Send button handling
                         if (isset($_POST['addRoom'])) {
-                            //upload image and set image name here
-                            $imageName = "image.jpg";
+                            //Set image name and upload file
+                            $roomImageName = $_FILES['newRoomImage']['name'];
+                            $roomTempName = $_FILES['newRoomImage']['tmp_name'];
+                            move_uploaded_file($roomTempName, "../IMAGE/gallery/$roomImageName");
 
                             query("INSERT INTO room (roomName, roomPrice, roomType, roomCapacity, roomReserved, roomImage, roomDescription, roomShortDescription)
                                    VALUES('{$_POST['roomName']}', '{$_POST['roomPrice']}', '{$_POST['roomType']}', '{$_POST['roomCapacity']}', 
-                                          0, '{$imageName}', '{$_POST['longDescription']}', '{$_POST['shortDescription']}')");
+                                          0, '{$roomImageName}', '{$_POST['longDescription']}', '{$_POST['shortDescription']}')");
 
                             ?><script>alert("Room added.");</script><?php
 
