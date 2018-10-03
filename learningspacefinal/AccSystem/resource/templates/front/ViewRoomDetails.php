@@ -1,18 +1,12 @@
-
-
 <!-- Page Content -->
-<div class="container">
-
-    <?php
+<div class="container"><?php
     $query = query("SELECT * FROM room WHERE room_id= " . escape_String($_GET['id']) . " ");
     confirm($query);
 
-    while ($row = fetch_array($query)):
-        ?>
-
+    while ($row = fetch_array($query)) { ?>
         <!-- Portfolio Item Heading -->
         <h1 class="my-4"><?php echo $row['roomName']; ?>
-            <small>Secondary Text</small>
+            <br/><h6><?php echo $row['roomShortDescription']; ?></h6>
         </h1>
 
         <!-- Portfolio Item Row -->
@@ -36,22 +30,20 @@
                             echo "<button type='button' class='btn btn-success btn-sm fa' disabled>Available</button>";
                         } else {
                             echo "<button type='button' class='btn btn-danger btn-sm fa' disabled>Unavailable</button>";
-                        }
-                        ?>
+                        } ?>
                     </li>
                 </ul>
                 <div class="my-3">
-                        <div class="form-group">
-                        <?php
-                        if ($row['roomReserved'] == 0) { ?>
-                            <a class="btn btn-outline-success"  href="booking.php?id=<?php echo $row['room_id'] ?>">Select this room for booking</a>
-                        <?php } ?>
+                        <div class="form-group"><?php
 
+                            if ($row['roomReserved'] == 0) { ?>
+                                <a class="btn btn-outline-info"  href="booking.php?id=<?php echo $row['room_id'] ?>">Select this room for booking</a><?php 
+                            } ?>
                         </div>
                 </div>
             </div>
-        </div>
-    <?php endwhile; ?>
+        </div><?php 
+    } ?>
 
     <!-- /.row -->
     <hr class="featurette-divider">
