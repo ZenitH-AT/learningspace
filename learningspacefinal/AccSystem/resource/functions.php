@@ -1054,8 +1054,14 @@ function payment() {
                 <td><?php echo $row['roomID'] ?></td>
                 <td><?php echo 'R' . $row['payAmount'] ?></td>
                 <td><?php echo $row['paymentDate'] ?></td>
-                <td><a class="btn btn-success" href="#"><span class="fa fa-check-circle" style="color:white"></span></a></td>
-                <td><a class="btn btn-secondary" href="#" data-toggle="modal" data-target="#refundPopup<?php echo $row['payID']; ?>"><span class="fa fa-undo-alt" style="color:white"></span></a></td>
+                <td><a class="btn btn-success" href="#"><span class="fa fa-check-circle" style="color:white"></span></a></td><?php
+                
+                //Only show refund request button if the user has not already submitted a refund request for this payment
+                $requestPresent = countItem(query("SELECT * FROM refund WHERE payID = " . $row['payID']));
+                
+                if($requestPresent == 0) { ?>
+                    <td><a class="btn btn-secondary" href="#" data-toggle="modal" data-target="#refundPopup<?php echo $row['payID']; ?>"><span class="fa fa-undo-alt" style="color:white"></span></a></td><?php
+                } ?>
 
                 <div class="modal fade" id="refundPopup<?php echo $row['payID']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered modal-md" role="document">
@@ -1074,7 +1080,9 @@ function payment() {
                                 if(isset($_GET['refund' . $row['payID']])){
                                     query("INSERT INTO refund (payID, studID, reason, date) VALUES('{$row['payID']}', '{$_SESSION["iduser"]}', '{$_GET['reason' . $row['payID']]}', now())");
                                     ?><script>alert("Your request has been sent.");</script><?php
-                                    $_SESSION["monthsNum"]--;
+                                    
+                                    header("Refresh:0");
+                                    exit();
                                 } ?> 
                             </div>
                             <div class="modal-footer">
