@@ -208,10 +208,24 @@
                                             </div>
                                         </div><?php     
                                     }
-                                } else { ?>
-                                    <div class="col-md-12">
-                                        <a href="gallery.php" class="text-info">Select a room for booking from the gallery first</a>
-                                    </div><?php 
+                                } else { 
+                                    if (isset($_SESSION["checkPayment"])) { ?>
+                                        <div class='alert alert-success alert-dismissible fade show text-center' role='alert'>
+                                            <strong>Success!</strong> You Have Booked a Room.
+                                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                            </button>
+                                        </div><?php
+                                    } elseif (isset($_SESSION["userRoomBooked"]) == $_SESSION["iduser"]) { ?>
+                                        <div class='alert alert-success alert-dismissible fade show text-center' role='alert'>
+                                            <strong>Info!</strong> You Have Already Booked A Room.
+                                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                            </button>
+                                        </div><?php 
+                                    } else { ?>                                
+                                        <div class="col-md-12">
+                                            <a href="gallery.php" class="text-info">Select a room for booking from the gallery first</a>
+                                        </div><?php 
+                                    }
                                 } ?>
                             </fieldset>
                         </form>
