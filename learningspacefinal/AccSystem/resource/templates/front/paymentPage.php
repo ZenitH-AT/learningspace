@@ -12,7 +12,13 @@ if (isset($_SESSION["idRoom"])) {
 $confirm1 = "<div class='alert alert-success alert-dismissible fade show text-center' role='alert'>
             <strong>Completed!</strong> You Have Successfully Left The Room.
             <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-              <span aria-hidden='true'>&times;</span>
+                <span aria-hidden='true'>&times;</span>
+            </button></div>";
+
+$confirm2 = "<div class='alert alert-success alert-dismissible fade show text-center' role='alert'>
+            <strong>Completed!</strong> You Have Successfully Made A Payment.
+            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                <span aria-hidden='true'>&times;</span>
             </button></div>";
 ?>
 <div class="container">
@@ -23,7 +29,7 @@ $confirm1 = "<div class='alert alert-success alert-dismissible fade show text-ce
         <?php
         if (isset($_GET['paid'])) {
             ?>
-            <div class="" style="width: 100%; padding-left: 16px; padding-right: 16px;"><?php echo $confirm1; ?></div>
+            <div class="" style="width: 100%; padding-left: 16px; padding-right: 16px;"><?php echo $confirm2; ?></div>
 <?php } //} ?>
         <div class="col-md-6">
             <div class="well well-sm">
