@@ -1052,7 +1052,7 @@ function payment() {
                 <td><?php echo $row['payMonth'] ?></td>
                 <td><?php echo $row['cardNumber'] ?></td>
                 <td><?php echo $row['roomID'] ?></td>
-                <td><?php echo 'R' . $row['payAmount'] ?></td>
+                <td><?php echo 'R' . round($row['payAmount'], 2) ?></td>
                 <td><?php echo $row['paymentDate'] ?></td>
                 <td><a class="btn btn-success" href="#"><span class="fa fa-check-circle" style="color:white"></span></a></td><?php
                 
@@ -1102,13 +1102,18 @@ function payment() {
 function paymentMonths() {
     $arrayMonths = array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
     $countMonth = 0;
+
     if (isset($_SESSION["numMonth"])) {
         $countMonth = $_SESSION["numMonth"];
     }
-    $NUM2 = 0;
-    //$monthArrayNum = array();
-    while ($NUM2 < $countMonth) {
-        $monthNumberFr = strtotime("+" . $NUM2 . " months", strtotime($_SESSION["bookStatDate"]));
+
+    $count = 0;
+    
+    $startDate = mysqli_fetch_assoc(query("SELECT bookStatDate FROM booking WHERE studID='{$_SESSION["iduser"]}' AND bookingStatus = 1"));
+    $startDate = $startDate['bookStatDate'];
+
+    while ($count < $countMonth) {
+        $monthNumberFr = strtotime("+" . $count . " months", strtotime($startDate));
         $ok = date('n', $monthNumberFr);
 
         switch ($ok) {
@@ -1124,15 +1129,20 @@ function paymentMonths() {
             case 10:
             case 11:
             case 12:
-                if ($NUM2 < sizeof($_SESSION["monthsNum"])) {
-                    echo "<div style='padding-right: 5px; padding-bottom: 3px;' data-toggle='tooltip' data-placement='top' title='It was already paid'><strong class='btn btn-success' >{$arrayMonths[$ok - 1]} </strong></div>";
+                if(isset($_SESSION["monthsNum"])) { //required incase the user has made no payments (in cases where they refund their first payment before making a second one)
+                    if ($count < sizeof($_SESSION["monthsNum"])) {
+                        echo "<div style='padding-right: 5px; padding-bottom: 3px;' data-toggle='tooltip' data-placement='top' title='It was already paid'><strong class='btn btn-success' >{$arrayMonths[$ok - 1]} </strong></div>";
+                    } else {
+                        echo "<div style='padding-right: 5px; padding-bottom: 2px;' data-toggle='tooltip' data-placement='top' title='This was not paid yet'><strong class='btn btn-danger'>{$arrayMonths[$ok - 1]} </strong></div>";
+                    }
                 } else {
                     echo "<div style='padding-right: 5px; padding-bottom: 2px;' data-toggle='tooltip' data-placement='top' title='This was not paid yet'><strong class='btn btn-danger'>{$arrayMonths[$ok - 1]} </strong></div>";
                 }
+
                 break;
         }
 
-        $NUM2++;
+        $count++;
     }
 }
 
@@ -1143,11 +1153,11 @@ function leaveOption() {
         $count=0;
         
         if (isset($_SESSION["idRoom"])) {
-        //Get Booking Details
-        $query = "SELECT * FROM booking WHERE studID='{$_SESSION["iduser"]}' AND roomID='{$_SESSION["idRoom"]}' AND bookingStatus='1'";
-        $result = query($query);
-        confirm($result);
-        $count = countItem($result);
+            //Get Booking Details
+            $query = "SELECT * FROM booking WHERE studID='{$_SESSION["iduser"]}' AND roomID='{$_SESSION["idRoom"]}' AND bookingStatus='1'";
+            $result = query($query);
+            confirm($result);
+            $count = countItem($result);
         }
 
         if ($count > 0) {
@@ -1157,7 +1167,7 @@ function leaveOption() {
             $studID = $row['studID'];
 
             $today = date('Y/m/d');  //('Y/m/d')  "2019/4/2"
-            //
+            
             $count2=0;
             if (isset($_SESSION["idRoom"])) {
                 //Get PAYMENT Details
@@ -1173,14 +1183,6 @@ function leaveOption() {
             while (($date1 = strtotime('+1 MONTH', $date1)) <= $date2) {
                 $months++;
             }
-//            echo '<br>';
-            //echo $months;
-            //echo '<br>';
-            //echo date('Y/m/d',$date2);
-            //echo '<br>';
-            //echo date('Y/m/d',$date1);
-            //echo '<br>';
-            //echo $count2;
 
             if ($months < $count2) {
 
@@ -1239,7 +1241,6 @@ function leaveOption() {
 }
 
 function makePayment() {
-    //echo $_SESSION["count"];
     if (isset($_SESSION["count"]) && isset($_SESSION["totalCost"]) && isset($_SESSION["iduser"]) && isset($_SESSION["idRoom"])) {
         if (isset($_POST['confirmPay'])) {
 
