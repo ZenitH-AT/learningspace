@@ -59,7 +59,7 @@ $confirm2 = "<div class='alert alert-success alert-dismissible fade show text-ce
                                             <tr>
                                                 <td>Additional Cost:</td>
                                                 <td><?php if (isset($_SESSION["numDaysLeft"])) {
-                                                echo $additional = ($roomPrice * $_SESSION["numDaysLeft"]) / 30;
+                                                echo round($additional = ($roomPrice * $_SESSION["numDaysLeft"]) / 30, 2);
                                             } ?></td>
                                             </tr>
                                         <?php } else { ?>
@@ -75,7 +75,9 @@ $confirm2 = "<div class='alert alert-success alert-dismissible fade show text-ce
                                 </tr>
                                 <tr>
                                     <th>Next Payment Cost:</th>
-                                    <th><?php $totalCost = ($roomPrice + $additional); echo $totalCost; $_SESSION['totalCost'] = $totalCost; ?></th>
+                                    <th><?php $totalCost = ($roomPrice + $additional); 
+                                    echo round($totalCost, 2); 
+                                    $_SESSION['totalCost'] = $totalCost; ?></th>
                                 </tr>
                             </tbody>
                         </table>
