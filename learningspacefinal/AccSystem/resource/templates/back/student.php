@@ -2,7 +2,14 @@
     <h1 class="h2">Students</h1>
 </div>
 
-<h5>Student records</h5>
+<div class="row">
+    <div class="col-lg-12">
+        <ol class="breadcrumb text-secondary ">
+            <li class="breadcrumb-item text-secondary"><i class="fa fa-user-graduate"></i> Students</li>  
+        </ol>
+    </div>
+</div>
+
 <div class="table-responsive">
     <table class="table table-striped table-sm">
         <thead>

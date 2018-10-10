@@ -2,7 +2,14 @@
     <h1 class="h2">Payments</h1>
 </div>
 
-<h5>Payment records</h5>
+<div class="row">
+    <div class="col-lg-12">
+        <ol class="breadcrumb text-secondary ">
+            <li class="breadcrumb-item text-secondary"><i class="fa fa-credit-card"></i> Payments</li>  
+        </ol>
+    </div>
+</div>
+
 <div class="table-responsive">
     <div class="table-responsive">
         <table class="table table-striped table-sm">
