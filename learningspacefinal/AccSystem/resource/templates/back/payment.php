@@ -28,7 +28,7 @@
                 while ($row = fetch_array($query)) { ?>
                     <tr>
                         <td><?php echo $row['payID'] ?></td>
-                        <td><?php echo $row['cardNumber'] ?></td>
+                        <td><?php echo substr($row['cardNumber'], 0, 2) . '****' . substr($row['cardNumber'], -2) ?></td>
                         <td><?php echo $row['cardMonth'] ?></td>
                         <td><?php echo $row['cardYear'] ?></td> 
                         <td><?php echo 'R' . $row['payAmount'] ?></td>
