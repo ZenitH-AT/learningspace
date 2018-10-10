@@ -63,7 +63,7 @@ function get_Rooms_BelowBelow() {
         $room1 = <<<DELIMETER
     <div class="col-sm-4 col-lg-4 col-md-4" >
         <div class="card-img-top card" style="padding-bottom: 2px;">
-            <img class="card-img-top" style="height: 10rem;" src="IMAGE/gallery/{$row['roomImage']}" alt="">
+            <img class="card-img-top" style="height:10rem; object-fit:cover;" src="IMAGE/gallery/{$row['roomImage']}" alt="">
             <div class="card-body">
                 <h4 class="float-right">&#82;{$row['roomPrice']}</h4>
                 <h4 class="card-title float-left"><a class="text-primary">{$row['roomName']}</a></h4>
@@ -82,8 +82,7 @@ function get_Rooms_BelowBelow() {
         </div>
             </div>
             <div class="">
-                <!-- <a class="btn btn-outline-primary"  href="booking.php?id={$row['room_id']}">Book</a> -->
-                <a class="btn btn-outline-primary"  href="viewRoom.php?id={$row['room_id']}">View Room</a>
+                <a class="btn btn-outline-primary" href="viewRoom.php?id={$row['room_id']}">View Room</a>
             </div>
         </div>
     </div>
@@ -124,8 +123,8 @@ function get_Rooms_BelowCarousel() {
     while ($row = fetch_array($query)) {
         $room3 = <<<DELIMETER
     <div class="col-lg-4">
-        <a class=""  href="viewRoom.php?id={$row['room_id']}">
-        <img class=" rounded-circle" width="200" height="200" src="IMAGE/gallery/{$row['roomImage']}" alt="">
+        <a href="viewRoom.php?id={$row['room_id']}">
+        <img class="rounded-circle" style="height:200px; width:200px; object-fit:cover;" src="IMAGE/gallery/{$row['roomImage']}" alt="">
         </a>
         <h2>{$row['roomName']}</h2>
         <p>{$row['roomShortDescription']} <a class="" data-toggle="collapse" data-target="#$target" aria-expanded="true" aria-controls="collapseOne" href="#">More&raquo;</a></p></p>
@@ -135,7 +134,7 @@ function get_Rooms_BelowCarousel() {
                     Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute,
                     mon cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua
                 </div>
-                <a class="btn btn-outline-primary"  href="viewRoom.php?id={$row['room_id']}">View Room</a>
+                <a class="btn btn-outline-primary" href="viewRoom.php?id={$row['room_id']}">View Room</a>
             </div>
         </div>
     </div>
@@ -160,10 +159,12 @@ function get_Rooms_Marketing() {
             <h2 class="featurette-heading">{$row['firstText']}<br>
             <span class="text-muted">{$row['secondText']}</span></h2>
             <p class="lead">{$row['roomDescription']}</p>
+            <br/>
+            <button class="btn btn-outline-info" href="viewRoom.php?id={$row['room_id']}">More information</button>
         </div>
         <div class="col-md-5 order-md-1">
-            <a class="btn btn-outline-success"  href="viewRoom.php?id={$row['room_id']}">
-            <img class="featurette-image img-fluid mx-auto" style="height: 500px; width:500px;" src="IMAGE/gallery/{$row['roomImage']}" alt="Generic placeholder image">
+            <a href="viewRoom.php?id={$row['room_id']}">
+            <img class="featurette-image img-fluid mx-auto" style="height:500px; width:500px; object-fit:cover;" src="IMAGE/gallery/{$row['roomImage']}" alt="Generic placeholder image">
             </a>
         </div>
     </div>
@@ -176,10 +177,12 @@ DELIMETER;
             <h2 class="featurette-heading">{$row['firstText']}<br> 
             <span class="text-muted">{$row['secondText']}</span></h2>
             <p class="lead">{$row['roomDescription']}</p>
+            <br/>
+            <button class="btn btn-outline-info" href="viewRoom.php?id={$row['room_id']}">More information</button>
         </div>
         <div class="col-md-5">
-            <a class="btn btn-outline-success"  href="viewRoom.php?id={$row['room_id']}">
-            <img class="featurette-image img-fluid mx-auto" style="height: 500px; width:500px;" src="IMAGE/gallery/{$row['roomImage']}" alt="Generic placeholder image">
+            <a href="viewRoom.php?id={$row['room_id']}">
+            <img class="featurette-image img-fluid mx-auto" style="height: 500px; width:500px; object-fit:cover;" src="IMAGE/gallery/{$row['roomImage']}" alt="Generic placeholder image">
             </a>
         </div>
     </div>
