@@ -38,7 +38,7 @@
                         <td><?php echo substr($row['cardNumber'], 0, 2) . '****' . substr($row['cardNumber'], -2) ?></td>
                         <td><?php echo $row['cardMonth'] ?></td>
                         <td><?php echo $row['cardYear'] ?></td> 
-                        <td><?php echo 'R' . $row['payAmount'] ?></td>
+                        <td><?php echo 'R' . round($row['payAmount'], 2) ?></td>
                         <td><?php echo $row['payMonth'] ?></td>
                         <td><?php echo $row['studID'] ?></td>
                         <td><?php echo $row['roomID'] ?></td>
