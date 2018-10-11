@@ -34,8 +34,8 @@ function fetch_array($result) {
 }
 
 function backHOme() {
-    if (!isset($_SESSION['iduser'])) {
-        redirect("Homepage.php");
+    if (!isset($_SESSION['iduser']) && !isset($_SESSION["admin"])) {
+        redirect("HomePage.php");
     }
 }
 
@@ -55,7 +55,7 @@ function toRemove($tableName, $colomnName, $idItem) {
 
 //Get Rooms
 function get_Rooms_BelowBelow() {
-    $query = query("SELECT * FROM room ");
+    $query = query("SELECT * FROM room WHERE roomType='deluxe' LIMIT 6");
     confirm($query);
     $num = 1;
     $target = 'two';
@@ -63,26 +63,28 @@ function get_Rooms_BelowBelow() {
         $room1 = <<<DELIMETER
     <div class="col-sm-4 col-lg-4 col-md-4" >
         <div class="card-img-top card" style="padding-bottom: 2px;">
+            <div data-toggle="tooltip" data-placement="top" title="Click to View and Book Room">
+            <a class=""  href="viewRoom.php?id={$row['room_id']}">
             <img class="card-img-top" style="height:10rem; object-fit:cover;" src="IMAGE/gallery/{$row['roomImage']}" alt="">
+            </a>
+            </div>
             <div class="card-body">
                 <h4 class="float-right">&#82;{$row['roomPrice']}</h4>
                 <h4 class="card-title float-left"><a class="text-primary">{$row['roomName']}</a></h4>
                 <br>
                 <br>             
-        <div class="panel-group" id="accordion">
-            <div class="panel panel-default" id="headingOne">
-                <p>{$row['roomShortDescription']}  <a class="" data-toggle="collapse" data-target="#$target" aria-expanded="true" aria-controls="collapseOne" href="#">More&raquo;</a></p>
-            </div>
-            <div id="$target" class="panel-collapse collapse in" aria-labelledby="headingOne" data-parent="#accordion">
-                <div class="card-body" style="">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute,
-                    mon cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-default" id="headingOne">
+                        <p>{$row['roomShortDescription']}  <a class="" data-toggle="collapse" data-target="#$target" aria-expanded="true" aria-controls="collapseOne" href="#">More&raquo;</a></p>
+                    </div>
+                    <div id="$target" class="panel-collapse collapse in" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body" style="">
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute,
+                            mon cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua
+                        </div>
+                        <a class="btn btn-outline-primary"  href="viewRoom.php?id={$row['room_id']}">View Room</a>
+                    </div>
                 </div>
-            </div>
-        </div>
-            </div>
-            <div class="">
-                <a class="btn btn-outline-primary" href="viewRoom.php?id={$row['room_id']}">View Room</a>
             </div>
         </div>
     </div>
@@ -116,15 +118,18 @@ DELIMETER;
 }
 
 function get_Rooms_BelowCarousel() {
-    $query = query("SELECT * FROM room");
+    $query = query("SELECT * FROM room WHERE roomType='gold' LIMIT 3");
     confirm($query);
     $num3 = 1;
     $target = 'one';
     while ($row = fetch_array($query)) {
         $room3 = <<<DELIMETER
     <div class="col-lg-4">
+        <div data-toggle="tooltip" data-placement="top" title="Click to View and Book Room">
         <a href="viewRoom.php?id={$row['room_id']}">
         <img class="rounded-circle" style="height:200px; width:200px; object-fit:cover;" src="IMAGE/gallery/{$row['roomImage']}" alt="">
+        </a>
+        </div>
         </a>
         <h2>{$row['roomName']}</h2>
         <p>{$row['roomShortDescription']} <a class="" data-toggle="collapse" data-target="#$target" aria-expanded="true" aria-controls="collapseOne" href="#">More&raquo;</a></p></p>
@@ -147,7 +152,7 @@ DELIMETER;
 function get_Rooms_Marketing() {
     $query = query("SELECT R.room_id,R.roomDescription, R.roomImage,R.roomPrice,R.roomName, RM.firstText,RM.secondText "
             . "FROM room AS R INNER JOIN roomMarket AS RM "
-            . "WHERE R.room_id = RM.roomID AND R.roomType IN ('Marketing ','New') LIMIT 2");
+            . "WHERE R.room_id = RM.roomID AND R.roomType IN ('marketing') LIMIT 2");
     confirm($query);
     $num2 = 1;
     $target = 'one';
@@ -163,9 +168,11 @@ function get_Rooms_Marketing() {
             <button class="btn btn-outline-info" href="viewRoom.php?id={$row['room_id']}">More information</button>
         </div>
         <div class="col-md-5 order-md-1">
+            <div data-toggle="tooltip" data-placement="top" title="Click to View and Book Room">
             <a href="viewRoom.php?id={$row['room_id']}">
             <img class="featurette-image img-fluid mx-auto" style="height:500px; width:500px; object-fit:cover;" src="IMAGE/gallery/{$row['roomImage']}" alt="Generic placeholder image">
             </a>
+            </div>
         </div>
     </div>
     <hr class="featurette-divider">
@@ -181,9 +188,11 @@ DELIMETER;
             <button class="btn btn-outline-info" href="viewRoom.php?id={$row['room_id']}">More information</button>
         </div>
         <div class="col-md-5">
+            <div data-toggle="tooltip" data-placement="top" title="Click to View and Book Room">
             <a href="viewRoom.php?id={$row['room_id']}">
             <img class="featurette-image img-fluid mx-auto" style="height: 500px; width:500px; object-fit:cover;" src="IMAGE/gallery/{$row['roomImage']}" alt="Generic placeholder image">
             </a>
+            </div>
         </div>
     </div>
     <hr class="featurette-divider">
@@ -1217,6 +1226,9 @@ function leaveOption() {
                                 unset($_SESSION["checkPayment"]);
                                 unset($_SESSION["userRoomBooked"]);
                                 redirect("?confirm=yes");
+                                
+                                //Send the student a notification
+                                send_notification("You have left room " . $roomID, "You have forcibly ended your booking for room <strong>{$roomID}</strong>.", "notice", $_SESSION["iduser"]);
                             }
                         } else {
                             $confirm = "<div class='alert alert-danger alert-dismissible fade show text-center' role='alert'>
@@ -1772,10 +1784,22 @@ function notification_icon($type) {
 
 //Sends an email to the admin and back to the sender (for contact page)
 function send_contact_message($firstname, $lastname, $email, $phone, $message) {
+    //Select a random active admin as the recipient
+    $query = query("SELECT adminEmail FROM admin WHERE adminActive='1' ORDER BY RAND() LIMIT 1");
+    confirm($query);
+    $row = fetch_array($query);
+
+    $adminEmail;
+
+    if ($query){
+        $adminEmail = $row['adminEmail'];
+    }  else {
+        $adminEmail = "zenith3za@gmail.com";
+    }
+
     $mail = new MailClass();
 
     //Message sent to admin
-    $adminEmail = "zenith3za@gmail.com";
     $subject = "New message from contact page";
     $body = "<strong>Contact information:</strong><br/>
             First name: {$firstname}<br/>
