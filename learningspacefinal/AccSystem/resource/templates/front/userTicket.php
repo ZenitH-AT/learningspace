@@ -1,12 +1,14 @@
 <?php if (isset($_SESSION["iduser"])) { ?>
-    <div class="container">
+    <div class="container" style="overflow:auto">
         <div class=" col-sm-4 col-lg-4 col-md-4"></div>
-        <div class="row">
+        <div class="row mysignup">
             <div class="col-md-6">
                 <div class="well well-sm">
                     <form class="form-horizontal" method="post">
                         <fieldset>
-                            <legend class="header col-md-10">Create new ticket</legend>
+                            <legend class="header col-md-10">Create new support ticket</legend>
+                            <a class=col-md-10>Need help? Creating a ticket will send LearningSpace<br/>
+                            <a>an issue to attend to.</a><br/><br/>
                             <div class="form-group">
                                 <div class="col-md-10 col-md-offset-1">
                                     <input id="subject" name="subject" type="text" placeholder="Subject" class="form-control" required>
@@ -21,8 +23,8 @@
 
                             <div class="form-group">
                                 <div class="col-md-10 col-md-offset-1">
+                                    <a class="col-md-offset-1">Category</a>
                                     <select class="combobox form-control" id="category" name="category">
-                                        <option value="" selected="selected">Select category</option>
                                         <option value="Booking">Booking</option>
                                         <option value="Complaint">Complaint</option>
                                         <option value="Other">Other</option>
@@ -96,8 +98,34 @@
                                         </p>
 
                                         <!-- Card buttons -->
+                                        <style>
+                                            .close-ticket-button-lg {
+                                                display:inline-block;
+                                                float: right;
+                                            }
+
+                                            .close-ticket-button-sm {
+                                                display:none;
+                                                float: right;
+                                            }
+                                            
+                                            /* Display button based on screen size */ 
+                                            @media screen and (max-width: 1200px) {
+                                                .close-ticket-button-lg {
+                                                    display:none;
+                                                    float: right;
+                                                }
+
+                                                .close-ticket-button-sm {
+                                                    display:inline-block;
+                                                    float: right;
+                                                }
+                                            }
+                                        </style>
+
                                         <span style="float:left"><a href="#" class="btn btn-outline-info btn-secondary" data-toggle="modal" data-target="#ticketPopup<?php echo $row['ticketID']; ?>" name="viewid<?php echo $row['ticketID']; ?>">View ticket</a></span>
-                                        <span style="float:right"><form method="post"><button class="btn btn-outline-secondary btn-secondary" name="closereopen<?php echo $row['ticketID']; ?>" onclick="return confirm('Are you sure you want to close <?php echo $row['ticketSubject'] ?>? You should only close a ticket when the issue has been resolved.')">Close ticket (issue resolved)</button></form></span><?php
+                                        <span class="close-ticket-button-lg"><form method="post"><button class="btn btn-outline-secondary btn-secondary" name="closereopen<?php echo $row['ticketID']; ?>" onclick="return confirm('Are you sure you want to close <?php echo $row['ticketSubject'] ?>? You should only close a ticket when the issue has been resolved.')">Close ticket (issue resolved)</button></form></span>
+                                        <span class="close-ticket-button-sm"><form method="post"><button class="btn btn-outline-secondary btn-secondary" name="closereopen<?php echo $row['ticketID']; ?>" onclick="return confirm('Are you sure you want to close <?php echo $row['ticketSubject'] ?>? You should only close a ticket when the issue has been resolved.')">Close ticket</button></form></span><?php
                                         
                                         //Close ticket button handling 
                                         close_open_ticket($row['ticketID'], $row['isActive']) ?>
