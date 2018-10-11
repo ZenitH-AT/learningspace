@@ -1283,15 +1283,15 @@ function get_Bookings() {
             <td><form method="post"><button class="btn-xs btn-dark formbutton" name="switchBookingStatus<?php echo $row['bookID'] ?>" onclick="return confirm('Are you sure you want to switch the status of booking ID <?php echo $row['bookID'] ?>?')"><span class="fas fa-exchange-alt" style="color:white"></button></form></td><?php
             
             //Determining pending colour
-            $pending;
+            $bookPending;
 
             if(new DateTime('today') < new DateTime($row['bookStatDate'])) {
-                $pending = '<a class="text-info">yes</a>';
+                $bookPending = '<a class="text-info">yes</a>';
             } else {
-                $pending = '<a class="text-secondary">no</a>';
+                $bookPending = '<a class="text-secondary">no</a>';
             } ?>
     
-            <td><?php echo $pending ?></td>
+            <td><?php echo $bookPending ?></td>
             <td><button type="button" class="btn btn-info formbutton" data-toggle="modal" data-target="#bookingPopup<?php echo $row['bookID']; ?>"><span class="fa fa-edit" style="color:white"></button></form></td>
         </tr><?php
 
@@ -1416,15 +1416,15 @@ function get_Viewings() {
             <td><?php echo $row['viewStatus'] ?></td><?php
 
             //Determining pending colour
-            $viewPendingColour;
+            $viewPending;
 
             if(new DateTime('today') < new DateTime($row['viewDate'])) {
-                $viewPendingColour = "btn btn-success";
+                $viewPending = '<a class="text-info">yes</a>';
             } else {
-                $viewPendingColour = "btn btn-secondary";
+                $viewPending = '<a class="text-secondary">no</a>';
             } ?>
     
-            <td><a class="<?php echo $viewPendingColour ?>" href="#"><span class="fa fa-clock" style="color:white"></span></a></td>
+            <td><?php echo $viewPending ?></td>
             <td><button type="button" class="btn btn-info formbutton" data-toggle="modal" data-target="#viewingPopup<?php echo $row['viewBookingID']; ?>"><span class="fa fa-edit" style="color:white"></button></form></td>
             <td><form method="post"><button class="btn btn-danger formbutton" name="removeViewing<?php echo $row['viewBookingID'] ?>" onclick="return confirm('Are you sure you want to remove viewing ID: <?php echo $row['viewBookingID'] ?>?')"><span class="fa fa-times" style="color:white"></button></form></td>
         </tr><?php
