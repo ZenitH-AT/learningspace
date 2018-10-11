@@ -26,7 +26,7 @@
 <div class="table-responsive">
     <table class="table table-striped table-sm">
         <thead>
-            <tr>  
+            <tr class="text-center">  
                 <th>Booking ID</th>
                 <th>Room ID</th>
                 <th>Student ID</th>
@@ -38,7 +38,10 @@
                 <th></th>
 
                 <th>Pending</th>
-                <th>Edit</th>
+                <th>Edit</th><?php
+                if($_SESSION['adminCategory'] == 1) { ?>
+                    <th>Remove</th><?php
+                } ?>
             </tr>
         </thead>
         <tbody class="text-center">
