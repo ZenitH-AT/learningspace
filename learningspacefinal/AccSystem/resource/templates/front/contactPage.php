@@ -5,6 +5,8 @@
         
         <div class="col-md-6">
             <div class="well well-sm">
+                <div class="card">
+                <div class="card-body">
                 <form class="form-horizontal" method="post">
                     <fieldset>
                         <legend class="header col-md-10">Leave a message</legend><?php
@@ -43,7 +45,7 @@
                         <div class="form-group">
                             <div class="col-md-12">
                                 <button type="submit" name="sendMessage" class=" btn btn-outline-success formbutton">Send message</button><?php
-                                
+
                                 //Send message button handling
                                 if (isset($_POST['sendMessage'])) {
                                     $firstname;
@@ -63,7 +65,7 @@
                                         $phone = $_SESSION["phone"];
                                     }
 
-                                    $message = escape_String($_POST['contactMessage']);
+                                    $message =$_POST['contactMessage'];
 
                                     send_contact_message($firstname, $lastname, $email, $phone, $message);
                                 } ?>
@@ -71,10 +73,13 @@
                         </div>
                     </fieldset>
                 </form>
+                    </div>
+                    </div>
             </div>
         </div>
         <div class="col-md-6">
-            <div>
+            <div class="card">
+                <div class="card-body">
                 <div class="panel panel-default">
                     <div class="panel-body col-md-10">
                     <legend class="header">Contact information</legend>
@@ -84,11 +89,12 @@
                             <br /> Email: <a href="mailto:learningspace@gmail.com">projectcrudacc@gmail.com</a>
                         </div>
                         <hr />
-                        <div id="map1" class="map" style="min-width:300px; min-height:300px; width:100%; height100%;">
+                        <div id="map1" class="map" style="min-width:300px; min-height:300px; width:100%; height:100%;">
                         </div>
                     </div>
                 </div>
-            </div>
+                    </div>
+                </div>
         </div>
     </div>
 
