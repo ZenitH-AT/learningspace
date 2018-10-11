@@ -1279,26 +1279,37 @@ function get_Bookings() {
             <td><?php echo $row['bookEndDate']; ?></td>
             <td><?php echo $row['stayingPeriod']; ?></td>
             <td><?php echo $row['bookingDate']; ?></td>
-            <td><?php echo ($row['bookingStatus'] == 1 ? '<a class="text-success">active</a>' : '<a class="text-secondary">ended</a>'); ?></td><?php
-     
+            <td><?php echo ($row['bookingStatus'] == 1 ? '<a class="text-success">active</a>' : '<a class="text-secondary">ended</a>'); ?></td>
+            <td><form method="post"><button class="btn-xs btn-dark formbutton" name="switchBookingStatus<?php echo $row['bookID'] ?>" onclick="return confirm('Are you sure you want to switch the status of booking ID <?php echo $row['bookID'] ?>?')"><span class="fas fa-exchange-alt" style="color:white"></button></form></td><?php
+            
             //Determining pending colour
-            $bookPendingColour;
+            $pending;
 
             if(new DateTime('today') < new DateTime($row['bookStatDate'])) {
-                $bookPendingColour = "btn btn-success";
+                $pending = '<a class="text-info">yes</a>';
             } else {
-                $bookPendingColour = "btn btn-secondary";
+                $pending = '<a class="text-secondary">no</a>';
             } ?>
     
-            <td><a class="<?php echo $bookPendingColour ?>" href="#"><span class="fa fa-clock" style="color:white"></span></a></td>
+            <td><?php echo $pending ?></td>
             <td><button type="button" class="btn btn-info formbutton" data-toggle="modal" data-target="#bookingPopup<?php echo $row['bookID']; ?>"><span class="fa fa-edit" style="color:white"></button></form></td>
-            <td><form method="post"><button class="btn btn-danger formbutton" name="removeBooking<?php echo $row['bookID'] ?>" onclick="return confirm('Are you sure you want to remove booking ID: <?php echo $row['bookID'] ?>?')"><span class="fa fa-times" style="color:white"></button></form></td>
         </tr><?php
 
-        //Remove booking button handling
-        if(isset($_POST['removeBooking' . $row['bookID']])) {
-            query("DELETE FROM booking WHERE bookID = " . $row['bookID']);
-            ?><script>alert("Booking deleted.");</script><?php
+        //Switch booking status button handling
+        if(isset($_POST['switchBookingStatus' . $row['bookID']])) {
+            $newValue = ($row['bookingStatus'] == 1 ? 0 : 1);
+            
+            //Only change booking status if the student isn't booked in another room already
+            $queryActiveBookings = query("SELECT * FROM booking WHERE studID = {$row['studID']} AND bookingStatus = 1");
+            confirm($queryActiveBookings);
+            $numActiveBookings = countItem($queryActiveBookings);
+
+            if ($newValue == 1 && $numActiveBookings > 0) {
+                ?><script>alert("This student already has an active booking.\nA student can only be booked in one room at a time.");</script><?php
+            } else {
+                query("UPDATE booking SET bookingStatus = {$newValue} WHERE bookID = " . $row['bookID']);
+                ?><script>alert("Booking status changed");</script><?php       
+            }
 
             header("Refresh:0");
             exit();
