@@ -35,9 +35,10 @@
                 <th>Date Scheduled</th>
                 <th>View status</th>
 
-                <th>Pending</th>
-                <th>Edit</th>
-                <th>Remove</th>
+                <th>Edit</th><?php
+                if($_SESSION['adminCategory'] == 1) { ?>
+                    <th>Remove</th><?php
+                } ?>
             </tr>
         </thead>
         <tbody class="text-center">

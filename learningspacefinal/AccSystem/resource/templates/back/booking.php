@@ -37,7 +37,6 @@
                 <th>Status</th>
                 <th></th>
 
-                <th>Pending</th>
                 <th>Edit</th><?php
                 if($_SESSION['adminCategory'] == 1) { ?>
                     <th>Remove</th><?php

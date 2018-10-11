@@ -60,9 +60,11 @@
                 <th>Message</th>
                 <th>Type</th>
                 <th>Date sent</th>
-                <th>Status</th>
+                <th>Status</th><?php
 
-                <th>Delete</th>
+                if($_SESSION['adminCategory'] == 1) { ?>
+                    <th>Delete</th><?php
+                } ?>
             </tr>
         </thead>
         <tbody> <?php
@@ -92,9 +94,12 @@
                     <td><?php echo $row['body'] ?></td> 
                     <td><?php echo '<text ' . $typeclass . '>' . $row['type'] . '</text>' ?></td>
                     <td><?php echo $row['time'] ?></td>
-                    <td><?php echo $row['status'] == 1 ? '<text class="text-info">read</text>' : 'unread' ?></td>
+                    <td><?php echo $row['status'] == 1 ? '<text class="text-info">read</text>' : 'unread' ?></td><?php
 
-                    <td><form method="post"><button class="btn btn-danger formbutton" name="delete<?php echo $row['notificationID']; ?>" onclick="return confirm('Are you sure you want to delete <?php echo $row['title'] ?>?')"><span class="fa fa-times" style="color:white"></button></form></td>
+                    //Show delete button if the logged in admin is an owner
+                    if($_SESSION['adminCategory'] == 1) { ?>
+                        <td><form method="post"><button class="btn btn-danger formbutton" name="delete<?php echo $row['notificationID']; ?>" onclick="return confirm('Are you sure you want to delete <?php echo $row['title'] ?>?')"><span class="fa fa-times" style="color:white"></button></form></td><?php
+                    } ?>
                 </tr><?php
 
                 //Delete button handling
