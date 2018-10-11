@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 01, 2018 at 12:10 AM
+-- Generation Time: Oct 11, 2018 at 09:24 PM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `accommodation`
 --
+CREATE DATABASE IF NOT EXISTS `accommodation` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+USE `accommodation`;
 
 -- --------------------------------------------------------
 
@@ -60,7 +62,8 @@ CREATE TABLE `admin` (
 
 INSERT INTO `admin` (`adminID`, `adminFirstN`, `adminLastN`, `adminCategory`, `adminAddress`, `adminPhone`, `adminEmail`, `adminPassword`, `adminActive`, `accID`) VALUES
 (1, 'Moises', 'Borracha', 1, 'Claremont', '0834866680', 'moisesnt2@gmail.com', '2cb29a44bd2a19bd03400804bb939ddb', '1', 0),
-(2, 'Suquila', 'WenyKeny', 2, 'Ronderborch', '0834777832', 'suquila@gmail.com', '7d58ccfcb8eaa301f20480a2953d043b', '0', 0);
+(2, 'Suquila', 'WenyKeny', 2, 'Ronderborch', '0834777832', 'suquila@gmail.com', '7d58ccfcb8eaa301f20480a2953d043b', '0', 0),
+(3, 'Robert', 'Zenith', 2, 'Claremont', '348729827833', 'zenith3za@gmail.com', 'Zenith3za', '0', 0);
 
 -- --------------------------------------------------------
 
@@ -89,9 +92,11 @@ INSERT INTO `booking` (`bookID`, `studID`, `roomID`, `bookStatDate`, `bookEndDat
 (18, 1, 6, '2018/10/30', '2019/03/23', 144, '2018-09-28 00:14:15', 0),
 (19, 1, 4, '2018/12/03', '2019/05/23', 171, '2018-09-28 00:14:15', 0),
 (20, 1, 6, '2018/12/05', '2019/02/15', 72, '2018-09-28 00:14:15', 0),
-(21, 1, 6, '2018/10/01', '2018/12/05', 65, '2018-09-28 00:14:15', 0),
-(22, 1, 5, '2018/10/01', '2018/12/08', 68, '2018-09-28 00:14:15', 0),
-(24, 22, 1, '2018/09/30', '2019/02/08', 131, '2018-09-30 03:28:42', 1);
+(21, 1, 6, '2018/10/01', '2018/12/05', 65, '2018-09-28 00:14:15', 1),
+(22, 1, 5, '2018/10/01', '2018/12/08', 68, '2018-09-28 00:14:15', 1),
+(23, 22, 7, '2018/10/10', '2019/05/18', 220, '2018-10-08 21:18:56', 0),
+(24, 22, 7, '2018/10/19', '2018/10/26', 7, '2018-10-08 21:18:56', 0),
+(25, 22, 7, '2018/10/10', '2019/03/08', 149, '2018-10-08 21:21:29', 1);
 
 -- --------------------------------------------------------
 
@@ -152,26 +157,6 @@ INSERT INTO `helpticketmessage` (`messageID`, `ticketID`, `studID`, `adminID`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `login_test`
---
-
-CREATE TABLE `login_test` (
-  `id` int(11) NOT NULL,
-  `username` varchar(30) COLLATE utf8_bin NOT NULL,
-  `password` varchar(30) COLLATE utf8_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
---
--- Dumping data for table `login_test`
---
-
-INSERT INTO `login_test` (`id`, `username`, `password`) VALUES
-(1, 'moises', 'moises'),
-(2, 'suquila', 'borracha');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `notification`
 --
 
@@ -192,14 +177,23 @@ CREATE TABLE `notification` (
 INSERT INTO `notification` (`notificationID`, `studID`, `title`, `body`, `type`, `time`, `status`) VALUES
 (2, 22, 'A long notification', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Quisque tincidunt scelerisque libero. Vestibulum fermentum tortor id mi. Nullam dapibus fermentum ipsum. Praesent in mauris eu tortor porttitor accumsan. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam bibendum elit eget erat. Nullam sit amet magna in magna gravida vehicula. Pellentesque sapien. Mauris metus. Nullam sit amet magna in magna gravida vehicula. Integer malesuada. Duis risus. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Curabitur ligula sapien, pulvinar a vestibulum quis, facilisis vel sapien. Nullam sapien sem, ornare ac, nonummy non, lobortis a enim. Et harum quidem rerum facilis est et expedita distinctio. Aliquam id dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. ', 'info', '2018-09-27 00:00:00', 1),
 (4, 22, 'Test 2', 'Another test', 'notice', '2018-09-27 21:08:20', 1),
-(6, 22, 'Test 3', 'For students 9 and 22', 'danger', '2018-09-27 21:08:44', 0),
+(6, 22, 'Test 3', 'For students 9 and 22', 'danger', '2018-09-27 21:08:44', 1),
 (7, 18, 'Test 4', 'For student with id of 18', 'success', '2018-09-27 21:25:04', 0),
 (8, 9, 'Hello', 'Testing again', 'default', '2018-09-27 21:39:08', 0),
 (9, 18, 'Hello', 'Testing again', 'default', '2018-09-27 21:39:08', 0),
-(10, 22, 'Final test', 'For now...', 'warning', '2018-09-28 02:52:52', 0),
-(13, 22, 'Your booking was successful', 'Your booking for room <strong>1</strong> starts at <strong>2018/09/30</strong>.', 'success', '2018-09-30 03:28:42', 0),
-(14, 22, 'Your refund request was declined', 'Your payment refund request has been <strong>declined</strong>.', 'danger', '2018-09-30 04:53:09', 0),
-(18, 22, 'Your ticket has recieved a reply', 'Your ticket has recieved a reply from <strong>Moises Borracha</strong>. Ticket ID: <strong>7</strong>. Subject: <strong>Another test</strong>.', 'info', '2018-09-30 05:37:10', 0);
+(10, 22, 'Final test', 'For now...', 'warning', '2018-09-28 02:52:52', 1),
+(13, 22, 'Your booking was successful', 'Your booking for room <strong>1</strong> starts at <strong>2018/09/30</strong>.', 'success', '2018-09-30 03:28:42', 1),
+(14, 22, 'Your refund request was declined', 'Your payment refund request has been <strong>declined</strong>.', 'danger', '2018-09-30 04:53:09', 1),
+(18, 22, 'Your ticket has recieved a reply', 'Your ticket has recieved a reply from <strong>Moises Borracha</strong>. Ticket ID: <strong>7</strong>. Subject: <strong>Another test</strong>.', 'info', '2018-09-30 05:37:10', 1),
+(19, 22, 'Stress test', 'asdfasdfsdf', 'danger', '2018-10-02 02:08:03', 1),
+(20, 22, 'stress test tttt', 'aesfasdf', 'notice', '2018-10-02 02:08:14', 1),
+(21, 22, 'asdfsdfasdfa', 'asdfasdfasdf', 'info', '2018-10-02 02:08:20', 1),
+(22, 22, 'sadfasdfasdf', 'asdfasdfasfasdfasdf', 'success', '2018-10-02 02:08:28', 1),
+(23, 22, 'Your booking was successful', 'Your booking for room <strong>7</strong> starts at <strong>2018/10/10</strong>.', 'success', '2018-10-06 19:46:52', 1),
+(24, 22, 'Your refund request was accepted', 'Your payment refund request has been <strong>accepted</strong>.', 'success', '2018-10-06 19:52:46', 1),
+(25, 22, 'Your refund request was accepted', 'Your payment refund request has been <strong>accepted</strong>.', 'success', '2018-10-06 19:52:53', 1),
+(26, 22, 'Your booking was successful', 'Your booking for room <strong>7</strong> starts at <strong>2018/10/19</strong>.', 'success', '2018-10-08 21:07:54', 1),
+(28, 22, 'Your refund request was declined', 'Your payment refund request has been <strong>declined</strong>.', 'danger', '2018-10-11 18:54:17', 1);
 
 -- --------------------------------------------------------
 
@@ -235,7 +229,13 @@ INSERT INTO `payment` (`payID`, `cardNumber`, `cardMonth`, `cardYear`, `payAmoun
 (82, '537462j', 'duhfiu', 'fiuhfu', '4345', '1', 1, 6, 0, '2018-12-01 23:14:19'),
 (83, '12345', '12345', '12345', '4345', '2', 1, 6, 0, '2018-09-28 00:08:06'),
 (84, 'Moises', 'f987y9d', '89f9f', '3445', '1', 1, 5, 0, '2018-09-28 00:13:30'),
-(86, '1234123414512', '12', '21', '203.09', '1', 22, 1, 1, '2018-09-30 03:28:42');
+(86, '1234123414512', '12', '21', '203.09', '1', 22, 1, 1, '2018-09-30 03:28:42'),
+(87, '23423423423', '10', '23', '6455', '1', 22, 7, 0, '2018-10-06 19:46:52'),
+(88, '45234234', '12', '22', '6455', '1', 22, 7, 0, '2018-10-08 21:07:54'),
+(89, '234234234', '11', '22', '6455', '1', 22, 7, 1, '2018-10-08 21:21:29'),
+(90, '2323423', '12', '11', '12049.333333333', '2', 22, 7, 0, '2018-10-10 20:28:29'),
+(91, '646546', '12', '21', '12049.333333333', '2', 22, 7, 0, '2018-10-10 20:38:22'),
+(92, '2342423423', '12', '21', '12049.333333333', '2', 22, 7, 1, '2018-10-10 20:48:01');
 
 -- --------------------------------------------------------
 
@@ -280,7 +280,7 @@ INSERT INTO `room` (`room_id`, `roomName`, `roomPrice`, `roomType`, `roomCapacit
 (4, 'Placio', 666, 'low', 1, '0', 'park1.jpg', 'This is a short description. Lorem ipsum dolor sit ametdxf. ', 'This is a short description. Lorem ipsum dolor sit ametdxf. '),
 (5, 'Orland', 3445, 'Luxury', 1, '0', '3.jpg', 'Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.\r\nDonec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.', 'Donec sed odio dui. Etiam porta sem '),
 (6, 'Los Angeles', 4345, 'Marketing', 1, '0', 'rails1.jpg', 'Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.\r\nDonec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.', 'Morbi leo risus, porta ac consectetur a'),
-(7, 'Plaza', 3455, 'New', 1, '0', 'marketing1.jpg', 'Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.\r\n', 'vestibulum at eros. Praesent commodo.');
+(7, 'Plaza', 6455, 'New', 1, '1', 'dubai.jpg', 'This feature works!', 'Ultimate room');
 
 -- --------------------------------------------------------
 
@@ -339,10 +339,10 @@ CREATE TABLE `student` (
 INSERT INTO `student` (`studID`, `studFirstName`, `studMiddleName`, `studLastName`, `studEmail`, `studPassword`, `studGender`, `studDOB`, `studSchool`, `studSchoolAddress`, `studCountry`, `studCity`, `studStreet`, `id_passport`, `studPhone`, `activationKey`, `isActive`, `data`) VALUES
 (2, 'Moises', 'mooo', 'Suquila', 'moisesnt4426@gmail.com', '8ee2197f8c482f9cdb157f126e255bc3', 'Male', '2018-08-04', 'hb', 'hb', '', '', '', 'hjghfgdf', '0834866680', 'd50dffefc052e05251ea91eb3a711f9d', '1', '2018-08-10 21:08:45'),
 (6, 'ee', 'mooo', 'Suquila', 'moidd@dd.com', 'f5213dacaee168fffb80807b1cc0e269', 'Male', '2018-08-10', 'hb', 'trdf', '', '', '', 'hjghfgdf', '0834866680', '4c760841c402abea779ff5c857b35afa', '1', '2018-08-10 21:13:02'),
-(7, 'Ee', 'Mooo', 'Suquila', 'moisddd@dd.com', 'f5213dacaee168fffb80807b1cc0e269', 'Male', '2018-08-10', 'Hb', 'Trdf', '', '', '', 'hjghfgdf', '0834866680', '92ae56d3c81e8dd53aae2bf77c267ce5', '1', '2018-08-10 21:19:15'),
+(7, 'Ee', 'Mooo', 'Suquila', 'moisddd@dd.com', 'f5213dacaee168fffb80807b1cc0e269', 'Male', '2018-08-10', 'Hb', 'Trdf', 'saasdf', 'sdfsdf', 'sdfsdf', 'hjghfgdf', '0834866680', '92ae56d3c81e8dd53aae2bf77c267ce5', '1', '2018-08-10 21:19:15'),
 (8, 'Kdfhbvh', 'KJSDFJN', 'DKJFNF', 'mois@fdj.cisjd', 'efdd30ebc81423fe7e5f016a10c67570', 'Male', '0000-00-00', 'Kjdnjnc', 'Jnxckjn', '', '', '', 'jdnfjncjn', '9387444363', 'bef2e86c5dbc9587fee929d4c84fb08a', '0', '2018-08-14 21:17:02'),
 (9, 'OKKKKK', 'Kjxncjn', 'Kdjfnjvnjk', 'moise@gma.com', '6e37469971a8bb23117f0085370dda2d', 'Male', '0000-00-00', 'Cjndjc', 'Kdjncjn', '', '', '', 'kjfnvjfnj', '2345456662211', '27ef5cf82630dd9d694f6843ef5a518c', '1', '2018-08-14 21:21:12'),
-(22, 'Robert', 'Fritz', 'Berge', 'zenith3za@gmail.com', 'd106b29303767527fc11214f1b325fb6', 'Male', '1998-01-06', 'Bergvliet High', 'Dunno', 'South Africa', 'Cape Town', 'Hertzog Road', '9806015255087', '0724375326', '91fccd488a9f0015a74dbbf8448e0975', '1', '2018-09-07 00:03:03');
+(22, 'Robert', 'Fritz', 'Berge', 'zenith3za@gmail.com', 'd106b29303767527fc11214f1b325fb6', 'Male', '1998-01-06', 'Bergvliet High', 'Dunno', 'South Africa', 'Cape Town', 'Hertzog Road', '9806015255087', '0724375326', '91fccd488a9f0015a74dbbf8448e0975', '1', '2018-10-03 05:13:40');
 
 -- --------------------------------------------------------
 
@@ -364,7 +364,7 @@ CREATE TABLE `studentprofile` (
 --
 
 INSERT INTO `studentprofile` (`profileID`, `studID`, `studDescription`, `studPicture`, `profileRestriction`, `date`) VALUES
-(1, 22, '', '', 0, '2018-09-29 01:19:29');
+(1, 22, '', '', 0, '2018-10-03 05:13:40');
 
 -- --------------------------------------------------------
 
@@ -389,8 +389,7 @@ CREATE TABLE `viewing` (
 
 INSERT INTO `viewing` (`viewBookingID`, `viewerName`, `viewerEmail`, `viewerPhone`, `viewDate`, `viewStatus`, `roomName`, `scheduledDate`) VALUES
 (1, 'Moises', 'moisesnt2@gmail.com', '8348666889', '2018-08-31 00:00:00', 1, '0', '2018-08-30 01:35:11'),
-(2, 'Moises', 'moisesnt2@gmail.com', '8348666889', '2018-08-31 12:00:00', 1, '0', '2018-08-30 01:37:00'),
-(3, 'teressa', 'moisesnt2@gmail.com', '65555465766', '2018-09-22 12:30:00', 1, '0', '2018-09-21 21:48:01');
+(4, 'Robert Berge', 'zenith3za@gmail.com', '0724375326', '2018-10-11 03:56:00', 1, '7', '2018-10-02 03:57:00');
 
 --
 -- Indexes for dumped tables
@@ -428,12 +427,6 @@ ALTER TABLE `helpticket`
 --
 ALTER TABLE `helpticketmessage`
   ADD PRIMARY KEY (`messageID`);
-
---
--- Indexes for table `login_test`
---
-ALTER TABLE `login_test`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `notification`
@@ -502,13 +495,13 @@ ALTER TABLE `accommodation`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `adminID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `adminID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `bookID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `bookID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `helpticket`
@@ -523,28 +516,22 @@ ALTER TABLE `helpticketmessage`
   MODIFY `messageID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
--- AUTO_INCREMENT for table `login_test`
---
-ALTER TABLE `login_test`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
 -- AUTO_INCREMENT for table `notification`
 --
 ALTER TABLE `notification`
-  MODIFY `notificationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `notificationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `payID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
+  MODIFY `payID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
 
 --
 -- AUTO_INCREMENT for table `refund`
 --
 ALTER TABLE `refund`
-  MODIFY `requestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `requestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `room`
@@ -562,7 +549,7 @@ ALTER TABLE `roommarket`
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `studID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=132;
+  MODIFY `studID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `studentprofile`
@@ -574,7 +561,7 @@ ALTER TABLE `studentprofile`
 -- AUTO_INCREMENT for table `viewing`
 --
 ALTER TABLE `viewing`
-  MODIFY `viewBookingID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `viewBookingID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
