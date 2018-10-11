@@ -1304,7 +1304,12 @@ function get_Bookings() {
             } ?>
     
             <td><?php echo $bookPending ?></td>
-            <td><button type="button" class="btn btn-info formbutton" data-toggle="modal" data-target="#bookingPopup<?php echo $row['bookID']; ?>"><span class="fa fa-edit" style="color:white"></button></form></td>
+            <td><button type="button" class="btn btn-info formbutton" data-toggle="modal" data-target="#bookingPopup<?php echo $row['bookID']; ?>"><span class="fa fa-edit" style="color:white"></button></form></td><?php
+            
+            //Show delete button if the logged in admin is an owner
+            if($_SESSION['adminCategory'] == 1) { ?>
+                <td><button type="button" class="btn btn-danger formbutton" name="removeBooking<?php echo $row['bookID'] ?>" onclick="return confirm('Are you sure you want to delete booking ID <?php echo $row['bookID'] ?>?')"><span class="fa fa-times" style="color:white"></button></form></td><?php
+            } ?>
         </tr><?php
 
         //Switch booking status button handling
@@ -1325,7 +1330,16 @@ function get_Bookings() {
 
             header("Refresh:0");
             exit();
-        } ?>
+        } 
+        
+        //Remove booking button handling
+        if(isset($_POST['removeBooking' . $row['bookID']])) {
+            query("DELETE FROM booking WHERE bookID = " . $row['bookID']);
+            ?><script>alert("Booking deleted.");</script><?php
+
+            header("Refresh:0");
+            exit();
+        }?>
 
         <!-- Edit booking modal -->
         <div class="modal fade" id="bookingPopup<?php echo $row['bookID']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
