@@ -70,8 +70,8 @@
                     </li>
                     <li class="head text-dark myMenuUser">
                         <div class="row">
-                            <div class="col-lg-8 col-sm-10 col-8">
-                                <a href="userTicket.php?iduser=<?php echo $_SESSION['iduser']; ?>" class="text-dark"><i class="fa fa-fw fa-life-ring"></i> Tickets</a>
+                            <div class="col-lg-10 col-sm-10 col-8">
+                                <a href="userTicket.php?iduser=<?php echo $_SESSION['iduser']; ?>" class="text-dark"><i class="fa fa-fw fa-life-ring"></i> Support</a>
                             </div>
                         </div>
                     </li>
