@@ -34,8 +34,8 @@ function fetch_array($result) {
 }
 
 function backHOme() {
-    if (!isset($_SESSION['iduser'])) {
-        redirect("Homepage.php");
+    if (!isset($_SESSION['iduser']) && !isset($_SESSION["admin"])) {
+        redirect("HomePage.php");
     }
 }
 
@@ -55,7 +55,7 @@ function toRemove($tableName, $colomnName, $idItem) {
 
 //Get Rooms
 function get_Rooms_BelowBelow() {
-    $query = query("SELECT * FROM room ");
+    $query = query("SELECT * FROM room WHERE roomType='deluxe' LIMIT 6");
     confirm($query);
     $num = 1;
     $target = 'two';
@@ -63,7 +63,11 @@ function get_Rooms_BelowBelow() {
         $room1 = <<<DELIMETER
     <div class="col-sm-4 col-lg-4 col-md-4" >
         <div class="card-img-top card" style="padding-bottom: 2px;">
-            <img class="card-img-top" style="height:10rem; object-fit:cover;" src="IMAGE/gallery/{$row['roomImage']}" alt="">
+            <div data-toggle="tooltip" data-placement="top" title="Click to View and Book Room">
+            <a class=""  href="viewRoom.php?id={$row['room_id']}">
+            <img class="card-img-top" style="height: 10rem;" src="IMAGE/gallery/{$row['roomImage']}" alt="">
+            </a>
+            </div>
             <div class="card-body">
                 <h4 class="float-right">&#82;{$row['roomPrice']}</h4>
                 <h4 class="card-title float-left"><a class="text-primary">{$row['roomName']}</a></h4>
@@ -78,11 +82,13 @@ function get_Rooms_BelowBelow() {
                     Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute,
                     mon cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua
                 </div>
+                <a class="btn btn-outline-primary"  href="viewRoom.php?id={$row['room_id']}">View Room</a>
             </div>
         </div>
             </div>
             <div class="">
-                <a class="btn btn-outline-primary" href="viewRoom.php?id={$row['room_id']}">View Room</a>
+                <!-- <a class="btn btn-outline-primary"  href="booking.php?id={$row['room_id']}">Book</a> -->
+                <!-- <a class="btn btn-outline-primary"  href="viewRoom.php?id={$row['room_id']}">View Room</a>-->
             </div>
         </div>
     </div>
@@ -116,16 +122,18 @@ DELIMETER;
 }
 
 function get_Rooms_BelowCarousel() {
-    $query = query("SELECT * FROM room");
+    $query = query("SELECT * FROM room WHERE roomType='gold' LIMIT 3");
     confirm($query);
     $num3 = 1;
     $target = 'one';
     while ($row = fetch_array($query)) {
         $room3 = <<<DELIMETER
     <div class="col-lg-4">
-        <a href="viewRoom.php?id={$row['room_id']}">
-        <img class="rounded-circle" style="height:200px; width:200px; object-fit:cover;" src="IMAGE/gallery/{$row['roomImage']}" alt="">
+        <div data-toggle="tooltip" data-placement="top" title="Click to View and Book Room">
+        <a class=""  href="viewRoom.php?id={$row['room_id']}">
+        <img class=" rounded-circle" width="200" height="200" src="IMAGE/gallery/{$row['roomImage']}" alt="">
         </a>
+        </div>
         <h2>{$row['roomName']}</h2>
         <p>{$row['roomShortDescription']} <a class="" data-toggle="collapse" data-target="#$target" aria-expanded="true" aria-controls="collapseOne" href="#">More&raquo;</a></p></p>
         <div class="panel-group" id="accordion">
@@ -134,7 +142,7 @@ function get_Rooms_BelowCarousel() {
                     Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute,
                     mon cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua
                 </div>
-                <a class="btn btn-outline-primary" href="viewRoom.php?id={$row['room_id']}">View Room</a>
+                <a class="btn btn-outline-primary"  href="viewRoom.php?id={$row['room_id']}">View Room</a>
             </div>
         </div>
     </div>
@@ -147,7 +155,7 @@ DELIMETER;
 function get_Rooms_Marketing() {
     $query = query("SELECT R.room_id,R.roomDescription, R.roomImage,R.roomPrice,R.roomName, RM.firstText,RM.secondText "
             . "FROM room AS R INNER JOIN roomMarket AS RM "
-            . "WHERE R.room_id = RM.roomID AND R.roomType IN ('Marketing ','New') LIMIT 2");
+            . "WHERE R.room_id = RM.roomID AND R.roomType IN ('marketing') LIMIT 2");
     confirm($query);
     $num2 = 1;
     $target = 'one';
@@ -159,13 +167,13 @@ function get_Rooms_Marketing() {
             <h2 class="featurette-heading">{$row['firstText']}<br>
             <span class="text-muted">{$row['secondText']}</span></h2>
             <p class="lead">{$row['roomDescription']}</p>
-            <br/>
-            <button class="btn btn-outline-info" href="viewRoom.php?id={$row['room_id']}">More information</button>
         </div>
         <div class="col-md-5 order-md-1">
-            <a href="viewRoom.php?id={$row['room_id']}">
-            <img class="featurette-image img-fluid mx-auto" style="height:500px; width:500px; object-fit:cover;" src="IMAGE/gallery/{$row['roomImage']}" alt="Generic placeholder image">
+            <div data-toggle="tooltip" data-placement="top" title="Click to View and Book Room">
+            <a class="btn btn-outline-success"  href="viewRoom.php?id={$row['room_id']}">
+            <img class="featurette-image img-fluid mx-auto" style="height: 500px; width:500px;" src="IMAGE/gallery/{$row['roomImage']}" alt="Generic placeholder image">
             </a>
+            </div>
         </div>
     </div>
     <hr class="featurette-divider">
@@ -177,13 +185,13 @@ DELIMETER;
             <h2 class="featurette-heading">{$row['firstText']}<br> 
             <span class="text-muted">{$row['secondText']}</span></h2>
             <p class="lead">{$row['roomDescription']}</p>
-            <br/>
-            <button class="btn btn-outline-info" href="viewRoom.php?id={$row['room_id']}">More information</button>
         </div>
         <div class="col-md-5">
-            <a href="viewRoom.php?id={$row['room_id']}">
-            <img class="featurette-image img-fluid mx-auto" style="height: 500px; width:500px; object-fit:cover;" src="IMAGE/gallery/{$row['roomImage']}" alt="Generic placeholder image">
+            <div data-toggle="tooltip" data-placement="top" title="Click to View and Book Room">
+            <a class="btn btn-outline-success"  href="viewRoom.php?id={$row['room_id']}">
+            <img class="featurette-image img-fluid mx-auto" style="height: 500px; width:500px;" src="IMAGE/gallery/{$row['roomImage']}" alt="Generic placeholder image">
             </a>
+            </div>
         </div>
     </div>
     <hr class="featurette-divider">
@@ -629,7 +637,7 @@ function signup() {
                     $subject = "Your Accommodation Account - Verify Your Email Address";
                     $body = "Dear {$fname} {$lname}<br><br>"
                             . "Please click the link below to verify your LearningSpace account.<br><br>"
-                            . "<a href='http://localhost:8080/project/AccSystem/public/userActivation.php?key={$userActicationKey}' class='btn btn-outline-success formbutton'>Verify email address</a>";
+                            . "<a href='http://localhost/project/AccSystem/public/userActivation.php?key={$userActicationKey}' class='btn btn-outline-success formbutton'>Verify email address</a>";
 
                     $getresult = $mail->sendMail($email, $subject, $body);
 
@@ -1055,7 +1063,7 @@ function payment() {
                 <td><?php echo $row['payMonth'] ?></td>
                 <td><?php echo $row['cardNumber'] ?></td>
                 <td><?php echo $row['roomID'] ?></td>
-                <td><?php echo 'R' . round($row['payAmount'], 2) ?></td>
+                <td><?php echo 'R' . $row['payAmount'] ?></td>
                 <td><?php echo $row['paymentDate'] ?></td>
                 <td><a class="btn btn-success" href="#"><span class="fa fa-check-circle" style="color:white"></span></a></td><?php
                 
@@ -1105,18 +1113,13 @@ function payment() {
 function paymentMonths() {
     $arrayMonths = array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
     $countMonth = 0;
-
     if (isset($_SESSION["numMonth"])) {
         $countMonth = $_SESSION["numMonth"];
     }
-
-    $count = 0;
-    
-    $startDate = mysqli_fetch_assoc(query("SELECT bookStatDate FROM booking WHERE studID='{$_SESSION["iduser"]}' AND bookingStatus = 1"));
-    $startDate = $startDate['bookStatDate'];
-
-    while ($count < $countMonth) {
-        $monthNumberFr = strtotime("+" . $count . " months", strtotime($startDate));
+    $NUM2 = 0;
+    //$monthArrayNum = array();
+    while ($NUM2 < $countMonth) {
+        $monthNumberFr = strtotime("+" . $NUM2 . " months", strtotime($_SESSION["bookStatDate"]));
         $ok = date('n', $monthNumberFr);
 
         switch ($ok) {
@@ -1132,20 +1135,15 @@ function paymentMonths() {
             case 10:
             case 11:
             case 12:
-                if(isset($_SESSION["monthsNum"])) { //required incase the user has made no payments (in cases where they refund their first payment before making a second one)
-                    if ($count < sizeof($_SESSION["monthsNum"])) {
-                        echo "<div style='padding-right: 5px; padding-bottom: 3px;' data-toggle='tooltip' data-placement='top' title='It was already paid'><strong class='btn btn-success' >{$arrayMonths[$ok - 1]} </strong></div>";
-                    } else {
-                        echo "<div style='padding-right: 5px; padding-bottom: 2px;' data-toggle='tooltip' data-placement='top' title='This was not paid yet'><strong class='btn btn-danger'>{$arrayMonths[$ok - 1]} </strong></div>";
-                    }
+                if ($NUM2 < sizeof($_SESSION["monthsNum"])) {
+                    echo "<div style='padding-right: 5px; padding-bottom: 3px;' data-toggle='tooltip' data-placement='top' title='It was already paid'><strong class='btn btn-success' >{$arrayMonths[$ok - 1]} </strong></div>";
                 } else {
                     echo "<div style='padding-right: 5px; padding-bottom: 2px;' data-toggle='tooltip' data-placement='top' title='This was not paid yet'><strong class='btn btn-danger'>{$arrayMonths[$ok - 1]} </strong></div>";
                 }
-
                 break;
         }
 
-        $count++;
+        $NUM2++;
     }
 }
 
@@ -1156,11 +1154,11 @@ function leaveOption() {
         $count=0;
         
         if (isset($_SESSION["idRoom"])) {
-            //Get Booking Details
-            $query = "SELECT * FROM booking WHERE studID='{$_SESSION["iduser"]}' AND roomID='{$_SESSION["idRoom"]}' AND bookingStatus='1'";
-            $result = query($query);
-            confirm($result);
-            $count = countItem($result);
+        //Get Booking Details
+        $query = "SELECT * FROM booking WHERE studID='{$_SESSION["iduser"]}' AND roomID='{$_SESSION["idRoom"]}' AND bookingStatus='1'";
+        $result = query($query);
+        confirm($result);
+        $count = countItem($result);
         }
 
         if ($count > 0) {
@@ -1170,7 +1168,7 @@ function leaveOption() {
             $studID = $row['studID'];
 
             $today = date('Y/m/d');  //('Y/m/d')  "2019/4/2"
-            
+            //
             $count2=0;
             if (isset($_SESSION["idRoom"])) {
                 //Get PAYMENT Details
@@ -1186,6 +1184,14 @@ function leaveOption() {
             while (($date1 = strtotime('+1 MONTH', $date1)) <= $date2) {
                 $months++;
             }
+//            echo '<br>';
+            //echo $months;
+            //echo '<br>';
+            //echo date('Y/m/d',$date2);
+            //echo '<br>';
+            //echo date('Y/m/d',$date1);
+            //echo '<br>';
+            //echo $count2;
 
             if ($months < $count2) {
 
@@ -1244,6 +1250,7 @@ function leaveOption() {
 }
 
 function makePayment() {
+    //echo $_SESSION["count"];
     if (isset($_SESSION["count"]) && isset($_SESSION["totalCost"]) && isset($_SESSION["iduser"]) && isset($_SESSION["idRoom"])) {
         if (isset($_POST['confirmPay'])) {
 
@@ -1279,37 +1286,26 @@ function get_Bookings() {
             <td><?php echo $row['bookEndDate']; ?></td>
             <td><?php echo $row['stayingPeriod']; ?></td>
             <td><?php echo $row['bookingDate']; ?></td>
-            <td><?php echo ($row['bookingStatus'] == 1 ? '<a class="text-success">active</a>' : '<a class="text-secondary">ended</a>'); ?></td>
-            <td><form method="post"><button class="btn-xs btn-dark formbutton" name="switchBookingStatus<?php echo $row['bookID'] ?>" onclick="return confirm('Are you sure you want to switch the status of booking ID <?php echo $row['bookID'] ?>?')"><span class="fas fa-exchange-alt" style="color:white"></button></form></td><?php
-            
+            <td><?php echo ($row['bookingStatus'] == 1 ? '<a class="text-success">active</a>' : '<a class="text-secondary">ended</a>'); ?></td><?php
+     
             //Determining pending colour
-            $bookPending;
+            $bookPendingColour;
 
             if(new DateTime('today') < new DateTime($row['bookStatDate'])) {
-                $bookPending = '<a class="text-info">yes</a>';
+                $bookPendingColour = "btn btn-success";
             } else {
-                $bookPending = '<a class="text-secondary">no</a>';
+                $bookPendingColour = "btn btn-secondary";
             } ?>
     
-            <td><?php echo $bookPending ?></td>
+            <td><a class="<?php echo $bookPendingColour ?>" href="#"><span class="fa fa-clock" style="color:white"></span></a></td>
             <td><button type="button" class="btn btn-info formbutton" data-toggle="modal" data-target="#bookingPopup<?php echo $row['bookID']; ?>"><span class="fa fa-edit" style="color:white"></button></form></td>
+            <td><form method="post"><button class="btn btn-danger formbutton" name="removeBooking<?php echo $row['bookID'] ?>" onclick="return confirm('Are you sure you want to remove booking ID: <?php echo $row['bookID'] ?>?')"><span class="fa fa-times" style="color:white"></button></form></td>
         </tr><?php
 
-        //Switch booking status button handling
-        if(isset($_POST['switchBookingStatus' . $row['bookID']])) {
-            $newValue = ($row['bookingStatus'] == 1 ? 0 : 1);
-            
-            //Only change booking status if the student isn't booked in another room already
-            $queryActiveBookings = query("SELECT * FROM booking WHERE studID = {$row['studID']} AND bookingStatus = 1");
-            confirm($queryActiveBookings);
-            $numActiveBookings = countItem($queryActiveBookings);
-
-            if ($newValue == 1 && $numActiveBookings > 0) {
-                ?><script>alert("This student already has an active booking.\nA student can only be booked in one room at a time.");</script><?php
-            } else {
-                query("UPDATE booking SET bookingStatus = {$newValue} WHERE bookID = " . $row['bookID']);
-                ?><script>alert("Booking status changed");</script><?php       
-            }
+        //Remove booking button handling
+        if(isset($_POST['removeBooking' . $row['bookID']])) {
+            query("DELETE FROM booking WHERE bookID = " . $row['bookID']);
+            ?><script>alert("Booking deleted.");</script><?php
 
             header("Refresh:0");
             exit();
@@ -1416,15 +1412,15 @@ function get_Viewings() {
             <td><?php echo $row['viewStatus'] ?></td><?php
 
             //Determining pending colour
-            $viewPending;
+            $viewPendingColour;
 
             if(new DateTime('today') < new DateTime($row['viewDate'])) {
-                $viewPending = '<a class="text-info">yes</a>';
+                $viewPendingColour = "btn btn-success";
             } else {
-                $viewPending = '<a class="text-secondary">no</a>';
+                $viewPendingColour = "btn btn-secondary";
             } ?>
     
-            <td><?php echo $viewPending ?></td>
+            <td><a class="<?php echo $viewPendingColour ?>" href="#"><span class="fa fa-clock" style="color:white"></span></a></td>
             <td><button type="button" class="btn btn-info formbutton" data-toggle="modal" data-target="#viewingPopup<?php echo $row['viewBookingID']; ?>"><span class="fa fa-edit" style="color:white"></button></form></td>
             <td><form method="post"><button class="btn btn-danger formbutton" name="removeViewing<?php echo $row['viewBookingID'] ?>" onclick="return confirm('Are you sure you want to remove viewing ID: <?php echo $row['viewBookingID'] ?>?')"><span class="fa fa-times" style="color:white"></button></form></td>
         </tr><?php
@@ -1772,10 +1768,18 @@ function notification_icon($type) {
 
 //Sends an email to the admin and back to the sender (for contact page)
 function send_contact_message($firstname, $lastname, $email, $phone, $message) {
+    //Select a random active admin to send the msg
+    $query = query("SELECT adminEmail FROM admin WHERE adminActive='1' ORDER BY RAND() LIMIT 1");
+    confirm($query);
+    $row = fetch_array($query);
+    if ($query){
+        $adminEmail = $row['adminEmail'];
+    }  else {
+        $adminEmail = "zenith3za@gmail.com";
+    }
+    
     $mail = new MailClass();
-
     //Message sent to admin
-    $adminEmail = "zenith3za@gmail.com";
     $subject = "New message from contact page";
     $body = "<strong>Contact information:</strong><br/>
             First name: {$firstname}<br/>
@@ -1789,5 +1793,6 @@ function send_contact_message($firstname, $lastname, $email, $phone, $message) {
     //Message sent back to sender
     $mail->sendMail($email, 'Your message has been sent', 
                     'An administrator will get back to you soon!<br/><br/><strong>Your message:</strong><br/>' . $message . '<br/><br/><text class="text-muted">Do not reply to this email.</text>');
+    
 }
 
