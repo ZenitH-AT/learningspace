@@ -10,9 +10,11 @@
             <img class="first-slide" src="IMAGE/gallery/3.jpg" alt="First slide">
             <div class="container">
                 <div class="carousel-caption text-left" style="text-shadow: 0px 0px 3px #000">
-                    <h1>Example headline.</h1>
-                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
+                    <h1>Your Leaving Space.</h1>
+                    <p>Open an account and book a room. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                    <?php if(!isset($_SESSION['admin']) && !isset($_SESSION['iduser'])){ ?>
+                    <p><a class="btn btn-lg btn-primary" href="signup.php" role="button">Sign up today</a></p>
+                    <?php } ?>
                 </div>
             </div>
         </div>
@@ -20,9 +22,9 @@
             <img class="second-slide" src="IMAGE/gallery/2.jpg" alt="Second slide">
             <div class="container">
                 <div class="carousel-caption" style="text-shadow: 0px 0px 3px #000">
-                    <h1>Another example headline.</h1>
+                    <h1>View other rooms for you.</h1>
                     <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
+                    <p><a class="btn btn-lg btn-primary" href="gallery.php" role="button">Gallery</a></p>
                 </div>
             </div>
         </div>
@@ -31,8 +33,7 @@
             <div class="container">
                 <div class="carousel-caption text-right" style="text-shadow: 0px 0px 3px #000">
                     <h1>One more for good measure.</h1>
-                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
+                    <p>LearnigSpace provides a wonderful view. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
                 </div>
             </div>
         </div>
