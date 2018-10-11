@@ -52,6 +52,7 @@
                         $newValue = ($row['paymentStatus'] == 1 ? 0 : 1);
 
                         query("UPDATE payment SET paymentStatus = {$newValue} WHERE payID = " . $row['payID']);
+                        ?><script>alert("Payment status changed.");</script><?php
 
                         header("Refresh:0");
                         exit();
