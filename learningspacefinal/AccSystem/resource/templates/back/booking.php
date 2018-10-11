@@ -34,11 +34,11 @@
                 <th>End date</th>
                 <th>Staying period<br />(days)</th>
                 <th>Date scheduled</th>
-                <th>Status</th>
-                <th></th>
+                <th>Booking status</th>
 
                 <th>Pending</th>
                 <th>Edit</th>
+                <th>Remove</th>
             </tr>
         </thead>
         <tbody class="text-center">
