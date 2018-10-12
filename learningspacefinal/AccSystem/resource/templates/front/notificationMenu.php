@@ -1,7 +1,6 @@
 <!-- notifications dropdown start -->
 <li class="nav-item dropdown" style="list-style-type:none;">
-    <a class="nav-link text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <i class="fa fa-bell" style="text-shadow: 0px 0px 15px #ffff00;"></i><?php
+    <a class="nav-link text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php
         
         //Determining number of unread notifications
         $sqlunreaddropdown = query("SELECT * FROM notification WHERE studID = " . $_SESSION["iduser"] . " AND status = 0 ORDER BY time DESC");
@@ -10,10 +9,13 @@
         $unreadcount = $sqlunreaddropdown->num_rows; 
 
         if($unreadcount > 0) { ?>
+            <i class="fa fa-bell" style="text-shadow: 0px 0px 15px #ffff00;"></i>
             <span class="badge badge-pill badge-danger"><?php echo $unreadcount ?></span><?php
+        } else { ?>
+            <i class="fa fa-bell"></i><?php
         } ?>
     </a>
-    <ul class="dropdown-menu">
+    <ul class="dropdown-menu" style="margin-top:10px;">
         <li class="head text-light bg-dark">
             <div class="row">
                 <div class="col-lg-12 col-sm-12 col-12">

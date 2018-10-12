@@ -5,7 +5,7 @@
     <span class="navbar-toggler-icon"></span>
 </button>
 
-<div class="collapse navbar-collapse" id="navbarCollapse" style="">
+<div class="collapse navbar-collapse" id="navbarCollapse">
     <ul class="navbar-nav mr-auto">
         <li class="nav-item">
             <a class="nav-link text-light" href="HomePage.php">Home</a>
@@ -30,23 +30,38 @@
         </form>
     <?php } ?>
 
-    <form class="form-inline mt-2 mt-md-0 ">
+    <form class="form-inline mt-2 mt-md-0">
         <?php
         if (isset($_SESSION["iduser"])) {
             include 'notificationMenu.php'; ?>
 
             <ul class="navbar-nav">
-                <li>
-                    <a class="nav-link text-light"><?php echo "Welcome, ".ucfirst($_SESSION["firstname"]); ?></a>
-                </li>
+                <a class="nav-link text-light"><?php echo "Welcome, ".ucfirst($_SESSION["firstname"]); ?></a>
+
+                <div style="max-width:40px;"><?php 
+                    $studImage = query("SELECT * FROM studentprofile WHERE studID='{$_SESSION["iduser"]}' AND LENGTH(studPicture) > 0");
+                    confirm($studImage);
+
+                    if (countItem($studImage) > 0) { 
+                        while ($row = fetch_array($studImage)) {
+                            $studPicture = $row['studPicture'];
+                        } ?>
+
+                        <img class="rounded-circle" src="IMAGE/upload/<?php echo $studPicture; ?>" style="min-width:40px; min-height:40px; max-width:3%; max-height:3%;">
+                        <?php 
+                    } else { ?>
+                        <img class="rounded-circle" src="IMAGE/web/self.jpg" style="font-size:0; min-width:40px; min-height:40px; max-width:3%; max-height:3%; margin-left:0px; margin-right:0px">
+                        <?php 
+                    } ?>
+                </div>
             </ul>
 
             <!-- account dropdown start -->
             <li class="nav-item dropdown">
                 <a class="nav-link text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa fa-user"></i>
+                    <i class="fas fa-bars"></i>
                 </a>
-                <ul class="dropdown-menu dropBox" style="">
+                <ul class="dropdown-menu dropBox" style="margin-top:10px;">
                     <li class="head text-dark myMenuUser">
                         <div class="row">
                             <div class="col-lg-8 col-sm-10 col-8">
@@ -63,14 +78,14 @@
                     </li>
                     <li class="head text-dark myMenuUser">
                         <div class="row">
-                            <div class="col-lg-10 col-sm-10 col-8">
+                            <div class="col-lg-10 col-sm-10 col-10">
                                 <a href="paymentPage.php?iduser=<?php echo $_SESSION['iduser']; ?>" class="text-dark"><i class="fa fa-fw fa-credit-card"></i> Payments</a>
                             </div>
                         </div>
                     </li>
                     <li class="head text-dark myMenuUser">
                         <div class="row">
-                            <div class="col-lg-10 col-sm-10 col-8">
+                            <div class="col-lg-10 col-sm-10 col-10">
                                 <a href="userTicket.php?iduser=<?php echo $_SESSION['iduser']; ?>" class="text-dark"><i class="fa fa-fw fa-life-ring"></i> Support</a>
                             </div>
                         </div>
