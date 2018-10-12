@@ -9,35 +9,35 @@
                 <div class="card-body">
                 <form class="form-horizontal" method="post">
                     <fieldset>
-                        <legend class="header col-md-10">Leave a message</legend><?php
+                        <legend class="header col-md-12">Leave a message</legend><?php
 
                         if (!isset($_SESSION["iduser"])) { ?>
                             <div class="form-group">
-                                <div class="col-md-10 col-md-offset-1">
+                                <div class="col-md-12 col-md-offset-1">
                                     <input name="contactFirstName" type="text" placeholder="First Name" class="form-control" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-md-10 col-md-offset-1">
+                                <div class="col-md-12 col-md-offset-1">
                                     <input name="contactLastName" type="text" placeholder="Last Name" class="form-control" required>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <div class="col-md-10 col-md-offset-1">
+                                <div class="col-md-12 col-md-offset-1">
                                     <input name="contactEmail" type="email" placeholder="Email Address" class="form-control" required>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <div class="col-md-10 col-md-offset-1">
+                                <div class="col-md-12 col-md-offset-1">
                                     <input name="contactPhone" type="text" placeholder="Phone" class="form-control" required>
                                 </div>
                             </div><?php 
                         } ?>
 
                         <div class="form-group">
-                            <div class="col-md-10 col-md-offset-1">
+                            <div class="col-md-12 col-md-offset-1">
                                 <textarea class="form-control" name="contactMessage" placeholder="Message" rows="7" required></textarea>
                             </div>
                         </div>
@@ -81,7 +81,7 @@
             <div class="card">
                 <div class="card-body">
                 <div class="panel panel-default">
-                    <div class="panel-body col-md-10">
+                    <div class="panel-body col-md-12">
                     <legend class="header">Contact information</legend>
                         <div> 567 Memory Lane, Claremont
                             <br /> Cape Town, 6562
@@ -89,8 +89,7 @@
                             <br /> Email: <a href="mailto:learningspace@gmail.com">projectcrudacc@gmail.com</a>
                         </div>
                         <hr />
-                        <div id="map1" class="map" style="min-width:300px; min-height:300px; width:100%; height:100%;">
-                        </div>
+                        <div id="map1" class="map" style="min-width:300px; min-height:300px; max-width:none; height:100%;"></div>
                     </div>
                 </div>
                     </div>
