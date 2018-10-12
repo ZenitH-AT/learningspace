@@ -78,7 +78,7 @@
                                     <label class="sr-only" for="inlineFormInputGroup">Gender</label>
                                     <div class="input-group mb-2 col-md-10 col-md-offset-1">
                                         <div class="input-group-prepend">
-                                            <div class="input-group-text"><i class="fa fa-birthday-cake"></i></div>
+                                            <div class="input-group-text"><i class="fa fa-venus-mars"></i></div>
                                         </div>
                                         <select name="gender" class="form-control" required>
                                             <option selected>Male</option>
@@ -91,7 +91,7 @@
                                     <label class="sr-only" for="inlineFormInputGroup">PhoneNumber</label>
                                     <div class="input-group mb-2 col-md-10 col-md-offset-1">
                                         <div class="input-group-prepend">
-                                            <div class="input-group-text"><i class="fa fa-birthday-cake"></i></div>
+                                            <div class="input-group-text"><i class="fa fa-phone"></i></div>
                                         </div>
                                         <input id="phone" name="phone" value="<?php echo $getphone; ?>" type="text" placeholder="Phone Number (1-541-754-3010)" class="form-control" required>                                
                                     </div>
@@ -101,148 +101,150 @@
                                     <label class="sr-only" for="inlineFormInputGroup">ID_Passport</label>
                                     <div class="input-group mb-2 col-md-10 col-md-offset-1">
                                         <div class="input-group-prepend">
-                                            <div class="input-group-text"><i class="fa fa-user"></i></div>
+                                            <div class="input-group-text"><i class="fa fa-id-card"></i></div>
                                         </div>
                                         <input id="idnumber" name="idnumber" value="<?php echo $getidPassport; ?>" type="text" placeholder="ID/Passport" class="form-control" required>
                                     </div>
                                 </div>
-
-                                </div>
-                                </div>
-                                </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="well well-sm">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <legend class="header col-md-10 h6">Address</legend>
-                                                <div class="form-group">
-                                                    <label class="sr-only" for="inlineFormInputGroup">Country</label>
-                                                    <div class="input-group mb-2 col-md-10 col-md-offset-1">
-                                                        <div class="input-group-prepend">
-                                                            <div class="input-group-text"><i class="fa fa-birthday-cake"></i></div>
-                                                        </div>
-                                                        <input id="add1_country" value="<?php echo $getcountry; ?>" name="add1_country" type="text" placeholder="Country" class="form-control" required>
-                                                    </div>
-                                                </div> 
-
-                                                <div class="form-group">
-                                                    <label class="sr-only" for="inlineFormInputGroup">City</label>
-                                                    <div class="input-group mb-2 col-md-10 col-md-offset-1">
-                                                        <div class="input-group-prepend">
-                                                            <div class="input-group-text"><i class="fa fa-birthday-cake"></i></div>
-                                                        </div>
-                                                        <input id="add2_city" value="<?php echo $getcity; ?>" name="add2_city" type="text" placeholder="City or Town" class="form-control" required>
-                                                    </div>
-                                                </div>
-
-
-                                                <div class="form-group">
-                                                    <label class="sr-only" for="inlineFormInputGroup">Street</label>
-                                                    <div class="input-group mb-2 col-md-10 col-md-offset-1">
-                                                        <div class="input-group-prepend">
-                                                            <div class="input-group-text"><i class="fa fa-birthday-cake"></i></div>
-                                                        </div>
-                                                        <input id="add3_street" value="<?php echo $getstreet; ?>" name="add3_street" type="text" placeholder="Street" class="form-control" required>
-                                                    </div>
-                                                </div> 
-                                                <hr>
-                                                <legend class="header col-md-10 h6">Intitution</legend>
-                                                <div class="form-group">
-                                                    <label class="sr-only" for="inlineFormInputGroup">School</label>
-                                                    <div class="input-group mb-2 col-md-10 col-md-offset-1">
-                                                        <div class="input-group-prepend">
-                                                            <div class="input-group-text"><i class="fa fa-birthday-cake"></i></div>
-                                                        </div>
-                                                        <input id="schoolname" value="<?php echo $getschoolName; ?>" name="schoolname" type="text" placeholder="School Name" class="form-control" required>
-                                                    </div>
-                                                </div> 
-
-                                                <div class="form-group">
-                                                    <label class="sr-only" for="inlineFormInputGroup">SchoolAdd</label>
-                                                    <div class="input-group mb-2 col-md-10 col-md-offset-1">
-                                                        <div class="input-group-prepend">
-                                                            <div class="input-group-text"><i class="fa fa-birthday-cake"></i></div>
-                                                        </div>
-                                                        <input id="schooladd" value="<?php echo $getschoolAdd; ?>" name="schooladd" type="text" placeholder="School Address" class="form-control" required>
-                                                    </div>
-                                                </div> 
-                                                <hr>
-                                            </div>
-
-                                            <div class="well well-sm">
-                                                <legend class="header col-md-10 h6">Personal Credentials</legend>
-                                                <div class="form-group">
-                                                    <label class="sr-only" for="inlineFormInputGroup">UserEmail</label>
-                                                    <div class="input-group mb-2 col-md-10 col-md-offset-1">
-                                                        <div class="input-group-prepend">
-                                                            <div class="input-group-text"><i class="fa fa-birthday-cake"></i></div>
-                                                        </div>
-                                                        <input id="email" name="email" value="<?php echo $getemail; ?>" type="email" disabled placeholder="Email Address" class="form-control" />
-                                                    </div>
-                                                </div> 
-
-                                                <div class="form-group">
-                                                    <label class="sr-only" for="inlineFormInputGroup">Description</label>
-                                                    <div class="input-group mb-2 col-md-10 col-md-offset-1">
-                                                        <div class="input-group-prepend">
-                                                            <div class="input-group-text"><i class="fa fa-birthday-cake"></i></div>
-                                                        </div>
-                                                        <input id="description" name="description" value="<?php echo $getDescription; ?>" type="text" placeholder="Short Description of Yourself" class="form-control" >                                        
-                                                    </div>
-                                                </div> 
-
-                                                <legend class="header col-md-10 h6">If Change Password, You Will Login Again!</legend>
-
-                                                <div class="form-group">
-                                                    <label class="sr-only" >Old Password</label>
-                                                    <div class="input-group mb-2 col-md-10 col-md-offset-1">
-
-                                                        <div class="input-group-prepend">
-                                                            <div class="input-group-text"><i class="fa fa-birthday-cake"></i></div>
-                                                        </div>
-                                                        <input id="oldpassword" name="oldpassword" value="" type="password" placeholder="Old Password" class="form-control" >                                        
-                                                    </div>
-                                                    <?php echo $OldpassError; ?>
-                                                </div> 
-
-                                                <div class="form-group">
-                                                    <label class="sr-only" for="inlineFormInputGroup">Password</label>
-                                                    <div class="input-group mb-2 col-md-10 col-md-offset-1">
-                                                        <div class="input-group-prepend">
-                                                            <div class="input-group-text"><i class="fa fa-birthday-cake"></i></div>
-                                                        </div>
-                                                        <input id="password" name="password" value="" type="password" placeholder="New Password" class="form-control" >                                        
-                                                    </div>
-                                                    <?php echo $passError; ?>
-                                                </div> 
-
-                                                <div class="form-group">
-                                                    <label class="sr-only" for="inlineFormInputGroup">Password</label>
-                                                    <div class="input-group mb-2 col-md-10 col-md-offset-1">
-                                                        <div class="input-group-prepend">
-                                                            <div class="input-group-text"><i class="fa fa-birthday-cake"></i></div>
-                                                        </div>
-                                                        <input id="rePass" name="rePass" value="" type="password" placeholder="Re-Enter New Password" class="form-control">
-                                                    </div>
-                                                    <?php echo $repassError; ?>
-                                                </div> 
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group text-center" style="width: 100%;">
-                                    <hr>
-                                    <div class="col-md-12">
-                                        <button type="submit" id="submit" name="editProfile" class=" btn btn-outline-success formbutton">Save Profile</button>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </form>
+                            </div>
+                        </div>
                     </div>
-                    <!--- END -->
                 </div>
+
+                <div class="col-md-6">
+                    <div class="well well-sm">
+                        <div class="card">
+                            <div class="card-body">
+                                <legend class="header col-md-10 h6">Your Address</legend>
+                                <div class="form-group">
+                                    <label class="sr-only" for="inlineFormInputGroup">Country</label>
+                                    <div class="input-group mb-2 col-md-10 col-md-offset-1">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text"><i class="fa fa-map-marked-alt"></i></div>
+                                        </div>
+                                        <input id="add1_country" value="<?php echo $getcountry; ?>" name="add1_country" type="text" placeholder="Country" class="form-control" required>
+                                    </div>
+                                </div> 
+
+                                <div class="form-group">
+                                    <label class="sr-only" for="inlineFormInputGroup">City</label>
+                                    <div class="input-group mb-2 col-md-10 col-md-offset-1">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text"><i class="fa fa-map-marked-alt"></i></div>
+                                        </div>
+                                        <input id="add2_city" value="<?php echo $getcity; ?>" name="add2_city" type="text" placeholder="City or Town" class="form-control" required>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label class="sr-only" for="inlineFormInputGroup">Street</label>
+                                    <div class="input-group mb-2 col-md-10 col-md-offset-1">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text"><i class="fa fa-map-marked-alt"></i></div>
+                                        </div>
+                                        <input id="add3_street" value="<?php echo $getstreet; ?>" name="add3_street" type="text" placeholder="Street" class="form-control" required>
+                                    </div>
+                                </div> 
+                                <hr>
+                                <legend class="header col-md-10 h6">Education</legend>
+                                <div class="form-group">
+                                    <label class="sr-only" for="inlineFormInputGroup">School</label>
+                                    <div class="input-group mb-2 col-md-10 col-md-offset-1">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text"><i class="fa fa-graduation-cap"></i></div>
+                                        </div>
+                                        <input id="schoolname" value="<?php echo $getschoolName; ?>" name="schoolname" type="text" placeholder="School Name" class="form-control" required>
+                                    </div>
+                                </div> 
+
+                                <div class="form-group">
+                                    <label class="sr-only" for="inlineFormInputGroup">SchoolAdd</label>
+                                    <div class="input-group mb-2 col-md-10 col-md-offset-1">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text"><i class="fa fa-map"></i></div>
+                                        </div>
+                                        <input id="schooladd" value="<?php echo $getschoolAdd; ?>" name="schooladd" type="text" placeholder="School Address" class="form-control" required>
+                                    </div>
+                                </div> 
+
+                                <hr>
+                            
+                                <div class="well well-sm">                  
+                                    <legend class="header col-md-10 h6">Personal Credentials</legend>
+                                    <div class="form-group">
+                                        <label class="sr-only" for="inlineFormInputGroup">UserEmail</label>
+                                        <div class="input-group mb-2 col-md-10 col-md-offset-1">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="fa fa-at"></i></div>
+                                            </div>
+                                            <input id="email" name="email" value="<?php echo $getemail; ?>" type="email" disabled placeholder="Email Address" class="form-control" />
+                                        </div>
+                                    </div> 
+
+                                    <div class="form-group">
+                                        <label class="sr-only" for="inlineFormInputGroup">Description</label>
+                                        <div class="input-group mb-2 col-md-10 col-md-offset-1">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="fa fa-info"></i></div>
+                                            </div>
+                                            <input id="description" name="description" value="<?php echo $getDescription; ?>" type="text" placeholder="Short description of yourself (bio)" class="form-control" >                                        
+                                        </div>
+                                    </div> 
+
+                                    <hr>
+
+                                    <legend class="header col-md-10 h6">Password</legend>
+                                    <h6 class="col-md-10 text-secondary">Note: If you change your password,<br/>you will need to log in again.</h6>
+
+                                    <div class="form-group">
+                                        <label class="sr-only" >Old Password</label>
+                                        <div class="input-group mb-2 col-md-10 col-md-offset-1">
+
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="fa fa-key"></i></div>
+                                            </div>
+                                            <input id="oldpassword" name="oldpassword" value="" type="password" placeholder="Old Password" class="form-control" >                                        
+                                        </div>
+                                        <?php echo $OldpassError; ?>
+                                    </div> 
+
+                                    <div class="form-group">
+                                        <label class="sr-only" for="inlineFormInputGroup">Password</label>
+                                        <div class="input-group mb-2 col-md-10 col-md-offset-1">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="fa fa-key"></i></div>
+                                            </div>
+                                            <input id="password" name="password" value="" type="password" placeholder="New Password" class="form-control" >                                        
+                                        </div>
+                                        <?php echo $passError; ?>
+                                    </div> 
+
+                                    <div class="form-group">
+                                        <label class="sr-only" for="inlineFormInputGroup">Password</label>
+                                        <div class="input-group mb-2 col-md-10 col-md-offset-1">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="fa fa-key"></i></div>
+                                            </div>
+                                            <input id="rePass" name="rePass" value="" type="password" placeholder="Re-enter new password" class="form-control">
+                                        </div>
+                                        <?php echo $repassError; ?>
+                                    </div> 
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group text-center" style="width: 100%;">
+                    <hr>
+                    <div class="col-md-12">
+                        <button type="submit" id="submit" name="editProfile" class=" btn btn-outline-success formbutton">Save Profile</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <!--- END -->
+</div>
