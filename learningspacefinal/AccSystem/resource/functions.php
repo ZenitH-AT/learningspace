@@ -906,6 +906,8 @@ function profile() {
                     $update2 = query($sql);
                     confirm($update2);
                     if ($update2) {
+                        header("Refresh:0");
+
                         $confirm = "<div class='alert alert-success alert-dismissible fade show text-center' role='alert'>
                                     <strong>Success!</strong> Your Profile Has Been Updated.
                                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
