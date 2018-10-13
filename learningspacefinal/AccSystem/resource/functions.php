@@ -1361,17 +1361,17 @@ function get_Bookings() {
                                         <div class="form-group row">
                                             <div class="col-sm-6">
                                                 Start date
-                                                <input type="text" class="form-control" value="<?php echo $row['bookStatDate'] ?>" id="startDate<?php echo $row['bookID']; ?>" name="startDate<?php echo $row['bookID']; ?>" required>
+                                                <input type="date" class="form-control" value="<?php echo $row['bookStatDate'] ?>" id="startDate<?php echo $row['bookID']; ?>" name="startDate<?php echo $row['bookID']; ?>" required>
                                             </div>
                                             <div class="col-sm-6">
                                                 End date
-                                                <input type="text" class="form-control" value="<?php echo $row['bookEndDate'] ?>" id="endDate<?php echo $row['bookID']; ?>" name="endDate<?php echo $row['bookID']; ?>" required>
+                                                <input type="date" class="form-control" value="<?php echo $row['bookEndDate'] ?>" id="endDate<?php echo $row['bookID']; ?>" name="endDate<?php echo $row['bookID']; ?>" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-sm-6">
                                                 Date scheduled
-                                                <input type="text" class="form-control" value="<?php echo $row['bookingDate'] ?>" id="bookDate<?php echo $row['bookID']; ?>" name="bookDate<?php echo $row['bookID']; ?>" required>
+                                                <input type="date" class="form-control" value="<?php echo $row['bookingDate'] ?>" id="bookDate<?php echo $row['bookID']; ?>" name="bookDate<?php echo $row['bookID']; ?>" required>
                                             </div>
                                         </div>
                                     </div>
@@ -1480,11 +1480,11 @@ function get_Viewings() {
                                         <div class="form-group row">
                                             <div class="col-sm-6">
                                                 View date
-                                                <input type="text" class="form-control" value="<?php echo $row['viewDate'] ?>" id="viewDate<?php echo $row['viewBookingID']; ?>" name="viewDate<?php echo $row['viewBookingID']; ?>" required>
+                                                <input type="date" class="form-control" value="<?php echo $row['viewDate'] ?>" id="viewDate<?php echo $row['viewBookingID']; ?>" name="viewDate<?php echo $row['viewBookingID']; ?>" required>
                                             </div>
                                             <div class="col-sm-6">
                                                 Date scheduled
-                                                <input type="text" class="form-control" value="<?php echo $row['scheduledDate'] ?>" id="scheduledDate<?php echo $row['viewBookingID']; ?>" name="scheduledDate<?php echo $row['viewBookingID']; ?>" required>
+                                                <input type="date" class="form-control" value="<?php echo $row['scheduledDate'] ?>" id="scheduledDate<?php echo $row['viewBookingID']; ?>" name="scheduledDate<?php echo $row['viewBookingID']; ?>" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
