@@ -136,7 +136,7 @@
                                                 <div class="form-group row">
                                                     <div class="col-sm-6">
                                                         Date of birth
-                                                        <input type="text" class="form-control" value="<?php echo $row['studDOB'] ?>" id="dateOfBirth<?php echo $row['studID']; ?>" name="dateOfBirth<?php echo $row['studID']; ?>" required>
+                                                        <input type="date" class="form-control" value="<?php echo $row['studDOB'] ?>" id="dateOfBirth<?php echo $row['studID']; ?>" name="dateOfBirth<?php echo $row['studID']; ?>" required>
                                                     </div>
                                                     <div class="col-sm-6">
                                                         ID/passport number
