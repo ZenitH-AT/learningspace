@@ -165,7 +165,7 @@ function get_Rooms_Marketing() {
             <span class="text-muted">{$row['secondText']}</span></h2>
             <p class="lead">{$row['roomDescription']}</p>
             <br/>
-            <button class="btn btn-outline-info" href="viewRoom.php?id={$row['room_id']}">More information</button>
+            <a href="viewRoom.php?id={$row['room_id']}" class="btn btn-outline-info" role="button">More information</a>
         </div>
         <div class="col-md-5 order-md-1">
             <div data-toggle="tooltip" data-placement="top" title="Click to View and Book Room">
@@ -185,7 +185,7 @@ DELIMETER;
             <span class="text-muted">{$row['secondText']}</span></h2>
             <p class="lead">{$row['roomDescription']}</p>
             <br/>
-            <button class="btn btn-outline-info" href="viewRoom.php?id={$row['room_id']}">More information</button>
+            <a href="viewRoom.php?id={$row['room_id']}" class="btn btn-outline-info" role="button">More information</a>
         </div>
         <div class="col-md-5">
             <div data-toggle="tooltip" data-placement="top" title="Click to View and Book Room">
