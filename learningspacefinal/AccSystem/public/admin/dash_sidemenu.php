@@ -14,15 +14,15 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="?booking">
-                    <span data-feather="book-open"></span>
-                    Bookings
-                </a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="?viewing">
                     <span data-feather="eye"></span>
                     Viewings
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="?booking">
+                    <span data-feather="book-open"></span>
+                    Bookings
                 </a>
             </li>
             <li class="nav-item">
