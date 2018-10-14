@@ -106,7 +106,7 @@
             <!-- account dropdown start -->
             <li class="nav-item dropdown">
                 <a class="nav-link text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa fa-user"></i>
+                    <i class="fas fa-bars"></i>
                 </a>
                 <ul class="dropdown-menu dropBox" style="">
                     <li class="head text-dark myMenuUser">
