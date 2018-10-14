@@ -67,6 +67,9 @@
                     if(isset($_POST['removeStudent' . $row['studID']])){
                         query("DELETE FROM student WHERE studID = " . $row['studID']);
                         ?><script>alert("Student deleted.");</script><?php
+
+                        header("Refresh:0");
+                        exit();
                     } ?>
                 </tr> 
                 
