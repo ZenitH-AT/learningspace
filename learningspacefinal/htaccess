@@ -1,0 +1,3 @@
+Options -Indexes
+ErrorDocument 404 http://localhost:8080/project/AccSystem/public/HomePage.php
+ErrorDocument 403 http://localhost:8080/project/AccSystem/public/HomePage.php
