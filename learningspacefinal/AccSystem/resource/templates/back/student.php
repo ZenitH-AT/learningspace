@@ -89,7 +89,7 @@
                                                         <input type="text" class="form-control" value="<?php echo $row['studFirstName'] ?>" id="firstName<?php echo $row['studID']; ?>" name="firstName<?php echo $row['studID']; ?>" required>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        School
+                                                        School name
                                                         <input type="text" class="form-control" value="<?php echo $row['studSchool'] ?>" id="school<?php echo $row['studID']; ?>" name="school<?php echo $row['studID']; ?>" required>
                                                     </div>
                                                 </div>
