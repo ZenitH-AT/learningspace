@@ -60,9 +60,13 @@
                     <td><?php echo ($row['isActive'] == 1 ? '<text class="text-success">active</text>' : '<text class="text-danger">inactive</text>') ?></td>
                     <td><?php echo $row['data'] ?></td>
 
-                    <td><button type="button" class="btn btn-info formbutton" data-toggle="modal" data-target="#studentPopup<?php echo $row['studID']; ?>"><span class="fa fa-user-edit" style="color:white"></button></form></td>
-                    <td><form method="post"><button class="btn btn-danger formbutton" name="removeStudent<?php echo $row['studID'] ?>" onclick="return confirm('Are you sure you want to remove <?php echo $row['studFirstName'] . ' ' . $row['studLastName'] ?>?')"><span class="fa fa-user-minus" style="color:white"></button></form></td><?php
-
+                    <td><button type="button" class="btn btn-info formbutton" data-toggle="modal" data-target="#studentPopup<?php echo $row['studID']; ?>"><span class="fa fa-user-edit" style="color:white"></button></form></td><?php
+                    
+                    //Show delete button if the logged in admin is an owner
+                    if($_SESSION['adminCategory'] == 1) { ?>
+                        <td><form method="post"><button class="btn btn-danger formbutton" name="removeStudent<?php echo $row['studID'] ?>" onclick="return confirm('Are you sure you want to remove <?php echo $row['studFirstName'] . ' ' . $row['studLastName'] ?>?')"><span class="fa fa-user-minus" style="color:white"></button></form></td><?php
+                    }
+                    
                     //Remove button handling
                     if(isset($_POST['removeStudent' . $row['studID']])){
                         query("DELETE FROM student WHERE studID = " . $row['studID']);
