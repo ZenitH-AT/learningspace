@@ -1301,7 +1301,7 @@ function get_Bookings() {
             
             //Show delete button if the logged in admin is an owner
             if($_SESSION['adminCategory'] == 1) { ?>
-                <td><button type="button" class="btn btn-danger formbutton" name="removeBooking<?php echo $row['bookID'] ?>" onclick="return confirm('Are you sure you want to delete booking ID <?php echo $row['bookID'] ?>?')"><span class="fa fa-times" style="color:white"></button></form></td><?php
+                <td><form method="post"><button class="btn btn-danger formbutton" name="removeBooking<?php echo $row['bookID'] ?>" onclick="return confirm('Are you sure you want to delete booking ID <?php echo $row['bookID'] ?>?')"><span class="fa fa-times" style="color:white"></button></form></td><?php
             } ?>
         </tr><?php
 
@@ -1334,9 +1334,9 @@ function get_Bookings() {
             exit();
 
             //Send student a different notification based on if the booking had started or not
-            if(new DateTime('today') < new DateTime($row['bookStatDate'])) {
+            if((new DateTime('today') < new DateTime($row['bookStatDate'])) && ($row['bookingStatus'] == 1)) {
                 send_notification("An administrator has ended your booking", "Your booking for room number <strong>{$row['roomID']}</strong> has been removed and candelled by an admin. Because your booking was still pending, you will be refunded.", "notice", $row['studID']);
-            } else {
+            } else if ($row['bookingStatus'] == 1) {
                 send_notification("An administrator has ended your booking", "Your booking for room number <strong>{$row['roomID']}</strong> has been removed and candelled by an admin.", "notice", $row['studID']);
             }
         } ?>
