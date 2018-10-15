@@ -1332,7 +1332,15 @@ function get_Bookings() {
 
             header("Refresh:0");
             exit();
-        }?>
+
+            //Send student a different notification based on if the booking had started or not
+            if(new DateTime('today') < new DateTime($row['bookStatDate'])) {
+                send_notification("An administrator has ended your booking", "Your booking for room number <strong>{$row['roomID']}</strong> has been removed and candelled by an admin.
+                 Because your booking was still pending, you will be refunded.", "notice", "$row['studID']");
+            } else {
+                send_notification("An administrator has ended your booking", "Your booking for room number <strong>{$row['roomID']}</strong> has been removed and candelled by an admin.", "notice", "$row['studID']");
+            }
+        } ?>
 
         <!-- Edit booking modal -->
         <div class="modal fade" id="bookingPopup<?php echo $row['bookID']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
