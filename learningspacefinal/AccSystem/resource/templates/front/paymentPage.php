@@ -101,7 +101,7 @@ $confirm2 = "<div class='alert alert-success alert-dismissible fade show text-ce
             <div class="well well-sm">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title text-center">Payment List</h4>
+                        <h4 class="card-title text-center">Payment History</h4>
                         <div class="text-center" style="padding-bottom: 5px;"><img style="height: 226px;" class="img-fluid img-thumbnail" src="IMAGE/web/list2.jpg"  width="380" ></div>
                         <div class="table table-sm">
                             <table class="table-responsive table-hover">
