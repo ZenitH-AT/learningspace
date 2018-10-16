@@ -99,6 +99,8 @@ function get_Rooms_Gallery() {
     confirm($query);
 
     while ($row = fetch_array($query)) {
+        $availability = ($row['roomReserved'] == 1 ? "<a class=text-success>Available</a>" : "<a class=text-danger>Not available</a>");
+
         $room1 = <<<DELIMETER
         <div class="col-sm-6 col-md-4">
             <div class="thumbnail">
@@ -107,8 +109,9 @@ function get_Rooms_Gallery() {
                 </a>
                 <div class="caption">
                     <h3>{$row['roomName']}</h3>
-                    <p>{$row['roomShortDescription']}
-                    <br/><br/><a class="text-success" style="float:right; font-size:150%" href="viewRoom.php?id={$row['room_id']}">More&raquo;</a></p>
+                    <p>{$row['roomShortDescription']}<br/><br/>
+                    {$availability}
+                    <br/><br/><a class="text-success" style="float:right; font-size:150%" href="viewRoom.php?id={$row['room_id']}">More info &raquo;</a></p>
                 </div>
             </div>
         </div>
