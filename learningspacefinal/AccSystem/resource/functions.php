@@ -99,7 +99,7 @@ function get_Rooms_Gallery() {
     confirm($query);
 
     while ($row = fetch_array($query)) {
-        $availability = ($row['roomReserved'] == 1 ? "<a class=text-success>Available</a>" : "<a class=text-danger>Not available</a>");
+        $availability = ($row['roomReserved'] == 0 ? "<a class=text-success>Available</a>" : "<a class=text-danger>Not available</a>");
 
         $room1 = <<<DELIMETER
         <div class="col-sm-6 col-md-4">
