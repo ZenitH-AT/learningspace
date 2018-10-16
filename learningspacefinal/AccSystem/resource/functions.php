@@ -1798,7 +1798,7 @@ function notification_icon($type) {
 //Sends an email to the admin and back to the sender (for contact page)
 function send_contact_message($firstname, $lastname, $email, $phone, $message) {
     //Select a random active admin as the recipient
-    $query = query("SELECT adminEmail FROM admin WHERE adminActive='1' ORDER BY RAND() LIMIT 1");
+    $query = query("SELECT adminEmail FROM admin WHERE adminActive = 1 ORDER BY RAND() LIMIT 1");
     confirm($query);
     $row = fetch_array($query);
 
