@@ -31,7 +31,7 @@ $confirm2 = "<div class='alert alert-success alert-dismissible fade show text-ce
             ?>
             <div class="" style="width: 100%; padding-left: 16px; padding-right: 16px;"><?php echo $confirm2; ?></div>
 <?php } //} ?>
-        <div class="col-md-6">
+        <div class="col-md-5">
             <div class="well well-sm">
                 <div class="card">
                     <div class="card-body">
@@ -86,7 +86,7 @@ $confirm2 = "<div class='alert alert-success alert-dismissible fade show text-ce
                         <div class="card-body ">
                             <div class="col-md-12 d-flex justify-content-center">
                                 <?php if (isset($_SESSION["idRoom"])) { ?>
-                                    <button type="button" class="btn btn-outline-success formbutton" data-target="#paymentModal" data-toggle="modal">Payment</button>
+                                    <button type="button" class="btn btn-outline-success formbutton" data-target="#paymentModal" data-toggle="modal">Make payment</button>
                                 <?php } ?>
                             </div>
                         </div>
@@ -97,7 +97,7 @@ $confirm2 = "<div class='alert alert-success alert-dismissible fade show text-ce
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-7">
             <div class="well well-sm">
                 <div class="card">
                     <div class="card-body">
