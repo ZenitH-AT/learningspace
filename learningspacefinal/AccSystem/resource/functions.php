@@ -1077,7 +1077,7 @@ function payment() {
 
             <tr>
                 <td><?php echo $row['payMonth'] ?></td>
-                <td><?php echo $row['cardNumber'] ?></td>
+                <td><?php echo substr($row['cardNumber'], 0, 2) . '****' . substr($row['cardNumber'], -2) ?></td>
                 <td><?php echo $row['roomID'] ?></td>
                 <td><?php echo 'R' . round($row['payAmount'], 2) ?></td>
                 <td><?php echo $row['paymentDate'] ?></td>
