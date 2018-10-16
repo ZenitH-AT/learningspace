@@ -1161,7 +1161,7 @@ function paymentMonths() {
                     if ($count < sizeof($_SESSION["monthsNum"])) {
                         echo "<div style='padding-right: 5px; padding-bottom: 3px;' data-toggle='tooltip' data-placement='top' title='It was already paid'><strong class='btn btn-success' >{$arrayMonths[$ok - 1]} </strong></div>";
                     } else {
-                        echo "<div style='padding-right: 5px; padding-bottom: 2px;' data-toggle='tooltip' data-placement='top' title='This was not paid yet'><strong class='btn btn-danger'>{$arrayMonths[$ok - 1]} </strong></div>";
+                        echo "<div style='padding-right: 5px; padding-bottom: 2px;' data-toggle='tooltip' data-placement='top' title='This was not paid yet'><strong class='btn btn-secondary'>{$arrayMonths[$ok - 1]} </strong></div>";
                     }
                 } else {
                     echo "<div style='padding-right: 5px; padding-bottom: 2px;' data-toggle='tooltip' data-placement='top' title='This was not paid yet'><strong class='btn btn-danger'>{$arrayMonths[$ok - 1]} </strong></div>";
