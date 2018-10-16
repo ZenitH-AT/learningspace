@@ -6,7 +6,7 @@
                 <div class="well well-sm card">
                     <form class="form-horizontal" method="post">
                         <fieldset>
-                            <legend class="header card-header col-md-10">Create new support ticket</legend>
+                            <legend class="header card-header col-md-10" style="background-color: white">Create new support ticket</legend>
                             <div class="card-body">
                                 <h6 class="text-muted">Need help? Creating a ticket will send LearningSpace<br/>an issue to attend to.</h6><br/>
                                 <div class="form-group">
@@ -66,7 +66,7 @@
             <div class="col-md-6">
                 <div class="well well-sm card">
                     <form class="form-horizontal" method="post">
-                        <legend class="header card-header col-md-10">Your active tickets</legend>
+                        <legend class="header card-header col-md-10" style="background-color: white">Your active tickets</legend>
                         <div class="card-body">
                             <?php 
                             //Displaying active tickets
@@ -90,7 +90,7 @@
                                     <!-- Active ticket cards -->
                                     <div class="card-body">
                                         <div class="card col-md-12 form-group" style="box-shadow: 5px 5px 15px #cfd1d3">
-                                            <div class="card-header text-secondary">
+                                            <div class="card-header text-secondary" style="background-color: white">
                                                 <span style="float:left">Ticket ID: <?php echo $row['ticketID']; ?></span><span style="float:right">Created: <?php echo $row['ticketTime']; ?></span>
                                             </div>
                                             <div class="card-body">
