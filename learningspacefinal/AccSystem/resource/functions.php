@@ -257,14 +257,17 @@ function bookingPage() {
                                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                       <span aria-hidden='true'>&times;</span>
                                     </button></div>";
-//            $mail = new MailClass();
-//            $subject = "Your Accommodation Account - Verify Your Email Address";
-//            $body = "Dear {$viewname}<br>"
-//                    . "You have schedule a viewing on {$viewdate}<br><br>"
-//                    . "<a href='#' class='btn btn-outline-success formbutton'>Don't Missing Your Appointment</a> <br><br>"
-//                    . "<a href='http://localhost/project/AccSystem/public/HomePage.php' class='btn btn-outline-success formbutton'>Go to the Website</a>";
-//
-//            $getresult = $mail->sendMail($email, $subject, $body);
+
+            if (!isset($_SESSION["iduser"])) {
+                $mail = new MailClass();
+                $subject = "Your viewing has been scheduled";
+                $body = "Dear {$viewname}<br><br>"
+                        . "Your view booking for room number <strong>{$idRoom}</strong> has been scheduled for {$viewdate}.";
+
+                $getresult = $mail->sendMail($userForgot, $subject, $body);
+            } else {
+                send_notification("Your viewing has been scheduled", "Your view booking for room number <strong>{$idRoom}</strong> has been scheduled for {$viewdate}.", "notice", $_SESSION["iduser"]);
+            }
         }
     }
 
