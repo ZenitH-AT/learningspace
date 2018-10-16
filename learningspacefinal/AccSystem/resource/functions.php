@@ -1273,6 +1273,9 @@ function makePayment() {
             confirm($insertPayment);
 
             if ($insertPayment) {
+                //Send the student a notification
+                send_notification("Your payment was successful", "Your payment for room <strong>{$_SESSION["idRoom"]}</strong> was successful.", "success", $_SESSION['iduser']);
+
                 redirect("?paid");
             }
         }
