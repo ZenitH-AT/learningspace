@@ -65,9 +65,13 @@
                                         $phone = $_SESSION["phone"];
                                     }
 
-                                    $message =$_POST['contactMessage'];
+                                    $message = $_POST['contactMessage'];
 
                                     send_contact_message($firstname, $lastname, $email, $phone, $message);
+
+                                    if (!isset($_SESSION["iduser"])) {
+                                        send_notification("Your message has been sent", "Your message sent through the contact page has been emailed to us. We will respond to you via email shortly.", "notice", $_SESSION['iduser']);
+                                    }
                                 } ?>
                             </div>
                         </div>
