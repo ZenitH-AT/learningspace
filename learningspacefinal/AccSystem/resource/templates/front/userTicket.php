@@ -126,7 +126,7 @@
                                                     }
                                                 </style>
 
-                                                <span style="float:left"><a href="#" class="btn btn-outline-info btn-secondary" data-toggle="modal" data-target="#ticketPopup<?php echo $row['ticketID']; ?>" name="viewid<?php echo $row['ticketID']; ?>">View ticket</a></span>
+                                                <span style="float:left"><a href="#" class="btn btn-outline-info btn-secondary" data-toggle="modal" data-target="#ticketPopup<?php echo $row['ticketID']; ?>" name="viewid<?php echo $row['ticketID']; ?>">Conversation</a></span>
                                                 <span class="close-ticket-button-lg"><form method="post"><button class="btn btn-outline-secondary btn-secondary" name="closereopen<?php echo $row['ticketID']; ?>" onclick="return confirm('Are you sure you want to close <?php echo $row['ticketSubject'] ?>? You should only close a ticket when the issue has been resolved.')">Close ticket (issue resolved)</button></form></span>
                                                 <span class="close-ticket-button-sm"><form method="post"><button class="btn btn-outline-secondary btn-secondary" name="closereopen<?php echo $row['ticketID']; ?>" onclick="return confirm('Are you sure you want to close <?php echo $row['ticketSubject'] ?>? You should only close a ticket when the issue has been resolved.')">Close ticket</button></form></span><?php
                                                 
