@@ -6,7 +6,14 @@
         <div class="col-md-6">
             <div class="well well-sm">
                 <div class="card">
-                <div class="card-body">
+                <div class="card-body"><?php
+                if (isset($_GET['messagesent'])) { ?>
+                    <div class='alert alert-success alert-dismissible fade show text-center' role='alert'>
+                    <strong>Success!</strong> Your message has been sent
+                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                        <span aria-hidden='true'>&times;</span>
+                    </button></div><?php
+                } ?>
                 <form class="form-horizontal" method="post">
                     <fieldset>
                         <legend class="header col-md-12">Leave a message</legend><?php
@@ -63,15 +70,15 @@
                                         $lastname = $_SESSION["lastname"];
                                         $email = $_SESSION["email"];
                                         $phone = $_SESSION["phone"];
+
+                                        send_notification("Your message has been sent", "Your message sent through the contact page has been emailed to us. We will respond to you via email shortly.", "notice", $_SESSION["iduser"]);
                                     }
 
                                     $message = $_POST['contactMessage'];
 
                                     send_contact_message($firstname, $lastname, $email, $phone, $message);
 
-                                    if (!isset($_SESSION["iduser"])) {
-                                        send_notification("Your message has been sent", "Your message sent through the contact page has been emailed to us. We will respond to you via email shortly.", "notice", $_SESSION['iduser']);
-                                    }
+                                    redirect("?messagesent");
                                 } ?>
                             </div>
                         </div>
