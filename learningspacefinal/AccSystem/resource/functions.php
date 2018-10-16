@@ -447,8 +447,8 @@ function lognew() {
                 }
                 $mail = new MailClass();
                 $subject = "Your Accommodation Account - Reset Your Password";
-                $body = "Dear {$UserFName} {$UserLName}<br>"
-                        . "Click the link below to reset your password<br><br>"
+                $body = "Dear {$UserFName} {$UserLName}<br><br>"
+                        . "Please click the link below to reset your password<br><br>"
                         . "<a href='http://localhost:8080/project/AccSystem/public/setNewPassword.php?key={$activationKey}' class='btn btn-outline-success formbutton'>Reset Your Password</a>";
 
                 $getresult = $mail->sendMail($userForgot, $subject, $body);
