@@ -267,6 +267,13 @@ function bookingPage() {
                 $getresult = $mail->sendMail($viewemail, $subject, $body);
             } else {
                 send_notification("Your viewing has been scheduled", "Your view booking for room number <strong>{$idRoom}</strong> has been scheduled for {$viewdate}.", "notice", $_SESSION["iduser"]);
+
+                $mail = new MailClass();
+                $subject = "Your viewing has been scheduled";
+                $body = "Dear {$viewname}<br><br>"
+                        . "Your view booking for room number <strong>{$idRoom}</strong> has been scheduled for {$viewdate}.";
+
+                $getresult = $mail->sendMail($viewemail, $subject, $body);
             }
         }
     }
