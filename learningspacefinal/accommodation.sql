@@ -27,19 +27,6 @@ USE `accommodation`;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `accommodation`
---
-
-CREATE TABLE `accommodation` (
-  `accID` int(11) NOT NULL,
-  `accResgistratioonNo` varchar(255) COLLATE utf8_bin NOT NULL,
-  `accLocation` varchar(255) COLLATE utf8_bin NOT NULL,
-  `accNoOfRooms` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `admin`
 --
 
@@ -409,13 +396,6 @@ INSERT INTO `viewing` (`viewBookingID`, `viewerName`, `viewerEmail`, `viewerPhon
 --
 
 --
--- Indexes for table `accommodation`
---
-ALTER TABLE `accommodation`
-  ADD PRIMARY KEY (`accID`),
-  ADD UNIQUE KEY `Unique` (`accResgistratioonNo`);
-
---
 -- Indexes for table `admin`
 --
 ALTER TABLE `admin`
@@ -497,12 +477,6 @@ ALTER TABLE `viewing`
 --
 -- AUTO_INCREMENT for dumped tables
 --
-
---
--- AUTO_INCREMENT for table `accommodation`
---
-ALTER TABLE `accommodation`
-  MODIFY `accID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `admin`
