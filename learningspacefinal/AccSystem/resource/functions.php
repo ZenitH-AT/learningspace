@@ -39,6 +39,21 @@ function backHOme() {
     }
 }
 
+function countRecords($tb, $idField=null, $tar=null, $idField2=null , $tar2=null){
+    if ($tar == null) {
+        $query = query("SELECT * FROM ".escape_String($tb)." ");
+    }elseif ($idField2 != null) {
+        $query = query("SELECT * FROM ".escape_String($tb)." WHERE ". escape_String($idField) ."= '" .  escape_String($tar)."' "
+                . "AND ".  escape_String($idField2)."= '".  escape_String($tar2)."' ");
+    }else{
+        $query = query("SELECT * FROM ".escape_String($tb)." WHERE ". escape_String($idField) ."= '" .  escape_String($tar)."' ");
+    }
+    confirm($query);
+    $count = countItem($query);
+    return $count;
+}
+
+
 function toRemove($tableName, $colomnName, $idItem) {
     $tN = escape_String($tableName);
     $clN = escape_String($colomnName);
@@ -1807,7 +1822,7 @@ function send_contact_message($firstname, $lastname, $email, $phone, $message) {
     if ($query){
         $adminEmail = $row['adminEmail'];
     }  else {
-        $adminEmail = "zenith3za@gmail.com";
+        $adminEmail = "projectcrudacc@gmail.com";
     }
 
     $mail = new MailClass();
