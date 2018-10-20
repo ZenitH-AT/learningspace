@@ -8,16 +8,13 @@
         <meta name="description" content="">
         <meta name="author" content="WenyKeny">
         <link rel="icon" href="../image/web/favicon.ico">
-
         <title>LearningSpace Dashboard</title>
-
         <!-- Bootstrap core CSS -->
         <link href="./css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/fontawesome/css/all.min.css" rel="stylesheet">
         <link href="./css/bootstrap.min.css" rel="stylesheet">
         <link href="./css/sb-admin.css" rel="stylesheet">
-        
-
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <!-- Custom styles for this template -->
         <link href="./css/dashboard.css" rel="stylesheet">
     </head>
@@ -25,6 +22,7 @@
     <body>
 
         <?php include 'dash_navbar.php'; ?>
+        
 
         <div class="container-fluid">
 
@@ -106,7 +104,6 @@
         <!-- Bootstrap core JavaScript
         ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
-<!--        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>-->
         <script src="./js/jquery-3.3.1.slim.min.js"></script>
         <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
         <script src="./js/popper.min.js"></script>
@@ -118,18 +115,6 @@
         <script>
             feather.replace();
         </script>
-        <script>
-//            $(document).ready(function() {
-//                $("a").click(function(e) {
-//                    //e.preventDefault();
-//                    $("a.active").removeClass("active");
-//                    $(this).addClass("active");
-//                });
-//            });
-        </script>
 
-        <!-- Graphs -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
-        <script src="js/chart.js"></script>
     </body>
 </html>
