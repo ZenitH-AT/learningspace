@@ -8,7 +8,6 @@
     <?php echo $empty; ?>
 
     <div class="row mysignup">
-
         <legend class="header col-md-10 text-center h3"><?php echo $_SESSION['firstname']; ?>'s Profile</legend>
         <div style="width: 100%;"><hr></div>
 
@@ -70,7 +69,7 @@
                                         <div class="input-group-prepend">
                                             <div class="input-group-text"><i class="fa fa-birthday-cake"></i></div>
                                         </div>
-                                        <input id="dob" name="dob" value="<?php echo $getdate; ?>" type="date" placeholder="Date Of Birth" class="form-control" required>    
+                                        <input id="dob" name="dob" value="<?php echo $getdate; ?>" type="date" placeholder="Date Of Birth" class="form-control" max="<?php echo date('Y-m-d', strtotime(date("Y-m-d", mktime()) . " - 16 year")); ?>" required>    
                                     </div>
                                 </div>
 
