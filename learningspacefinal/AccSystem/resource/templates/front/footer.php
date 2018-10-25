@@ -18,42 +18,42 @@ if (isset($_GET['error'])) {
     $error = $_GET['error'];
     if ($error == 1) {
         ?>
-        <script>alert("Your Credentials Are Wrong. Please, Try It Again");</script>
+        <script>alert("Your credentials are wrong. Please try again.");</script>
         <?php
     }
     if ($error == 2) {
         ?>
-        <script>alert("Your Email Is Wrong. Please, Provide Your Registed Email");</script>
+        <script>alert("YThe provided email is invaid. Please enter your registered email.");</script>
         <?php
     }
     if ($error == 3) {
         ?>
-        <script>alert("A Reset Password Link Was Sent Successfully To Your Email.");</script>
+        <script>alert("A password reset link was successfully sent to your email.");</script>
         <?php
     }
     if ($error == 4) {
         ?>
-        <script>alert("Sign In Fields Cannot Be Empty. Try It Again.");</script>
+        <script>alert("Sign in fields cannot be empty. Please try again.");</script>
         <?php
     }
     if ($error == 5) {
         ?>
-        <script>alert("You Are Not ACTIVE USER. Please, Go To Your Email To Activate Your ACCOUNT");</script>
+        <script>alert("Your account is not active. Please echeck your email and go to the link to activate your account.");</script>
         <?php
     }
     if ($error == 6) {
         ?>
-        <script>alert("Reset Password Like Was Sent To Your Email");</script>
+        <script>alert("A password reset link was sent to your email.");</script>
         <?php
     }
     if ($error == 7) {
         ?>
-        <script>alert("Internet Connection Error Or The Email Provided Is Invalid");</script>
+        <script>alert("Internet connection error or the email provided is invalid.");</script>
         <?php
     }
     if ($error == 8) {
         ?>
-        <script>alert("You Have Changed Your Password. Sing In With New Password.");</script>
+        <script>alert("Your password has been changed. Please sign in using the updated password.");</script>
         <?php
     }
 }
