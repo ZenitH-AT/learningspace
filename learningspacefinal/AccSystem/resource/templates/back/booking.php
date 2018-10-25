@@ -29,10 +29,12 @@
             <tr class="text-center">  
                 <th>Booking ID</th>
                 <th>Room ID</th>
+                <th>Room name</th>
                 <th>Student ID</th>
+                <th>Student name</th>
                 <th>Start date</th>
                 <th>End date</th>
-                <th>Staying period<br />(days)</th>
+                <th>Staying<br/>period<br/>(days)</th>
                 <th>Date scheduled</th>
                 <th>Status</th>
                 <th></th>

@@ -9,6 +9,7 @@
             <tr>  
                 <th>Ticket ID</th>
                 <th>Student ID</th>
+                <th>Student name</th>
                 <th>Subject</th>
                 <th>Category</th>
                 <th>Date created</th>
@@ -21,10 +22,15 @@
             $query = query("SELECT * FROM helpticket WHERE isActive = 1 ORDER BY ticketID DESC");
             confirm($query);
 
-            while ($row = fetch_array($query)) { ?>
+            while ($row = fetch_array($query)) { 
+                 //Getting student name
+                 $sqlStudentName = query("SELECT studFirstName, studLastName FROM student WHERE studID = " . $row['studID']);
+                 $studentName = mysqli_fetch_assoc($sqlStudentName); ?>
+
                 <tr>
                     <td><?php echo $row['ticketID'] ?></td>
                     <td><?php echo $row['studID'] ?></td>
+                    <td><?php echo $studentName['studFirstName'] . " "  . $studentName['studLastName']; ?></td>
                     <td><?php echo $row['ticketSubject'] ?></td>
                     <td><?php echo $row['ticketCategory'] ?></td> 
                     <td><?php echo $row['ticketTime'] ?></td>

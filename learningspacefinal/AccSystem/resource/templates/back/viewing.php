@@ -28,6 +28,7 @@
             <tr>  
                 <th>View ID</th>
                 <th>Room ID</th>
+                <th>Room name</th>
                 <th>Viewer name</th>
                 <th>Viewer email</th>
                 <th>Viewer phone</th>

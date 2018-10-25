@@ -56,6 +56,7 @@
             <tr>  
                 <th>Notification ID</th>
                 <th>Student ID (recipient)</th>
+                <th>Student name</th>
                 <th>Title</th>
                 <th>Message</th>
                 <th>Type</th>
@@ -85,11 +86,16 @@
                     $typeclass = 'class="text-danger"';
                 } else if ($row['type'] == 'notice') {
                     $typeclass = 'class="bg-warning text-dark"';
-                } ?>
+                } 
+
+                //Getting student name
+                $sqlStudentName = query("SELECT studFirstName, studLastName FROM student WHERE studID = " . $row['studID']);
+                $studentName = mysqli_fetch_assoc($sqlStudentName); ?>
 
                 <tr>
                     <td><?php echo $row['notificationID'] ?></td>
                     <td><?php echo $row['studID'] ?></td>
+                    <td><?php echo $studentName['studFirstName'] . " "  . $studentName['studLastName']; ?></td>
                     <td><?php echo $row['title'] ?></td>
                     <td><?php echo $row['body'] ?></td> 
                     <td><?php echo '<text ' . $typeclass . '>' . $row['type'] . '</text>' ?></td>

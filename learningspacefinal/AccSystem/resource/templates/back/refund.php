@@ -18,6 +18,7 @@
                     <th>Request ID</th>
                     <th>Payment ID<br />(payment to be revoked)</th>
                     <th>Student ID</th>
+                    <th>Student name</th>
                     <th>Reason</th>
                     <th>Date requested</th>
 
@@ -29,11 +30,16 @@
                 $query = query("SELECT * FROM refund ORDER BY requestID DESC");
                 confirm($query);
     
-                while ($row = fetch_array($query)) { ?>
+                while ($row = fetch_array($query)) { 
+                    //Getting student name
+                    $sqlStudentName = query("SELECT studFirstName, studLastName FROM student WHERE studID = " . $row['studID']);
+                    $studentName = mysqli_fetch_assoc($sqlStudentName); ?>
+
                     <tr>
                         <td><?php echo $row['requestID'] ?></td>
                         <td><?php echo $row['payID'] ?></td>
                         <td><?php echo $row['studID'] ?></td>
+                        <td><?php echo $studentName['studFirstName'] . " "  . $studentName['studLastName']; ?></td>
                         <td><?php echo $row['reason'] ?></td>
                         <td><?php echo $row['date'] ?></td>
 
