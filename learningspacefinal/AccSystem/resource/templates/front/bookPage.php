@@ -4,7 +4,35 @@
 <div class="text-center">
     <?php bookingPage(); ?>
     <?php echo $viewsuccess; ?>
-</div>
+</div> <?php 
+
+if (isset($_GET['id'])) { 
+    $sqlRoomName = query("SELECT roomName, roomImage FROM room WHERE room_id = " . $_GET['id']);
+    confirm($sqlRoomName);
+    $roomInfo = mysqli_fetch_assoc($sqlRoomName); ?>
+
+    <style>
+        .selected-room-card {
+            background-repeat: repeat-y;
+            background-size: contain;
+            background-position: right 0;
+        }
+    </style>
+
+    <div class="col-md-12">
+        <div class="well well-sm">
+            <div class="card selected-room-card" style="background-image: linear-gradient(to right, white 80%, transparent), url('IMAGE/gallery/<?php echo$roomInfo['roomImage']; ?>');">
+                <div class="card-body">
+                    <div class="col-md-12 col-md-offset-1">
+                        <h5>Selected room information</h5>
+                        <span class="badge badge-light">Room no: <span class="text-info"><?php echo $_GET['id']; ?></span></span><br/>
+                        <span class="badge badge-light">Room name: <span class="text-info"><?php echo $roomInfo['roomName']; ?></span></span>
+                    </div> 
+                </div> 
+            </div> 
+        </div> 
+    </div>
+<?php } ?>
 
 <div class="row mysignup">
     <div class="col-md-6">
@@ -15,12 +43,6 @@
                         <fieldset>
                             <div class="text-center">
                                 <legend class="header col-md-12">Book Viewing <hr></legend>
-                            </div>
-
-                            <div class="col-md-12 col-md-offset-1">
-                                <?php if (isset($_GET['id'])) { ?>
-                                    <span class="badge badge-light">Room no: <span class="text-info"><?php echo $_GET['id']; ?></span></span>
-                                <?php } ?>
                             </div> <?php
                             if (isset($_GET['id'])) {
                                 if (!isset($_SESSION["iduser"])) { ?>
@@ -81,9 +103,6 @@
                                 <?php echo $DatesError; ?>
 
                                 <div class="col-md-12 col-md-offset-1">
-                                    <?php if (isset($_GET['id']) && ($checkPayment != "done")) { ?>
-                                        <span class="badge badge-light">Room no: <span class="text-info"><?php echo $_GET['id']; ?></span></span>
-                                    <?php } ?>
                                 </div><?php 
                                 if (isset($_GET['id'])) {
                                     if ($checkPayment == "ready") { ?>
