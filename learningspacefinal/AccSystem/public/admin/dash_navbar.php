@@ -5,7 +5,8 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto"></ul>
-        <ul class="navbar-nav ">
+        <input class="form-control form-control-dark" id="searchFilter" style="max-width:50%; margin-right:5%;" placeholder="Search" aria-label="Search" type="text">  
+        <ul class="navbar-nav">
             <li class="nav-item text-nowrap" style="padding-right: 11px;">
                 <a class="nav-link text-light"><?php echo "Welcome, " . ucfirst($_SESSION["adminFN"]) . " (" . ($_SESSION['adminCategory'] == 1 ? "owner" : "regular admin") . ")"; ?></a>
             </li>

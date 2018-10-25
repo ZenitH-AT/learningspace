@@ -116,5 +116,32 @@
             feather.replace();
         </script>
 
+        <!-- Search bar -->
+        <script>
+            $('#searchFilter').on("keypress", function(e) {
+                //if enter key is pressed
+                if (e.keyCode == 13) {
+                    var urlStr = window.location.href;
+                    var filter = document.getElementById('searchFilter').value;
+                    
+                    //Do not append "&searchFilter=" if input was blank and remove any existing searchFilter parameter
+                    if (filter == "") {
+                        window.location.href = window.location.href.split("&")[0];
+                        return;
+                    } 
+
+                    if (window.location.href.includes("&searchFilter")) {
+                        //Prevents appending a search query to the URL more than once
+                        urlStr = window.location.href.split("&")[0] + "&searchFilter=" + filter;
+                    } else {
+                        urlStr = window.location.href + "&searchFilter=" + filter;
+                    }
+
+                    window.location.href = urlStr;
+                    return;
+                }
+            });
+        </script>
+
     </body>
 </html>
