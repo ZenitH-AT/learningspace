@@ -70,7 +70,7 @@ function toRemove($tableName, $colomnName, $idItem) {
 
 //Get Rooms
 function get_Rooms_BelowBelow() {
-    $query = query("SELECT * FROM room WHERE roomType='deluxe' LIMIT 6");
+    $query = query("SELECT * FROM room WHERE roomReserved != 1 AND roomType='deluxe' LIMIT 6");
     confirm($query);
     $num = 1;
     $target = 'two';
@@ -110,11 +110,11 @@ DELIMETER;
 }
 
 function get_Rooms_Gallery() {
-    $query = query("SELECT * FROM room");
+    $query = query("SELECT * FROM room ORDER BY roomReserved, roomPrice");
     confirm($query);
 
     while ($row = fetch_array($query)) {
-        $availability = ($row['roomReserved'] == 0 ? "<a class=text-success>Available</a>" : "<a class=text-danger>Not available</a>");
+        $availability = ($row['roomReserved'] == 0 ? "<a class=text-success>Available @ R{$row['roomPrice']} p/m</a>" : "<a class=text-danger>Not available</a>");
 
         $room1 = <<<DELIMETER
         <div class="col-sm-6 col-md-4">
@@ -136,7 +136,7 @@ DELIMETER;
 }
 
 function get_Rooms_BelowCarousel() {
-    $query = query("SELECT * FROM room WHERE roomType='gold' LIMIT 3");
+    $query = query("SELECT * FROM room WHERE roomReserved != 1 AND roomType='gold' LIMIT 3");
     confirm($query);
     $num3 = 1;
     $target = 'one';
@@ -170,7 +170,7 @@ DELIMETER;
 function get_Rooms_Marketing() {
     $query = query("SELECT R.room_id,R.roomDescription, R.roomImage,R.roomPrice,R.roomName, RM.firstText,RM.secondText "
             . "FROM room AS R INNER JOIN roomMarket AS RM "
-            . "WHERE R.room_id = RM.roomID AND R.roomType IN ('marketing') LIMIT 2");
+            . "WHERE roomReserved != 1 AND R.room_id = RM.roomID AND R.roomType IN ('marketing') LIMIT 2");
     confirm($query);
     $num2 = 1;
     $target = 'one';
@@ -224,7 +224,6 @@ DELIMETER;
 function bookingPage() {
     global $viewsuccess, $checkPayment, $bookDateIn, $bookDateOut, $DatesError, $bookRoomName, $bookRoomPrice, $bookRoomCapacity, $paymentConfirm;
     $checkPayment = "NotReady";
-    //$bookRoomPrice = $bookDateIn = $bookDateOut = "";
 
     if (isset($_GET['id'])) {
         $idRoom = escape_String($_GET['id']);
@@ -267,29 +266,30 @@ function bookingPage() {
         confirm($query);
 
         if ($insert) {
-            $viewsuccess = "<div class='alert alert-success alert-dismissible fade show' role='alert'>
-                                    <strong>Success!</strong> You Have Scheduled The Viewing Successfully.
-                                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                                      <span aria-hidden='true'>&times;</span>
-                                    </button></div>";
-
             if (!isset($_SESSION["iduser"])) {
                 $mail = new MailClass();
                 $subject = "Your viewing has been scheduled";
                 $body = "Dear {$viewname}<br><br>"
-                        . "Your view booking for room number <strong>{$idRoom}</strong> has been scheduled for {$viewdate}.";
+                        . "Your view booking for <strong>{$bookRoomName}</strong> (room number <strong>{$idRoom}</strong>) has been scheduled for <strong>{$viewdate}</strong>.";
 
                 $getresult = $mail->sendMail($viewemail, $subject, $body);
             } else {
-                send_notification("Your viewing has been scheduled", "Your view booking for room number <strong>{$idRoom}</strong> has been scheduled for {$viewdate}.", "notice", $_SESSION["iduser"]);
+                send_notification("Your viewing has been scheduled", "Your view booking for <strong>{$bookRoomName}</strong> (room number <strong>{$idRoom}</strong>) has been scheduled for <strong>{$viewdate}</strong>.", "notice", $_SESSION["iduser"]);
 
                 $mail = new MailClass();
                 $subject = "Your viewing has been scheduled";
                 $body = "Dear {$viewname}<br><br>"
-                        . "Your view booking for room number <strong>{$idRoom}</strong> has been scheduled for {$viewdate}.";
+                        . "Your view booking for <strong>{$bookRoomName}</strong> (room number <strong>{$idRoom}</strong>) has been scheduled for <strong>{$viewdate}</strong>.";
 
                 $getresult = $mail->sendMail($viewemail, $subject, $body);
             }
+
+            $viewsuccess = "<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                                <strong>Success!</strong> You Have Scheduled The Viewing Successfully.
+                                <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                    <span aria-hidden='true'>&times;</span>
+                                </button>
+                            </div>";
         }
     }
 
@@ -304,11 +304,6 @@ function bookingPage() {
 
 
             if ($count > 0) {
-//                while ($row = fetch_array($result)) {
-//                    $bookRoomName = $row['roomName'];
-//                    $bookRoomPrice = $row['roomPrice'];
-//                    $bookRoomCapacity = $row['roomCapacity'];
-//                }
                 $_SESSION['bookRoomPrice'] = $bookRoomPrice;
             }
         } else {
@@ -514,7 +509,7 @@ function resetPassword() {
             if (!empty($pass1) && !empty($pass2)) {
                 if (!preg_match('/^\S*(?=\S{7,15})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/', $pass1)) {
                     $passError1 = "<div class='alert alert-info alert-dismissible fade show' role='alert'>
-                                    <strong>INFO!</strong> Password must have 1 Number, 1 Uppercase, and Between 7-15.
+                                    <strong>INFO!</strong> Password must have at least 1 lowercase letter, 1 uppercase letter and 1 number and 7-15 characters.
                                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                       <span aria-hidden='true'>&times;</span>
                                     </button></div>";
@@ -641,7 +636,7 @@ function signup() {
 
                 if (!preg_match('/^\S*(?=\S{7,15})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/', $password)) {
                     $passError = "<div class='alert alert-info alert-dismissible fade show' role='alert'>
-                                    <strong>INFO!</strong> Password must have 1 Number, 1 Uppercase, and between 7-15.
+                                    <strong>INFO!</strong> Password must have at least 1 lowercase letter, 1  letter and 1 number and 7-15 characters.
                                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                       <span aria-hidden='true'>&times;</span>
                                     </button></div>";
@@ -1316,11 +1311,21 @@ function makePayment() {
 function get_Bookings() {
     $query = query("SELECT * FROM booking ORDER BY bookID DESC ");
     confirm($query);
-    while ($row = fetch_array($query)) { ?>
+    while ($row = fetch_array($query)) { 
+        //Getting room name
+        $sqlRoomName = query("SELECT roomName FROM room WHERE room_id = " . $row['roomID']);
+        $roomName = mysqli_fetch_assoc($sqlRoomName); 
+        
+        //Getting student name
+        $sqlStudentName = query("SELECT studFirstName, studLastName FROM student WHERE studID = " . $row['studID']);
+        $studentName = mysqli_fetch_assoc($sqlStudentName); ?>
+
         <tr>
             <td><?php echo $row['bookID']; ?></td>
             <td><?php echo $row['roomID']; ?></td>
+            <td><?php echo $roomName['roomName']; ?></td>
             <td><?php echo $row['studID']; ?></td>
+            <td><?php echo $studentName['studFirstName'] . " "  . $studentName['studLastName']; ?></td>
             <td><?php echo $row['bookStatDate']; ?></td>
             <td><?php echo $row['bookEndDate']; ?></td>
             <td><?php echo $row['stayingPeriod']; ?></td>
@@ -1453,10 +1458,15 @@ function get_Bookings() {
 function get_Viewings() {
     $query = query("SELECT * FROM viewing ORDER BY viewBookingID DESC ");
     confirm($query);
-    while ($row = fetch_array($query)) { ?>
+    while ($row = fetch_array($query)) { 
+        //Getting room name
+        $sqlRoomName = query("SELECT roomName FROM room WHERE room_id = " . $row['roomName']);
+        $roomName = mysqli_fetch_assoc($sqlRoomName); ?>
+
         <tr>
             <td><?php echo $row['viewBookingID'] ?></td>
             <td><?php echo $row['roomName'] ?></td>
+            <td><?php echo $roomName['roomName'] ?></td>
             <td><?php echo $row['viewerName'] ?></td>
             <td><?php echo $row['viewerEmail'] ?></td>
             <td><?php echo $row['viewerPhone'] ?></td>
