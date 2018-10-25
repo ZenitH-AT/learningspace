@@ -31,9 +31,31 @@
                 </tr>
             </thead>
             <tbody> <?php
-                $query = query("SELECT * FROM payment ORDER BY payID DESC");
+                $query;
+
+                if (isset($_GET['searchFilter'])) {
+                    //Select records containing the search query text
+                    $filter = $_GET['searchFilter'];
+
+                    $query = query("SELECT * FROM payment 
+                                    WHERE payID LIKE '%{$filter}%'
+                                    OR cardNumber LIKE '%{$filter}%'
+                                    OR cardMonth LIKE '%{$filter}%'
+                                    OR cardYear LIKE '%{$filter}%'
+                                    OR payAmount LIKE '%{$filter}%'
+                                    OR payMonth LIKE '%{$filter}%'
+                                    OR studID LIKE '%{$filter}%'
+                                    OR roomID LIKE '%{$filter}%'
+                                    OR paymentStatus LIKE '%{$filter}%'
+                                    OR paymentDate LIKE '%{$filter}%'
+                                    ORDER BY payID DESC");
+                } else {
+                    //Select all records
+                    $query = query("SELECT * FROM payment ORDER BY payID DESC");
+                }
+
                 confirm($query);
-    
+                
                 while ($row = fetch_array($query)) { 
                     //Getting student name
                     $sqlStudentName = query("SELECT studFirstName, studLastName FROM student WHERE studID = " . $row['studID']);
