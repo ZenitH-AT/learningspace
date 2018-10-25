@@ -123,6 +123,11 @@
                 if (e.keyCode == 13) {
                     var urlStr = window.location.href;
                     var filter = document.getElementById('searchFilter').value;
+
+                    if(!window.location.href.includes("?")) {
+                        alert("You must go to a section before you can search.");
+                        return;
+                    }
                     
                     //Do not append "&searchFilter=" if input was blank and remove any existing searchFilter parameter
                     if (filter == "") {
