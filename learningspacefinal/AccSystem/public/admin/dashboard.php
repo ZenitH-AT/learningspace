@@ -118,8 +118,15 @@
 
         <!-- Search bar -->
         <script>
+            //Only show search bar if the user is not at dashboard
+            if(window.location.href.includes("?")) {
+                document.getElementById('searchFilter').style.display = "block";
+            } else {
+                document.getElementById('searchFilter').style.display = "none";
+            }
+
             $('#searchFilter').on("keypress", function(e) {
-                //if enter key is pressed
+                //If enter key is pressed
                 if (e.keyCode == 13) {
                     var urlStr = window.location.href;
                     var filter = document.getElementById('searchFilter').value;
