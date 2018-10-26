@@ -28,7 +28,29 @@
                 </tr>
             </thead>
             <tbody> <?php
-                $query = query("SELECT * FROM admin ORDER BY adminID DESC");
+                $query;
+
+                if (isset($_GET['searchFilter'])) {
+                    //Select records containing the search query text
+                    $filter = $_GET['searchFilter'];
+
+                    $query = query("SELECT * FROM admin 
+                                    WHERE adminID LIKE '%{$filter}%'
+                                    OR adminFirstN LIKE '%{$filter}%'
+                                    OR adminLastN LIKE '%{$filter}%'
+                                    OR adminCategory LIKE '%{$filter}%'
+                                    OR adminAddress LIKE '%{$filter}%'
+                                    OR adminPhone LIKE '%{$filter}%'
+                                    OR adminEmail LIKE '%{$filter}%'
+                                    OR adminPassword LIKE '%{$filter}%'
+                                    OR adminActive LIKE '%{$filter}%'
+                                    OR accID LIKE '%{$filter}%'
+                                    ORDER BY adminID DESC");
+                } else {
+                    //Select all records
+                    $query = query("SELECT * FROM admin ORDER BY adminID DESC");
+                }
+
                 confirm($query);
     
                 while ($row = fetch_array($query)) { ?>

@@ -19,7 +19,27 @@
             </tr>
         </thead>
         <tbody> <?php
-            $query = query("SELECT * FROM helpticket WHERE isActive = 1 ORDER BY ticketID DESC");
+            $query;
+
+            if (isset($_GET['searchFilter'])) {
+                //Select records containing the search query text
+                $filter = $_GET['searchFilter'];
+
+                $query = query("SELECT * FROM helpticket 
+                                WHERE isActive = 1  
+                                AND (
+                                    ticketID LIKE '%{$filter}%'
+                                    OR studID LIKE '%{$filter}%'
+                                    OR ticketSubject LIKE '%{$filter}%'
+                                    OR ticketCategory LIKE '%{$filter}%'
+                                    OR ticketTime LIKE '%{$filter}%'
+                                )
+                                ORDER BY ticketID DESC");
+            } else {
+                //Select all records
+                $query = query("SELECT * FROM helpticket WHERE isActive = 1 ORDER BY ticketID DESC");
+            }
+
             confirm($query);
 
             while ($row = fetch_array($query)) { 
@@ -130,7 +150,27 @@
             </tr>
         </thead>
         <tbody> <?php
-            $query = query("SELECT * FROM helpticket WHERE isActive = 0 ORDER BY ticketID DESC");
+            $query;
+
+            if (isset($_GET['searchFilter'])) {
+                //Select records containing the search query text
+                $filter = $_GET['searchFilter'];
+
+                $query = query("SELECT * FROM helpticket 
+                                WHERE isActive = 0 
+                                AND (
+                                    ticketID LIKE '%{$filter}%'
+                                    OR studID LIKE '%{$filter}%'
+                                    OR ticketSubject LIKE '%{$filter}%'
+                                    OR ticketCategory LIKE '%{$filter}%'
+                                    OR ticketTime LIKE '%{$filter}%'
+                                )
+                                ORDER BY ticketID DESC");
+            } else {
+                //Select all records
+                $query = query("SELECT * FROM helpticket WHERE isActive = 0 ORDER BY ticketID DESC");
+            }
+
             confirm($query);
 
             while ($row = fetch_array($query)) { ?>

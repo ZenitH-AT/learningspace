@@ -69,7 +69,26 @@
             </tr>
         </thead>
         <tbody> <?php
-            $query = query("SELECT * FROM notification ORDER BY time DESC");
+            $query;
+
+            if (isset($_GET['searchFilter'])) {
+                //Select records containing the search query text
+                $filter = $_GET['searchFilter'];
+
+                $query = query("SELECT * FROM notification 
+                                WHERE notificationID LIKE '%{$filter}%'
+                                OR studID LIKE '%{$filter}%'
+                                OR title LIKE '%{$filter}%'
+                                OR body LIKE '%{$filter}%'
+                                OR type LIKE '%{$filter}%'
+                                OR time LIKE '%{$filter}%'
+                                OR status LIKE '%{$filter}%'
+                                ORDER BY time DESC");
+            } else {
+                //Select all records
+                $query = query("SELECT * FROM notification ORDER BY time DESC");
+            }
+
             confirm($query);
 
             while ($row = fetch_array($query)) { 

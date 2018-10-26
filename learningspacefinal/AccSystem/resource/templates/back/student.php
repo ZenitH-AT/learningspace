@@ -38,7 +38,35 @@
             </tr>
         </thead>
         <tbody> <?php
-            $query = query("SELECT * FROM student ORDER BY studID DESC");
+            $query;
+
+            if (isset($_GET['searchFilter'])) {
+                //Select records containing the search query text
+                $filter = $_GET['searchFilter'];
+        
+                $query = query("SELECT * FROM student 
+                                WHERE studID LIKE '%{$filter}%'
+                                OR studFirstName LIKE '%{$filter}%'
+                                OR studMiddleName LIKE '%{$filter}%'
+                                OR studLastName LIKE '%{$filter}%'
+                                OR studEmail LIKE '%{$filter}%'
+                                OR studGender LIKE '%{$filter}%'
+                                OR studDOB LIKE '%{$filter}%'
+                                OR studSchool LIKE '%{$filter}%'
+                                OR studSchoolAddress LIKE '%{$filter}%'
+                                OR studCountry LIKE '%{$filter}%'
+                                OR studCity LIKE '%{$filter}%'
+                                OR studStreet LIKE '%{$filter}%'
+                                OR id_passport LIKE '%{$filter}%'
+                                OR studPhone LIKE '%{$filter}%'
+                                OR isActive LIKE '%{$filter}%'
+                                OR data LIKE '%{$filter}%'
+                                ORDER BY studID DESC");
+            } else {
+                //Select all records
+                $query = query("SELECT * FROM student ORDER BY studID DESC");
+            }
+        
             confirm($query);
 
             while ($row = fetch_array($query)) { ?>
