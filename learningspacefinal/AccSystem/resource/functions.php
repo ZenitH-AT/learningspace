@@ -1309,8 +1309,29 @@ function makePayment() {
 
 //Show all Bookings
 function get_Bookings() {
-    $query = query("SELECT * FROM booking ORDER BY bookID DESC ");
+    $query;
+
+    if (isset($_GET['searchFilter'])) {
+        //Select records containing the search query text
+        $filter = $_GET['searchFilter'];
+
+        $query = query("SELECT * FROM booking 
+                        WHERE bookID LIKE '%{$filter}%'
+                        OR studID LIKE '%{$filter}%'
+                        OR roomID LIKE '%{$filter}%'
+                        OR bookStatDate LIKE '%{$filter}%'
+                        OR bookEndDate LIKE '%{$filter}%'
+                        OR stayingPeriod LIKE '%{$filter}%'
+                        OR bookingDate LIKE '%{$filter}%'
+                        OR bookingStatus LIKE '%{$filter}%'
+                        ORDER BY bookID DESC");
+    } else {
+        //Select all records
+        $query = query("SELECT * FROM booking ORDER BY bookID DESC");
+    }
+
     confirm($query);
+
     while ($row = fetch_array($query)) { 
         //Getting room name
         $sqlRoomName = query("SELECT roomName FROM room WHERE room_id = " . $row['roomID']);
@@ -1456,8 +1477,29 @@ function get_Bookings() {
 
 //Show all Viewings
 function get_Viewings() {
-    $query = query("SELECT * FROM viewing ORDER BY viewBookingID DESC ");
+    $query;
+
+    if (isset($_GET['searchFilter'])) {
+        //Select records containing the search query text
+        $filter = $_GET['searchFilter'];
+
+        $query = query("SELECT * FROM viewing 
+                        WHERE viewBookingID LIKE '%{$filter}%'
+                        OR viewerName LIKE '%{$filter}%'
+                        OR viewerEmail LIKE '%{$filter}%'
+                        OR viewerPhone LIKE '%{$filter}%'
+                        OR viewDate LIKE '%{$filter}%'
+                        OR viewStatus LIKE '%{$filter}%'
+                        OR roomName LIKE '%{$filter}%'
+                        OR scheduledDate LIKE '%{$filter}%'
+                        ORDER BY viewBookingID DESC");
+    } else {
+        //Select all records
+        $query = query("SELECT * FROM viewing ORDER BY viewBookingID DESC");
+    }
+
     confirm($query);
+
     while ($row = fetch_array($query)) { 
         //Getting room name
         $sqlRoomName = query("SELECT roomName FROM room WHERE room_id = " . $row['roomName']);
@@ -1576,8 +1618,28 @@ function get_Viewings() {
 
 //Show all Rooms
 function get_Rooms() {
-    $query = query("SELECT * FROM room ORDER BY room_id DESC ");
+    $query;
+
+    if (isset($_GET['searchFilter'])) {
+        //Select records containing the search query text
+        $filter = $_GET['searchFilter'];
+
+        $query = query("SELECT * FROM room 
+                        WHERE room_id LIKE '%{$filter}%'
+                        OR roomName LIKE '%{$filter}%'
+                        OR roomPrice LIKE '%{$filter}%'
+                        OR roomType LIKE '%{$filter}%'
+                        OR roomCapacity LIKE '%{$filter}%'
+                        OR roomReserved LIKE '%{$filter}%'
+                        OR roomShortDescription LIKE '%{$filter}%'
+                        ORDER BY room_id DESC");
+    } else {
+        //Select all records
+        $query = query("SELECT * FROM room ORDER BY room_id DESC");
+    }
+
     confirm($query);
+
     while ($row = fetch_array($query)) { ?>
         <tr>
             <td><?php echo $row['room_id'] ?></td>
