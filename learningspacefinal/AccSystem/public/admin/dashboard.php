@@ -124,7 +124,8 @@
             } else {
                 document.getElementById('searchFilter').style.display = "none";
             }
-
+            
+            //Search bar code
             $('#searchFilter').on("keypress", function(e) {
                 //If enter key is pressed
                 if (e.keyCode == 13) {
@@ -138,13 +139,13 @@
                     
                     //Do not append "&searchFilter=" if input was blank and remove any existing searchFilter parameter
                     if (filter == "") {
-                        window.location.href = window.location.href.split("&")[0];
+                        window.location.href = window.location.href.split("&searchFilter=")[0]; //element 0 of this split string is everything before the & symbol
                         return;
                     } 
 
-                    if (window.location.href.includes("&searchFilter")) {
+                    if (window.location.href.includes("&searchFilter=")) {
                         //Prevents appending a search query to the URL more than once
-                        urlStr = window.location.href.split("&")[0] + "&searchFilter=" + filter;
+                        urlStr = window.location.href.split("&searchFilter=")[0] + "&searchFilter=" + filter;
                     } else {
                         urlStr = window.location.href + "&searchFilter=" + filter;
                     }
@@ -153,6 +154,28 @@
                     return;
                 }
             });
+
+            //Search results filtering
+            if (window.location.href.includes("&searchFilter=")) {
+                var filter = window.location.href.split("&searchFilter=")[1].toLowerCase().decodeURI(); //decodeURI replaces all %20 and other URI text with its proper representation (e.g. whitespace)
+                var trs = document.getElementsByTagName('tr');
+                var atLeastOneResultFound = false;
+
+                for(var i = 1; i < trs.length; i++) { //i is initialised to 1 to skip the table headings row
+                    var rowText = trs[i].textContent.toLowerCase(); //both the filter and row text are changed to lower case so searches are case-insensitive
+
+                    if(!rowText.includes(filter)) {
+                        trs[i].style.display = "none";
+                    } else {
+                        atLeastOneResultFound = true;
+                    }
+                }
+                
+                if (!atLeastOneResultFound) {
+                    alert("No results found for filter: " + filter);
+                    window.location.href = window.location.href.split("&searchFilter=")[0]; //remove searchFilter parameter from URL
+                }
+            }
         </script>
 
     </body>
