@@ -27,24 +27,7 @@
                 </tr>
             </thead>
             <tbody> <?php
-                $query;
-
-                if (isset($_GET['searchFilter'])) {
-                    //Select records containing the search query text
-                    $filter = $_GET['searchFilter'];
-
-                    $query = query("SELECT * FROM refund 
-                                    WHERE requestID LIKE '%{$filter}%'
-                                    OR payID LIKE '%{$filter}%'
-                                    OR studID LIKE '%{$filter}%'
-                                    OR reason LIKE '%{$filter}%'
-                                    OR date LIKE '%{$filter}%'
-                                    ORDER BY requestID DESC");
-                } else {
-                    //Select all records
-                    $query = query("SELECT * FROM refund ORDER BY requestID DESC");
-                }
-
+                $query = query("SELECT * FROM refund ORDER BY requestID DESC");
                 confirm($query);
     
                 while ($row = fetch_array($query)) { 
