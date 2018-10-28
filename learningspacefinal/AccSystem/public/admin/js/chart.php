@@ -86,7 +86,7 @@
 
         var options = {
             chart: {
-                title: 'Viewings Statistics',
+                title: 'Viewing Statistics',
                 subtitle: 'Data acquired in: 2018',
             }
         };
