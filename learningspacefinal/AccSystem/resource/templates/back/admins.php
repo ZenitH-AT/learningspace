@@ -22,9 +22,7 @@
                     <th>Address</th>
                     <th>Phone number</th>
                     <th>Email</th>
-                    <th>Password</th>
                     <th>Active</th>
-                    <th>Acc ID</th>
                 </tr>
             </thead>
             <tbody> <?php
@@ -40,9 +38,7 @@
                         <td><?php echo $row['adminAddress'] ?></td>
                         <td><?php echo $row['adminPhone'] ?></td>
                         <td><?php echo $row['adminEmail'] ?></td>
-                        <td><?php echo ($_SESSION['adminCategory'] == 1 ? $row['adminPassword'] : '<text class="text-info">You lack permission to view</text>') ?></td>
                         <td><?php echo ($row['adminActive'] == 1 ? '<text class="text-success">active</text>' : '<text class="text-danger">inactive</text>') ?></td>
-                        <td><?php echo $row['accID'] ?></td>
                     </tr> <?php
                 } ?>
             </tbody>
