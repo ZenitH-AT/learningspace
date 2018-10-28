@@ -129,15 +129,15 @@ $confirm1 = "<div class='alert alert-success alert-dismissible fade show text-ce
                             <div >
                                 <strong class="text-info">Notification: </strong>Due to the additional
     <?php echo $numDaysLeft; ?> days, you will be charged the values of these in one of the next payment.
+    
+    <p></p>
+    <?php if(!empty($bookStatDate)){ 
+                        $monthtoLeave = strtotime("+1 months", strtotime($bookStatDate. ' + 1 days')); //echo date('Y/m/d', $monthtoLeave); ?>
+                    <p><strong class="text-info">Notification:</strong> If you want to leave the room, You have to state/leave before -> <strong> <?php echo date('Y/m/d', $monthtoLeave); ?>. </strong>
+                    Otherwise, the <strong>System</strong> will automatically charge you for the next month payment</p>
+                    <?php } ?>
                             </div>
 <?php } ?>
-
-                        <div class="card-body ">
-                            <!--so para fazer volume-->
-                        </div>
-                        <div class="card-body ">
-                            <!--so para fazer volume-->
-                        </div>
                     </div>
                 </div>
             </div>
@@ -148,9 +148,7 @@ $confirm1 = "<div class='alert alert-success alert-dismissible fade show text-ce
             <div class="col-md-12">
 <?php if(isset($leaveRoom)){ if ($leaveRoom == "yes") { ?>
                 <div class="">
-                    <?php if(!empty($bookStatDate)){ 
-                        $monthtoLeave = strtotime("+1 months", strtotime($bookStatDate)); //echo date('Y/m/d', $monthtoLeave); ?>
-                    <p><strong class="text-info">Notification:</strong> If you want to leave the room, You have to state/leave before -> <strong> <?php echo date('Y/m/d', $monthtoLeave); ?> </strong> </p>
+                    <?php if(!empty($bookStatDate)){ ?>
                     <button type="submit" class="btn btn-outline-danger formbutton" name="leaveModal" data-target="#leaveModal" data-toggle="modal"><i class="fa fa-fw fa-times-circle"></i> Leave room</button>
                     <?php } ?>
                 </div>
