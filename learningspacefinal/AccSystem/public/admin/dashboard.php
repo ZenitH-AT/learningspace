@@ -154,10 +154,10 @@
                     return;
                 }
             });
-
+            
             //Search results filtering
             if (window.location.href.includes("&searchFilter=")) {
-                var filter = window.location.href.split("&searchFilter=")[1].toLowerCase().decodeURI(); //decodeURI replaces all %20 and other URI text with its proper representation (e.g. whitespace)
+                var filter = decodeURI(window.location.href.split("&searchFilter=")[1].toLowerCase()); //decodeURI replaces all %20 and other URI text with its proper representation (e.g. whitespace)
                 var trs = document.getElementsByTagName('tr');
                 var atLeastOneResultFound = false;
 
