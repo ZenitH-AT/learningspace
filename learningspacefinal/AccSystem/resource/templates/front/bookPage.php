@@ -31,7 +31,7 @@ if (isset($_GET['id'])) {
                         </div>
                         <div class="col-md-2">
                             <span class="badge badge-light">Room Capacity: <span class="text-info"><?php echo $bookRoomCapacity; ?></span></span>
-                            <span class="badge badge-light">Price per Month: <span class="text-info"><?php echo $bookRoomPrice; ?></span></span>
+                            <span class="badge badge-light">Price per Month: <span class="text-info">R<?php echo $bookRoomPrice; ?></span></span>
                         </div>
                     </div>
                 </div> 
