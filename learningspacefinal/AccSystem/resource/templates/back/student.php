@@ -185,7 +185,7 @@
                                         
                                         ?><script>alert("Student edited.");</script><?php
 
-                                        header("Refresh:0");
+                                        header("Location: ".$_SERVER['REQUEST_URI']);
                                         exit();
                                     } ?>
 

@@ -54,7 +54,7 @@
 
                             send_notification("Your refund request was accepted", "Your payment refund request has been <strong>accepted</strong>.", "success", $row['studID']);
                             
-                            header("Refresh:0");
+                            header("Location: ".$_SERVER['REQUEST_URI']);
                             exit();
                         }
 
@@ -65,7 +65,7 @@
 
                             send_notification("Your refund request was declined", "Your payment refund request has been <strong>declined</strong>.", "danger", $row['studID']);
                             
-                            header("Refresh:0");
+                            header("Location: ".$_SERVER['REQUEST_URI']);
                             exit();
                         } ?>
                     </tr> <?php
