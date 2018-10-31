@@ -97,7 +97,7 @@
                     <td><?php echo $row['studID'] ?></td>
                     <td><?php echo $studentName['studFirstName'] . " "  . $studentName['studLastName']; ?></td>
                     <td><?php echo $row['title'] ?></td>
-                    <td><?php echo $row['body'] ?></td> 
+                    <td><a class="btn btn-outline-dark" data-toggle="modal" data-target="#bodyPopup<?php echo $row['notificationID']; ?>"><span class="far fa-file-alt" style="color:black"></span></a></td>
                     <td><?php echo '<text ' . $typeclass . '>' . $row['type'] . '</text>' ?></td>
                     <td><?php echo $row['time'] ?></td>
                     <td><?php echo $row['status'] == 1 ? '<text class="text-info">read</text>' : 'unread' ?></td><?php
@@ -106,13 +106,39 @@
                     if($_SESSION['adminCategory'] == 1) { ?>
                         <td><form method="post"><button class="btn btn-danger formbutton" name="delete<?php echo $row['notificationID']; ?>" onclick="return confirm('Are you sure you want to delete <?php echo $row['title'] ?>?')"><span class="fa fa-times" style="color:white"></button></form></td><?php
                     } ?>
-                </tr><?php
+                </tr>
+                
+                <!-- Notification body modal -->
+                <div class="modal fade" id="bodyPopup<?php echo $row['notificationID']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+                        <div class="modal-content">  
+                            <div class="modal-header">
+                                <h5><?php echo $row['title']?></h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                            </div> 
+                            <div class="modal-body">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-12">  
+                                            <div class="col-sm-12">
+                                                <a><?php echo $row['body']; ?></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div><?php
 
                 //Delete button handling
                 if (isset($_POST['delete' . $row['notificationID']])) {                  
                     query("DELETE FROM notification WHERE notificationID = " . $row['notificationID']);
             
-                    header("Refresh:0");
+                    header("Location: ".$_SERVER['REQUEST_URI']);
                     exit();
                 } 
             } ?>
