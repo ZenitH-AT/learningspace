@@ -12,6 +12,14 @@
                                 <div class="text-center" style="font-size: 30px;"><?php echo countRecords("booking"); ?></div>
                             </div>
                         </div>
+
+                        <a href="?booking">
+                            <div class="card-footer bg-light">
+                                <span class="float-left">View Details</span>
+                                <span class="float-right"><i class="fa fa-arrow-alt-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -27,6 +35,14 @@
                                 <div class="text-center" style="font-size: 30px;"><?php echo countRecords("booking", "bookingStatus", "1"); ?></div>
                             </div>
                         </div>
+
+                        <a href="?booking">
+                            <div class="card-footer bg-light">
+                                <span class="float-left">View Details</span>
+                                <span class="float-right"><i class="fa fa-arrow-alt-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -42,19 +58,15 @@
                                 <div class="text-center" style="font-size: 30px;"><?php echo countRecords("booking", "bookingStatus", "0"); ?></div>
                             </div>
                         </div>
+
+                        <a href="?booking">
+                            <div class="card-footer bg-light">
+                                <span class="float-left">View Details</span>
+                                <span class="float-right"><i class="fa fa-arrow-alt-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
                     </div>
-                </div><br/>
-            </div>
-            <div class="col-lg-3 col-md-4"></div>
-            <div class="col-lg-6 col-md-10">
-                <div class="card">
-                    <a href="?booking">
-                        <div class="card-footer bg-light">
-                            <span class="float-left">View Details</span>
-                            <span class="float-right"><i class="fa fa-arrow-alt-circle-right"></i></span>
-                            <div class="clearfix"></div>
-                        </div>
-                    </a>
                 </div>
             </div>
         </div>
