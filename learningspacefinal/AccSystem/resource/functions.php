@@ -392,6 +392,7 @@ function lognew() {
                     $UserPhone = $row['studPhone'];
                     $UserActive = $row['isActive'];
                     $userPass = $row['studPassword'];
+                    $userActicationKey = $row['activationKey'];
                 }
                 if ($UserActive == 1) {
                     $query = "SELECT * FROM booking WHERE studID='{$id}' AND bookingStatus='1'";
@@ -412,6 +413,14 @@ function lognew() {
                         redirect("HomePage.php");
                     }
                 } else {
+                    $mail = new MailClass();
+                    $subject = "Your Accommodation Account - Verify Your Email Address";
+                    $body = "Dear {$UserFirstName} {$UserLastName}<br><br>"
+                            . "Please click the link below to verify your LearningSpace account.<br><br>"
+                            . "<a href='http://localhost:8080/project/AccSystem/public/userActivation.php?key={$userActicationKey}' class='btn btn-outline-success formbutton'>Verify email address</a>";
+
+                    $getresult = $mail->sendMail($UserEmail, $subject, $body);
+                    
                     redirect("HomePage.php?error=5");
                 }
             } elseif ($countAdmin > 0) {
