@@ -2,7 +2,16 @@
 
     <?php profile(); ?>
     <div class=" col-sm-4 col-lg-4 col-md-4"></div>
-    <?php echo $confirm; ?>
+
+    <?php 
+    if(isset($_GET['profileUpdated'])) { ?>
+        <div class='alert alert-success alert-dismissible fade show text-center' role='alert'>
+        <strong>Success!</strong> Your Profile Has Been Updated.
+        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+            <span aria-hidden='true'>&times;</span>
+        </button></div><?php
+    } ?>
+
     <?php echo $empty; ?>
     <?php echo $errorGeneral; ?>
     <?php echo $empty; ?>
