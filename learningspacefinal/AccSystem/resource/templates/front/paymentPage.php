@@ -44,7 +44,7 @@ $confirm2 = "<div class='alert alert-success alert-dismissible fade show text-ce
                                     <td><?php echo $roomID; $_SESSION["idRoom"] = $roomID; ?></td>
                                 </tr>
                                 <tr>
-                                    <td>Room Name:</td>
+                                    <td>Room name:</td>
                                     <td><?php echo $roomName; ?></td>
                                 </tr>
                                 <tr>
@@ -70,7 +70,7 @@ $confirm2 = "<div class='alert alert-success alert-dismissible fade show text-ce
                                         <?php }
                                     } ?>
                                 <tr>
-                                    <td>Payment method:</td>
+                                    <td>Payment type:</td>
                                     <td>Monthly</td>
                                 </tr>
                                 <tr>

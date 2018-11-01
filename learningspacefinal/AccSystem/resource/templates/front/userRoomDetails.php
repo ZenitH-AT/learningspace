@@ -36,11 +36,11 @@ $confirm1 = "<div class='alert alert-success alert-dismissible fade show text-ce
                                     <td scope="row"><?php echo $roomID; ?></td>
                                 </tr>
                                 <tr>
-                                    <td>Name:</td>
+                                    <td>Room name:</td>
                                     <td><?php echo $roomName; ?></td>
                                 </tr>
                                 <tr>
-                                    <td>Price per Month:</td>
+                                    <td>Price per month:</td>
                                     <td>R<?php echo $roomPrice; ?></td>
                                 </tr>
                                 <tr>
@@ -48,7 +48,7 @@ $confirm1 = "<div class='alert alert-success alert-dismissible fade show text-ce
                                     <td><?php echo $roomType; ?></td>
                                 </tr>
                                 <tr>
-                                    <td>People allowed:</td>
+                                    <td>Capacity:</td>
                                     <td><?php echo $roomCapacity; ?></td>
                                 </tr>
                             </tbody>
@@ -103,15 +103,15 @@ $confirm1 = "<div class='alert alert-success alert-dismissible fade show text-ce
                         <table class="table">
                             <tbody>
                                 <tr>
-                                    <td>Started Date</td>
+                                    <td>Start date:</td>
                                     <td><?php echo $bookStatDate; ?></td>
                                 </tr>
                                 <tr>
-                                    <td>Last Date:</td>
+                                    <td>End date:</td>
                                     <td><?php echo $bookEndDate; ?></td>
                                 </tr>
                                 <tr>
-                                    <td>Staying Period:</td>
+                                    <td>Staying period (days):</td>
                                     <td><?php echo $stayingPeriod; ?></td>
                                 </tr>
                                 <tr>
