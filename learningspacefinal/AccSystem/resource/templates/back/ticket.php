@@ -36,7 +36,7 @@
                     <td><?php echo $row['ticketTime'] ?></td>
 
                     <td><button type="button" class="btn btn-success formbutton" data-toggle="modal" data-target="#ticketPopup<?php echo $row['ticketID']; ?>"><span class="fa fa-comments" style="color:white"></button></form></td>
-                    <td><form method="post"><button class="btn btn-danger formbutton" name="closereopen<?php echo $row['ticketID']; ?>" onclick="return confirm('Are you sure you want to close <?php echo $row['ticketSubject'] ?>?')"><span class="fa fa-times" style="color:white"></button></form></td>
+                    <td><form method="post"><button class="btn btn-danger formbutton" name="closereopen<?php echo $row['ticketID']; ?>" onclick="return confirm('Are you sure you want to close <?php echo $row['ticketSubject'] ?>?')"><span class="fa fa-arrow-down" style="color:white"></button></form></td>
                 </tr> 
                 
                 <!-- Conversation modal -->
@@ -121,30 +121,53 @@
             <tr>  
                 <th>Ticket ID</th>
                 <th>Student ID</th>
+                <th>Student name</th>
                 <th>Subject</th>
                 <th>Category</th>
                 <th>Date created</th>
 
                 <th>View conversation</th>
                 <th>Reopen ticket</th>
+                <?php if($_SESSION['adminCategory'] == 1) { ?>
+                    <th>Remove</th>
+                <?php } ?>
             </tr>
         </thead>
         <tbody> <?php
             $query = query("SELECT * FROM helpticket WHERE isActive = 0 ORDER BY ticketID DESC");
             confirm($query);
 
-            while ($row = fetch_array($query)) { ?>
+            while ($row = fetch_array($query)) { 
+                $sqlStudentName = query("SELECT studFirstName, studLastName FROM student WHERE studID = " . $row['studID']);
+                $studentName = mysqli_fetch_assoc($sqlStudentName); ?>
                 <tr>
                     <td><?php echo $row['ticketID'] ?></td>
                     <td><?php echo $row['studID'] ?></td>
+                    <td><?php echo $studentName['studFirstName'] . " "  . $studentName['studLastName']; ?></td>
                     <td><?php echo $row['ticketSubject'] ?></td>
                     <td><?php echo $row['ticketCategory'] ?></td> 
                     <td><?php echo $row['ticketTime'] ?></td>
 
                     <td><button type="button" class="btn btn-success formbutton" data-toggle="modal" data-target="#ticketPopup<?php echo $row['ticketID']; ?>"><span class="fa fa-comments" style="color:white"></button></form></td>
                     <td><form method="post"><button class="btn btn-info formbutton" name="closereopen<?php echo $row['ticketID']; ?>" onclick="return confirm('Are you sure you want to reopen <?php echo $row['ticketSubject'] ?>?')"><span class="fa fa-arrow-up" style="color:white"></button></form></td>
+                    <?php
+                        //Show delete button if the logged in admin is an owner
+                        if($_SESSION['adminCategory'] == 1) { ?>
+                        <td><form method="post"><button class="btn btn-danger formbutton" name="removeTicket<?php echo $row['ticketID']; ?>" onclick="return confirm('Are you sure you want to remove <?php echo $studentName['studFirstName'] ?>\'s payment?')"><span class="fas fa-times" style="color:white"></button></form></td>
+                        <?php }
+                    ?>
                 </tr> 
-                
+                <?php   
+                    //Remove button handling
+                    if(isset($_POST['removeTicket' . $row['ticketID']])){
+                        $rem = query("DELETE FROM helpticket WHERE ticketID = " . $row['ticketID']." AND studID = ".$row['studID']);
+                        $conf = confirm($rem);
+                        ?>
+                        <script>alert("Ticket deleted.");</script>
+                        <?php 
+                        header("Refresh:0");
+                        exit();
+                        } ?>
                 <!-- Conversation modal -->
                 <div class="modal fade" id="ticketPopup<?php echo $row['ticketID']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered modal-md" role="document">

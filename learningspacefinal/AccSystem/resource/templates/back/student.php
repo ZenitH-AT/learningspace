@@ -72,7 +72,7 @@
                         query("DELETE FROM student WHERE studID = " . $row['studID']);
                         ?><script>alert("Student deleted.");</script><?php
 
-                        header("Location: ".$_SERVER['REQUEST_URI']);
+                        header("Refresh:0");
                         exit();
                     } ?>
                 </tr> 
@@ -97,7 +97,7 @@
                                                     </div>
                                                     <div class="col-sm-6">
                                                         School name
-                                                        <input type="text" class="form-control" value="<?php echo $row['studSchool'] ?>" id="school<?php echo $row['studID']; ?>" name="school<?php echo $row['studID']; ?>" required>
+                                                        <input type="text" class="form-control" value="<?php echo $row['studSchool'] ?>" id="school<?php echo $row['studID']; ?>" name="school<?php echo $row['studID']; ?>" >
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -107,7 +107,7 @@
                                                     </div>
                                                     <div class="col-sm-6">
                                                         School address
-                                                        <input type="text" class="form-control" value="<?php echo $row['studSchoolAddress'] ?>" id="schoolAddress<?php echo $row['studID']; ?>" name="schoolAddress<?php echo $row['studID']; ?>" required>
+                                                        <input type="text" class="form-control" value="<?php echo $row['studSchoolAddress'] ?>" id="schoolAddress<?php echo $row['studID']; ?>" name="schoolAddress<?php echo $row['studID']; ?>" >
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -117,7 +117,7 @@
                                                     </div>
                                                     <div class="col-sm-6">
                                                         Country
-                                                        <input type="text" class="form-control" value="<?php echo $row['studCountry'] ?>" id="country<?php echo $row['studID']; ?>" name="country<?php echo $row['studID']; ?>" required>
+                                                        <input type="text" class="form-control" value="<?php echo $row['studCountry'] ?>" id="country<?php echo $row['studID']; ?>" name="country<?php echo $row['studID']; ?>" >
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -127,17 +127,17 @@
                                                     </div>
                                                     <div class="col-sm-6">
                                                         City
-                                                        <input type="text" class="form-control" value="<?php echo $row['studCity'] ?>" id="city<?php echo $row['studID']; ?>" name="city<?php echo $row['studID']; ?>" required>
+                                                        <input type="text" class="form-control" value="<?php echo $row['studCity'] ?>" id="city<?php echo $row['studID']; ?>" name="city<?php echo $row['studID']; ?>" >
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <div class="col-sm-6">
                                                         Gender
-                                                        <input type="text" class="form-control" value="<?php echo $row['studGender'] ?>" id="gender<?php echo $row['studID']; ?>" name="gender<?php echo $row['studID']; ?>" required>
+                                                        <input type="text" class="form-control" value="<?php echo $row['studGender'] ?>" id="gender<?php echo $row['studID']; ?>" name="gender<?php echo $row['studID']; ?>" >
                                                     </div>
                                                     <div class="col-sm-6">
                                                         Street
-                                                        <input type="text" class="form-control" value="<?php echo $row['studStreet'] ?>" id="street<?php echo $row['studID']; ?>" name="street<?php echo $row['studID']; ?>" required>
+                                                        <input type="text" class="form-control" value="<?php echo $row['studStreet'] ?>" id="street<?php echo $row['studID']; ?>" name="street<?php echo $row['studID']; ?>" >
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -151,7 +151,13 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <div class="col-sm-6"></div>
+                                                    <div class="col-sm-6">
+                                                        Status
+                                                        <select class="form-control" name="Status<?php echo $row['isActive']; ?>">
+                                                            <option value="1" <?php if($row['isActive']=='1'){echo 'selected';} ?>>Active</option>
+                                                            <option value="0" <?php if($row['isActive']=='0'){echo 'selected';}?>>Inactive</option>
+                                                        </select>
+                                                    </div>
                                                     <div class="col-sm-6">
                                                         Phone number
                                                         <input type="text" class="form-control" value="<?php echo $row['studPhone'] ?>" id="phoneNumber<?php echo $row['studID']; ?>" name="phoneNumber<?php echo $row['studID']; ?>" required>
@@ -180,12 +186,13 @@
                                             studCity = '{$_POST['city' . $row['studID']]}', 
                                             studStreet = '{$_POST['street' . $row['studID']]}', 
                                             id_passport = '{$_POST['idPassport' . $row['studID']]}', 
-                                            studPhone = '{$_POST['phoneNumber' . $row['studID']]}'
+                                            studPhone = '{$_POST['phoneNumber' . $row['studID']]}',
+                                            isActive  = '{$_POST['Status' . $row['isActive']]}'
                                             WHERE studID = " . $row['studID']);
                                         
                                         ?><script>alert("Student edited.");</script><?php
 
-                                        header("Location: ".$_SERVER['REQUEST_URI']);
+                                        header("Refresh:0");
                                         exit();
                                     } ?>
 
