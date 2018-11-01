@@ -38,7 +38,7 @@ if (isset($_GET['error'])) {
     }
     if ($error == 5) {
         ?>
-        <script>alert("Your account is not active. Please echeck your email and go to the link to activate your account.");</script>
+        <script>alert("Your account is not active. The activation email has been re-sent.\nPlease check your email and go to the link to activate your account.");</script>
         <?php
     }
     if ($error == 6) {
