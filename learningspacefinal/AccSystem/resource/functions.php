@@ -392,7 +392,6 @@ function lognew() {
                     $UserPhone = $row['studPhone'];
                     $UserActive = $row['isActive'];
                     $userPass = $row['studPassword'];
-                    $userActicationKey = $row['activationKey'];
                 }
                 if ($UserActive == 1) {
                     $query = "SELECT * FROM booking WHERE studID='{$id}' AND bookingStatus='1'";
@@ -413,14 +412,6 @@ function lognew() {
                         redirect("HomePage.php");
                     }
                 } else {
-                    $mail = new MailClass();
-                    $subject = "Your Accommodation Account - Verify Your Email Address";
-                    $body = "Dear {$UserFirstName} {$UserLastName}<br><br>"
-                            . "Please click the link below to verify your LearningSpace account.<br><br>"
-                            . "<a href='http://localhost:8080/project/AccSystem/public/userActivation.php?key={$userActicationKey}' class='btn btn-outline-success formbutton'>Verify email address</a>";
-
-                    $getresult = $mail->sendMail($UserEmail, $subject, $body);
-                    
                     redirect("HomePage.php?error=5");
                 }
             } elseif ($countAdmin > 0) {
@@ -938,7 +929,13 @@ function profile() {
                     $update2 = query($sql);
                     confirm($update2);
                     if ($update2) {
-                        header("Location: ".$_SERVER['REQUEST_URI']."&profileUpdated");
+                        header("Refresh:0");
+
+                        $confirm = "<div class='alert alert-success alert-dismissible fade show text-center' role='alert'>
+                                    <strong>Success!</strong> Your Profile Has Been Updated.
+                                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                      <span aria-hidden='true'>&times;</span>
+                                    </button></div>";
                     }
                 }
             } else {
@@ -1115,14 +1112,14 @@ function payment() {
                                     <textarea type="text" class="form-control" name="reason<?php echo $row['payID']; ?>" placeholder="Reason" rows="4" required></textarea><br />
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="submit" class="btn btn-primary formbutton" style="float:right" name="refund<?php echo $row['payID']; ?>" onclick="confirm('Are you sure?')">Reqest refund</button><?php
+                                    <button type="submit" class="btn btn-primary formbutton" style="float:right" name="refund<?php echo $row['payID']; ?>" onclick="confirm('Are you sure?')">Request refund</button><?php
 
                                     //Request refund button handling
                                     if(isset($_POST['refund' . $row['payID']])){
                                         query("INSERT INTO refund (payID, studID, reason, date) VALUES('{$row['payID']}', '{$_SESSION["iduser"]}', '{$_GET['reason' . $row['payID']]}', now())");
                                         ?><script>alert("Your request has been sent.");</script><?php
                                         
-                                        header("Location: ".$_SERVER['REQUEST_URI']);
+                                        header("Refresh:0");
                                         exit();
                                     } ?> 
 
@@ -1361,7 +1358,7 @@ function get_Bookings() {
                 ?><script>alert("Booking status changed");</script><?php       
             }
 
-            header("Location: ".$_SERVER['REQUEST_URI']);
+            header("Refresh:0");
             exit();
         } 
         
@@ -1370,7 +1367,7 @@ function get_Bookings() {
             query("DELETE FROM booking WHERE bookID = " . $row['bookID']);
             ?><script>alert("Booking deleted.");</script><?php
 
-            header("Location: ".$_SERVER['REQUEST_URI']);
+            header("Refresh:0");
             exit();
 
             //Send student a different notification based on if the booking had started or not
@@ -1447,7 +1444,7 @@ function get_Bookings() {
                                 
                                 ?><script>alert("Booking edited.");</script><?php
 
-                                header("Location: ".$_SERVER['REQUEST_URI']);
+                                header("Refresh:0");
                                 exit();
                             } ?>
                         </div>
@@ -1492,7 +1489,7 @@ function get_Viewings() {
             query("DELETE FROM viewing WHERE viewBookingID = " . $row['viewBookingID']);
             ?><script>alert("Viewing deleted.");</script><?php
 
-            header("Location: ".$_SERVER['REQUEST_URI']);
+            header("Refresh:0");
             exit();
         } ?>
 
@@ -1533,17 +1530,17 @@ function get_Viewings() {
                                         <div class="form-group row">
                                             <div class="col-sm-6">
                                                 View date
-                                                <input type="date" class="form-control" value="<?php echo $row['viewDate'] ?>" id="viewDate<?php echo $row['viewBookingID']; ?>" name="viewDate<?php echo $row['viewBookingID']; ?>" required>
+                                                <input type="datetime" class="form-control" value="<?php echo $row['viewDate'] ?>" id="viewDate<?php echo $row['viewBookingID']; ?>" name="viewDate<?php echo $row['viewBookingID']; ?>" required>
                                             </div>
                                             <div class="col-sm-6">
                                                 Date scheduled
-                                                <input type="date" class="form-control" value="<?php echo $row['scheduledDate'] ?>" id="scheduledDate<?php echo $row['viewBookingID']; ?>" name="scheduledDate<?php echo $row['viewBookingID']; ?>" required>
+                                                <input type="datetime" class="form-control" value="<?php echo $row['scheduledDate'] ?>" id="scheduledDate<?php echo $row['viewBookingID']; ?>" name="scheduledDate<?php echo $row['viewBookingID']; ?>" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-sm-6">
                                                 Viewer status
-                                                <input type="text" class="form-control" value="<?php echo $row['viewStatus'] ?>" id="status<?php echo $row['viewBookingID']; ?>" name="status<?php echo $row['viewBookingID']; ?>" required>
+                                                <input type="text" class="form-control" value="<?php echo $row['viewStatus'] ?>" id="status<?php echo $row['viewBookingID']; ?>" name="status<?php echo $row['viewBookingID']; ?>" >
                                             </div>
                                         </div>
                                     </div>
@@ -1568,7 +1565,7 @@ function get_Viewings() {
                                 
                                 ?><script>alert("Viewing edited.");</script><?php
 
-                                header("Location: ".$_SERVER['REQUEST_URI']);
+                                header("Refresh:0");
                                 exit();
                             } ?>
                         </div>
@@ -1609,7 +1606,7 @@ function get_Rooms() {
             query("DELETE FROM room WHERE room_id = " . $row['room_id']);
             ?><script>alert("Room deleted.");</script><?php
 
-            header("Location: ".$_SERVER['REQUEST_URI']);
+            header("Refresh:0");
             exit();
         } ?>
         
@@ -1646,7 +1643,7 @@ function get_Rooms() {
                                 
                                 ?><script>alert("Description edited.");</script><?php
 
-                                header("Location: ".$_SERVER['REQUEST_URI']);
+                                header("Refresh:0");
                                 exit();
                             } ?>
 
@@ -1743,7 +1740,7 @@ function get_Rooms() {
                                 
                                 ?><script>alert("Room edited.");</script><?php
 
-                                header("Location: ".$_SERVER['REQUEST_URI']);
+                                header("Refresh:0");
                                 exit();
                             } ?>
 
@@ -1763,7 +1760,7 @@ function close_open_ticket($ticketID, $isActive) {
         
         query("UPDATE helpticket SET isActive = " . $closereopen . " WHERE ticketID = " . $ticketID);
 
-        header("Location: ".$_SERVER['REQUEST_URI']);
+        header("Refresh:0");
         exit(); //Prevents ticket closing from immediately reopening the ticket
     } 
 }
@@ -1796,7 +1793,7 @@ function send_notification($title, $body, $type, $inputids) {
             }
         }
 
-        header("Location: ".$_SERVER['REQUEST_URI']);
+        header("Refresh:0");
         exit();
     } 
 }
@@ -1805,7 +1802,7 @@ function send_notification($title, $body, $type, $inputids) {
 function mark_read($studID) {
     query("UPDATE notification SET status = 1 WHERE studID = " . $studID);
 
-    header("Location: ".$_SERVER['REQUEST_URI']);
+    header("Refresh:0");
     exit();
 }
 
