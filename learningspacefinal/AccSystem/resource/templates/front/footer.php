@@ -40,6 +40,7 @@ if (isset($_GET['error'])) {
         ?>
         <script>alert("Your account is not active. The activation email has been re-sent.\nPlease check your email and go to the link to activate your account.");</script>
         <?php
+        redirect("HomePage.php");
     }
     if ($error == 6) {
         ?>
