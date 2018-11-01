@@ -1533,11 +1533,11 @@ function get_Viewings() {
                                         <div class="form-group row">
                                             <div class="col-sm-6">
                                                 View date
-                                                <input type="date" class="form-control" value="<?php echo $row['viewDate'] ?>" id="viewDate<?php echo $row['viewBookingID']; ?>" name="viewDate<?php echo $row['viewBookingID']; ?>" required>
+                                                <input type="datetime" class="form-control" value="<?php echo $row['viewDate'] ?>" id="viewDate<?php echo $row['viewBookingID']; ?>" name="viewDate<?php echo $row['viewBookingID']; ?>" required>
                                             </div>
                                             <div class="col-sm-6">
                                                 Date scheduled
-                                                <input type="date" class="form-control" value="<?php echo $row['scheduledDate'] ?>" id="scheduledDate<?php echo $row['viewBookingID']; ?>" name="scheduledDate<?php echo $row['viewBookingID']; ?>" required>
+                                                <input type="datetime" class="form-control" value="<?php echo $row['scheduledDate'] ?>" id="scheduledDate<?php echo $row['viewBookingID']; ?>" name="scheduledDate<?php echo $row['viewBookingID']; ?>" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
