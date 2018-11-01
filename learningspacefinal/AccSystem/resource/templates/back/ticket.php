@@ -158,13 +158,15 @@
                         <td><form method="post"><button class="btn btn-danger formbutton" name="deleteTicket<?php echo $row['ticketID']; ?>" onclick="return confirm('Are you sure you want to delete <?php echo $studentName['studFirstName'] ?>\'s ticket?')"><span class="fas fa-times" style="color:white"></button></form></td><?php 
                     } ?>
                 </tr><?php
-                   
+
                 //Delete ticket button handling
-                if(isset($_POST['deleteTicket' . $row['ticketID']])){
+                if(isset($_POST['deleteTicket' . $row['ticketID']])) {
                     $rem = query("DELETE FROM helpticket WHERE ticketID = " . $row['ticketID']);
                     $conf = confirm($rem); 
 
-                    ?><script>alert("Ticket deleted.");</script><?php
+                    if(!$conf) { ?>
+                        <script>alert("Ticket deleted.");</script><?php
+                    }
                     
                     header("Location: ".$_SERVER['REQUEST_URI']);
                     exit();
