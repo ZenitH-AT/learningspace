@@ -929,13 +929,7 @@ function profile() {
                     $update2 = query($sql);
                     confirm($update2);
                     if ($update2) {
-                        header("Refresh:0");
-
-                        $confirm = "<div class='alert alert-success alert-dismissible fade show text-center' role='alert'>
-                                    <strong>Success!</strong> Your Profile Has Been Updated.
-                                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                                      <span aria-hidden='true'>&times;</span>
-                                    </button></div>";
+                        header("Location: ".$_SERVER['REQUEST_URI']."&profileUpdated");
                     }
                 }
             } else {
@@ -1119,7 +1113,7 @@ function payment() {
                                         query("INSERT INTO refund (payID, studID, reason, date) VALUES('{$row['payID']}', '{$_SESSION["iduser"]}', '{$_GET['reason' . $row['payID']]}', now())");
                                         ?><script>alert("Your request has been sent.");</script><?php
                                         
-                                        header("Refresh:0");
+                                        header("Location: ".$_SERVER['REQUEST_URI']);
                                         exit();
                                     } ?> 
 
@@ -1358,7 +1352,7 @@ function get_Bookings() {
                 ?><script>alert("Booking status changed");</script><?php       
             }
 
-            header("Refresh:0");
+            header("Location: ".$_SERVER['REQUEST_URI']);
             exit();
         } 
         
@@ -1367,7 +1361,7 @@ function get_Bookings() {
             query("DELETE FROM booking WHERE bookID = " . $row['bookID']);
             ?><script>alert("Booking deleted.");</script><?php
 
-            header("Refresh:0");
+            header("Location: ".$_SERVER['REQUEST_URI']);
             exit();
 
             //Send student a different notification based on if the booking had started or not
@@ -1444,7 +1438,7 @@ function get_Bookings() {
                                 
                                 ?><script>alert("Booking edited.");</script><?php
 
-                                header("Refresh:0");
+                                header("Location: ".$_SERVER['REQUEST_URI']);
                                 exit();
                             } ?>
                         </div>
@@ -1489,7 +1483,7 @@ function get_Viewings() {
             query("DELETE FROM viewing WHERE viewBookingID = " . $row['viewBookingID']);
             ?><script>alert("Viewing deleted.");</script><?php
 
-            header("Refresh:0");
+            header("Location: ".$_SERVER['REQUEST_URI']);
             exit();
         } ?>
 
@@ -1565,7 +1559,7 @@ function get_Viewings() {
                                 
                                 ?><script>alert("Viewing edited.");</script><?php
 
-                                header("Refresh:0");
+                                header("Location: ".$_SERVER['REQUEST_URI']);
                                 exit();
                             } ?>
                         </div>
@@ -1606,7 +1600,7 @@ function get_Rooms() {
             query("DELETE FROM room WHERE room_id = " . $row['room_id']);
             ?><script>alert("Room deleted.");</script><?php
 
-            header("Refresh:0");
+            header("Location: ".$_SERVER['REQUEST_URI']);
             exit();
         } ?>
         
@@ -1643,7 +1637,7 @@ function get_Rooms() {
                                 
                                 ?><script>alert("Description edited.");</script><?php
 
-                                header("Refresh:0");
+                                header("Location: ".$_SERVER['REQUEST_URI']);
                                 exit();
                             } ?>
 
@@ -1740,7 +1734,7 @@ function get_Rooms() {
                                 
                                 ?><script>alert("Room edited.");</script><?php
 
-                                header("Refresh:0");
+                                header("Location: ".$_SERVER['REQUEST_URI']);
                                 exit();
                             } ?>
 
@@ -1760,7 +1754,7 @@ function close_open_ticket($ticketID, $isActive) {
         
         query("UPDATE helpticket SET isActive = " . $closereopen . " WHERE ticketID = " . $ticketID);
 
-        header("Refresh:0");
+        header("Location: ".$_SERVER['REQUEST_URI']);
         exit(); //Prevents ticket closing from immediately reopening the ticket
     } 
 }
@@ -1793,7 +1787,7 @@ function send_notification($title, $body, $type, $inputids) {
             }
         }
 
-        header("Refresh:0");
+        header("Location: ".$_SERVER['REQUEST_URI']);
         exit();
     } 
 }
@@ -1802,7 +1796,7 @@ function send_notification($title, $body, $type, $inputids) {
 function mark_read($studID) {
     query("UPDATE notification SET status = 1 WHERE studID = " . $studID);
 
-    header("Refresh:0");
+    header("Location: ".$_SERVER['REQUEST_URI']);
     exit();
 }
 
