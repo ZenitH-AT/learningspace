@@ -4,9 +4,7 @@
     <!-- this is the entire modal form, including the background -->
     <div class="cd-signin-modal__container">
         <!-- this is the container wrapper -->
-        <ul class="cd-signin-modal__switcher js-signin-modal-switcher js-signin-modal-trigger" style="list-style-type:none;">
-            <li><a style="text-decoration: none;" href="#0" data-signin="login" data-type="login">Sign in</a></li>
-        </ul>
+        <ul class="cd-signin-modal__switcher js-signin-modal-switcher js-signin-modal-trigger"></ul>
 
         <div class="cd-signin-modal__block js-signin-modal-block" data-type="login">
             <!-- log in form -->
@@ -21,7 +19,7 @@
                     <label class="cd-signin-modal__label cd-signin-modal__label--password cd-signin-modal__label--image-replace" for="signin-password">Password</label>
                     <input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="signin-password" name="signin-password" type="password" placeholder="Password">
                     <a href="#" class="cd-signin-modal__hide-password js-hide-password" style="font-size: 1.0rem;">Show</a>
-                    <span class="cd-signin-modal__error">Error message here!</span>
+                    <span class="cd-signin-modal__error">Error!</span>
                 </p>
                 
                 <p class="cd-signin-modal__fieldset" style="margin-left: 67%;">
@@ -29,7 +27,7 @@
                 </p>
 
                 <p class="cd-signin-modal__fieldset">
-                    <input class="cd-signin-modal__input cd-signin-modal__input--full-width" type="submit" name="doLogin" value="Login">
+                    <input class="cd-signin-modal__input cd-signin-modal__input--full-width" type="submit" name="doLogin" value="Sign in">
                 </p>
             </form>
         </div>
@@ -43,7 +41,7 @@
                 <p class="cd-signin-modal__fieldset">
                     <label class="cd-signin-modal__label cd-signin-modal__label--email cd-signin-modal__label--image-replace" for="reset-email">E-mail</label>
                     <input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="reset-email" name="reset-email" type="email" placeholder="E-mail">
-                    <span class="cd-signin-modal__error">Error message here!</span>
+                    <span class="cd-signin-modal__error">Error!</span>
                 </p>
 
                 <p class="cd-signin-modal__fieldset" style="margin-left: 78%;">
