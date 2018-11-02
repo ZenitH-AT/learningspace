@@ -133,7 +133,10 @@
                                                 <div class="form-group row">
                                                     <div class="col-sm-6">
                                                         Gender
-                                                        <input type="text" class="form-control" value="<?php echo $row['studGender'] ?>" id="gender<?php echo $row['studID']; ?>" name="gender<?php echo $row['studID']; ?>" required>
+                                                        <select class="form-control" name="gender<?php echo $row['studID']; ?>">
+                                                            <option value="Male" <?php if($row['studGender']=='Male'){echo 'selected';} ?>>Male</option>
+                                                            <option value="Female" <?php if($row['studGender']=='Female'){echo 'selected';}?>>Female</option>
+                                                        </select>
                                                     </div>
                                                     <div class="col-sm-6">
                                                         Street
@@ -151,10 +154,16 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <div class="col-sm-6"></div>
                                                     <div class="col-sm-6">
                                                         Phone number
                                                         <input type="text" class="form-control" value="<?php echo $row['studPhone'] ?>" id="phoneNumber<?php echo $row['studID']; ?>" name="phoneNumber<?php echo $row['studID']; ?>" required>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        Status
+                                                        <select class="form-control" name="isActive<?php echo $row['studID']; ?>">
+                                                            <option value="1" <?php if($row['isActive']=='1'){echo 'selected';} ?>>Active</option>
+                                                            <option value="0" <?php if($row['isActive']=='0'){echo 'selected';}?>>Inactive</option>
+                                                        </select>
                                                     </div>
                                                 </div> 
                                             </div>
@@ -180,7 +189,8 @@
                                             studCity = '{$_POST['city' . $row['studID']]}', 
                                             studStreet = '{$_POST['street' . $row['studID']]}', 
                                             id_passport = '{$_POST['idPassport' . $row['studID']]}', 
-                                            studPhone = '{$_POST['phoneNumber' . $row['studID']]}'
+                                            studPhone = '{$_POST['phoneNumber' . $row['studID']]}',
+                                            isActive  = '{$_POST['isActive' . $row['studID']]}'
                                             WHERE studID = " . $row['studID']);
                                         
                                         ?><script>alert("Student edited.");</script><?php
