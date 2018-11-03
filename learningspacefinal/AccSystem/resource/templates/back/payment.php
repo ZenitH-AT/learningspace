@@ -26,7 +26,7 @@
                     <th>Room<br/>ID</th>
                     <th>Room name</th>
                     <th>Status</th>
-                    <th></th>
+                    <!-- <th></th> -->
                     <th>Payment date</th><?php 
                     if($_SESSION['adminCategory'] == 1) { ?>
                         <th>Delete</th><?php 
@@ -58,7 +58,7 @@
                         <td><?php echo $row['roomID'] ?></td>
                         <td><?php echo $roomName['roomName']; ?></td>
                         <td><?php echo ($row['paymentStatus'] == 1 ? '<text class="text-success" style="float:left">paid</text>' : '<text class="text-info" style="float:left">complete</text>') ?></td>
-                        <td><form method="post"><button class="btn-xs btn-dark formbutton" name="switch<?php echo $row['payID']; ?>" onclick="return confirm('Are you sure you want to switch the payment status of payment ID <?php echo $row['payID'] ?>?')"><span class="fas fa-exchange-alt" style="color:white"></button></form></td>
+                        <!-- <td><form method="post"><button class="btn-xs btn-dark formbutton" name="switch<?php echo $row['payID']; ?>" onclick="return confirm('Are you sure you want to switch the payment status of payment ID <?php echo $row['payID'] ?>?')"><span class="fas fa-exchange-alt" style="color:white"></button></form></td> -->
                         <td><?php echo $row['paymentDate'] ?></td><?php
 
                         //Show delete button if the logged in admin is an owner
