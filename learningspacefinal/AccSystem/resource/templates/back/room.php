@@ -43,10 +43,13 @@
                             query("INSERT INTO room (roomName, roomPrice, roomType, roomCapacity, roomReserved, roomImage, roomDescription, roomShortDescription)
                                    VALUES('{$_POST['roomName']}', '{$_POST['roomPrice']}', '{$_POST['roomType']}', '{$_POST['roomCapacity']}', 
                                           0, '{$roomImageName}', '{$_POST['longDescription']}', '{$_POST['shortDescription']}')");
+                            ?>
 
-                            ?><script>alert("Room added.");</script><?php
+                            <script>
+                                alert("Room added.");
+                                window.location.href = window.location.href;
+                            </script><?php
 
-                            header("Location: ".$_SERVER['REQUEST_URI']);
                             exit();
                         } ?>
                     </div>

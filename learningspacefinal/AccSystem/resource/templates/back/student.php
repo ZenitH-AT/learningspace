@@ -69,10 +69,13 @@
                     
                     //Remove button handling
                     if(isset($_POST['removeStudent' . $row['studID']])){
-                        query("DELETE FROM student WHERE studID = " . $row['studID']);
-                        ?><script>alert("Student deleted.");</script><?php
+                        query("DELETE FROM student WHERE studID = " . $row['studID']); ?>
 
-                        header("Location: ".$_SERVER['REQUEST_URI']);
+                        <script>
+                            alert("Student deleted.");
+                            window.location.href = window.location.href;
+                        </script><?php
+
                         exit();
                     } ?>
                 </tr> 
@@ -191,11 +194,13 @@
                                             id_passport = '{$_POST['idPassport' . $row['studID']]}', 
                                             studPhone = '{$_POST['phoneNumber' . $row['studID']]}',
                                             isActive  = '{$_POST['isActive' . $row['studID']]}'
-                                            WHERE studID = " . $row['studID']);
-                                        
-                                        ?><script>alert("Student edited.");</script><?php
+                                            WHERE studID = " . $row['studID']); ?>
 
-                                        header("Location: ".$_SERVER['REQUEST_URI']);
+                                        <script>
+                                            alert("Student edited.");
+                                            window.location.href = window.location.href;
+                                        </script><?php
+
                                         exit();
                                     } ?>
 

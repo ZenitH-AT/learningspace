@@ -93,19 +93,24 @@
             
             $sqlAdmin = query("SELECT * FROM admin WHERE adminEmail = '{$email}' ");
             confirm($sqlAdmin);
-            //$count = countItem($result)
+
             if (countItem($sqlAdmin)==0) {
                 $AddAd = query("INSERT INTO admin (adminFirstN, adminLastN, adminEmail,adminPassword, adminAddress, adminPhone, adminCategory, adminActive )"
                     . " VALUES('{$firstname}', '{$lastname}', '{$email}', '{$enCPass}', '{$address}', '{$phone}', '{$category}', '{$status}' )");
-                confirm($AddAd);
-                ?><script>alert("Admin Added.");</script><?php
+                confirm($AddAd); ?>
 
-                header("Refresh:0");
+                <script>
+                    alert("Admin added.");
+                    window.location.href = window.location.href;
+                </script><?php
+
                 exit();
-            }  else {
-                ?><script>alert("Admin was not Added. Please change the email address");</script><?php
+            }  else { ?>
+                <script>
+                    alert("Admin was not added.\nPlease change the email address");
+                    window.location.href = window.location.href;
+                </script><?php
 
-                header("Refresh:0");
                 exit();
             }  
         }
@@ -176,10 +181,13 @@
                     
                 //Remove button handling
                 if(isset($_POST['removeAdmin' . $row['adminID']])){
-                    query("DELETE FROM admin WHERE adminID = " . $row['adminID']);
-                    ?><script>alert("Admin deleted.");</script><?php
+                    query("DELETE FROM admin WHERE adminID = " . $row['adminID']); ?>
 
-                    header("Refresh:0");
+                    <script>
+                        alert("Admin deleted.");
+                        window.location.href = window.location.href;
+                    </script><?php
+    
                     exit();
                 } ?>
                 
@@ -251,11 +259,14 @@
                                         adminAddress = '{$_POST['address' . $row['adminID']]}', 
                                         adminPhone = '{$_POST['phone' . $row['adminID']]}', 
                                         adminPassword = '{$adminPass}' 
-                                        WHERE adminID = " . $row['adminID']);
-                                    
-                                    ?><script>alert("Admin edited.");</script><?php
-                                    header("Refresh:0");
-                                    exit();
+                                        WHERE adminID = " . $row['adminID']); ?>
+
+                                        <script>
+                                            alert("Admin edited.");
+                                            window.location.href = window.location.href;
+                                        </script><?php
+
+                                        exit();
                                 } ?>
 
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

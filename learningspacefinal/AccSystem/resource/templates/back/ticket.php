@@ -162,13 +162,13 @@
                 //Delete ticket button handling
                 if(isset($_POST['deleteTicket' . $row['ticketID']])) {
                     $rem = query("DELETE FROM helpticket WHERE ticketID = " . $row['ticketID']);
-                    $conf = confirm($rem); 
+                    $conf = confirm($rem); ?>
 
-                    if(!$conf) { ?>
-                        <script>alert("Ticket deleted.");</script><?php
-                    }
-                    
-                    header("Location: ".$_SERVER['REQUEST_URI']);
+                    <script>
+                        alert("Ticket deleted.");
+                        window.location.href = window.location.href;
+                    </script><?php
+                
                     exit();
                 } ?> 
                 

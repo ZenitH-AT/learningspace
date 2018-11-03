@@ -136,9 +136,13 @@
 
                 //Delete button handling
                 if (isset($_POST['delete' . $row['notificationID']])) {                  
-                    query("DELETE FROM notification WHERE notificationID = " . $row['notificationID']);
-            
-                    header("Location: ".$_SERVER['REQUEST_URI']);
+                    query("DELETE FROM notification WHERE notificationID = " . $row['notificationID']); ?>
+
+                    <script>
+                        alert("Notification deleted.");
+                        window.location.href = window.location.href;
+                    </script><?php
+
                     exit();
                 } 
             } ?>

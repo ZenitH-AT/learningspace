@@ -50,22 +50,28 @@
                         if(isset($_POST['accept' . $row['requestID']])){
                             query("UPDATE payment SET paymentStatus = 0 WHERE payID = " . $row['payID']);
                             query("DELETE FROM refund WHERE requestID = " . $row['requestID']);
-                            ?><script>alert("The request has been accepted.");</script><?php
 
-                            send_notification("Your refund request was accepted", "Your payment refund request has been <strong>accepted</strong>.", "success", $row['studID']);
-                            
-                            header("Location: ".$_SERVER['REQUEST_URI']);
+                            send_notification("Your refund request was accepted", "Your payment refund request has been <strong>accepted</strong>.", "success", $row['studID']); ?>
+
+                            <script>
+                                alert("The request has been accepted.");
+                                window.location.href = window.location.href;
+                            </script><?php
+
                             exit();
                         }
 
                         //Decline button handling
                         if(isset($_POST['decline' . $row['requestID']])){
                             query("DELETE FROM refund WHERE requestID = " . $row['requestID']);
-                            ?><script>alert("The request has been declined.");</script><?php
 
-                            send_notification("Your refund request was declined", "Your payment refund request has been <strong>declined</strong>.", "danger", $row['studID']);
-                            
-                            header("Location: ".$_SERVER['REQUEST_URI']);
+                            send_notification("Your refund request was declined", "Your payment refund request has been <strong>declined</strong>.", "danger", $row['studID']); ?>
+
+                            <script>
+                                alert("The request has been declined.");
+                                window.location.href = window.location.href;
+                            </script><?php
+
                             exit();
                         } ?>
                     </tr> <?php

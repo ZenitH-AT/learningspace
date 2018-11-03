@@ -70,13 +70,13 @@
                     //Delete button handling
                     if(isset($_POST['deletePayment' . $row['payID']])) {
                         $rem = query("DELETE FROM payment WHERE payID = " . $row['payID']." AND studID = ".$row['studID']." AND paymentStatus = 0 ");
-                        $conf = confirm($rem);
-                        
-                        if(!$conf) { ?>
-                            <script>alert("Payment deleted.");</script><?php
-                        }
+                        $conf = confirm($rem); ?>
 
-                        header("Location: ".$_SERVER['REQUEST_URI']);
+                        <script>
+                            alert("Payment deleted.");
+                            window.location.href = window.location.href;
+                        </script><?php
+                    
                         exit();
                     }
 
@@ -84,10 +84,13 @@
                     if(isset($_POST['switch' . $row['payID']])) {
                         $newValue = ($row['paymentStatus'] == 1 ? 0 : 1);
 
-                        query("UPDATE payment SET paymentStatus = {$newValue} WHERE payID = " . $row['payID']);
-                        ?><script>alert("Payment status changed.");</script><?php
+                        query("UPDATE payment SET paymentStatus = {$newValue} WHERE payID = " . $row['payID']); ?>
+                        
+                        <script>
+                            alert("Payment status changed.");
+                            window.location.href = window.location.href;
+                        </script><?php
 
-                        header("Location: ".$_SERVER['REQUEST_URI']);
                         exit();
                     }
                 } ?>
