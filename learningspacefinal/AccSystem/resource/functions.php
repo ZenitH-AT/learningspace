@@ -1119,10 +1119,13 @@ function payment() {
 
                                     //Request refund button handling
                                     if(isset($_POST['refund' . $row['payID']])){
-                                        query("INSERT INTO refund (payID, studID, reason, date) VALUES('{$row['payID']}', '{$_SESSION["iduser"]}', '{$_GET['reason' . $row['payID']]}', now())");
-                                        ?><script>alert("Your request has been sent.");</script><?php
-                                        
-                                        header("Location: ".$_SERVER['REQUEST_URI']);
+                                        query("INSERT INTO refund (payID, studID, reason, date) VALUES('{$row['payID']}', '{$_SESSION["iduser"]}', '{$_GET['reason' . $row['payID']]}', now())"); ?>
+
+                                        <script>
+                                            alert("Your request has been sent.");
+                                            window.location.href = window.location.href;
+                                        </script><?php
+                        
                                         exit();
                                     } ?> 
 
@@ -1361,16 +1364,19 @@ function get_Bookings() {
                 ?><script>alert("Booking status changed");</script><?php       
             }
 
-            header("Location: ".$_SERVER['REQUEST_URI']);
+            ?><script>window.location.href = window.location.href;</script><?php
             exit();
         } 
         
         //Remove booking button handling
         if(isset($_POST['removeBooking' . $row['bookID']])) {
-            query("DELETE FROM booking WHERE bookID = " . $row['bookID']);
-            ?><script>alert("Booking deleted.");</script><?php
+            query("DELETE FROM booking WHERE bookID = " . $row['bookID']); ?>
 
-            header("Location: ".$_SERVER['REQUEST_URI']);
+            <script>
+                alert("Booking deleted.");
+                window.location.href = window.location.href;
+            </script><?php
+
             exit();
 
             //Send student a different notification based on if the booking had started or not
@@ -1445,9 +1451,13 @@ function get_Bookings() {
                                     bookingDate = '{$_POST['bookDate' . $row['bookID']]}'
                                     WHERE bookID = " . $row['bookID']);
                                 
-                                ?><script>alert("Booking edited.");</script><?php
+                                ?>
 
-                                header("Location: ".$_SERVER['REQUEST_URI']);
+                                <script>
+                                    alert("Booking edited.");
+                                    window.location.href = window.location.href;
+                                </script><?php
+                
                                 exit();
                             } ?>
                         </div>
@@ -1489,10 +1499,13 @@ function get_Viewings() {
 
         //Remove viewing button handling
         if(isset($_POST['removeViewing' . $row['viewBookingID']])) {
-            query("DELETE FROM viewing WHERE viewBookingID = " . $row['viewBookingID']);
-            ?><script>alert("Viewing deleted.");</script><?php
+            query("DELETE FROM viewing WHERE viewBookingID = " . $row['viewBookingID']); ?>
 
-            header("Location: ".$_SERVER['REQUEST_URI']);
+            <script>
+                alert("Viewing deleted.");
+                window.location.href = window.location.href;
+            </script><?php
+
             exit();
         } ?>
 
@@ -1566,9 +1579,13 @@ function get_Viewings() {
                                     scheduledDate = '{$_POST['scheduledDate' . $row['viewBookingID']]}'
                                     WHERE viewBookingID = " . $row['viewBookingID']);
                                 
-                                ?><script>alert("Viewing edited.");</script><?php
+                                ?>
 
-                                header("Location: ".$_SERVER['REQUEST_URI']);
+                                <script>
+                                    alert("Viewing edited.");
+                                    window.location.href = window.location.href;
+                                </script><?php
+                
                                 exit();
                             } ?>
                         </div>
@@ -1606,10 +1623,13 @@ function get_Rooms() {
 
         //Remove room button handling
         if(isset($_POST['removeRoom' . $row['room_id']])) {
-            query("DELETE FROM room WHERE room_id = " . $row['room_id']);
-            ?><script>alert("Room deleted.");</script><?php
+            query("DELETE FROM room WHERE room_id = " . $row['room_id']); ?>
 
-            header("Location: ".$_SERVER['REQUEST_URI']);
+            <script>
+                alert("Room deleted.");
+                window.location.href = window.location.href;
+            </script><?php
+
             exit();
         } ?>
         
@@ -1644,9 +1664,13 @@ function get_Rooms() {
                                     roomDescription = '{$_POST['description' . $row['room_id']]}'
                                     WHERE room_id = " . $row['room_id']);
                                 
-                                ?><script>alert("Description edited.");</script><?php
+                                ?>
 
-                                header("Location: ".$_SERVER['REQUEST_URI']);
+                                <script>
+                                    alert("Description edited.");
+                                    window.location.href = window.location.href;
+                                </script><?php
+                
                                 exit();
                             } ?>
 
@@ -1741,9 +1765,13 @@ function get_Rooms() {
                                     roomShortDescription = '{$_POST['shortDescription' . $row['room_id']]}'
                                     WHERE room_id = " . $row['room_id']);
                                 
-                                ?><script>alert("Room edited.");</script><?php
+                                ?>
 
-                                header("Location: ".$_SERVER['REQUEST_URI']);
+                                <script>
+                                    alert("Room edited.");
+                                    window.location.href = window.location.href;
+                                </script><?php
+                
                                 exit();
                             } ?>
 
