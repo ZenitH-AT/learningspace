@@ -118,9 +118,13 @@
 
         <!-- Search bar -->
         <script>
-            //Only show search bar if the user is not at dashboard
+            //Only show search bar if the user is not at dashboard or live chat page
             if(window.location.href.includes("?")) {
                 document.getElementById('searchFilter').style.display = "block";
+
+                if (window.location.href.includes("?livechat")) {
+                    document.getElementById('searchFilter').style.display = "none";
+                }
             } else {
                 document.getElementById('searchFilter').style.display = "none";
             }
