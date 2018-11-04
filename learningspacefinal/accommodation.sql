@@ -1,9 +1,9 @@
-﻿-- phpMyAdmin SQL Dump
+-- phpMyAdmin SQL Dump
 -- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 03, 2018 at 02:05 AM
+-- Generation Time: Nov 04, 2018 at 06:03 PM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -21,19 +21,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `accommodation`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `accommodation`
---
-
-CREATE TABLE `accommodation` (
-  `accID` int(11) NOT NULL,
-  `accResgistratioonNo` varchar(255) COLLATE utf8_bin NOT NULL,
-  `accLocation` varchar(255) COLLATE utf8_bin NOT NULL,
-  `accNoOfRooms` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -61,7 +48,8 @@ CREATE TABLE `admin` (
 INSERT INTO `admin` (`adminID`, `adminFirstN`, `adminLastN`, `adminCategory`, `adminAddress`, `adminPhone`, `adminEmail`, `adminPassword`, `adminActive`, `accID`) VALUES
 (1, 'Moises', 'Borracha', 1, 'Claremont', '0834866680', 'moisesnt2@gmail.com', '2cb29a44bd2a19bd03400804bb939ddb', '1', 0),
 (2, 'Suquila', 'WenyKeny', 2, 'Ronderborch', '0834777832', 'suquila@gmail.com', '7d58ccfcb8eaa301f20480a2953d043b', '0', 0),
-(3, 'Robert', 'Zenith', 2, 'Claremont', '348729827833', 'zenith3za@gmail.com', 'Zenith3za', '0', 0);
+(3, 'Robert', 'Zenith', 2, 'Claremont', '348729827833', 'zenith3za@gmail.com', 'Zenith3za', '0', 0),
+(5, 'Zenaide', 'Luis', 2, 'Cape Town', '12312313', 'zenaideluis22@gmail.com', 'a1c7f67b09808249b3a2dce888784324', '1', 0);
 
 -- --------------------------------------------------------
 
@@ -429,13 +417,6 @@ INSERT INTO `viewing` (`viewBookingID`, `viewerName`, `viewerEmail`, `viewerPhon
 --
 
 --
--- Indexes for table `accommodation`
---
-ALTER TABLE `accommodation`
-  ADD PRIMARY KEY (`accID`),
-  ADD UNIQUE KEY `Unique` (`accResgistratioonNo`);
-
---
 -- Indexes for table `admin`
 --
 ALTER TABLE `admin`
@@ -519,16 +500,10 @@ ALTER TABLE `viewing`
 --
 
 --
--- AUTO_INCREMENT for table `accommodation`
---
-ALTER TABLE `accommodation`
-  MODIFY `accID` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `adminID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `adminID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `booking`
@@ -547,64 +522,6 @@ ALTER TABLE `helpticket`
 --
 ALTER TABLE `helpticketmessage`
   MODIFY `messageID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
-
---
--- AUTO_INCREMENT for table `notification`
---
-ALTER TABLE `notification`
-  MODIFY `notificationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
-
---
--- AUTO_INCREMENT for table `payment`
---
-ALTER TABLE `payment`
-  MODIFY `payID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
-
---
--- AUTO_INCREMENT for table `refund`
---
-ALTER TABLE `refund`
-  MODIFY `requestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `room`
---
-ALTER TABLE `room`
-  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
-
---
--- AUTO_INCREMENT for table `roommarket`
---
-ALTER TABLE `roommarket`
-  MODIFY `roomMarketID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `student`
---
-ALTER TABLE `student`
-  MODIFY `studID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
-
---
--- AUTO_INCREMENT for table `studentprofile`
---
-ALTER TABLE `studentprofile`
-  MODIFY `profileID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `viewing`
---
-ALTER TABLE `viewing`
-  MODIFY `viewBookingID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `studentprofile`
---
-ALTER TABLE `studentprofile`
-  ADD CONSTRAINT `studentprofile_ibfk_1` FOREIGN KEY (`studID`) REFERENCES `student` (`studID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
