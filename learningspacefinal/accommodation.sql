@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 04, 2018 at 06:03 PM
+-- Generation Time: Nov 04, 2018 at 07:06 PM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -46,10 +46,10 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`adminID`, `adminFirstN`, `adminLastN`, `adminCategory`, `adminAddress`, `adminPhone`, `adminEmail`, `adminPassword`, `adminActive`, `accID`) VALUES
-(1, 'Moises', 'Borracha', 1, 'Claremont', '0834866680', 'moisesnt2@gmail.com', '2cb29a44bd2a19bd03400804bb939ddb', '1', 0),
+(1, 'Moises', 'Borracha', 1, 'Claremont', '0834866680', 'moisesnt2@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', '1', 0),
 (2, 'Suquila', 'WenyKeny', 2, 'Ronderborch', '0834777832', 'suquila@gmail.com', '7d58ccfcb8eaa301f20480a2953d043b', '0', 0),
 (3, 'Robert', 'Zenith', 2, 'Claremont', '348729827833', 'zenith3za@gmail.com', 'Zenith3za', '0', 0),
-(5, 'Zenaide', 'Luis', 2, 'Cape Town', '12312313', 'zenaideluis22@gmail.com', 'a1c7f67b09808249b3a2dce888784324', '1', 0);
+(5, 'Zenaide', 'Luis', 2, 'Cape Town', '12312313', 'zenaideluis22@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', '1', 0);
 
 -- --------------------------------------------------------
 
